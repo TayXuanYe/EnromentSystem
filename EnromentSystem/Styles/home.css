@@ -16,3 +16,135 @@
     overflow: clip;
     overflow-clip-margin: content-box;
 }
+
+h1 {
+    text-align: center;
+    color: #b2151b;
+    margin-top: 10px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.card {
+    flex: 1 1 25%;
+    width: 330px;
+    height: 200px;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+    margin: 20px;
+    display: inline-block;
+}
+
+.card-header {
+    text-align: right;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 10px;
+}
+
+#cardEnrolment .card-header:before {
+    margin-top: 5px;
+    background-repeat: no-repeat;
+    content: "";
+    float: left;
+    height: 150px;
+    width: 44px;
+    background-image: url("../Images/EnrolmentIcon.png");
+}
+
+#cardAddDrop .card-header:before {
+    margin-top: 5px;
+    background-repeat: no-repeat;
+    content: "";
+    float: left;
+    height: 150px;
+    width: 44px;
+    background-image: url("../Images/AddDropIcon.png");
+}
+
+#cardEnquiry .card-header:before {
+    margin-top: 5px;
+    background-repeat: no-repeat;
+    content: "";
+    float: left;
+    height: 150px;
+    width: 44px;
+    background-image: url("../Images/EnquiryIcon.png");
+}
+
+#cardStatement .card-header:before {
+    margin-top: 5px;
+    background-repeat: no-repeat;
+    content: "";
+    float: left;
+    height: 150px;
+    width: 44px;
+    background-image: url("../Images/StatementIcon.png");
+}
+
+#cardPayment .card-header:before {
+    margin-top: 5px;
+    background-repeat: no-repeat;
+    content: "";
+    float: left;
+    height: 150px;
+    width: 44px;
+    background-image: url("../Images/PaymentIcon.png");
+}
+
+#cardAccount .card-header:before {
+    margin-top: 5px;
+    background-repeat: no-repeat;
+    content: "";
+    float: left;
+    height: 150px;
+    width: 44px;
+    background-image: url("../Images/AccountIcon.png");
+}
+
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: red;
+}
+
+.card-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card-content li {
+    display: flex;
+    padding: 5px 0;
+    font-size: 1em;
+    position: relative;
+}
+
+.card-content li:before {
+    content: "";
+    height: 13px;
+    width: 16px;
+    background-image: url("../Images/BoxStar.png");
+    margin: 7px 0px 5px 5px;
+
+}
+
+.card-content li a {
+    margin-left: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+.card-content li a:hover {
+    text-decoration: underline;
+}
