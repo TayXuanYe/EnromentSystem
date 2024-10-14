@@ -1,0 +1,82 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D7EEFF;
+}
+
+button, input[type="button"], input[type="submit"] {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    box-shadow: none; /* Remove shadow */
+    text-align: inherit; /* Keep text alignment consistent with parent */
+    font: inherit; /* Keep font consistent with parent */
+    color: inherit; /* Keep text color consistent with parent */
+    cursor: pointer; /* Set cursor to pointer (clickable) */
+    outline: none; /* Remove outline on focus */
+}
+
+
+.header {
+    text-align: center;
+    padding: 20px 15px;
+}
+
+.header div {
+    display: inline-block;
+    vertical-align: middle; 
+}
+
+#intiLogo {
+    background-image: url("../Images/INTI_IU_logo.png");
+    height: 92px;
+    width: 378px;
+    margin-right: 250px;
+}
+
+#identityCard {
+    border: solid;
+    border-color: #cccccc;
+    border-radius: 3px;
+    background-color: #ececec;
+    text-align: left;
+}
+
+#btnHomeButton {
+    margin: 2px 2px;
+    background-image: url("../Images/home.png");
+    width: 49px;
+    height: 49px;
+}
+
+#btnHomeButton:hover {
+    background-color: #b9b9b9;
+    border-radius: 25px;
+}
+
+#studentDetails {
+    margin-left: 4px;
+    color: #82828D;
+    font-family: Arial;
+    font-size: 10px;
+}
+
+#btnLogout {
+    margin: 0px 5px;
+    padding: 0px 5px;
+    background-color: #970003;
+    border-radius: 3px;
+    color: #dddddd;
+}
+
+#btnLogout:hover {
+    background-color: #8a0001;
+    border-radius: 3px;
+}
+
+
