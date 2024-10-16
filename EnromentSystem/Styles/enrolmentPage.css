@@ -1,0 +1,20 @@
+﻿body {
+}
+
+.box {
+    width: 1150px;
+    height: 900px;
+    background-color: #FFFFFF;
+    border: 0px solid #FFFFFF;
+    border-radius: 25px;
+    margin: 50px auto 40px;
+    padding: 10px;
+    padding-bottom: 25px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.15);
+    font-size: 12pt;
+    font-weight: 100;
+    line-height: 1.6;
+    overflow: clip;
+    overflow-clip-margin: content-box;
+}
+
