@@ -1,0 +1,88 @@
+﻿body {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.box {
+    width: 460px;
+    background: #ffffff;
+    border: 0px solid #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    padding-bottom: 25px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.15);
+    font-size: 12pt;
+    font-weight: 100;
+    line-height: 1.6;
+    overflow: clip;
+    overflow-clip-margin: content-box;
+}
+
+.box img {
+    display: block;
+    margin: 20px auto 10px;
+    width: 80%;
+}
+
+.box p{
+    font-size: 18pt;
+    font-weight: 100;
+    line-height: 1.6;
+}
+
+#infoBox {
+    margin: 0px 40px 15px 40px;
+    padding: 10px 10px 10px 10px;
+}
+
+.textBox {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-color: #808080;
+    border-radius: 2px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #e8f0fe;
+}
+
+.textBox focus {
+    border-color: #808080;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.textBox::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+#infoBox > p {
+    margin-top: 20px;
+}
+
+#btnLogin {
+    width: 250px;
+    height: 42px;
+    background-color: #c00000;
+    margin: 0px auto 25px;
+    color: #FFF;
+    text-align: center;
+    display: block;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-color: #e8f0fe;
+    border-radius: 7px;
+}
+
+#infoBox > div > p{
+    font-size: 7.5pt;
+    text-align: center;
+    margin: 10px 0px 5px 0px;
+}
+
+#infoBox p > span {
+    color: #f00000;
+    font-weight: 800;
+}

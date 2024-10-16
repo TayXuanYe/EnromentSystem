@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Home Page</title>
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/home.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/studentHomePage.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/main.css") %>" />
 </head>
 <body>
