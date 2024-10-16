@@ -18,3 +18,85 @@
     overflow-clip-margin: content-box;
 }
 
+.body {
+    margin: 0px 50px;
+}
+
+.body h1 {
+    display: inline-block;
+        --rem: 16;
+    font-family: Arial;
+    font-size: 18pt;
+    color: #656565;
+    margin-bottom: 30px;
+}
+
+#studentInfoPart {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#studentInfoPart tr {
+    height: 30px;
+}
+
+#studentInfoPart td:nth-child(odd) {
+    font-weight: 800;
+    width: 15%;
+}
+
+#studentInfoPart td:nth-child(odd):before {
+    content: ":";
+    text-align: right;
+    float: right;
+}
+
+#studentInfoPart td:nth-child(even) {
+    width: 35%;
+    padding-left: 5px;
+}
+
+#stdentCourseInfo {
+    margin: 30px 0px;
+    width: 100%;
+}
+
+#stdentCourseInfo td{
+    width: 50%;
+}
+
+h2 {
+    --rem: 16;
+    font-family: Arial;
+    font-size: 14pt;
+    color: #656565;
+    font-weight: 500;
+}
+
+.body input{
+    background-color: #f6f6f6;
+    border: none;
+    color: #656565;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
+    border: solid #C3C3C3 1px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.body input:hover {
+    background-color: #c3c3c3;
+}
+
+.footer-button input{
+    width: 100px;
+}
+
+.footer-button{
+    margin: 20px 0px;
+}
