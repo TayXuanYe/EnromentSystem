@@ -79,4 +79,80 @@ button, input[type="button"], input[type="submit"] {
     border-radius: 3px;
 }
 
+.navigation-bar {
+    margin: 30px 30px 15px 30px;
+}
+
+
+.dropmenu, .dropmenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropmenu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    display: flex;
+}
+
+    .dropmenu > li {
+        width: 150px;
+        position: relative;
+        cursor: pointer;
+        border-right: 1px solid #ccc;
+    }
+
+        .dropmenu > li > p {
+            margin: 0;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #f2f2f2;
+            font-size: 14px;
+            color: #333;
+        }
+
+    .dropmenu a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .dropmenu > li:hover > p,
+    .dropmenu > li:hover > a {
+        background-color: #ddd;
+    }
+
+    .dropmenu li ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #fff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+    }
+
+        .dropmenu li ul li {
+            width: 150px;
+            padding: 10px;
+            white-space: nowrap;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .dropmenu li ul li a {
+                text-decoration: none;
+                color: #333;
+                font-size: 14px;
+                display: block;
+            }
+
+            .dropmenu li ul li:hover {
+                background-color: #ddd;
+            }
+
+    .dropmenu li:hover ul {
+        display: block;
+    }
 
