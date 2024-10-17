@@ -95,14 +95,14 @@
         <h1>Change Password</h1>
         <p>
            Password must be between 8 to 20 alphanumeric characters. 
-           Include at least one letter and one numeric digit.
-           Symbols are not allowed.
+           It must include at least one letter and one numeric digit.
+           Symbols are not allowed in the password.
         </p>
 
         <div>
-            <div>
+            <div id="midBody">
                 <!--Current password-->
-                <div>
+                <div class="text-box">
                     <p>Existing Password</p>
                     <asp:TextBox ID="txtExistingPassword" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator 
@@ -126,7 +126,7 @@
                     </asp:CustomValidator>
                 </div>
                 <!--New Password-->
-                <div>
+                <div class="text-box">
                     <p>New Password</p>
                     <asp:TextBox ID="txtNewPassword" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator
@@ -150,7 +150,7 @@
                     </asp:CustomValidator>
                 </div>
                 <!--Confirm New Password-->
-                <div>
+                <div class="text-box">
                     <p>Confirm New Password</p>
                     <asp:TextBox ID="txtConfirmNewPassword" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator 
@@ -172,6 +172,11 @@
                         ClientValidationFunction=""
                         OnServerValidate="PasswordFormat_ServerValidate">
                     </asp:CustomValidator>
+                </div>
+                
+                <div class="button">
+                    <asp:Button ID="btnUpdatePassword" runat="server" Text="Update Password" CssClass="button"/>
+                    <asp:Button ID="vtnCancel" runat="server" Text="Cancel" CssClass="button"/>
                 </div>
             </div>
         </div>
