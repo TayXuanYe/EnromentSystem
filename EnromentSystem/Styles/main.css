@@ -25,11 +25,18 @@ button, input[type="button"], input[type="submit"] {
 .header {
     text-align: center;
     padding: 20px 15px;
+    caret-color: transparent;
+    user-select: none;
+}
+
+.header span{
+    user-select: none;
 }
 
 .header div {
     display: inline-block;
     vertical-align: middle; 
+    user-select: none;
 }
 
 #intiLogo {

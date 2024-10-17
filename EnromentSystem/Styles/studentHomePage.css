@@ -1,6 +1,14 @@
 ﻿body {
 }
 
+span, h1, li {
+    user-select: none;
+}
+
+* {
+    caret-color: transparent;
+}
+
 .box {
     width: 1150px;
     background-color: #FFFFFF;
