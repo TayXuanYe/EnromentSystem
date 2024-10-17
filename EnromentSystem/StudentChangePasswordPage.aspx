@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Change Password Page</title>
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/main.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/studentChangePasswordPage.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/studentUpdateProfilePage.css") %>" />
 </head>
 <body>
 <form id="form1" runat="server">
