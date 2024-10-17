@@ -91,6 +91,91 @@
     </table>
     </div>
 </div>
+    <div class="body">
+        <h1>Change Password</h1>
+        <p>
+           Password must be between 8 to 20 alphanumeric characters. 
+           Include at least one letter and one numeric digit.
+           Symbols are not allowed.
+        </p>
+
+        <div>
+            <div>
+                <!--Current password-->
+                <div>
+                    <p>Existing Password</p>
+                    <asp:TextBox ID="txtExistingPassword" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator 
+                        ControlToValidate="txtExistingPassword"
+                        ID="RequiredFieldValidator1" 
+                        runat="server" 
+                        Display="Dynamic"
+                        ForeColor="Red"
+                        ErrorMessage="This field is requited"
+                        CssClass="validator">
+                    </asp:RequiredFieldValidator>
+                    <asp:CustomValidator
+                        ID="CustomValidator1" 
+                        runat="server" 
+                        Display="Dynamic"
+                        ForeColor="Red"
+                        ErrorMessage="CustomValidator"
+                        CssClass="validator"
+                        ClientValidationFunction=""
+                        OnServerValidate="PasswordFormat_ServerValidate">
+                    </asp:CustomValidator>
+                </div>
+                <!--New Password-->
+                <div>
+                    <p>New Password</p>
+                    <asp:TextBox ID="txtNewPassword" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator
+                        ControlToValidate="txtExistingPassword"
+                        ID="RequiredFieldValidator2" 
+                        runat="server" 
+                        Display="Dynamic"
+                        ForeColor="Red"
+                        ErrorMessage="This field is requited"
+                        CssClass="validator">
+                    </asp:RequiredFieldValidator>
+                    <asp:CustomValidator 
+                        ID="CustomValidator2" 
+                        runat="server" 
+                        Display="Dynamic"
+                        ForeColor="Red"
+                        ErrorMessage="CustomValidator"
+                        CssClass="validator"
+                        ClientValidationFunction=""
+                        OnServerValidate="PasswordFormat_ServerValidate">
+                    </asp:CustomValidator>
+                </div>
+                <!--Confirm New Password-->
+                <div>
+                    <p>Confirm New Password</p>
+                    <asp:TextBox ID="txtConfirmNewPassword" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator 
+                        ControlToValidate="txtExistingPassword"
+                        ID="RequiredFieldValidator3" 
+                        runat="server" 
+                        Display="Dynamic"
+                        ForeColor="Red"
+                        ErrorMessage="This field is requited"
+                        CssClass="validator">
+                    </asp:RequiredFieldValidator>
+                    <asp:CustomValidator
+                        ID="CustomValidator3" 
+                        runat="server" 
+                        Display="Dynamic"
+                        ForeColor="Red"
+                        ErrorMessage="CustomValidator"
+                        CssClass="validator"
+                        ClientValidationFunction=""
+                        OnServerValidate="PasswordFormat_ServerValidate">
+                    </asp:CustomValidator>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </form>
 </body>

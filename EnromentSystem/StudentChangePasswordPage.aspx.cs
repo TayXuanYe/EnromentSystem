@@ -11,4 +11,11 @@ public partial class StudentChangePasswordPage : System.Web.UI.Page
     {
 
     }
+
+
+
+    protected void PasswordFormat_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+
+    }
 }

@@ -5,6 +5,10 @@
     height: 100vh;
 }
 
+p, img {
+    caret-color: transparent;
+    user-select: none;
+}
 
 .box {
     width: 460px;

@@ -1,5 +1,12 @@
-﻿body {
+﻿* {
+    outline: none;
+    caret-color: transparent;
 }
+span, h1, h2, li, p {
+    user-select: none;
+}
+
+
 
 .box {
     width: 1150px;
@@ -19,7 +26,7 @@
 }
 
 .body {
-    margin: 0px 50px;
+    margin: 0px 90px;
 }
 
 .body h1 {
