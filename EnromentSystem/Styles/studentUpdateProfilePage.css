@@ -3,7 +3,6 @@
 
 .box {
     width: 1150px;
-    height: 1000px;
     background-color: #FFFFFF;
     border: 0px solid #FFFFFF;
     border-radius: 25px;
@@ -18,10 +17,174 @@
     overflow-clip-margin: content-box;
 }
 
-.body{
-    display:flex;
+.body {
+    display: flex;
+    justify-content: center
 }
 
-    .body>div{
-        display:
+    .body > div {
+        text-align: left;
+        width: 800px;
     }
+
+    .body h1 {
+        --rem: 16;
+        font-family: Arial;
+        font-size: 18pt;
+        color: #656565;
+    }
+
+    .body h2 {
+        font-family: Arial;
+        font-size: 14pt;
+        font-weight: 600;
+        height: 40px;
+    }
+
+    .body h3 {
+        --rem: 16;
+        font-family: Arial;
+        font-size: 12pt;
+        font-weight: bold;
+        height: 40px;
+    }
+
+    .body table{
+        width:100%;
+    }
+        .body table p{
+            display:inline-block;
+            --rem: 16;
+            font-family: Arial;
+            font-size: 10pt;
+            vertical-align:central;
+        }
+
+.personal-address{
+    margin: 30px 0px;
+}
+
+.emergency-contact, .personal-contact{
+    margin: 10px 0px;
+}
+
+.personal-address td:nth-child(odd), .personal-contact td:nth-child(odd), .emergency-contact td:nth-child(odd) {
+    font-weight: 600;
+    width: 15%;
+}
+
+    .personal-address td:nth-child(odd):before, .personal-contact td:nth-child(odd):before, .emergency-contact td:nth-child(odd):before {
+        content: ":";
+        text-align: right;
+        float: right;
+    }
+
+.personal-address td:nth-child(even), .personal-contact td:nth-child(even), .emergency-contact td:nth-child(even) {
+    width: 35%;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+h1, div {
+    user-select: none;
+    outline: none;
+    caret-color: transparent;
+}
+
+.body table input[type=text] {
+    width: 90%;
+    margin: 4px 0px;
+    padding: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-color: #808080;
+    border-radius: 2px;
+    font-size: 12px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fff;
+    caret-color: #000;
+}
+
+    .body table input[type=text] focus {
+        border-color: #808080;
+        box-shadow: 0 0 2px rgba(0, 123, 255, 0.5);
+    }
+
+        .body table input[type=text]::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+.body table textarea {
+    width: 90%;
+    height: 60px;
+    margin: 8px 0px 0px;
+    padding: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-color: #808080;
+    border-radius: 2px;
+    font-size: 12px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fff;
+    caret-color: #000;
+}
+
+    .body table textarea focus {
+        border-color: #808080;
+        box-shadow: 0 0 2px rgba(0, 123, 255, 0.5);
+    }
+
+    .body table textarea::placeholder {
+        color: #aaa;
+        font-style: italic;
+    }
+
+.dropDownList {
+    width: 90%;
+    margin: 4px 0px;
+    padding: 10px;
+    border: 2px solid #808080;
+    border-radius: 2px;
+    font-size: 12px;
+    appearance: menulist;
+    background: white url('data:image/png;base64, ...') no-repeat right 10px center;
+    background-size: 10px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+    .dropDownList:focus {
+        border-color: #0056b3;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .dropDownList option {
+        padding: 12px;
+    }
+
+        .body table span{
+            color:red;
+        }
+
+.footer-button {
+    padding: 10px 0px 30px;
+}
+
+    .footer-button input {
+        background-color: #f6f6f6;
+        width: 100px;
+        border: none;
+        color: #000000;
+        padding: 6px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px;
+        cursor: pointer;
+        border: solid #C3C3C3 1px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+        .footer-button input:hover {
+            background-color: #c3c3c3;
+        }
