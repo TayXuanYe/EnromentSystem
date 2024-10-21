@@ -11,70 +11,71 @@
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
-<div class="body">
-    <div>
-        <h1>Update Bank Details Page</h1>
-
-        <table>
-            <thead>
-			    <tr>
-				    <th><h2>Bank Information</h2></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>
-                    <table class="bank-details">
-                        <!--Bank name-->
-                        <tr>
-                            <td>
-                                <p>Bank Name</p>
-                            </td>
-                            <td>
-                                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="dropDownList"></asp:DropDownList>
-                            </td>
-                        </tr>
-                        <!--Bank Account No.-->
-                        <tr>
-                            <td>
-                                <p>Bank Account No.</p>
-                            </td>
-                            <td>
-                                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <!--Bank Holder Name-->
-                        <tr>
-                            <td>
-                                <p>Bank Holder Name</p>
-                            </td>
-                            <td>
-                                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                            </td>
-                        </tr>
+<div class="box">
+    <div class="body">
+        <div>
+            <h1>Update Bank Details Page</h1>
+            <table>
+                <thead>
+			        <tr>
+				        <th><h2>Bank Information</h2></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>
+                        <table class="bank-details">
+                            <!--Bank name-->
+                            <tr>
+                                <td>
+                                    <p>Bank Name</p>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="dropDownList"></asp:DropDownList>
+                                </td>
+                            </tr>
+                            <!--Bank Account No.-->
+                            <tr>
+                                <td>
+                                    <p>Bank Account No.</p>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <!--Bank Holder Name-->
+                            <tr>
+                                <td>
+                                    <p>Bank Holder Name</p>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                                </td>
+                            </tr>
                         
-                        <!--Account verification documents-->
-                        <tr>
-                            <td>
-                                <p>Account Verification Documents</p>
-                            </td>
-                            <td>
-                                <asp:FileUpload ID="FileUpload1" runat="server" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <td>
-                                <asp:Literal ID="Literal1" runat="server" Text="Download"></asp:Literal>
-                            </td>
-                        </tr>
-                    </table>
-                </td></tr>
-                <tr><td class="footer-button">
-                    <asp:Button ID="Button1" runat="server" Text="Upload and Save Bank Details" />
-                    <asp:Button ID="Button2" runat="server" Text="Exit without Saving" />
-                </td></tr>
-            </tbody>
-		</table>
+                            <!--Account verification documents-->
+                            <tr>
+                                <td>
+                                    <p>Account Verification Documents</p>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FileUpload1" runat="server" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <asp:Literal ID="Literal1" runat="server" Text="Download"></asp:Literal>
+                                </td>
+                            </tr>
+                        </table>
+                    </td></tr>
+                    <tr><td class="footer-button">
+                        <asp:Button ID="Button1" runat="server" Text="Upload and Save Bank Details" />
+                        <asp:Button ID="Button2" runat="server" Text="Exit without Saving" />
+                    </td></tr>
+                </tbody>
+		    </table>
+        </div>
     </div>
 </div>
 </asp:Content>
