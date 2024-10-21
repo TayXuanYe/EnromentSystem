@@ -49,7 +49,7 @@
         <!-- Attendance -->
         <div class="card" id="cardAttendance">
             <div class="card-header">
-                <span class="card-title">Enquiry</span>
+                <span class="card-title">Attendance</span>
             </div>
             <div class="card-content">
                 <ul>

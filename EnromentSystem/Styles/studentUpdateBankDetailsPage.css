@@ -3,18 +3,7 @@
 
 .box {
     width: 1150px;
-    background-color: #FFFFFF;
-    border: 0px solid #FFFFFF;
-    border-radius: 25px;
-    margin: 50px auto 40px;
-    padding: 10px;
-    padding-bottom: 25px;
-    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.15);
-    font-size: 12pt;
-    font-weight: 100;
-    line-height: 1.6;
-    overflow: clip;
-    overflow-clip-margin: content-box;
+
 }
 
 .body {
@@ -24,7 +13,8 @@
 
     .body > div {
         text-align: left;
-        width: 800px;
+        width: 600px;
+        margin: 0px auto;
     }
 
     .body h1 {
@@ -36,7 +26,6 @@
     }
 
     .body table {
-        width: 100%;
     }
 
         .body table p {
@@ -110,7 +99,7 @@ h1, div {
 
     .footer-button input {
         background-color: #f6f6f6;
-        width: 250px;
+        width: 230px;
         border: none;
         color: #000000;
         padding: 6px 8px;
@@ -131,7 +120,7 @@ h1, div {
 
 .bank-details td:nth-child(odd) {
     font-weight: 600;
-    width: 15%;
+    width: 45%;
 }
 
     .bank-details td:nth-child(odd):before{
@@ -141,7 +130,7 @@ h1, div {
     }
 
 .bank-details td:nth-child(even){
-    width: 35%;
+    width: 55%;
     padding-left: 5px;
     padding-right: 10px;
 }
