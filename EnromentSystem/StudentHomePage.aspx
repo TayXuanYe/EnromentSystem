@@ -46,16 +46,14 @@
                 </ul>
             </div>
         </div>
-        <!-- Enquiry -->
-        <div class="card" id="cardEnquiry">
+        <!-- Attendance -->
+        <div class="card" id="cardAttendance">
             <div class="card-header">
                 <span class="card-title">Enquiry</span>
             </div>
             <div class="card-content">
                 <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Timetable Matching</a></li>
-                    <li><a href="#">Student Evaluation of Teaching</a></li>
+                    <li><a href="#">Attendance</a></li>
                 </ul>
             </div>
         </div>
