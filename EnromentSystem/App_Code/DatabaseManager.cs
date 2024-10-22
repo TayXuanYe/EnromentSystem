@@ -48,6 +48,11 @@ public static class DatabaseManager
             ConnectDatabase();
         }
 
+        if (connection.State != ConnectionState.Open)
+        {
+            connection.Open();
+        }
+
         //create query
         String columns = String.Join(", ", selectColumns);
         String query = $"SELECT {columns} FROM {table}";
@@ -67,12 +72,14 @@ public static class DatabaseManager
         }
         catch (SqlException sqlEx)
         {
-            Console.WriteLine("SQL error occurred: " + sqlEx.Message);
+            Console.WriteLine("SQL error occurred - get record: " + sqlEx.Message);
+            Debug.WriteLine("SQL error occurred - get record: " + sqlEx.Message);
             return null;
         }
         catch (Exception ex)
         {
-            Console.WriteLine("An error occurred: " + ex.Message);
+            Console.WriteLine("An error occurred - get record: " + ex.Message);
+            Debug.WriteLine("SQL error occurred - get record: " + ex.Message);
             return null;
         }
     }
