@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -13,18 +14,18 @@ using System.Web;
 
 public static class DatabaseManager
 {
-    private static String serverAddress = null;
-    private static String databaseName = null;
+    private static String serverName = "DESKTOP-EMOGFRG\\SQLEXPRESS";
+    private static String databaseName = "EnrolmentSystemDatabase";
     public static SqlConnection connection = null;
 
     public static void ConnectDatabase()
     {
         string connectionString =
-            "Server=" + serverAddress + ";"
+            "Server=" + serverName + ";"
             + "Database=" + databaseName + ";"
             + "Integrated Security=True;";
 
-        SqlConnection connection = new SqlConnection(connectionString);
+        connection = new SqlConnection(connectionString);
 
         try
         {
@@ -32,11 +33,11 @@ public static class DatabaseManager
         }
         catch (SqlException sqlEx)
         {
-            Console.WriteLine("SQL error occurred: " + sqlEx.Message);
+            Console.WriteLine("SQL error occurred - connect database: " + sqlEx.Message);
         }
         catch (Exception ex)
         {
-            Console.WriteLine("An error occurred: " + ex.Message);
+            Console.WriteLine("An error occurred - connect database: " + ex.Message);
         }
     }
 
@@ -45,6 +46,11 @@ public static class DatabaseManager
         if (connection == null)
         {
             ConnectDatabase();
+        }
+
+        if (connection.State != ConnectionState.Open)
+        {
+            connection.Open();
         }
 
         //create query
@@ -66,12 +72,14 @@ public static class DatabaseManager
         }
         catch (SqlException sqlEx)
         {
-            Console.WriteLine("SQL error occurred: " + sqlEx.Message);
+            Console.WriteLine("SQL error occurred - get record: " + sqlEx.Message);
+            Debug.WriteLine("SQL error occurred - get record: " + sqlEx.Message);
             return null;
         }
         catch (Exception ex)
         {
-            Console.WriteLine("An error occurred: " + ex.Message);
+            Console.WriteLine("An error occurred - get record: " + ex.Message);
+            Debug.WriteLine("SQL error occurred - get record: " + ex.Message);
             return null;
         }
     }
@@ -80,7 +88,12 @@ public static class DatabaseManager
     {
         if (connection == null)
         {
-            ConnectDatabase();
+                ConnectDatabase();
+        }
+
+        if (connection.State != ConnectionState.Open)
+        {
+            connection.Open();
         }
 
         //create query
@@ -102,12 +115,14 @@ public static class DatabaseManager
         }
         catch (SqlException sqlEx)
         {
-            Console.WriteLine("SQL error occurred: " + sqlEx.Message);
+            Console.WriteLine("SQL error occurred - get record: " + sqlEx.Message);
+            Debug.WriteLine("SQL error occurred - get record: " + sqlEx.Message);
             return null;
         }
         catch (Exception ex)
         {
-            Console.WriteLine("An error occurred: " + ex.Message);
+            Console.WriteLine("An error occurred - get record: " + ex.Message);
+            Debug.WriteLine("SQL error occurred - get record: " + ex.Message);
             return null;
         }
     }

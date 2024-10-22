@@ -22,16 +22,29 @@
                 <p>Password</p>
                 <div>
                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="textBox"></asp:TextBox>
-                </div>
-                <div>
-                    <p>
-                        By signing onto this website, you agree to abide by its 
-                        <span>Terms of Use</span>.<br />
-                        Violations could lead to restriction of website privileges and/or disciplinary action.
-                    </p>
+                    <a href="#">Forget Password?</a><br />
+                    <asp:CustomValidator 
+                        ID="cvdLoginFall" 
+                        ForeColor="red"
+                        Dispaly="dynamic"
+                        runat="server" 
+                        ErrorMessage="CustomValidator"
+                        CssClass="validator"
+                        ClientValidationFunction=""
+                        OnServerValidate="cvdLoginFall_ServerValidate">
+                    </asp:CustomValidator>
                 </div>
             </div>
+            
             <asp:Button ID="btnLogin" runat="server" Text="Login to Online Enrolment Portal" />
+
+            <div class="terms">
+                <p>
+                    By signing onto this website, you agree to abide by its 
+                    <span><a href="#">Terms of Use</a></span>.<br />
+                    Violations could lead to restriction of website privileges and/or disciplinary action.
+                </p>
+            </div>
         </div>
     </form>
 </body>

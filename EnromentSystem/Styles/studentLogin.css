@@ -1,8 +1,9 @@
 ﻿body {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background: linear-gradient(to bottom right, #df595c,#6b2424);
 }
 
 p, img {
@@ -12,9 +13,10 @@ p, img {
 
 .box {
     width: 460px;
+    height: 600px;
     background: #ffffff;
     border: 0px solid #ffffff;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 20px;
     padding-bottom: 25px;
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.15);
@@ -28,11 +30,11 @@ p, img {
 .box img {
     display: block;
     margin: 20px auto 10px;
-    width: 80%;
+    width: 70%;
 }
 
 .box p{
-    font-size: 18pt;
+    font-size: 14pt;
     font-weight: 100;
     line-height: 1.6;
 }
@@ -64,11 +66,11 @@ p, img {
 }
 
 #infoBox > p {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #btnLogin {
-    width: 250px;
+    width: 320px;
     height: 42px;
     background-color: #c00000;
     margin: 0px auto 25px;
@@ -80,13 +82,28 @@ p, img {
     border-radius: 7px;
 }
 
-#infoBox > div > p{
+.terms > p{
     font-size: 7.5pt;
     text-align: center;
     margin: 10px 0px 5px 0px;
 }
 
-#infoBox p > span {
+.terms p > span {
     color: #f00000;
     font-weight: 800;
+}
+
+#infoBox a {
+    text-decoration: none;
+    color: #777777;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.validator{
+
 }
