@@ -11,4 +11,9 @@ public partial class StudentLoginPage : System.Web.UI.Page
     {
 
     }
+
+    protected void cvdLoginFall_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+
+    }
 }
