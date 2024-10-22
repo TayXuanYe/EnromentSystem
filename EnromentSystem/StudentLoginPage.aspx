@@ -22,7 +22,7 @@
                 <p>Password</p>
                 <div>
                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="textBox"></asp:TextBox>
-                    <a href="#">Forget Password?</a>
+                    <a href="#">Forget Password?</a><br />
                     <asp:CustomValidator 
                         ID="cvdLoginFall" 
                         ForeColor="red"
