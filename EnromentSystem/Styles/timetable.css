@@ -1,0 +1,34 @@
+﻿body {
+}
+
+
+.timetable{
+    display: flex; /* Use Flexbox to align items */
+    flex-direction: column; /* Arrange items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    height: 100vh; /* Use full viewport height */
+    margin: 0; /* Remove default margin */
+    padding: 20px; /* Add some padding */
+    background-color: #f8f9fa; /* Light background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+    /* Style for the heading */
+    .timetable .h2 {
+        font-size: 24px; /* Larger font size for heading */
+        color: #333; /* Darker color for text */
+        margin-bottom: 20px; /* Space below heading */
+    }
+
+    /* Optional: Style for the Literal control */
+    .timetable .literal {
+        max-width: 600px; /* Max width for content */
+        width: 100%; /* Full width */
+        text-align: center; /* Center text */
+        padding: 10px; /* Padding for content */
+        border: 1px solid #ddd; /* Border around content */
+        border-radius: 4px; /* Rounded corners */
+        background-color: #ffffff; /* White background */
+    }
