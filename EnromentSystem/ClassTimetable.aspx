@@ -12,9 +12,9 @@
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
-    <div class="timetable">
-        <h2>Class Timetable PDF Preview</h2>
-        <asp:Literal ID="LiteralPdfPreview" runat="server"></asp:Literal>
-    </div>
+        <div class="timetable">
+            <h2>Class Timetable PDF Preview</h2>
+            <asp:Literal ID="LiteralPdfPreview" runat="server"></asp:Literal>
+        </div>
 </asp:Content>
 
