@@ -39,4 +39,14 @@ public partial class StudentLoginPage : System.Web.UI.Page
             return false;
         }
     }
+
+    protected void btnLogin_Click(object sender, EventArgs e)
+    {
+        if (Page.IsValid)
+        {
+            Session["sid"] = txtUserId.Text;
+            Session.Timeout = 30;
+            Response.Redirect("InfoVerificationPage.aspx");
+        }
+    }
 }
