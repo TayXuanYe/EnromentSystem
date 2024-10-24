@@ -46,7 +46,7 @@ public partial class StudentLoginPage : System.Web.UI.Page
         {
             Session["sid"] = txtUserId.Text;
             Session.Timeout = 30;
-            Response.Redirect("InfoVerificationPage.aspx");
+            Response.Redirect("StudentHomePage.aspx");
         }
     }
 }
