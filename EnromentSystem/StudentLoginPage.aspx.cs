@@ -49,4 +49,9 @@ public partial class StudentLoginPage : System.Web.UI.Page
             Response.Redirect("StudentHomePage.aspx");
         }
     }
+
+    protected void btnResetPassword_Click(object sender, EventArgs e)
+    {
+
+    }
 }

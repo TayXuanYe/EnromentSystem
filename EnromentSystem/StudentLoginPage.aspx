@@ -59,7 +59,7 @@
                         CssClass="validator"
                         OnServerValidate="cvdLoginFall_ServerValidate">
                     </asp:CustomValidator><br />
-                    <a href="#">Forget Password?</a>
+                    <a href="#" id="forgetPasswordWindows">Forget Password?</a>
                 </div>
             </div>
             
@@ -79,7 +79,7 @@
 
             <div id="popUpWindows" class="pop-up-windows">
                 <div class="windows-contain">
-                    <div id="intiLogo"></div>
+                    <div class="intiLogo"></div>
                     <h1>Term Of Use</h1>
                     <p>
                         1)	It is the responsibility of the students to ensure that the subjects they are enrolling for is part of their programme study plan. 
@@ -158,6 +158,26 @@
                         runat="server" 
                         Text="Close" 
                         OnClientClick="document.getElementById('popUpWindows').style.display='none'; return false;" />
+                </div>
+            </div>
+
+            <div id="forgetPassword" class="pop-up-windows">
+                <div class="windows-contain">
+                    <div class="intiLogo"></div>
+                    <div class="container-in-forget-password-page">
+                        <h1>Forgot Your Password?</h1>
+                        <h2>
+                            User Id
+                        </h2>
+                        <asp:TextBox ID="txtResetPasswordId" runat="server" CssClass="textBox"></asp:TextBox><br />
+                        <p>Enter your User ID to recrive an temporary password. </p>
+                    </div>
+                    <asp:Button ID="btnGetTemporaryPassword" runat="server" Text="Get Temporary Password" OnClick="btnResetPassword_Click"/>
+                    <asp:Button 
+                        ID="btnExitForgetWindows"
+                        runat="server" 
+                        Text="Close" 
+                        OnClientClick="document.getElementById('forgetPassword').style.display='none'; return false;" />
                 </div>
             </div>
         </div>
