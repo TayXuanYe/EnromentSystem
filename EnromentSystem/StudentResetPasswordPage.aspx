@@ -70,14 +70,14 @@
                         Display="dynamic"
                         ControlToCompare="txtNewPassword"
                         runat="server" 
-                        ErrorMessage="The passwords entered do not match. Please re-enter">
+                        ErrorMessage="The passwords entered do not match. <br>Please re-enter">
                     </asp:CompareValidator>
                 </div>
                 <p>Verification Code</p>
                 <div>
                     <table class="verifcation-code-table">
                         <tr><td>
-                            <asp:TextBox ID="txtVerifcationCode" runat="server" TextMode="Password" CssClass="textBox"></asp:TextBox>
+                            <asp:TextBox ID="txtVerifcationCode" runat="server" ></asp:TextBox>
                         </td>
                         <td>
                             <asp:Button ID="btnSendVerificationCode" runat="server" OnClick="btnSendVerificationCode_Click"/>
@@ -105,7 +105,7 @@
             </div>
             <div class="button-bar">
                 <asp:Button ID="btnResetPassword" runat="server" Text="Reset Password" />
-                <asp:Button ID="btnExit" runat="server" Text="Exit" />
+                <asp:Button ID="btnExit" runat="server" Text="Exit" CausesValidation="false" OnClick="ExitPage"/>
             </div>
             <div id="popUpWindows" class="pop-up-windows">
                 <div class="windows-contain">
@@ -117,7 +117,7 @@
                         ID="btnExitInPopUpWindows" 
                         runat="server" 
                         Text="Exit" 
-                        OnClick="btnExitInPopUpWindows_Click"
+                        OnClick="ExitPage"
                         CausesValidation="false"/>
                 </div>
             </div>

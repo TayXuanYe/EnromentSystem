@@ -22,8 +22,9 @@ public partial class StudentResetPasswordPage : System.Web.UI.Page
 
     }
 
-    protected void btnExitInPopUpWindows_Click(object sender, EventArgs e)
+    protected void ExitPage(object sender, EventArgs e)
     {
         Response.Redirect("StudentLoginPage.aspx");
     }
+
 }

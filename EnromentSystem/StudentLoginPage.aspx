@@ -59,7 +59,7 @@
                         CssClass="validator"
                         OnServerValidate="cvdLoginFall_ServerValidate">
                     </asp:CustomValidator><br />
-                    <a href="#" >Forget Password?</a>
+                    <a href="StudentResetPasswordPage.aspx" >Forget Password?</a>
                 </div>
             </div>
             
