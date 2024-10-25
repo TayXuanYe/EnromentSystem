@@ -43,7 +43,7 @@
         <div id="identityCard">
             <asp:Button ID="btnHomeButton" runat="server" Text="" />
             <div id="studentDetails">
-                <asp:Label runat="server" Text="Tay Xuan Ye<br>I23024312<br>SCSI - BACHELOR OF COMPUTER SCIENCE (HONS)"></asp:Label>
+                <asp:Label runat="server" Text="Tay Xuan Ye<br>I23024312<br>BCSI - BACHELOR OF COMPUTER SCIENCE (HONS)"></asp:Label>
             </div>
             <asp:Button ID="btnLogout" runat="server" Text="Logout" />
         </div>

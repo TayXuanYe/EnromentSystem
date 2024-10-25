@@ -35,7 +35,7 @@
                         Display="dynamic"
                         CssClass="validator"
                         ErrorMessage="Student ID not in required fromat"
-                        ValidationExpression="I\d+">
+                        ValidationExpression="[Ii]\d{8}">
                     </asp:RegularExpressionValidator>
                 </div>
                 <p>Password</p>
@@ -59,7 +59,7 @@
                         CssClass="validator"
                         OnServerValidate="cvdLoginFall_ServerValidate">
                     </asp:CustomValidator><br />
-                    <a href="#" id="forgetPasswordWindows">Forget Password?</a>
+                    <a href="#" >Forget Password?</a>
                 </div>
             </div>
             
@@ -158,54 +158,6 @@
                         runat="server" 
                         Text="Close" 
                         OnClientClick="document.getElementById('popUpWindows').style.display='none'; return false;" />
-                </div>
-            </div>
-
-            <div id="forgetPassword" class="pop-up-windows">
-                <div class="windows-contain">
-                    <div class="intiLogo"></div>
-                    <div class="container-in-forget-password-page">
-                        <h1>Forgot Your Password?</h1>
-                        <h2>User Id</h2>
-                        <asp:TextBox ID="txtResetPasswordId" runat="server" CssClass="textBox"></asp:TextBox><br />
-                        <asp:RequiredFieldValidator 
-                            ID="rfvResetPasswordId" 
-                            ControlToValidate="txtResetPasswordId"
-                            ForeColor="red"
-                            Display="dynamic"
-                            CssClass="validator"
-                            runat="server" 
-                            ErrorMessage="This field is requited">
-                        </asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator 
-                            ID="revResetPasswordId" 
-                            runat="server" 
-                            ControlToValidate="txtResetPasswordId"
-                            ForeColor="red"
-                            Display="dynamic"
-                            CssClass="validator"
-                            ErrorMessage="Student ID not in required fromat"
-                            ValidationExpression="I\d+">
-                        </asp:RegularExpressionValidator>
-                        <h2>Verification Code</h2>
-                        <asp:TextBox ID="txtVerificationCode" runat="server" CssClass="textBox"></asp:TextBox><br />
-                        <asp:Button ID="bthGetVerificationCode" runat="server" Text="Get Verification Code" OnClick="bthGetVerificationCode_Click" />
-                        <asp:RequiredFieldValidator 
-                            ID="RequiredFieldValidator4" 
-                            ControlToValidate="txtVerificationCode"
-                            ForeColor="red"
-                            Display="dynamic"
-                            CssClass="validator"
-                            runat="server" 
-                            ErrorMessage="This field is requited">
-                        </asp:RequiredFieldValidator>
-                    </div>
-                    <asp:Button ID="btnGetTemporaryPassword" runat="server" Text="Get Temporary Password" OnClick="btnGetTemporaryPassword_Click"/>
-                    <asp:Button 
-                        ID="btnExitForgetWindows"
-                        runat="server" 
-                        Text="Close" 
-                        OnClientClick="document.getElementById('forgetPassword').style.display='none'; return false;" />
                 </div>
             </div>
         </div>

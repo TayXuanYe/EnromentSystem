@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 public static class DatabaseManager
 {
-    private static String serverName = "DESKTOP-EMOGFRG\\SQLEXPRESS";
+    private static String serverName = "DESKTOP-GCII6U9\\SQLEXPRESS";
     private static String databaseName = "EnrolmentSystemDatabase";
     public static SqlConnection connection = null;
 
