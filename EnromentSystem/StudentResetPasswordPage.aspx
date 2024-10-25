@@ -19,7 +19,7 @@
                 <div>
                     <asp:TextBox ID="txtUserId" runat="server" CssClass="textBox"></asp:TextBox>
                     <asp:RequiredFieldValidator 
-                        ID="RequiredFieldValidator2" 
+                        ID="rfvUserId" 
                         ControlToValidate="txtUserId"
                         ForeColor="red"
                         Display="dynamic"
@@ -80,18 +80,12 @@
                             <asp:TextBox ID="txtVerifcationCode" runat="server" ></asp:TextBox>
                         </td>
                         <td>
-                            <asp:Button ID="btnSendVerificationCode" runat="server" OnClick="btnSendVerificationCode_Click"/>
+                            <asp:Button 
+                                ID="btnSendVerificationCode" 
+                                runat="server" 
+                                OnClick="btnSendVerificationCode_Click"/>
                         </td></tr>
                     </table>
-                    <asp:RequiredFieldValidator 
-                        ID="RequiredFieldValidator4" 
-                        ControlToValidate="txtConformNewPassword"
-                        ForeColor="red"
-                        Display="dynamic"
-                        CssClass="validator"
-                        runat="server" 
-                        ErrorMessage="This field is requited">
-                    </asp:RequiredFieldValidator>
                     <asp:CustomValidator 
                         ID="cvdVerificationCodeMatch" 
                         ForeColor="red"
@@ -104,10 +98,10 @@
                 </div>
             </div>
             <div class="button-bar">
-                <asp:Button ID="btnResetPassword" runat="server" Text="Reset Password" />
+                <asp:Button ID="btnResetPassword" runat="server" Text="Reset Password" OnClick="btnResetPassword_Click"/>
                 <asp:Button ID="btnExit" runat="server" Text="Exit" CausesValidation="false" OnClick="ExitPage"/>
             </div>
-            <div id="popUpWindows" class="pop-up-windows">
+            <asp:Panel ID="successfulPopUpWindows" runat="server" CssClass="pop-up-windows">
                 <div class="windows-contain">
                     <div class="checkmark-container">
                         <div class="checkmark">✔</div>
@@ -120,7 +114,23 @@
                         OnClick="ExitPage"
                         CausesValidation="false"/>
                 </div>
-            </div>
+            </asp:Panel>
+
+            <asp:Panel ID="failPopUpWindows" runat="server" CssClass="pop-up-windows">
+                <div class="windows-contain">
+                    <div class="checkmark-container">
+                        <div class="checkmark">X</div>
+                    </div>
+                    <h1>Student ID not found</h1>
+                    <asp:Button 
+                        ID="Button1" 
+                        runat="server" 
+                        Text="Exit" 
+                        OnClick="ExitPage"
+                        CausesValidation="false"
+                        OnClientClick="document.getElementById('failPopUpWindows').style.display='none'; return false;" />
+                </div>
+            </asp:Panel>
         </div>
     </form>
 </body>
