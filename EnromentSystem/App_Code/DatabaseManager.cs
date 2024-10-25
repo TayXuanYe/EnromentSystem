@@ -157,7 +157,7 @@ public static class DatabaseManager
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 //add value into SQL command
-                for (int i = 0; i < columnNames.Length; i++)
+                for (int i = 0; i < columnNames.Count; i++)
                 {
                     command.Parameters.AddWithValue($"@{columnNames[i]}", values[i]);
                 }

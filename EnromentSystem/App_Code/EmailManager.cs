@@ -42,7 +42,8 @@ public class EmailManager
         using (MailMessage message = new MailMessage(sender, receiver)
         {
             Subject = subject,
-            Body = body
+            Body = body,
+            IsBodyHtml = true
         })
         {
             smtp.Send(message);

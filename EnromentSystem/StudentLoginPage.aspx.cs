@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class StudentLoginPage : System.Web.UI.Page
 {
+    private int verificationCode;
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -50,8 +52,46 @@ public partial class StudentLoginPage : System.Web.UI.Page
         }
     }
 
-    protected void btnResetPassword_Click(object sender, EventArgs e)
+    protected void btnGetTemporaryPassword_Click(object sender, EventArgs e)
     {
+        // reset password 
+    }
 
+    protected void bthGetVerificationCode_Click(object sender, EventArgs e)
+    {
+        if(rfvResetPasswordId.IsValid == true && revResetPasswordId.IsValid == true)
+        {
+            //read data
+            DataSet dataSet = DatabaseManager.getRecord(
+                "student",
+                new List<string> { "student_email", "name" },
+                "WHERE sid = " + txtUserId.Text
+                );
+
+            DataTable dt = dataSet.Tables[0];
+            string name = null;
+            string student_email = null;
+            foreach (DataRow row in dt.Rows)
+            {
+                name = row["name"].ToString();
+                student_email = row["student_email"].ToString();
+            }
+
+            if(name != null)
+            {
+                EmailManager emailManager = new EmailManager();
+                emailManager.SetEmailReceiver(name, student_email);
+                emailManager.SetEmailSubject("Verification Code");
+                //generate 6 digit random number
+                Random random = new Random();
+                verificationCode = random.Next(100000,999999);
+                //send verification
+                emailManager.SetEmailBody("Dear "+name+":");
+            }
+            else
+            {
+                Debug.WriteLine("Reset password: sid not found");
+            }
+        }
     }
 }
