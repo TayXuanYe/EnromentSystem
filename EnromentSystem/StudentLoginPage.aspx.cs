@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class StudentLoginPage : System.Web.UI.Page
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {
-
-    }
-
     protected void cvdLoginFall_ServerValidate(object source, ServerValidateEventArgs args)
     {
         args.IsValid = checkPasswordMatchId();
@@ -21,7 +13,7 @@ public partial class StudentLoginPage : System.Web.UI.Page
 
     private bool checkPasswordMatchId()
     {
-        string condition = "WHERE sid = \'" + txtUserId.Text + "\'";
+        string condition = "WHERE sid = \'" + txtUserId.Text.ToUpper() + "\'";
         DataSet dataSet = DatabaseManager.getRecord("student", new List<string> { "password" }, condition);
         DataTable dt = dataSet.Tables[0];
         string password = null;
@@ -37,6 +29,16 @@ public partial class StudentLoginPage : System.Web.UI.Page
         else
         {
             return false;
+        }
+    }
+
+    protected void btnLogin_Click(object sender, EventArgs e)
+    {
+        if (Page.IsValid)
+        {
+            Session["sid"] = txtUserId.Text;
+            Session.Timeout = 30;
+            Response.Redirect("StudentHomePage.aspx");
         }
     }
 }

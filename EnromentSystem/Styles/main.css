@@ -39,7 +39,7 @@ button, input[type="button"], input[type="submit"] {
     user-select: none;
 }
 
-#intiLogo {
+#intiLogo ,.intiLogo {
     background-image: url("../Images/INTI_IU_logo.png");
     height: 92px;
     width: 378px;
