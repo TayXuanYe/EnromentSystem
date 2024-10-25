@@ -117,12 +117,12 @@
             </asp:Panel>
 
             <asp:Panel ID="failPopUpWindows" runat="server" CssClass="pop-up-windows">
-                <div class="windows-contain">
-                    <div class="checkmark-container">
-                        <div class="checkmark">X</div>
+                <div class="windows-contain-fail">
+                    <div class="crosemark-container">
+                        <div class="crosemark">✕</div>
                     </div>
                     <h1>Student ID not found</h1>
-                    <asp:Button 
+                    <asp:Button is
                         ID="Button1" 
                         runat="server" 
                         Text="Exit" 

@@ -6,9 +6,9 @@ using System.Net.Mail;
 /// </summary>
 public class EmailManager
 {
-    private static MailAddress sender = new MailAddress("your_email@example.com", "Your Name");
+    private static MailAddress sender = new MailAddress("tayxuanye@gmail.com", "Tay Xuan Ye");
     private MailAddress receiver = null;
-    private static string senderPassword = "your_password";
+    private static string senderPassword = "Txy/FFEED0oldgmail";
     private string subject = null;
     private string body = null;
 
@@ -24,7 +24,7 @@ public class EmailManager
 
     public void SetEmailReceiver(string emailAddress, string name)
     {
-        receiver = new MailAddress(emailAddress, name);
+        receiver = new MailAddress("i23024312@student.newinti.edu.my", name);
     }
 
     public void SendEmail()

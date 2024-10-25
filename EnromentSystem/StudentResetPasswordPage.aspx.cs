@@ -12,7 +12,7 @@ public partial class StudentResetPasswordPage : System.Web.UI.Page
     private int verificationCode;
     protected void cvdVerificationCodeMatch_ServerValidate(object source, ServerValidateEventArgs args)
     {
-
+        args.IsValid = false;
     }
 
     protected void btnSendVerificationCode_Click(object sender, EventArgs e)
@@ -39,11 +39,13 @@ public partial class StudentResetPasswordPage : System.Web.UI.Page
 
             if (name != null)
             {
+                Debug.WriteLine(student_email);
                 EmailManager emailManager = new EmailManager();
                 emailManager.SetEmailReceiver(name, student_email);
                 emailManager.SetEmailSubject("Verification Code");
                 //send verification
                 emailManager.SetEmailBody("Dear " + name + ":");
+                emailManager.SendEmail();
             }
             else
             {
