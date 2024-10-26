@@ -8,9 +8,7 @@
             <div class="panel-container">
             <asp:Panel ID="Panel1" runat="server" Height="340px">
                 <h1>Course Add / Drop</h1>
-
-                <p>
-                    &nbsp;</p>
+                <br />
 
                 <!-- Flex container for the tables -->
                 <div class="table-container">

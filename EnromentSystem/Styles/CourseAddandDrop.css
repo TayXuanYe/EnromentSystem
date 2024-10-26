@@ -20,13 +20,17 @@
 h1 {
     margin: 20px auto;
     width: 100%;
-    margin-left: 250px
+/*    margin-left: 250px*/
+}
+
+#MainContent{
+    width:750px;
 }
 
 .table-container {
     display: flex;
-    justify-content: center;
-    width: 100%;
+/*    justify-content: center;*/
+    width: 750px;
     gap: 300px
 }
 
@@ -50,7 +54,7 @@ panel2 {
     max-width: 800px;
     border-collapse: collapse;
     margin-top: 20px;
-    margin-left: 300px;
+/*    margin-left: 300px;*/
 }
 
  .course-table th,
@@ -87,12 +91,12 @@ panel2 {
     text-decoration-color: red;
     color: red;
     margin: 0;
-    margin-left: 300px;
+/*    margin-left: 300px;*/
     width: 100%;
 }
 
 p {
-    margin-left: 300px;
+/*    margin-left: 300px;*/
 }
 
 /* Round button styles */
@@ -120,12 +124,12 @@ p {
     background-color: #f9f9f9;
     width: 20px;
     height: 70px;
-    margin-left: 320px;
+/*    margin-left: 320px;*/
 }
 
 .unique-label-style {
     font-size: 16px;
-    margin-left: 320px;
+/*    margin-left: 320px;*/
 }
 
 panel3 {
