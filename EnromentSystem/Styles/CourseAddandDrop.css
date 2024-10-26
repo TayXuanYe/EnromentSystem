@@ -1,0 +1,170 @@
+﻿body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Main container for the entire page content */
+.panel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+h1 {
+    margin: 20px auto;
+    width: 100%;
+    margin-left: 250px
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 300px
+}
+
+/* Table styling */
+.table-left,
+.table-right {
+    border-collapse: collapse;
+}
+
+    .table-left td,
+    .table-right td {
+        padding: 8px; /* Padding inside table cells */
+    }
+
+panel2 {
+    justify-content: center;
+}
+/* Styling for the course table */
+.course-table {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: 300px;
+}
+
+ .course-table th,
+ .course-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    
+ }
+
+        .course-table th:nth-child(1), .course-table td:nth-child(1) {
+            width: 5%;
+        }
+
+        .course-table th:nth-child(2), .course-table td:nth-child(2) {
+            width: 30%;
+        }
+
+        .course-table th:nth-child(3), .course-table td:nth-child(3) {
+            width: 15%;
+        }
+
+        .course-table th:nth-child(4), .course-table td:nth-child(4) {
+            width: 5%;
+        }
+
+    .course-table th {
+        background-color: #f2f2f2;
+    }
+
+
+.underline-red {
+    text-decoration: underline;
+    text-decoration-color: red;
+    color: red;
+    margin: 0;
+    margin-left: 300px;
+    width: 100%;
+}
+
+p {
+    margin-left: 300px;
+}
+
+/* Round button styles */
+.round-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+    .round-button img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+    }
+
+.panel-small {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 5px;
+    background-color: #f9f9f9;
+    width: 20px;
+    height: 70px;
+    margin-left: 320px;
+}
+
+.unique-label-style {
+    font-size: 16px;
+    margin-left: 320px;
+}
+
+panel3 {
+    justify-content: center;
+}
+
+.unique-label-style2 {
+    justify-content: center;
+}
+
+.custom-button {
+    background-color: #007bff;
+    color: #fff;
+    border: 2px solid #0056b3;
+    font-size: 16px;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    padding-left: 10px;
+    margin-bottom: 10px
+}
+
+    /* Hover Effect */
+    .custom-button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+        transform: scale(1.05); /* Slight scaling effect */
+    }
+
+    /* Active Effect */
+    .custom-button:active {
+        transform: scale(1); /* Reset scaling when clicked */
+        background-color: #004080; /* Even darker shade on active click */
+    }
+
+    /* Disabled State */
+    .custom-button:disabled {
+        background-color: #ccc; /* Grey background for disabled state */
+        cursor: not-allowed; /* Not-allowed cursor */
+        opacity: 0.6; /* Slight transparency */
+    }
