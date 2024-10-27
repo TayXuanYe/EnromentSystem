@@ -40,7 +40,7 @@
                 </div>
                 <p>New Password</p>
                 <div>
-                    <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" CssClass="textBox"></asp:TextBox>
+                    <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" CssClass="textBox" ViewStateMode="Enabled"></asp:TextBox>
                     <asp:RequiredFieldValidator 
                         ID="RequiredFieldValidator1" 
                         ControlToValidate="txtNewPassword"
@@ -50,6 +50,16 @@
                         runat="server" 
                         ErrorMessage="This field is requited">
                     </asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator 
+                        ID="RegularExpressionValidator2" 
+                        runat="server" 
+                        ControlToValidate="txtNewPassword"
+                        ForeColor="red"
+                        Display="dynamic"
+                        CssClass="validator"
+                        ErrorMessage="Password must be between 8 to 20 alphanumeric characters. Include at least one letter and one numeric digit. Symbols are not allowed."
+                        ValidationExpression="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}">
+                    </asp:RegularExpressionValidator>
                 </div>
                 <p>Conform New Password</p>
                 <div>
@@ -83,7 +93,8 @@
                             <asp:Button 
                                 ID="btnSendVerificationCode" 
                                 runat="server" 
-                                OnClick="btnSendVerificationCode_Click"/>
+                                OnClick="btnSendVerificationCode_Click"
+                                CausesValidation="false"/>
                         </td></tr>
                     </table>
                     <asp:CustomValidator 
@@ -91,7 +102,7 @@
                         ForeColor="red"
                         Display="dynamic"
                         runat="server" 
-                        ErrorMessage="The berification code not match"
+                        ErrorMessage="The Verification code not match"
                         CssClass="validator"
                         OnServerValidate="cvdVerificationCodeMatch_ServerValidate">
                     </asp:CustomValidator><br />
@@ -122,7 +133,7 @@
                         <div class="crosemark">✕</div>
                     </div>
                     <h1>Student ID not found</h1>
-                    <asp:Button is
+                    <asp:Button
                         ID="Button1" 
                         runat="server" 
                         Text="Exit" 
