@@ -150,7 +150,7 @@
        <br />
        <div class="button-container" >
           <br />
-        <asp:Button ID="Button1" runat="server" Text="PAY BY(CREDIT/DEBIT CARD/FLYWIRE)"  />
+        <asp:Button ID="Button1" runat="server" Text="PAY BY(CREDIT/DEBIT CARD/FLYWIRE)" CssClass="unique-button" />
            &nbsp;<asp:Button ID="Button2" runat="server" Text="PAY BY (OTHER)" CssClass="unique-button" />
            &nbsp;<asp:Button ID="Button3" runat="server" Text="REGISTRATION SUMMARY" CssClass="unique-button" />
            &nbsp;<asp:Button ID="Button4" runat="server" Text="CANCEL" CssClass="unique-button" />

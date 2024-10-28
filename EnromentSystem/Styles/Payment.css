@@ -104,26 +104,30 @@ h1 {
     margin: 20px;
 }
 
-#Button1,
-#Button2,
-#Button3,
-#Button4 {
-    padding: 20px;
-    margin: 10px;
-    border: 1px solid black;
-    color: gray;
-    border-radius: 10px;
-    transition: background-color 0.3s, color 0.3s; 
-}
+    #Button1,
+    #Button2,
+    #Button3,
+    #Button4,
+    .unique-button,
+    .button-container input[type="submit"] {
+        padding: 10px 10px;
+        margin: 10px;
+        border: 1px solid black;
+        color: gray;
+        border-radius: 10px;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
     /* Hover effects */
     #Button1:hover,
     #Button2:hover,
     #Button3:hover,
-    #Button4:hover {
-        background-color: dimgray; 
-        color: white; 
-        cursor: pointer; 
+    #Button4:hover,
+    .unique-button:hover,
+    .button-container input[type="submit"]:hover {
+        background-color: dimgray;
+        color: white;
+        cursor: pointer;
     }
 
 .blinking-label {
