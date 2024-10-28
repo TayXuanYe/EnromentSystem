@@ -16,9 +16,9 @@
         <div id="identityCard">
             <asp:Button ID="btnHomeButton" runat="server" Text="" />
             <div id="studentDetails">
-                <asp:Label runat="server" Text="Tay Xuan Ye<br>I23024312<br>SCSI - BACHELOR OF COMPUTER SCIENCE (HONS)"></asp:Label>
+                <asp:Label ID="lblStudentDetails" runat="server" Text=""></asp:Label>
             </div>
-            <asp:Button ID="btnLogout" runat="server" Text="Logout" />
+            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click"/>
         </div>
     </div>
     <h1>Welcome to Online Enrolment Portal!</h1>
@@ -30,7 +30,7 @@
             </div>
             <div class="card-content">
                 <ul>
-                    <li><a href="#">Course Enrolment</a></li>
+                    <li><a href="EnrolmentPage.aspx">Course Enrolment</a></li>
                 </ul>
             </div>
         </div>

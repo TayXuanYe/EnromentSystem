@@ -4,6 +4,7 @@
 }
 span, h1, h2, li, p {
     user-select: none;
+    margin:0px;
 }
 
 
