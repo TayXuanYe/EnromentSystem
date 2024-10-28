@@ -1,0 +1,174 @@
+﻿body {
+}
+
+h1 {
+    margin-left: 250px;
+    font-size: 30px;
+    font-family: Arial;
+    color: dimgray;
+}
+
+.Container-table {
+    display: flex;
+    margin-left: 250px;
+    width: 100%;
+    font-family: Arial;
+}
+
+    .Container-table table {
+        border-collapse: collapse; 
+    }
+
+    .Container-table th, .Container-table td {
+        padding: 10px; 
+    }
+
+
+/* Styling for the course table */
+.course-table {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: Arial;
+}
+
+    .course-table th,
+    .course-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+        .course-table th:nth-child(1), .course-table td:nth-child(1) {
+            width: 5%;
+        }
+
+        .course-table th:nth-child(2), .course-table td:nth-child(2) {
+            width: 30%;
+        }
+
+        .course-table th:nth-child(3), .course-table td:nth-child(3) {
+            width: 15%;
+        }
+
+
+    .course-table th {
+        background-color: #f2f2f2;
+    }
+
+.small-table {
+    display: flex;
+    margin-left: 180px;
+    width: 100%;
+    font-family: Arial;
+    width: 100%;
+}
+
+    .small-table table {
+        border-collapse: collapse; 
+    }
+
+    .small-table th, .small-table td {
+        padding: 10px; 
+    }
+
+.blue {
+    color: blue;
+    font-weight: bold;
+}
+
+.second-table table {
+    display: flex;
+    margin-left: 180px;
+    width: 100%;
+    font-family: Arial;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.second-table table {
+    border-collapse: collapse; 
+}
+
+.second-table th, .second-table td {
+    padding: 10px; 
+}
+
+.button-container {
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    margin: 20px;
+}
+
+    #Button1,
+    #Button2,
+    #Button3,
+    #Button4,
+    .unique-button,
+    .button-container input[type="submit"] {
+        padding: 10px 10px;
+        margin: 10px;
+        border: 1px solid black;
+        color: gray;
+        border-radius: 10px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Hover effects */
+    #Button1:hover,
+    #Button2:hover,
+    #Button3:hover,
+    #Button4:hover,
+    .unique-button:hover,
+    .button-container input[type="submit"]:hover {
+        background-color: dimgray;
+        color: white;
+        cursor: pointer;
+    }
+
+.blinking-label {
+    font-size: 20px;
+    color: black; 
+    animation: blink-animation 2s infinite; 
+    font-family: Arial;
+    font-style: italic;
+    font-weight: bold;
+    color: red;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Define the blinking animation */
+@keyframes blink-animation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.normal-label {
+    font-family: Arial;
+    font-size: 12px;
+    color: black;
+    font-style: italic;
+    display: flex;
+    justify-content: center;
+}
+
+.copywrite-label {
+    font-family: Arial;
+    font-size: 10px;
+    color: dimgrey;
+    display: flex;
+    justify-content: center;
+}
