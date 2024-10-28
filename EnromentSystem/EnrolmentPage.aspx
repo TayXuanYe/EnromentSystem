@@ -104,7 +104,7 @@
     <div>
         <h2>Course Enrolled</h2>
         <asp:Table ID="tblCourseEnrolled" runat="server" CssClass="CourseEnrolled"></asp:Table>
-            <asp:Button ID="btnCalculateFeeSummary" runat="server" Text="Fee Summary" />
+            <asp:Button ID="btnAddEnrolledCourse" runat="server" Text="Add Course" />
     </div>
     <div class="footer-button">
         <asp:Button ID="btnEnrol" runat="server" Text="Enrol" />

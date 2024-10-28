@@ -168,29 +168,59 @@ public partial class EnrolmentPage : System.Web.UI.Page
         TableHeaderCell cellCourseCodeHeader = new TableHeaderCell { Text = "Course Code" };
         TableHeaderCell cellCourseNameHeader = new TableHeaderCell { Text = "Course Name" };
         TableHeaderCell cellCourseCreditsHeader = new TableHeaderCell { Text = "Credits" };
-        TableHeaderCell cellActionHeader = new TableHeaderCell { Text = "Action" };
+        TableHeaderCell cellActionHeader = new TableHeaderCell { Text = "Delete" };
         headerRow.Cells.Add(cellNoHeader);
         headerRow.Cells.Add(cellCourseCodeHeader);
         headerRow.Cells.Add(cellCourseNameHeader);
         headerRow.Cells.Add(cellCourseCreditsHeader);
         headerRow.Cells.Add(cellActionHeader);
         tblCourseEnrolled.Rows.Add(headerRow);
-
-        if (tblCourseEnrolled.Rows.Count == 1)
+        //insert data from database
+        //create a new row
+        TableRow tbRow = new TableRow();
+        TableCell cellNo = new TableCell { Text = "<br>" };
+        TableCell cellCourseCode = new TableCell { Text = "<br>" };
+        TableCell cellCourseName = new TableCell { Text = "<br>" };
+        TableCell cellCourseCredits = new TableCell { Text = "<br>" };
+        TableCell cellAction = new TableCell();
+        Button btn = new Button
         {
-            TableRow tbRow = new TableRow();
-            TableCell cellNo = new TableCell { Text = "<br>" };
-            TableCell cellCourseCode = new TableCell { Text = "<br>" };
-            TableCell cellCourseName = new TableCell { Text = "<br>" };
-            TableCell cellCourseCredits = new TableCell { Text = "<br>" };
-            TableCell cellAction = new TableCell { Text = "<br>" };
+            CssClass = "action-button",
+            CommandArgument = (tblCourseEnrolled.Rows.Count - 2).ToString(),
+            Text = "Delete"
+        };
+        btn.Click += new EventHandler(btnAddCourse_Click);
+        cellAction.Controls.Add(btn);
+        tbRow.Cells.Add(cellNo);
+        tbRow.Cells.Add(cellCourseCode);
+        tbRow.Cells.Add(cellCourseName);
+        tbRow.Cells.Add(cellCourseCredits);
+        tbRow.Cells.Add(cellAction);
+        tblCourseEnrolled.Rows.Add(tbRow);
+    }
 
-            tbRow.Cells.Add(cellNo);
-            tbRow.Cells.Add(cellCourseCode);
-            tbRow.Cells.Add(cellCourseName);
-            tbRow.Cells.Add(cellCourseCredits);
-            tbRow.Cells.Add(cellAction);
-            tblCourseEnrolled.Rows.Add(tbRow);
-        }
+    protected void btnAddCourse_Click(object sender, EventArgs e)
+    {
+        Debug.WriteLine("Halo");
+        TableRow tbRow = new TableRow();
+        TableCell cellNo = new TableCell { Text = "<br>" };
+        TableCell cellCourseCode = new TableCell { Text = "<br>" };
+        TableCell cellCourseName = new TableCell { Text = "<br>" };
+        TableCell cellCourseCredits = new TableCell { Text = "<br>" };
+        TableCell cellAction = new TableCell();
+        Button btn = new Button
+        {
+            CssClass = "action-button",
+            CommandArgument = (tblCourseEnrolled.Rows.Count - 2).ToString(),
+            Text = "Delete"
+        };
+        btn.Click += new EventHandler(btnAddCourse_Click);
+        cellAction.Controls.Add(btn);
+        tbRow.Cells.Add(cellNo);
+        tbRow.Cells.Add(cellCourseCode);
+        tbRow.Cells.Add(cellCourseName);
+        tbRow.Cells.Add(cellCourseCredits);
+        tbRow.Cells.Add(cellAction);
+        tblCourseEnrolled.Rows.Add(tbRow);
     }
 }

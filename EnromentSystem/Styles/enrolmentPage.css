@@ -208,7 +208,7 @@ h2 {
         border: 1px solid #333;
         color: #FFF;
         background-color: #333;
-        width: 60%;
+        width: 67%;
         padding-left: 10px;
     }
 
@@ -216,7 +216,7 @@ h2 {
         border: 1px solid #333;
         color: #FFF;
         background-color: #333;
-        width: 10%;
+        width: 7%;
         padding-left: 10px;
     }
 
@@ -224,7 +224,7 @@ h2 {
         border: 1px solid #333;
         color: #FFF;
         background-color: #333;
-        width: 10%;
+        width: 7%;
         padding-left: 10px;
     }
 
@@ -245,21 +245,21 @@ h2 {
     .CourseEnrolled td:nth-child(5n+3) {
         border: 1px solid #333;
         color: #333;
-        width: 60%;
+        width: 67%;
         padding-left: 10px;
     }
 
     .CourseEnrolled td:nth-child(5n+4) {
         border: 1px solid #333;
         color: #333;
-        width: 10%;
+        width: 7%;
         padding-left: 10px;
     }
 
     .CourseEnrolled td:nth-child(5n+5) {
         border: 1px solid #333;
         color: #333;
-        width: 10%;
+        width: 7%;
         padding-left: 10px;
     }
 
