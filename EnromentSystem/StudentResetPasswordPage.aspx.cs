@@ -33,7 +33,7 @@ public partial class StudentResetPasswordPage : System.Web.UI.Page
             Random random = new Random();
             Session["verification"] = random.Next(100000, 999999);
 
-            DataSet dataSet = DatabaseManager.getRecord(
+            DataSet dataSet = DatabaseManager.GetRecord(
             "student",
             new List<string> { "student_email", "name" },
             "WHERE sid = \'" + txtUserId.Text+ "\'"

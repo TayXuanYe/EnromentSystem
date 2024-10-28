@@ -39,7 +39,7 @@ public static class DatabaseManager
         }
     }
 
-    public static DataSet getRecord(string table, List<string> selectColumns)
+    public static DataSet GetRecord(string table, List<string> selectColumns)
     {
         if (connection == null)
         {
@@ -82,7 +82,7 @@ public static class DatabaseManager
         }
     }
 
-    public static DataSet getRecord(string table, List<string> selectColumns, string condition)
+    public static DataSet GetRecord(string table, List<string> selectColumns, string condition)
     {
         if (connection == null)
         {

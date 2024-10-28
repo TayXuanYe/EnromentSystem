@@ -14,7 +14,7 @@ public partial class StudentLoginPage : System.Web.UI.Page
     private bool checkPasswordMatchId()
     {
         string condition = "WHERE sid = \'" + txtUserId.Text.ToUpper() + "\'";
-        DataSet dataSet = DatabaseManager.getRecord("student", new List<string> { "password" }, condition);
+        DataSet dataSet = DatabaseManager.GetRecord("student", new List<string> { "password" }, condition);
         DataTable dt = dataSet.Tables[0];
         string password = null;
         foreach (DataRow row in dt.Rows)
