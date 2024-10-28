@@ -94,16 +94,16 @@
 
         <tr>
             <td>
-                <asp:Table ID="tblPreviousFailedCourse" runat="server"></asp:Table>
+                <asp:Table ID="tblPreviousFailedCourse" runat="server" CssClass="PreviousFailedCourse"></asp:Table>
             </td>
             <td>
-                <asp:Table ID="tblPreviousCompulsoryCourse" runat="server"></asp:Table>
+                <asp:Table ID="tblPreviousCompulsoryCourse" runat="server" CssClass="PreviousCompulsoryCourse"></asp:Table>
             </td>
         </tr>
     </table>
     <div>
         <h2>Course Enrolled</h2>
-        <asp:Table ID="tblCourseEnrolled" runat="server"></asp:Table>
+        <asp:Table ID="tblCourseEnrolled" runat="server" CssClass="CourseEnrolled"></asp:Table>
             <asp:Button ID="btnCalculateFeeSummary" runat="server" Text="Fee Summary" />
     </div>
     <div class="footer-button">

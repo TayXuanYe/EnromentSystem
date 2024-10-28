@@ -69,7 +69,11 @@ span, h1, h2, li, p {
     width: 100%;
 }
 
-#stdentCourseInfo td{
+#stdentCourseInfo > tbody > tr > td:nth-child(2n+1){
+    width: 50%;
+    padding-right: 30px;
+}
+#stdentCourseInfo > tbody > tr > td:nth-child(2n) {
     width: 50%;
 }
 
@@ -107,4 +111,158 @@ h2 {
 
 .footer-button{
     margin: 20px 0px;
+}
+
+/*dynamic components*/
+.PreviousFailedCourse {
+    border: 1px solid #333;
+    width:100%
+}
+
+.PreviousFailedCourse th:nth-child(2n+1){
+    border: 1px solid #333;
+    color: #FFF;
+    background-color: #333;
+    width:30%;
+    padding-left: 10px;
+}
+
+.PreviousFailedCourse th:nth-child(2n){
+    border: 1px solid #333;
+    color: #FFF;
+    background-color: #333;
+    width:70%;
+    padding-left: 10px;
+}
+.PreviousFailedCourse td:nth-child(2n+1){
+    border: 1px solid #333;
+    color: #333;
+    width:30%;
+    padding-left: 10px;
+}
+
+.PreviousFailedCourse td:nth-child(2n){
+    border: 1px solid #333;
+    color: #333;
+    width:70%;
+    padding-left: 10px;
+}
+
+
+.PreviousCompulsoryCourse {
+    border: 1px solid #333;
+    width: 100%;
+}
+
+    .PreviousCompulsoryCourse th:nth-child(2n+1) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 30%;
+        padding-left: 10px;
+    }
+
+    .PreviousCompulsoryCourse th:nth-child(2n) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 70%;
+        padding-left: 10px;
+    }
+
+    .PreviousCompulsoryCourse td:nth-child(2n+1) {
+        border: 1px solid #333;
+        color: #333;
+        width: 30%;
+        padding-left: 10px;
+    }
+
+    .PreviousCompulsoryCourse td:nth-child(2n) {
+        border: 1px solid #333;
+        color: #333;
+        width: 70%;
+        padding-left: 10px;
+    }
+
+.CourseEnrolled {
+    border: 1px solid #333;
+    width: 100%
+}
+    .CourseEnrolled th:nth-child(5n+1) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 4%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled th:nth-child(5n+2) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 15%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled th:nth-child(5n+3) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 60%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled th:nth-child(5n+4) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 10%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled th:nth-child(5n+5) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 10%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled td:nth-child(5n+1) {
+        border: 1px solid #333;
+        color: #333;
+        width: 4%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled td:nth-child(5n+2) {
+        border: 1px solid #333;
+        color: #333;
+        width: 15%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled td:nth-child(5n+3) {
+        border: 1px solid #333;
+        color: #333;
+        width: 60%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled td:nth-child(5n+4) {
+        border: 1px solid #333;
+        color: #333;
+        width: 10%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled td:nth-child(5n+5) {
+        border: 1px solid #333;
+        color: #333;
+        width: 10%;
+        padding-left: 10px;
+    }
+
+table td, table th {
+    vertical-align: top;
 }

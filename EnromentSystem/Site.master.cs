@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Principal;
@@ -37,7 +38,8 @@ public partial class SiteMaster : MasterPage
                 program;
         }else
         {
-            //Response.Redirect("StudentLoginPage.aspx");
+            Debug.WriteLine("return");
+            Response.Redirect("StudentLoginPage.aspx");
         }
     }
 
