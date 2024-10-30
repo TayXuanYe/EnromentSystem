@@ -133,14 +133,7 @@
                  </asp:DropDownList>
                  <h2>Pre Requisite Course</h2>
                  <asp:Table ID="tblPreRequisite" runat="server" CssClass="PreRequisiteCourse"></asp:Table>
-                 <asp:CustomValidator 
-                     ID="CustomValidator1" 
-                     runat="server" 
-                     CssClass="validator"
-                     OnServerValidate="CustomValidator1_ServerValidate"
-                     Display="Dynamic"
-                     ValidationGroup="popUpWindows">
-                 </asp:CustomValidator><br />
+                 <asp:Label ID="lblErrorMessage" runat="server" Text="Label" CssClass="validator"></asp:Label><br />
                  <asp:Button 
                      ID="btnAddCourse" 
                      runat="server" 
