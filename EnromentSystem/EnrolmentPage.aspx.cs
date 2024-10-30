@@ -453,9 +453,9 @@ public partial class EnrolmentPage : System.Web.UI.Page
     {
         SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
         PreRequisiteMeetValidate();
-        //CourseAvailableValidate();
+        CourseAvailableValidate();
         AchieveMaxCreidtHoursValidate();
-        //TimeTableCrashCheckingValidate();
+        TimeTableCrashCheckingValidate();
     }
 
     protected void PreRequisiteMeetValidate()
@@ -474,7 +474,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
         }
         else
         {
-            lblErrorMessage.Text = "Pre Requisite Not Meet    ";
+            lblErrorMessage.Text = "Pre Requisite Not Meet<br>";
         }
 
 
@@ -484,7 +484,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
     {
         if (ddlCourseSection.Items.Count == 0)
         {
-            lblErrorMessage.Text += "No course section are available    ";
+            lblErrorMessage.Text += "No course section are available<br>";
         }
         else
         {
@@ -495,7 +495,69 @@ public partial class EnrolmentPage : System.Web.UI.Page
     
     protected void TimeTableCrashCheckingValidate()
     {
-        bool timeTableCrash = true;
+        //get course credit hour
+        DataSet dataSet = DatabaseManager.GetRecord(
+               "course",
+               new List<string> { "time" },
+               "INNER JOIN section AS s ON course.cid = s.cid " +
+               "INNER JOIN class AS c ON s.sid = c.sid " +
+               "WHERE course.cid IN (" +
+               "SELECT cid FROM student_taken_course WHERE sid = \'" + Session["sid"] +"\' " +
+               "AND status = 'ADD') " +
+               "AND s.sid IN (" +
+               "SELECT section_id FROM student_taken_course WHERE sid = \'" + Session["sid"] + "\' " +
+               "AND status = 'ADD')"
+           );
+        DataTable dt = null;
+        List<int> timeSelected = new List<int> { };
+        if (dataSet != null)
+        {
+            dt = dataSet.Tables[0];
+        }
+        if (dt != null)
+        {
+            foreach(DataRow row in dt.Rows)
+            {
+                timeSelected.Add(int.Parse(row["time"].ToString()));
+            }
+        }
+        //get current course time
+        dataSet = DatabaseManager.GetRecord(
+               "course",
+               new List<string> { "time" },
+               "INNER JOIN section AS s ON course.cid = s.cid " +
+               "INNER JOIN class AS c ON s.sid = c.sid " +
+               "WHERE course.cid = \'" + ddlCourseCodeListing.SelectedValue + "\' " +
+               "AND s.sid = \'" + ddlCourseSection.SelectedValue + "\'"
+           );
+        dt = null;
+        if (dataSet != null)
+        {
+            dt = dataSet.Tables[0];
+        }
+        if (dt != null)
+        {
+            bool crash = false;
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach (int time in timeSelected)
+                {
+                    Debug.WriteLine(int.Parse(row["time"].ToString()) + ":" + time + ":" + (int.Parse(row["time"].ToString()) == time));
+
+                    if (int.Parse(row["time"].ToString()) == time)
+                    {
+                        crash = true;
+                        break;
+                    }
+                }
+                if (crash)
+                {
+                    lblErrorMessage.Text += "Time table crash<br>";
+                    break;
+                }
+            }
+            
+        }
     }
     
     protected void AchieveMaxCreidtHoursValidate()
@@ -555,7 +617,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
             string maxCreditHourInString = null;
             foreach (DataRow row in dt.Rows)
             {
-                maxCreditHourInString = row["credit_hours"].ToString();
+                maxCreditHourInString = row["credit_hour"].ToString();
             }
             try
             {
@@ -570,7 +632,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
         //verification
         if(currentCreditHours > maxCreditHour)
         {
-            lblErrorMessage.Text += "You have met the maximum available credit hours    ";
+            lblErrorMessage.Text += "You have met the maximum available credit hours<br>";
         }
     }
 }

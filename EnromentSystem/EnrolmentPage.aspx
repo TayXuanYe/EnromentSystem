@@ -133,7 +133,7 @@
                  </asp:DropDownList>
                  <h2>Pre Requisite Course</h2>
                  <asp:Table ID="tblPreRequisite" runat="server" CssClass="PreRequisiteCourse"></asp:Table>
-                 <asp:Label ID="lblErrorMessage" runat="server" Text="Label" CssClass="validator"></asp:Label><br />
+                 <asp:Label ID="lblErrorMessage" runat="server" Text="" CssClass="validator"></asp:Label>
                  <asp:Button 
                      ID="btnAddCourse" 
                      runat="server" 
