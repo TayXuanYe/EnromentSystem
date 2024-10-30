@@ -13,11 +13,19 @@ public partial class EnrolmentPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["sid"] = "I23024312";
-        SetCourseEnrolmentDetails();
-        SetPrevoiousFailedCourseTable();
-        SetPreviousCompulsoryCourseTable();
-        SetCourseEnrolledTable();
+        if (Session["sid"] != null)
+        {
+            SetCourseEnrolmentDetails();
+            SetPrevoiousFailedCourseTable();
+            SetPreviousCompulsoryCourseTable();
+            SetCourseEnrolledTable();
+            if (!IsPostBack)
+            {
+                SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
+                PopulateCourseCodeListing();
+                PopulateCourseSection(ddlCourseCodeListing.SelectedValue);
+            }
+        }
     }
 
     private void SetCourseEnrolmentDetails()
@@ -54,26 +62,23 @@ public partial class EnrolmentPage : System.Web.UI.Page
             major = row["major"].ToString();
         }
         dataSet = DatabaseManager.GetRecord(
-              "current_session",
+              "current_semester",
               new List<string> {
-                    "session",
-                    "credit_hour"
+                    "semester"
               }
           );
         dataTable = dataSet.Tables[0];
-        string session = null;
+        string semester = null;
         foreach (DataRow row in dataTable.Rows)
         {
-            session = row["session"].ToString();
-            Session["maxCreditHourAvailable"] = row["credit_hour"].ToString();
-
+            semester = row["semester"].ToString();
         }
 
         lblMatriculationNo.Text = Session["sid"].ToString();
         lblStudentName.Text = name;
         lblIcPassportNo.Text = icPassport;
         lblStudyMode.Text = studyMode;
-        lblSession.Text = session;
+        lblSession.Text = semester;
         lblSchool.Text = school;
         lblLevel.Text = level;
         lblProgram.Text = program;
@@ -96,8 +101,8 @@ public partial class EnrolmentPage : System.Web.UI.Page
                     "student_taken_course.cid",
                     "name"
                 },
-                "INNER JOIN course ON student_taken_course.cid = course.cid " +
-                "WHERE student_id = \'" + Session["sid"] + "\' AND " + "status = 'fail'"
+                "INNER JOIN course AS c ON student_taken_course.cid = c.cid " +
+                "WHERE sid = \'" + Session["sid"] + "\' AND " + "status = 'FAIL'"
             );
         DataTable dataTable = dataSet.Tables[0];
         foreach (DataRow row in dataTable.Rows)
@@ -136,7 +141,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
                     "previous_compulsory_course.cid",
                     "name"
                 },
-                "INNER JOIN course ON previous_compulsory_course.cid = course.cid " +
+                "INNER JOIN course AS c ON previous_compulsory_course.cid = c.cid " +
                 "WHERE sid = \'" + Session["sid"] + "\'"
             );
         DataTable dataTable = dataSet.Tables[0];
@@ -163,64 +168,337 @@ public partial class EnrolmentPage : System.Web.UI.Page
     private void SetCourseEnrolledTable()
     {
         //Add header
-        TableHeaderRow headerRow = new TableHeaderRow();
-        TableHeaderCell cellNoHeader= new TableHeaderCell { Text = "No" };
-        TableHeaderCell cellCourseCodeHeader = new TableHeaderCell { Text = "Course Code" };
-        TableHeaderCell cellCourseNameHeader = new TableHeaderCell { Text = "Course Name" };
-        TableHeaderCell cellCourseCreditsHeader = new TableHeaderCell { Text = "Credits" };
-        TableHeaderCell cellActionHeader = new TableHeaderCell { Text = "Delete" };
-        headerRow.Cells.Add(cellNoHeader);
-        headerRow.Cells.Add(cellCourseCodeHeader);
-        headerRow.Cells.Add(cellCourseNameHeader);
-        headerRow.Cells.Add(cellCourseCreditsHeader);
-        headerRow.Cells.Add(cellActionHeader);
-        tblCourseEnrolled.Rows.Add(headerRow);
-        //insert data from database
-        //create a new row
-        TableRow tbRow = new TableRow();
-        TableCell cellNo = new TableCell { Text = "<br>" };
-        TableCell cellCourseCode = new TableCell { Text = "<br>" };
-        TableCell cellCourseName = new TableCell { Text = "<br>" };
-        TableCell cellCourseCredits = new TableCell { Text = "<br>" };
-        TableCell cellAction = new TableCell();
-        Button btn = new Button
+        if (tblCourseEnrolled.Rows.Count == 0)
         {
-            CssClass = "action-button",
-            CommandArgument = (tblCourseEnrolled.Rows.Count - 2).ToString(),
-            Text = "Delete"
-        };
-        btn.Click += new EventHandler(btnAddCourse_Click);
-        cellAction.Controls.Add(btn);
-        tbRow.Cells.Add(cellNo);
-        tbRow.Cells.Add(cellCourseCode);
-        tbRow.Cells.Add(cellCourseName);
-        tbRow.Cells.Add(cellCourseCredits);
-        tbRow.Cells.Add(cellAction);
-        tblCourseEnrolled.Rows.Add(tbRow);
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell cellNoHeader = new TableHeaderCell { Text = "No" };
+            TableHeaderCell cellCourseCodeHeader = new TableHeaderCell { Text = "Course Code" };
+            TableHeaderCell cellCourseNameHeader = new TableHeaderCell { Text = "Course Name" };
+            TableHeaderCell cellCourseCreditsHeader = new TableHeaderCell { Text = "Credits" };
+            TableHeaderCell cellActionHeader = new TableHeaderCell { Text = "Delete" };
+            headerRow.Cells.Add(cellNoHeader);
+            headerRow.Cells.Add(cellCourseCodeHeader);
+            headerRow.Cells.Add(cellCourseNameHeader);
+            headerRow.Cells.Add(cellCourseCreditsHeader);
+            headerRow.Cells.Add(cellActionHeader);
+            tblCourseEnrolled.Rows.Add(headerRow);
+        }
+        //insert data from database
+        DataSet courseDataSet = DatabaseManager.GetRecord(
+                "student_taken_course",
+                new List<string> {
+                    "student_taken_course.cid",
+                    "name",
+                    "credit_hours"
+                },
+                "INNER JOIN course AS c " +
+                "ON student_taken_course.cid = c.cid " +
+                "WHERE student_taken_course.sid = \'" + Session["sid"] + "\' " +
+                "AND  student_taken_course.status = 'ADD'"
+            );
+        if(courseDataSet != null)
+        {
+            DataTable dt = courseDataSet.Tables[0];
+            int count = 0;
+            foreach (DataRow row in dt.Rows)
+            {
+                count++;
+                TableRow tbRow = new TableRow();
+                TableCell cellNo = new TableCell { Text = count.ToString() };
+                TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
+                TableCell cellCourseName = new TableCell { Text = row["name"].ToString() };
+                TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
+
+                TableCell cellAction = new TableCell();
+                Button btn = new Button
+                {
+                    CssClass = "action-button",
+                    CommandArgument = (tblCourseEnrolled.Rows.Count - 2).ToString(),
+                    Text = "Delete"
+                };
+                btn.Click += new EventHandler(btnDeleteCourse_Click);
+                cellAction.Controls.Add(btn);
+                tbRow.Cells.Add(cellNo);
+
+                tbRow.Cells.Add(cellCourseCode);
+                tbRow.Cells.Add(cellCourseName);
+                tbRow.Cells.Add(cellCourseCredits);
+                tbRow.Cells.Add(cellAction);
+                tblCourseEnrolled.Rows.Add(tbRow);
+            }
+        }
+        
+
+        if (tblCourseEnrolled.Rows.Count == 1)
+        {
+            TableRow tbRow = new TableRow();
+            TableCell cellNo = new TableCell { Text = "1" };
+            TableCell cellCourseCode = new TableCell { Text = "<br>" };
+            TableCell cellCourseName = new TableCell { Text = "<br>" };
+            TableCell cellCourseCredits = new TableCell { Text = "<br>" };
+            TableCell cellAction = new TableCell { Text = "<br>"};
+
+            tbRow.Cells.Add(cellNo);
+            tbRow.Cells.Add(cellCourseCode);
+            tbRow.Cells.Add(cellCourseName);
+            tbRow.Cells.Add(cellCourseCredits);
+            tbRow.Cells.Add(cellAction);
+            tblCourseEnrolled.Rows.Add(tbRow);
+        }
     }
 
     protected void btnAddCourse_Click(object sender, EventArgs e)
     {
-        Debug.WriteLine("Halo");
-        TableRow tbRow = new TableRow();
-        TableCell cellNo = new TableCell { Text = "<br>" };
-        TableCell cellCourseCode = new TableCell { Text = "<br>" };
-        TableCell cellCourseName = new TableCell { Text = "<br>" };
-        TableCell cellCourseCredits = new TableCell { Text = "<br>" };
-        TableCell cellAction = new TableCell();
-        Button btn = new Button
+        SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
+        addCoursePopUpWindow.Style["display"] = "flex";
+    }
+
+    private void PopulateCourseCodeListing()
+    {
+        //get student details
+        DataSet studentSet = DatabaseManager.GetRecord(
+               "student",
+               new List<string> { "program", "major" },
+               "WHERE sid = \'" + Session["sid"] + "\'"
+           );
+
+        DataTable dt = studentSet.Tables[0];
+        string program = null;
+        string major = null;
+        foreach (DataRow row in dt.Rows)
         {
-            CssClass = "action-button",
-            CommandArgument = (tblCourseEnrolled.Rows.Count - 2).ToString(),
-            Text = "Delete"
-        };
-        btn.Click += new EventHandler(btnAddCourse_Click);
-        cellAction.Controls.Add(btn);
-        tbRow.Cells.Add(cellNo);
-        tbRow.Cells.Add(cellCourseCode);
-        tbRow.Cells.Add(cellCourseName);
-        tbRow.Cells.Add(cellCourseCredits);
-        tbRow.Cells.Add(cellAction);
-        tblCourseEnrolled.Rows.Add(tbRow);
+            program = row["program"].ToString();
+            major = row["major"].ToString();
+        }
+
+        //get course data
+        DataSet courseSet = DatabaseManager.GetRecord(
+               "course",
+               new List<string> {
+                    "course.cid",
+                    "name",
+                    "available",
+                    "credit_hours",
+                    "price"
+               },
+               "FULL JOIN course_major AS cm ON course.cid = cm.cid  " +
+               "WHERE program = \'"+ program +"\' " +
+               "AND (major = \'" + major + "\'" + " OR major = \'NONE\') " +
+               "AND available = '1' " +
+               "AND course.cid NOT IN (" +
+               "SELECT cid FROM student_taken_course WHERE sid = \'" + Session["sid"] + "\'" + " AND status != 'FAIL')"
+           );
+        dt = courseSet.Tables[0];
+        List<string> course = new List<string>();
+        List<string> courseCode = new List<string>();
+        foreach (DataRow row in dt.Rows)
+        {
+            course.Add(row["cid"].ToString() + ":" + row["name"].ToString());
+            courseCode.Add(row["cid"].ToString());
+        }
+        UIComponentGenerator.PopulateDropDownList(ddlCourseCodeListing,course,courseCode);
+    }
+
+    private void PopulateCourseSection(string courseCode)
+    {
+        //get student details
+        DataSet studentSet = DatabaseManager.GetRecord(
+               "student",
+               new List<string> { "program" },
+               "WHERE sid = \'" + Session["sid"] + "\'"
+           );
+
+        DataTable dt = studentSet.Tables[0];
+        string program = null;
+        foreach (DataRow row in dt.Rows)
+        {
+            program = row["program"].ToString();
+        }
+
+        
+        DataSet courseSet = DatabaseManager.GetDistinctRecord(
+               "section",
+               new List<string> {
+                    "name",
+                    "sid"
+               },
+               "WHERE cid = \'" + courseCode + "\' " +
+               "AND current_enroll < max_enroll " +
+               "AND program = \'" + program + "\' " +
+               "AND semester IN (SELECT semester FROM current_semester);"
+           );
+        dt = courseSet.Tables[0];
+        List<string> sectionName = new List<string>();
+        List<string> sectionId = new List<string>();
+        foreach (DataRow row in dt.Rows)
+        {
+            sectionName.Add(row["name"].ToString());
+            sectionId.Add(row["sid"].ToString());
+        }
+        UIComponentGenerator.PopulateDropDownList(ddlCourseSection, sectionName, sectionId);
+    }
+
+    private void SetPreRequisiteTable(string courseCode)
+    {
+        //Add header
+        if (tblPreRequisite.Rows.Count == 0)
+        {
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell cellCourseCodeHeader = new TableHeaderCell { Text = "Course Code" };
+            TableHeaderCell cellCourseNameHeader = new TableHeaderCell { Text = "Course Name" };
+            TableHeaderCell cellMeetsPrerequisitesHeader = new TableHeaderCell { Text = "Meets Pre-requisites" };
+            headerRow.Cells.Add(cellCourseCodeHeader);
+            headerRow.Cells.Add(cellCourseNameHeader);
+            headerRow.Cells.Add(cellMeetsPrerequisitesHeader);
+            tblPreRequisite.Rows.Add(headerRow);
+        }
+        //get pre requisit course
+        DataSet courseDataSet = DatabaseManager.GetRecord(
+                "course",
+                new List<string> {
+                    "cid",
+                    "name"
+                },
+                "WHERE cid IN (" +
+                "SELECT prerequisite FROM course FULL JOIN course_prerequisite AS cp " +
+                "ON course.cid = cp.cid " +
+                "WHERE course.cid = \'" + courseCode + "\')"
+            );
+        if (courseDataSet != null)
+        {
+            DataTable courseDataTable = courseDataSet.Tables[0];
+            foreach (DataRow row in courseDataTable.Rows)
+            {
+                TableRow tbRow = new TableRow();
+                TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
+                TableCell cellCourseName = new TableCell { Text = row["name"].ToString() };
+
+                TableCell cellMeetsPrerequisites = null;
+
+                //Get student taken cours
+                DataSet takenCourseDataSet = DatabaseManager.GetRecord(
+                    "student_taken_course",
+                    new List<string> {
+                    "cid"
+                    },
+                    "WHERE sid = \'" + Session["sid"] + "\' " +
+                    "AND cid IN ( " +
+                    "SELECT prerequisite FROM course " +
+                    "FULL JOIN course_prerequisite AS cp ON course.cid = cp.cid " +
+                    "WHERE course.cid = \'" + courseCode + "\' " +
+                    "AND status = 'COMPLETE')"
+                );
+
+                if (takenCourseDataSet != null)
+                {
+                    DataTable dt = takenCourseDataSet.Tables[0];
+                    foreach (DataRow programRow in dt.Rows)
+                    {
+                        if (row["cid"] == programRow["cid"])
+                        {
+                            cellMeetsPrerequisites = new TableCell { Text = "Satisfied", ForeColor = System.Drawing.Color.Green };
+                            break;
+                        }
+                        else
+                        {
+                            cellMeetsPrerequisites = new TableCell { Text = "Unsatisfied", ForeColor = System.Drawing.Color.Red };
+                        }
+                    }
+                    if (dt.Rows.Count == 0)
+                    {
+                        cellMeetsPrerequisites = new TableCell { Text = "Unsatisfied", ForeColor = System.Drawing.Color.Red };
+                    }
+                }
+                else
+                {
+                    cellMeetsPrerequisites = new TableCell { Text = "Unsatisfied", ForeColor = System.Drawing.Color.Red };
+                }
+                tbRow.Cells.Add(cellCourseCode);
+                tbRow.Cells.Add(cellCourseName);
+                tbRow.Cells.Add(cellMeetsPrerequisites);
+                tblPreRequisite.Rows.Add(tbRow);
+            }
+        }
+        if (tblPreRequisite.Rows.Count == 1)
+        {
+            TableRow tbRow = new TableRow();
+            TableCell cellCourseCode = new TableCell { Text = "None" };
+            TableCell cellCourseName = new TableCell { Text = "None" };
+            TableCell cellMeetsPrerequisites = new TableCell { Text = "Satisfied", ForeColor = System.Drawing.Color.Green };
+            tbRow.Cells.Add(cellCourseCode);
+            tbRow.Cells.Add(cellCourseName);
+            tbRow.Cells.Add(cellMeetsPrerequisites);
+            tblPreRequisite.Rows.Add(tbRow);
+
+        }
+    }
+    protected void ddlCourseCodeListing_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        PopulateCourseSection(ddlCourseCodeListing.SelectedValue);
+        SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
+    }
+
+    protected void btnExit_Click(object sender, EventArgs e)
+    {
+        addCoursePopUpWindow.Style["display"] = "none";
+    }
+
+    protected void btnDeleteCourse_Click(object sender, EventArgs e)
+    {
+        
+
+    }
+    protected void btnAddCourse_Click1(object sender, EventArgs e)
+    {
+        
+
+    }
+
+    protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        args.IsValid = false;
+        bool preRequisiteMeet = true;
+        foreach (TableRow row in tblPreRequisite.Rows)
+        {
+            if (row.Cells[2].Text == "Unsatisfied")
+            {
+                preRequisiteMeet = false;
+            }
+        }
+        bool courseAvailable = false;
+        if(ddlCourseSection.Items.Count == 0)
+        {
+            courseAvailable = false;
+        }
+        else
+        {
+            courseAvailable = true;
+        }
+        bool timeTableCrash = true;
+        bool achieveMaxCreidtHours = true;
+
+
+
+
+
+        if (preRequisiteMeet)
+        {
+            args.IsValid = true;
+        }
+        else
+        {
+            args.IsValid = false;
+            CustomValidator1.ErrorMessage = "Pre Requisite Not Meet";
+        }
+        if (courseAvailable)
+        {
+            args.IsValid = true;
+        }
+        else
+        {
+            args.IsValid = false;
+            CustomValidator1.ErrorMessage = "No course section are available";
+        }
+
     }
 }

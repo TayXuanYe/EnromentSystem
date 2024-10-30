@@ -124,6 +124,94 @@ public static class DatabaseManager
             return null;
         }
     }
+
+    public static DataSet GetDistinctRecord(string table, List<string> selectColumns)
+    {
+        if (connection == null)
+        {
+            ConnectDatabase();
+        }
+
+        if (connection.State != ConnectionState.Open)
+        {
+            connection.Open();
+        }
+
+        //create query
+        String columns = String.Join(", ", selectColumns);
+        String query = $"SELECT DISTINCT {columns} FROM {table}";
+
+        try
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                {
+                    DataSet dataSet = new DataSet();
+                    adapter.Fill(dataSet);
+
+                    return dataSet;
+                }
+            }
+        }
+        catch (SqlException sqlEx)
+        {
+            Console.WriteLine("SQL error occurred - get distinct record: " + sqlEx.Message);
+            Debug.WriteLine("SQL error occurred - get distinct record: " + sqlEx.Message);
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred - get distinct record: " + ex.Message);
+            Debug.WriteLine("SQL error occurred - get distinct record: " + ex.Message);
+            return null;
+        }
+    }
+
+    public static DataSet GetDistinctRecord(string table, List<string> selectColumns, string condition)
+    {
+        if (connection == null)
+        {
+            ConnectDatabase();
+        }
+
+        if (connection.State != ConnectionState.Open)
+        {
+            connection.Open();
+        }
+
+        //create query
+        String columns = String.Join(", ", selectColumns);
+        String query = $"SELECT DISTINCT {columns} FROM {table} {condition}";
+
+        try
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                {
+                    DataSet dataSet = new DataSet();
+                    adapter.Fill(dataSet);
+
+                    return dataSet;
+                }
+            }
+        }
+        catch (SqlException sqlEx)
+        {
+            Console.WriteLine("SQL error occurred - get distinct record: " + sqlEx.Message);
+            Debug.WriteLine("SQL error occurred - get distinct record: " + sqlEx.Message);
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred - get distinct record: " + ex.Message);
+            Debug.WriteLine("SQL error occurred - get distinct record: " + ex.Message);
+            return null;
+        }
+    }
+
+
     public static bool UpdateData(String table, List<string> columnNames, List<object> values, String condition)
     {
         if (connection == null)

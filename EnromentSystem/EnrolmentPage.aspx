@@ -4,6 +4,9 @@
     Language="C#" AutoEventWireup="true" 
     CodeFile="EnrolmentPage.aspx.cs" 
     Inherits="EnrolmentPage" %>
+<%@ Register Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    Namespace="System.Web.UI" TagPrefix="asp" %>
+
 
 <asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/enrolmentPage.css") %>" />
@@ -104,11 +107,51 @@
     <div>
         <h2>Course Enrolled</h2>
         <asp:Table ID="tblCourseEnrolled" runat="server" CssClass="CourseEnrolled"></asp:Table>
-            <asp:Button ID="btnAddEnrolledCourse" runat="server" Text="Add Course" />
+        <asp:Button ID="btnAddEnrolledCourse" runat="server" Text="Add Course" OnClick="btnAddCourse_Click"/>
+    </div>
+    <div>
+        <h2>Fee Summary</h2>
     </div>
     <div class="footer-button">
         <asp:Button ID="btnEnrol" runat="server" Text="Enrol" />
         <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
     </div>
 </div>
+
+<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
+     <ContentTemplate>
+         <asp:Panel ID="addCoursePopUpWindow" runat="server" CssClass="pop-up-windows">
+             <div class="windows-contain">
+                 <h2>Course Code Listing</h2>
+                 <asp:DropDownList 
+                     ID="ddlCourseCodeListing" runat="server"
+                     AutoPostBack="true"
+                     OnSelectedIndexChanged="ddlCourseCodeListing_SelectedIndexChanged"
+                     CssClass="dropDownList"></asp:DropDownList>
+                 <h2>Course Section</h2>
+                 <asp:DropDownList ID="ddlCourseSection" runat="server" CssClass="dropDownList">
+                 </asp:DropDownList>
+                 <h2>Pre Requisite Course</h2>
+                 <asp:Table ID="tblPreRequisite" runat="server" CssClass="PreRequisiteCourse"></asp:Table>
+                 <asp:CustomValidator 
+                     ID="CustomValidator1" 
+                     runat="server" 
+                     CssClass="validator"
+                     OnServerValidate="CustomValidator1_ServerValidate"
+                     Display="Dynamic"
+                     ValidationGroup="popUpWindows">
+                 </asp:CustomValidator><br />
+                 <asp:Button 
+                     ID="btnAddCourse" 
+                     runat="server" 
+                     Text="Add Course" 
+                     OnClick="btnAddCourse_Click1" 
+                     ValidationGroup="popUpWindows"/>
+                 <asp:Button ID="btnExit" runat="server" Text="Exit" OnClick="btnExit_Click"/>
+             </div>
+         </asp:Panel>
+     </ContentTemplate>
+     <Triggers>
+     </Triggers>
+ </asp:UpdatePanel>
 </asp:Content>

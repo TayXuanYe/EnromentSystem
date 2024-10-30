@@ -72,7 +72,7 @@ p, img {
 #btnLogin {
     width: 320px;
     height: 42px;
-    background-color: #c00000;
+    background-color: #A00000;
     margin: 0px auto 25px;
     color: #FFF;
     text-align: center;
@@ -82,6 +82,11 @@ p, img {
     border-radius: 7px;
 }
 
+    #btnLogin:hover {
+        background-color: #8d0000;
+        text-decoration: none;
+        cursor: pointer;
+    }
 .terms > p{
     font-size: 7.5pt;
     text-align: center;
@@ -145,18 +150,6 @@ a {
     border: solid 2px #888;
     border-radius: 5px;
 }
-
-    #btnPopWindowsClose:hover,
-    #btnPopWindowsClose:focus,
-    #btnExitForgetWindows:hover,
-    #btnExitForgetWindows:focus,
-    #btnGetTemporaryPassword:hover,
-    #btnGetTemporaryPassword:focus {
-        background-color: #CCC;
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
 
 .windows-contain h1 {
     --rem: 16;
