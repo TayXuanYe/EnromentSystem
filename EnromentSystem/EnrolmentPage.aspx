@@ -114,37 +114,33 @@
     </div>
     <div class="footer-button">
         <asp:Button ID="btnEnrol" runat="server" Text="Enrol" />
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel"  OnClick="btnCancel_Click"/>
     </div>
 </div>
 
-<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
-     <ContentTemplate>
-         <asp:Panel ID="addCoursePopUpWindow" runat="server" CssClass="pop-up-windows">
-             <div class="windows-contain">
-                 <h2>Course Code Listing</h2>
-                 <asp:DropDownList 
-                     ID="ddlCourseCodeListing" runat="server"
-                     AutoPostBack="true"
-                     OnSelectedIndexChanged="ddlCourseCodeListing_SelectedIndexChanged"
-                     CssClass="dropDownList"></asp:DropDownList>
-                 <h2>Course Section</h2>
-                 <asp:DropDownList ID="ddlCourseSection" runat="server" CssClass="dropDownList">
-                 </asp:DropDownList>
-                 <h2>Pre Requisite Course</h2>
-                 <asp:Table ID="tblPreRequisite" runat="server" CssClass="PreRequisiteCourse"></asp:Table>
-                 <asp:Label ID="lblErrorMessage" runat="server" Text="" CssClass="validator"></asp:Label>
-                 <asp:Button 
-                     ID="btnAddCourse" 
-                     runat="server" 
-                     Text="Add Course" 
-                     OnClick="btnAddCourse_Click1" 
-                     ValidationGroup="popUpWindows"/>
-                 <asp:Button ID="btnExit" runat="server" Text="Exit" OnClick="btnExit_Click"/>
-             </div>
-         </asp:Panel>
-     </ContentTemplate>
-     <Triggers>
-     </Triggers>
- </asp:UpdatePanel>
+
+<asp:Panel ID="addCoursePopUpWindow" runat="server" CssClass="pop-up-windows">
+    <div class="windows-contain">
+        <h2>Course Code Listing</h2>
+        <asp:DropDownList 
+            ID="ddlCourseCodeListing" runat="server"
+            AutoPostBack="true"
+            OnSelectedIndexChanged="ddlCourseCodeListing_SelectedIndexChanged"
+            CssClass="dropDownList"></asp:DropDownList>
+        <h2>Course Section</h2>
+        <asp:DropDownList ID="ddlCourseSection" runat="server" CssClass="dropDownList">
+        </asp:DropDownList>
+        <h2>Pre Requisite Course</h2>
+        <asp:Table ID="tblPreRequisite" runat="server" CssClass="PreRequisiteCourse"></asp:Table>
+        <asp:Label ID="lblErrorMessage" runat="server" Text="" CssClass="validator"></asp:Label>
+        <asp:Button 
+            ID="btnAddCourse" 
+            runat="server" 
+            Text="Add Course" 
+            OnClick="btnAddCourse_Click1" 
+            ValidationGroup="popUpWindows"/>
+        <asp:Button ID="btnExit" runat="server" Text="Exit" OnClick="btnExit_Click"/>
+    </div>
+</asp:Panel>
+
 </asp:Content>

@@ -169,6 +169,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
     private void SetCourseEnrolledTable()
     {
         //Add header
+        tblCourseEnrolled.Rows.Clear();
         if (tblCourseEnrolled.Rows.Count == 0)
         {
             TableHeaderRow headerRow = new TableHeaderRow();
@@ -250,6 +251,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
 
     protected void btnAddCourse_Click(object sender, EventArgs e)
     {
+        SetCourseEnrolledTable();
         SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
         addCoursePopUpWindow.Style["display"] = "flex";
     }
@@ -298,6 +300,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
             courseCode.Add(row["cid"].ToString());
         }
         UIComponentGenerator.PopulateDropDownList(ddlCourseCodeListing,course,courseCode);
+        PopulateCourseSection(courseCode[0]);
     }
 
     private void PopulateCourseSection(string courseCode)
@@ -433,6 +436,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
 
         }
     }
+
     protected void ddlCourseCodeListing_SelectedIndexChanged(object sender, EventArgs e)
     {
         PopulateCourseSection(ddlCourseCodeListing.SelectedValue);
@@ -452,13 +456,51 @@ public partial class EnrolmentPage : System.Web.UI.Page
     protected void btnAddCourse_Click1(object sender, EventArgs e)
     {
         SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
-        PreRequisiteMeetValidate();
-        CourseAvailableValidate();
-        AchieveMaxCreidtHoursValidate();
-        TimeTableCrashCheckingValidate();
+
+        bool preRequisiteMeet = PreRequisiteMeetValidate();
+        bool courseAvailable = CourseAvailableValidate();
+        bool creidtHoursMeet = AchieveMaxCreidtHoursValidate();
+        bool timeTabletNoCrash = TimeTableCrashCheckingValidate();
+
+        if (preRequisiteMeet && courseAvailable && creidtHoursMeet && timeTabletNoCrash)
+        {
+            //check is fail?
+            DataSet dataSet = DatabaseManager.GetRecord(
+               "student_taken_course",
+               new List<string> { "cid" },
+               "WHERE sid = \'" + Session["sid"] + "\' " +
+               "AND cid = \'" + ddlCourseCodeListing.SelectedValue+ "\' " +
+               "AND status = \'FAIL\'"
+           );
+            DataTable dt = dataSet.Tables[0];
+            if (dt.Rows.Count == 0)
+            {
+                DatabaseManager.InsertData(
+                    "student_taken_course",
+                    new List<string> { "sid", "cid", "section_id", "status" },
+                    new List<object> { Session["sid"].ToString(),
+                        ddlCourseCodeListing.SelectedValue,
+                        ddlCourseSection.SelectedValue,
+                        "ADD"
+                    });
+            }
+            else
+            {
+                DatabaseManager.UpdateData(
+                    "student_taken_course",
+                    new List<string> { "status" },
+                    new List<object> { "ADD" },
+                    "WHERE sid = \'" + Session["sid"] + "\' " +
+                    "AND cid = \'" + ddlCourseCodeListing.SelectedValue + "\' " +
+                    "AND status = \'FAIL\'"
+                    );
+            }
+            addCoursePopUpWindow.Style["display"] = "none";
+            SetCourseEnrolledTable();
+        }
     }
 
-    protected void PreRequisiteMeetValidate()
+    protected bool PreRequisiteMeetValidate()
     {
         bool preRequisiteMeet = true;
         foreach (TableRow row in tblPreRequisite.Rows)
@@ -470,30 +512,29 @@ public partial class EnrolmentPage : System.Web.UI.Page
         }
         if (preRequisiteMeet == true)
         {
-            lblErrorMessage.Text = "";
+            return true;
         }
         else
         {
             lblErrorMessage.Text = "Pre Requisite Not Meet<br>";
+            return false;
         }
-
-
     }
     
-    protected void CourseAvailableValidate()
+    protected bool CourseAvailableValidate()
     {
         if (ddlCourseSection.Items.Count == 0)
         {
             lblErrorMessage.Text += "No course section are available<br>";
+            return false;
         }
         else
         {
-            lblErrorMessage.Text += "";
-;
+;           return true;
         }
     }
     
-    protected void TimeTableCrashCheckingValidate()
+    protected bool TimeTableCrashCheckingValidate()
     {
         //get course credit hour
         DataSet dataSet = DatabaseManager.GetRecord(
@@ -514,12 +555,22 @@ public partial class EnrolmentPage : System.Web.UI.Page
         {
             dt = dataSet.Tables[0];
         }
+        else
+        {
+            Debug.WriteLine("TimeTableCrashCheckingValidate: get course credit hour dataset is null");
+            return false;
+        }
         if (dt != null)
         {
             foreach(DataRow row in dt.Rows)
             {
                 timeSelected.Add(int.Parse(row["time"].ToString()));
             }
+        }
+        else
+        {
+            Debug.WriteLine("TimeTableCrashCheckingValidate: get course credit hour datatable is null");
+            return false;
         }
         //get current course time
         dataSet = DatabaseManager.GetRecord(
@@ -534,6 +585,11 @@ public partial class EnrolmentPage : System.Web.UI.Page
         if (dataSet != null)
         {
             dt = dataSet.Tables[0];
+        }
+        else
+        {
+            Debug.WriteLine("TimeTableCrashCheckingValidate: get current course time dataset is null");
+            return false;
         }
         if (dt != null)
         {
@@ -553,14 +609,15 @@ public partial class EnrolmentPage : System.Web.UI.Page
                 if (crash)
                 {
                     lblErrorMessage.Text += "Time table crash<br>";
-                    break;
+                    return false;
                 }
             }
             
         }
+        return true;
     }
     
-    protected void AchieveMaxCreidtHoursValidate()
+    protected bool AchieveMaxCreidtHoursValidate()
     {
         int currentCreditHours = 0;
         foreach (TableRow row in tblCourseEnrolled.Rows)
@@ -633,6 +690,13 @@ public partial class EnrolmentPage : System.Web.UI.Page
         if(currentCreditHours > maxCreditHour)
         {
             lblErrorMessage.Text += "You have met the maximum available credit hours<br>";
+            return false;
         }
+        return true;
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+
     }
 }
