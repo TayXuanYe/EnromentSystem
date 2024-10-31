@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
@@ -20,6 +21,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
             SetPrevoiousFailedCourseTable();
             SetPreviousCompulsoryCourseTable();
             SetCourseEnrolledTable();
+            SetFeeSummaryTable();
             if (!IsPostBack)
             {
                 SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
@@ -246,6 +248,93 @@ public partial class EnrolmentPage : System.Web.UI.Page
             tbRow.Cells.Add(cellCourseCredits);
             tbRow.Cells.Add(cellAction);
             tblCourseEnrolled.Rows.Add(tbRow);
+        }
+    }
+
+    private void SetFeeSummaryTable()
+    {
+        //Add header
+        tblFeeSummary.Rows.Clear();
+        if (tblFeeSummary.Rows.Count == 0)
+        {
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell cellNoHeader = new TableHeaderCell { Text = "No" };
+            TableHeaderCell cellCourseCodeHeader = new TableHeaderCell { Text = "Course Code" };
+            TableHeaderCell cellCourseNameHeader = new TableHeaderCell { Text = "Course Name" };
+            TableHeaderCell cellCoursePriceHeader = new TableHeaderCell { Text = "Price" };
+            headerRow.Cells.Add(cellNoHeader);
+            headerRow.Cells.Add(cellCourseCodeHeader);
+            headerRow.Cells.Add(cellCourseNameHeader);
+            headerRow.Cells.Add(cellCoursePriceHeader);
+            tblFeeSummary.Rows.Add(headerRow);
+        }
+        
+        //Add price data
+        double cumulativePrice = 0.0;
+        DataSet dataSet = DatabaseManager.GetRecord(
+            "student_taken_course",
+            new List<string> { "student_taken_course.cid", "course.name", "price" },
+            "INNER JOIN course ON student_taken_course.cid = course.cid " +
+            "WHERE sid = \'" + Session["sid"] + "\' " +
+            "AND status = 'ADD'"
+            );
+        int count = 0;
+        
+        if (dataSet != null)
+        {
+            DataTable dataTable = dataSet.Tables[0];
+            foreach (DataRow row in dataTable.Rows)
+            {
+                count++;
+                TableRow tbRow = new TableRow();
+                TableCell cellNo = new TableCell { Text = count.ToString() };
+                TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
+                TableCell cellCourseName = new TableCell { Text = row["name"].ToString() };
+                TableCell cellCoursePrice = new TableCell { Text = "RM " + row["price"].ToString() };
+                tbRow.Cells.Add(cellNo);
+                tbRow.Cells.Add(cellCourseCode);
+                tbRow.Cells.Add(cellCourseName);
+                tbRow.Cells.Add(cellCoursePrice);
+                tblFeeSummary.Rows.Add(tbRow);
+                cumulativePrice += double.Parse(row["price"].ToString());
+            }
+        }
+
+        //add scholar
+        double scholarshipAmount = 0;
+        {
+            TableRow tbRow = new TableRow();
+            dataSet = DatabaseManager.GetRecord(
+                "student",
+                new List<string> { "scholarship" },
+                "WHERE sid = \'" + Session["sid"] + "\'"
+                );
+            DataTable dt = dataSet.Tables[0];
+            int scholarship = 0;
+            foreach (DataRow row in dt.Rows)
+            {
+                scholarship = int.Parse(row["scholarship"].ToString());
+            }
+            TableCell cellscholarship = new TableCell { Text = "scholarship : " + scholarship + "%" };
+            cellscholarship.ColumnSpan = 3;
+            scholarshipAmount = cumulativePrice * scholarship / 100;
+            TableCell cellscholarshipAmount = new TableCell { Text = "RM " + scholarshipAmount.ToString() };
+
+            tbRow.Cells.Add(cellscholarship);
+            tbRow.Cells.Add(cellscholarshipAmount);
+            tblFeeSummary.Rows.Add(tbRow);
+        }
+        //add total price
+        {
+            TableRow tbRow = new TableRow();
+            TableCell cellTotalPriceText = new TableCell { Text = "Total : " };
+            cellTotalPriceText.ColumnSpan = 3;
+            double total = cumulativePrice - scholarshipAmount;
+            TableCell cellTotalPrice = new TableCell { Text = "RM " + total.ToString() };
+
+            tbRow.Cells.Add(cellTotalPriceText);
+            tbRow.Cells.Add(cellTotalPrice);
+            tblFeeSummary.Rows.Add(tbRow);
         }
     }
 

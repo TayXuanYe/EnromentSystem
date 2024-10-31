@@ -83,8 +83,12 @@ h2 {
     font-size: 14pt;
     color: #656565;
     font-weight: 500;
+
 }
 
+.body h2 {
+    margin: 10px 0px;
+}
 .body input{
     background-color: #f6f6f6;
     border: none;
@@ -95,10 +99,17 @@ h2 {
     display: inline-block;
     font-size: 16px;
     margin: 4px;
+    margin-top: 10px;
     cursor: pointer;
     border: solid #C3C3C3 1px;
     border-radius: 4px;
     transition: background-color 0.3s;
+}
+
+.CourseEnrolled input{
+    margin-top: 4px;
+    padding-top: 0px;
+    padding-bottom : 0px;
 }
 
 .body input:hover {
@@ -394,3 +405,71 @@ table td, table th {
     color: #EE0000;
     font-size: 16pt;
 }
+
+.FeeSummary {
+    border: 1px solid #333;
+    width: 100%;
+}
+
+    .FeeSummary th:nth-child(4n+1) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 4%;
+        padding-left: 10px;
+    }
+
+    .FeeSummary th:nth-child(4n+2) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 20%;
+        padding-left: 10px;
+    }
+
+    .FeeSummary th:nth-child(4n+3) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 60%;
+        padding-left: 10px;
+    }
+
+    .FeeSummary th:nth-child(4n+4) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 10%;
+        padding-left: 5px;
+        padding-right: 10px;
+    }
+
+    .FeeSummary td:nth-child(4n+1) {
+        border: 1px solid #333;
+        color: #333;
+        width: 5%;
+        padding-left: 10px;
+    }
+
+    .FeeSummary td:nth-child(4n+2) {
+        border: 1px solid #333;
+        color: #333;
+        width: 20%;
+        padding-left: 10px;
+    }
+
+    .FeeSummary td:nth-child(4n+3) {
+        border: 1px solid #333;
+        color: #333;
+        width: 60%;
+        padding-left: 10px;
+    }
+
+    .FeeSummary td:nth-child(4n+4) {
+        H border: 1px solid #333;
+        color: #333;
+        width: 10%;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
