@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -320,6 +322,42 @@ public static class DatabaseManager
         {
             Debug.WriteLine("An error occurred - InsertData: " + ex.Message);
             Console.WriteLine("An error occurred - InsertData: " + ex.Message);
+            return false;
+        }
+    }
+
+    public static bool DeleteData(string table, string condition)
+    {
+        if (connection == null)
+        {
+            ConnectDatabase();
+        }
+
+        if (connection.State != ConnectionState.Open)
+        {
+            connection.Open();
+        }
+
+        string query = $"DELETE FROM {table} {condition}";
+        try
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+        }
+        catch (SqlException sqlEx)
+        {
+            Debug.WriteLine("SQL error occurred - Delete data: " + sqlEx.Message);
+            Console.WriteLine("SQL error occurred - Delete data: " + sqlEx.Message);
+            return false;
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("An error occurred - Delete data: " + ex.Message);
+            Console.WriteLine("An error occurred - Delete data: " + ex.Message);
             return false;
         }
     }

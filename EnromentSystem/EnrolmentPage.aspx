@@ -114,7 +114,7 @@
         <asp:Table ID="tblFeeSummary" runat="server" CssClass="FeeSummary"></asp:Table>
     </div>
     <div class="footer-button">
-        <asp:Button ID="btnEnrol" runat="server" Text="Enrol" />
+        <asp:Button ID="btnEnrol" runat="server" Text="Enrol" OnClick="btnEnrol_Click"/>
         <asp:Button ID="btnCancel" runat="server" Text="Cancel"  OnClick="btnCancel_Click"/>
     </div>
 </div>

@@ -22,10 +22,11 @@ public partial class EnrolmentPage : System.Web.UI.Page
             SetPreviousCompulsoryCourseTable();
             SetCourseEnrolledTable();
             SetFeeSummaryTable();
+            lblErrorMessage.Text = "";
             if (!IsPostBack)
             {
-                SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
                 PopulateCourseCodeListing();
+                SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
                 PopulateCourseSection(ddlCourseCodeListing.SelectedValue);
             }
         }
@@ -217,7 +218,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
                 Button btn = new Button
                 {
                     CssClass = "action-button",
-                    CommandArgument = (tblCourseEnrolled.Rows.Count - 2).ToString(),
+                    CommandArgument = (tblCourseEnrolled.Rows.Count).ToString(),
                     Text = "Delete"
                 };
                 btn.Click += new EventHandler(btnDeleteCourse_Click);
@@ -539,13 +540,29 @@ public partial class EnrolmentPage : System.Web.UI.Page
 
     protected void btnDeleteCourse_Click(object sender, EventArgs e)
     {
-        
-
+        Button btn = (Button)sender;
+        int rowIndex = int.Parse(btn.CommandArgument);
+        string courseId = null;
+        if (rowIndex < tblCourseEnrolled.Rows.Count)
+        {
+            TableCell cell = tblCourseEnrolled.Rows[rowIndex].Cells[1];
+            courseId = cell.Text;
+        }
+        if(courseId != null)
+        {
+            DatabaseManager.DeleteData(
+                "student_taken_course",
+                "WHERE sid = \'" + Session["sid"] + "\' " +
+                "AND cid = \'" + courseId + "\'");
+        }
+        PopulateCourseCodeListing();
+        SetCourseEnrolledTable();
+        SetFeeSummaryTable();
     }
     protected void btnAddCourse_Click1(object sender, EventArgs e)
     {
         SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
-
+        lblErrorMessage.Text = "";
         bool preRequisiteMeet = PreRequisiteMeetValidate();
         bool courseAvailable = CourseAvailableValidate();
         bool creidtHoursMeet = AchieveMaxCreidtHoursValidate();
@@ -603,7 +620,9 @@ public partial class EnrolmentPage : System.Web.UI.Page
                 "WHERE sid = \'" + ddlCourseSection.SelectedValue + "\' "
                 );
             addCoursePopUpWindow.Style["display"] = "none";
+            PopulateCourseCodeListing();
             SetCourseEnrolledTable();
+            SetFeeSummaryTable();
         }
     }
 
@@ -623,7 +642,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
         }
         else
         {
-            lblErrorMessage.Text = "Pre Requisite Not Meet<br>";
+            lblErrorMessage.Text += "Pre Requisite Not Meet<br>";
             return false;
         }
     }
@@ -705,8 +724,6 @@ public partial class EnrolmentPage : System.Web.UI.Page
             {
                 foreach (int time in timeSelected)
                 {
-                    Debug.WriteLine(int.Parse(row["time"].ToString()) + ":" + time + ":" + (int.Parse(row["time"].ToString()) == time));
-
                     if (int.Parse(row["time"].ToString()) == time)
                     {
                         crash = true;
@@ -804,6 +821,18 @@ public partial class EnrolmentPage : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
+        Response.Redirect("StudentHomePage.aspx");
+    }
+
+    protected void btnEnrol_Click(object sender, EventArgs e)
+    {
+        DatabaseManager.UpdateData(
+            "student_taken_course",
+            new List<string> { "status" },
+            new List<object> { "TAKEN" },
+            "WHERE status = 'ADD' " +
+            "AND sid = \'" + Session["sid"] + "\'"
+            );
         Response.Redirect("StudentHomePage.aspx");
     }
 }
