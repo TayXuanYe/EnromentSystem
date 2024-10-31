@@ -505,7 +505,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
             int currentEnroll = 0;
             foreach(DataRow row in dt.Rows)
             {
-                currentEnroll = int.Parse(row["current_enroll"].ToString())''
+                currentEnroll = int.Parse(row["current_enroll"].ToString());
             }
             DatabaseManager.UpdateData(
                 "section",
