@@ -488,8 +488,8 @@ public partial class EnrolmentPage : System.Web.UI.Page
             {
                 DatabaseManager.UpdateData(
                     "student_taken_course",
-                    new List<string> { "status" },
-                    new List<object> { "ADD" },
+                    new List<string> { "status", "section_id" },
+                    new List<object> { "ADD", ddlCourseSection.SelectedValue },
                     "WHERE sid = \'" + Session["sid"] + "\' " +
                     "AND cid = \'" + ddlCourseCodeListing.SelectedValue + "\' " +
                     "AND status = \'FAIL\'"
@@ -697,6 +697,6 @@ public partial class EnrolmentPage : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("StudentHomePage.aspx");
     }
 }
