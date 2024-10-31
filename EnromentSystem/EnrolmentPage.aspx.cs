@@ -495,6 +495,24 @@ public partial class EnrolmentPage : System.Web.UI.Page
                     "AND status = \'FAIL\'"
                     );
             }
+            //update section current enroll
+            dataSet = DatabaseManager.GetRecord(
+               "section",
+               new List<string> { "current_enroll" },
+               "WHERE sid = \'" + ddlCourseSection.SelectedValue + "\' "
+            );
+            dt = dataSet.Tables[0];
+            int currentEnroll = 0;
+            foreach(DataRow row in dt.Rows)
+            {
+                currentEnroll = int.Parse(row["current_enroll"].ToString())''
+            }
+            DatabaseManager.UpdateData(
+                "section",
+                new List<string> { "current_enroll" },
+                new List<object> { currentEnroll+1 },
+                "WHERE sid = \'" + ddlCourseSection.SelectedValue + "\' "
+                );
             addCoursePopUpWindow.Style["display"] = "none";
             SetCourseEnrolledTable();
         }
