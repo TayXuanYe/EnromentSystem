@@ -1,174 +1,436 @@
-﻿body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
+﻿* {
+    outline: none;
+    caret-color: transparent;
 }
 
-/* Main container for the entire page content */
-.panel-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+span, h1, h2, li, p {
+    user-select: none;
+    margin: 0px;
+}
+
+
+
+.box {
+    width: 1150px;
+    height: 900px;
+    background-color: #FFFFFF;
+    border: 0px solid #FFFFFF;
+    border-radius: 25px;
+    margin: 50px auto 40px;
+    padding: 10px;
+    padding-bottom: 25px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.15);
+    font-size: 12pt;
+    font-weight: 100;
+    line-height: 1.6;
+    overflow: clip;
+    overflow-clip-margin: content-box;
+}
+
+.body {
+    margin: 0px 90px;
+}
+
+    .body h1 {
+        display: inline-block;
+        --rem: 16;
+        font-family: Arial;
+        font-size: 18pt;
+        color: #656565;
+        margin-bottom: 30px;
+    }
+
+#studentInfoPart {
     width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-    background-color: #fff;
-}
-
-h1 {
-    margin: 20px auto;
-    width: 100%;
-/*    margin-left: 250px*/
-}
-
-#MainContent{
-    width:750px;
-}
-
-.table-container {
-    display: flex;
-/*    justify-content: center;*/
-    width: 750px;
-    gap: 300px
-}
-
-/* Table styling */
-.table-left,
-.table-right {
     border-collapse: collapse;
 }
 
-    .table-left td,
-    .table-right td {
-        padding: 8px; /* Padding inside table cells */
+    #studentInfoPart tr {
+        height: 30px;
     }
 
-panel2 {
-    justify-content: center;
-}
-/* Styling for the course table */
-.course-table {
-    width: 100%;
-    max-width: 800px;
-    border-collapse: collapse;
-    margin-top: 20px;
-/*    margin-left: 300px;*/
-}
-
- .course-table th,
- .course-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-    
- }
-
-        .course-table th:nth-child(1), .course-table td:nth-child(1) {
-            width: 5%;
-        }
-
-        .course-table th:nth-child(2), .course-table td:nth-child(2) {
-            width: 30%;
-        }
-
-        .course-table th:nth-child(3), .course-table td:nth-child(3) {
-            width: 15%;
-        }
-
-        .course-table th:nth-child(4), .course-table td:nth-child(4) {
-            width: 5%;
-        }
-
-    .course-table th {
-        background-color: #f2f2f2;
+    #studentInfoPart td:nth-child(odd) {
+        font-weight: 800;
+        width: 15%;
     }
 
+        #studentInfoPart td:nth-child(odd):before {
+            content: ":";
+            text-align: right;
+            float: right;
+        }
 
-.underline-red {
-    text-decoration: underline;
-    text-decoration-color: red;
-    color: red;
-    margin: 0;
-/*    margin-left: 300px;*/
+    #studentInfoPart td:nth-child(even) {
+        width: 35%;
+        padding-left: 5px;
+    }
+
+#stdentCourseInfo {
+    margin: 30px 0px;
     width: 100%;
 }
 
-p {
-/*    margin-left: 300px;*/
+    #stdentCourseInfo > tbody > tr > td:nth-child(2n+1) {
+        width: 50%;
+        padding-right: 30px;
+    }
+
+    #stdentCourseInfo > tbody > tr > td:nth-child(2n) {
+        width: 50%;
+    }
+
+h2 {
+    --rem: 16;
+    font-family: Arial;
+    font-size: 14pt;
+    color: #656565;
+    font-weight: 500;
 }
 
-/* Round button styles */
-.round-button {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+.body h2 {
+    margin: 10px 0px;
+}
+
+.body input {
+    background-color: #f6f6f6;
     border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-    .round-button img {
-        width: 100%;
-        height: auto;
-        border-radius: 50%;
-    }
-
-.panel-small {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    padding: 5px;
-    background-color: #f9f9f9;
-    width: 20px;
-    height: 70px;
-/*    margin-left: 320px;*/
-}
-
-.unique-label-style {
-    font-size: 16px;
-/*    margin-left: 320px;*/
-}
-
-panel3 {
-    justify-content: center;
-}
-
-.unique-label-style2 {
-    justify-content: center;
-}
-
-.custom-button {
-    background-color: #007bff;
-    color: #fff;
-    border: 2px solid #0056b3;
-    font-size: 16px;
-    border-radius: 8px;
+    color: #656565;
+    padding: 6px 8px;
     text-align: center;
     text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    margin-top: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    padding-left: 10px;
-    margin-bottom: 10px
+    border: solid #C3C3C3 1px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-    /* Hover Effect */
-    .custom-button:hover {
-        background-color: #0056b3; /* Darker shade on hover */
-        transform: scale(1.05); /* Slight scaling effect */
+.CourseEnrolled input {
+    margin-top: 4px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.body input:hover {
+    background-color: #c3c3c3;
+}
+
+.footer-button input {
+/*    width: 100px;*/
+}
+
+.footer-button {
+    margin: 20px 0px;
+}
+
+/*dynamic components*/
+.PreviousFailedCourse {
+    border: 1px solid #333;
+    width: 100%
+}
+
+    .PreviousFailedCourse th:nth-child(2n+1) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 30%;
+        padding-left: 10px;
     }
 
-    /* Active Effect */
-    .custom-button:active {
-        transform: scale(1); /* Reset scaling when clicked */
-        background-color: #004080; /* Even darker shade on active click */
+    .PreviousFailedCourse th:nth-child(2n) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 70%;
+        padding-left: 10px;
     }
 
-    /* Disabled State */
-    .custom-button:disabled {
-        background-color: #ccc; /* Grey background for disabled state */
-        cursor: not-allowed; /* Not-allowed cursor */
-        opacity: 0.6; /* Slight transparency */
+    .PreviousFailedCourse td:nth-child(2n+1) {
+        border: 1px solid #333;
+        color: #333;
+        width: 30%;
+        padding-left: 10px;
     }
+
+    .PreviousFailedCourse td:nth-child(2n) {
+        border: 1px solid #333;
+        color: #333;
+        width: 70%;
+        padding-left: 10px;
+    }
+
+
+.PreviousCompulsoryCourse {
+    border: 1px solid #333;
+    width: 100%;
+}
+
+    .PreviousCompulsoryCourse th:nth-child(2n+1) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 30%;
+        padding-left: 10px;
+    }
+
+    .PreviousCompulsoryCourse th:nth-child(2n) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 70%;
+        padding-left: 10px;
+    }
+
+    .PreviousCompulsoryCourse td:nth-child(2n+1) {
+        border: 1px solid #333;
+        color: #333;
+        width: 30%;
+        padding-left: 10px;
+    }
+
+    .PreviousCompulsoryCourse td:nth-child(2n) {
+        border: 1px solid #333;
+        color: #333;
+        width: 70%;
+        padding-left: 10px;
+    }
+
+.CourseEnrolled {
+    border: 1px solid #333;
+    width: 100%
+}
+
+    .CourseEnrolled th:nth-child(5n+1) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 4%;
+        padding-left: 5px;
+    }
+
+    .CourseEnrolled th:nth-child(5n+2) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 20%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled th:nth-child(5n+3) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 60%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled th:nth-child(5n+4) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 10%;
+        padding-left: 10px;
+        padding-right: 5px;
+    }
+
+    .CourseEnrolled th:nth-child(5n+5) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 17%;
+        padding-left: 10px;
+        padding-right: 5px;
+    }
+
+    .CourseEnrolled td:nth-child(5n+1) {
+        border: 1px solid #333;
+        color: #333;
+        width: 5%;
+        padding-left: 5px;
+    }
+
+    .CourseEnrolled td:nth-child(5n+2) {
+        border: 1px solid #333;
+        color: #333;
+        width: 20%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled td:nth-child(5n+3) {
+        border: 1px solid #333;
+        color: #333;
+        width: 60%;
+        padding-left: 10px;
+    }
+
+    .CourseEnrolled td:nth-child(5n+4) {
+        border: 1px solid #333;
+        color: #333;
+        width: 10%;
+        padding-right: 5px;
+        padding-left: 10px;
+    }
+    
+    .CourseEnrolled td:nth-child(5n+5) {
+        border: 1px solid #333;
+        color: #333;
+        width: 10%;
+        vertical-align: middle;
+    }
+    
+    .CourseEnrolled td:nth-child(5n+5) input{
+        vertical-align:middle;
+    }
+
+table td, table th {
+    vertical-align: top;
+}
+
+/*pop up windows*/
+.pop-up-windows {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.windows-contain {
+    background-color: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+}
+
+
+.pop-up-windows h2 {
+    margin: 10px 0px;
+}
+
+.dropDownList {
+    width: 80%;
+    max-width: 500px;
+    padding: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    font-size: 16px;
+    background-size: 10px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+    .dropDownList:focus {
+        border-color: #0056b3; /* 聚焦时边框颜色 */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 聚焦时添加阴影效果 */
+    }
+
+    .dropDownList option {
+        padding: 10px;
+    }
+
+.pop-up-windows input {
+    background-color: #f6f6f6;
+    border: none;
+    color: #656565;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 8px 10px 0px 0px;
+    cursor: pointer;
+    border: solid #C3C3C3 1px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+    .pop-up-windows input:hover {
+        background-color: #c3c3c3;
+    }
+
+.pop-up-windows .validator {
+    margin: 10px 0px;
+    color: #EE0000;
+    font-size: 16pt;
+}
+
+/*pop up windows Add course*/
+
+.PreRequisiteCourse {
+    border: 1px solid #333;
+    width: 600px;
+}
+
+    .PreRequisiteCourse th:nth-child(3n+1) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 20%;
+        padding-left: 10px;
+    }
+
+    .PreRequisiteCourse td:nth-child(3n+1) {
+        border: 1px solid #333;
+        width: 20%;
+        padding-left: 10px;
+    }
+
+    .PreRequisiteCourse th:nth-child(3n+2) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 50%;
+        padding-left: 10px;
+    }
+
+    .PreRequisiteCourse td:nth-child(3n+2) {
+        border: 1px solid #333;
+        width: 50%;
+        padding-left: 10px;
+    }
+
+    .PreRequisiteCourse th:nth-child(3n) {
+        border: 1px solid #333;
+        color: #FFF;
+        background-color: #333;
+        width: 30%;
+        padding-left: 10px;
+    }
+
+    .PreRequisiteCourse td:nth-child(3n) {
+        border: 1px solid #333;
+        width: 30%;
+        padding-left: 10px;
+    }
+/*pop up window select Operation*/
+.operation-button-contain{
+    display: inline-block;
+}
+
+.operation-button-contain span{
+    position:relative;
+    bottom: 35px;
+    display:block;
+    text-align:center;
+    margin-right:10px;
+}
+
+.operation-button-contain input{
+    padding:20px;
+    padding-bottom: 40px;
+}
+
+.label-operating-course-id span{
+    display:inline-block;
+    font-size: 16pt;
+    margin-bottom: 10px;
+}
