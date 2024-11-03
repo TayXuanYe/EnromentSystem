@@ -172,11 +172,7 @@
 
 <asp:Panel ID="dropCoursePopUpWindow" runat="server" CssClass="pop-up-windows">
     <div class="windows-contain">
-        <h2>Course Code Listing</h2>
-        <asp:DropDownList 
-            ID="ddlDropCourseListing" runat="server"
-            AutoPostBack="true"
-            CssClass="dropDownList"></asp:DropDownList>
+        <h2>Course Code : <asp:Label ID="lblDropingCourse" runat="server" Text=""></asp:Label></h2>
 
         <h2>Reason</h2>
         <asp:TextBox ID="txtDropCourseReason" runat="server" TextMode="MultiLine" CssClass="text-area"></asp:TextBox><br />
@@ -204,7 +200,7 @@
         <asp:Button 
             ID="btnDropCourseApply" 
             runat="server" 
-            Text="Add Course" 
+            Text="Drop Course" 
             OnClick="btnDropCourseApply_Click" 
             ValidationGroup="dropCoursepopUpWindow"/>
         <asp:Button ID="btnExitDropCourseWindow" runat="server" Text="Exit" OnClick="btnExitDropCourseWindow_Click"/>
@@ -213,40 +209,43 @@
 </asp:Panel>
 
 <asp:Panel ID="changeSectionPopUpWindow" runat="server" CssClass="pop-up-windows">
+    <asp:Label ID="lblCurrentSectionId" runat="server" Text="" Width="0px"></asp:Label>
     <div class="windows-contain">
-        <h2>Course Section</h2>
+        <h2>Course Code : <asp:Label ID="lblChangingSectionCourse" runat="server" Text=""></asp:Label></h2>
+        <h2>Current Section : <asp:Label ID="lblCurrentSectionName" runat="server" Text=""></asp:Label></h2><br />
+        <h2>Target Section</h2>
         <asp:DropDownList ID="ddlTargetChangeSection" runat="server" CssClass="dropDownList">
-        </asp:DropDownList>
+        </asp:DropDownList><br />
+        <asp:Label ID="lblChangeSectionErrorMessage" runat="server" Text="" CssClass="validator"></asp:Label>
         <h2>Reason</h2>
-        <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" CssClass="text-area"></asp:TextBox><br />
+        <asp:TextBox ID="txtChangeSectionReason" runat="server" TextMode="MultiLine" CssClass="text-area"></asp:TextBox><br />
         <asp:RequiredFieldValidator 
             ID="RequiredFieldValidator1" 
             runat="server" 
             Display="Dynamic"
             ErrorMessage="This field are requited"
-            ControlToValidate="txtAddCourseReason"
+            ControlToValidate="txtChangeSectionReason"
             CssClass="validator"
             ForeColor="Red"
-            ValidationGroup="addCoursePopUpWindow">
+            ValidationGroup="ddlTargetChangeSection">
         </asp:RequiredFieldValidator>
         <asp:CustomValidator 
             ID="CustomValidator2" 
             runat="server" 
             Display="Dynamic"
-            ControlToValidate="txtAddCourseReason"
+            ControlToValidate="txtChangeSectionReason"
             CssClass="validator"
             ErrorMessage="The length of input should not more than 1000"
             OnServerValidate="OperationReasonLengthValidate"
-            ValidationGroup="addCoursePopUpWindow">
+            ValidationGroup="ddlTargetChangeSection">
         </asp:CustomValidator><br />
-
         <asp:Button 
-            ID="Button1" 
+            ID="btnChangeSectionApply" 
             runat="server" 
-            Text="Add Course" 
-            OnClick="btnAddCourse_Click1" 
-            ValidationGroup="addCoursePopUpWindow"/>
-        <asp:Button ID="Button2" runat="server" Text="Exit" OnClick="btnExitAddCourseWindow_Click"/>
+            Text="Change Section" 
+            OnClick="btnChangeSectionApply_Click" 
+            ValidationGroup="ddlTargetChangeSection"/>
+        <asp:Button ID="btnExitChangeSectionWindow" runat="server" Text="Exit" OnClick="btnExitChangeSectionWindow_Click"/>
     </div>
 
 </asp:Panel>

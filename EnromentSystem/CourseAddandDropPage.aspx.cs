@@ -584,6 +584,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         }
         PopulateCourseCodeListing();
         SetRequestChangesTable();
+        SetCurrentEnrolledCourseTable();
     }
 
 
@@ -1016,69 +1017,45 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
 
     protected void btnChangeSection_Click(object sender, EventArgs e)
     {
+        lblChangingSectionCourse.Text = lblCourseId.Text;
+        PopulateChangeCourseSection(lblChangingSectionCourse.Text);
+        DataSet ds = DatabaseManager.GetRecord(
+            "student_taken_course",
+            new List<string> { "section_id", "name"},
+            "INNER JOIN section AS s ON student_taken_course.section_id = s.sid " +
+            "WHERE student_taken_course.cid = \'" + lblChangingSectionCourse.Text + "\'"
+            );
 
+        if(ds.Tables.Count > 0)
+        {
+            DataTable dt =  ds.Tables[0];
+            foreach (DataRow row in dt.Rows)
+            {
+                lblCurrentSectionName.Text = row["name"].ToString();
+                lblCurrentSectionId.Text = row["section_id"].ToString();
+            }
+        }
+        txtChangeSectionReason.Text = "";
+        lblChangeSectionErrorMessage.Text = "";
+        selectOperationpopUpWindow.Style["display"] = "none";
+        changeSectionPopUpWindow.Style["display"] = "flex";
     }
 
     protected void btnDropCourse_Click(object sender, EventArgs e)
     {
-        PopulateDropCourseCodeListing();
+        lblDropingCourse.Text = lblCourseId.Text;
         txtDropCourseReason.Text = "";
         selectOperationpopUpWindow.Style["display"] = "none";
         dropCoursePopUpWindow.Style["display"] = "flex";
     }
 
     /*Drop course windows*/
-    private void PopulateDropCourseCodeListing()
-    {
-        //get student details
-        DataSet studentSet = DatabaseManager.GetRecord(
-               "student",
-               new List<string> { "program", "major" },
-               "WHERE sid = \'" + Session["sid"] + "\'"
-           );
-
-        DataTable dt = studentSet.Tables[0];
-        string program = null;
-        string major = null;
-        foreach (DataRow row in dt.Rows)
-        {
-            program = row["program"].ToString();
-            major = row["major"].ToString();
-        }
-
-        //get course data
-        DataSet courseSet = DatabaseManager.GetRecord(
-               "student_taken_course",
-               new List<string> {
-                    "student_taken_course.cid",
-                    "name"
-               },
-               "INNER JOIN course AS c ON student_taken_course.cid = c.cid " +
-               "WHERE sid = \'" + Session["sid"] + "\' " +
-               "AND status = 'TAKEN' " +
-               "AND student_taken_course.cid NOT IN (SELECT cid FROM request_add_course WHERE status != 'NOT APPROVE' AND sid = \'" + Session["sid"]+ "\') " +
-               "AND student_taken_course.cid NOT IN (SELECT cid FROM request_drop_course WHERE status != 'NOT APPROVE' AND sid = \'" + Session["sid"]+ "\') " +
-               "AND student_taken_course.cid NOT IN (SELECT cid FROM request_change_section WHERE status != 'NOT APPROVE' AND sid = \'" + Session["sid"] + "\') "
-           );
-        dt = courseSet.Tables[0];
-        List<string> course = new List<string>();
-        List<string> courseCode = new List<string>();
-        foreach (DataRow row in dt.Rows)
-        {
-            course.Add(row["cid"].ToString() + ":" + row["name"].ToString());
-            courseCode.Add(row["cid"].ToString());
-        }
-        UIComponentGenerator.PopulateDropDownList(ddlDropCourseListing, course, courseCode);
-    }
-
     protected void btnDropCourseApply_Click(object sender, EventArgs e)
     {
-        lblErrorMessage.Text = "";
-
         DatabaseManager.InsertData(
             "request_drop_course",
             new List<string> { "sid", "cid", "reason", "status" },
-            new List<object> { Session["sid"], ddlDropCourseListing.SelectedValue, txtDropCourseReason.Text, "HOLD" }
+            new List<object> { Session["sid"], lblDropingCourse.Text, txtDropCourseReason.Text, "HOLD" }
             );
         dropCoursePopUpWindow.Style["display"] = "none";
         SetCurrentEnrolledCourseTable();
@@ -1091,7 +1068,76 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
     }
 
     /*Change section windows*/
+    private void PopulateChangeCourseSection(string courseCode)
+    {
+        //get student details
+        DataSet studentSet = DatabaseManager.GetRecord(
+               "student",
+               new List<string> { "program" },
+               "WHERE sid = \'" + Session["sid"] + "\'"
+           );
 
+        DataTable dt = studentSet.Tables[0];
+        string program = null;
+        foreach (DataRow row in dt.Rows)
+        {
+            program = row["program"].ToString();
+        }
+
+
+        DataSet courseSet = DatabaseManager.GetDistinctRecord(
+               "section",
+               new List<string> {
+                    "name",
+                    "sid"
+               },
+               "WHERE cid = \'" + courseCode + "\' " +
+               "AND current_enroll < max_enroll " +
+               "AND program = \'" + program + "\' " +
+               "AND semester IN (SELECT semester FROM current_semester) " +
+               "AND sid NOT IN (SELECT section_id FROM student_taken_course WHERE cid = \'" + courseCode + "\')"
+           );
+        dt = courseSet.Tables[0];
+        List<string> sectionName = new List<string>();
+        List<string> sectionId = new List<string>();
+        foreach (DataRow row in dt.Rows)
+        {
+            sectionName.Add(row["name"].ToString());
+            sectionId.Add(row["sid"].ToString());
+        }
+        UIComponentGenerator.PopulateDropDownList(ddlTargetChangeSection, sectionName, sectionId);
+    }
+
+    protected void btnChangeSectionApply_Click(object sender, EventArgs e)
+    {
+        if(ddlTargetChangeSection.SelectedValue != "")
+        {
+            DatabaseManager.InsertData(
+            "request_change_section",
+            new List<string> { "sid", "cid", "reason", "status", "current_section_id", "target_section_id" },
+            new List<object> {
+                Session["sid"],
+                lblChangingSectionCourse.Text,
+                txtDropCourseReason.Text,
+                "HOLD",
+                lblCurrentSectionId.Text,
+                ddlTargetChangeSection.SelectedValue
+            }
+            );
+            changeSectionPopUpWindow.Style["display"] = "none";
+            SetCurrentEnrolledCourseTable();
+            SetRequestChangesTable();
+        }
+        else
+        {
+            lblChangeSectionErrorMessage.Text = "There are no section to able to change<br>";
+        }
+    }
+
+    protected void btnExitChangeSectionWindow_Click(object sender, EventArgs e)
+    {
+        changeSectionPopUpWindow.Style["display"] = "none";
+    }
     /*bottom btn bar*/
     protected void btnCancel_Click(object sender, EventArgs e)
     {
@@ -1109,9 +1155,4 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
           );*/
         Response.Redirect("StudentHomePage.aspx");
     }
-
-
-
-
-
 }
