@@ -135,7 +135,8 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     "request_add_course",
                     new List<string> { "*" },
                     "WHERE cid = \'" + row["cid"].ToString() +
-                    "\' AND sid = \'" + Session["sid"] + "\'"
+                    "\' AND sid = \'" + Session["sid"] + "\' " +
+                    "AND (status = 'HOLD' OR status = 'PENDING')"
                     );
                 if (addCourseRecord.Tables[0].Rows.Count != 0)
                 {
@@ -145,7 +146,8 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     "request_drop_course",
                     new List<string> { "*" },
                     "WHERE cid = \'" + row["cid"].ToString() +
-                    "\' AND sid = \'" + Session["sid"] + "\'"
+                    "\' AND sid = \'" + Session["sid"] + "\' " +
+                    "AND (status = 'HOLD' OR status = 'PENDING')"
                     );
                 if (dropCourseRecord.Tables[0].Rows.Count != 0)
                 {
@@ -155,7 +157,8 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     "request_change_section",
                     new List<string> { "*" },
                     "WHERE cid = \'" + row["cid"].ToString() +
-                    "\' AND sid = \'" + Session["sid"] + "\'"
+                    "\' AND sid = \'" + Session["sid"] + "\' " +
+                    "AND (status = 'HOLD' OR status = 'PENDING')"
                     );
                 if (changeSectionRecord.Tables[0].Rows.Count != 0)
                 {
