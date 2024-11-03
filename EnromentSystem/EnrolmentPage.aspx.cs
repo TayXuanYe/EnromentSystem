@@ -626,7 +626,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
         }
     }
 
-    protected bool PreRequisiteMeetValidate()
+    private bool PreRequisiteMeetValidate()
     {
         bool preRequisiteMeet = true;
         foreach (TableRow row in tblPreRequisite.Rows)
@@ -646,8 +646,8 @@ public partial class EnrolmentPage : System.Web.UI.Page
             return false;
         }
     }
-    
-    protected bool CourseAvailableValidate()
+
+    private bool CourseAvailableValidate()
     {
         if (ddlCourseSection.Items.Count == 0)
         {
@@ -659,8 +659,8 @@ public partial class EnrolmentPage : System.Web.UI.Page
 ;           return true;
         }
     }
-    
-    protected bool TimeTableCrashCheckingValidate()
+
+    private bool TimeTableCrashCheckingValidate()
     {
         //get course credit hour
         DataSet dataSet = DatabaseManager.GetRecord(
@@ -740,8 +740,8 @@ public partial class EnrolmentPage : System.Web.UI.Page
         }
         return true;
     }
-    
-    protected bool AchieveMaxCreidtHoursValidate()
+
+    private bool AchieveMaxCreidtHoursValidate()
     {
         int currentCreditHours = 0;
         foreach (TableRow row in tblCourseEnrolled.Rows)

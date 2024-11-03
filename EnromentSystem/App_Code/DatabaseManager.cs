@@ -15,7 +15,8 @@ using System.Linq;
 
 public static class DatabaseManager
 {
-    private static string serverName = "DESKTOP-GCII6U9\\SQLEXPRESS";
+    //private static string serverName = "DESKTOP-GCII6U9\\SQLEXPRESS";// XY laptop
+    private static string serverName = "DESKTOP-EMOGFRG\\SQLEXPRESS";// XY desktop
     private static string databaseName = "EnrolmentSystemDatabase";
     public static SqlConnection connection = null;
 
@@ -89,7 +90,7 @@ public static class DatabaseManager
     {
         if (connection == null)
         {
-                ConnectDatabase();
+            ConnectDatabase();
         }
 
         if (connection.State != ConnectionState.Open)
