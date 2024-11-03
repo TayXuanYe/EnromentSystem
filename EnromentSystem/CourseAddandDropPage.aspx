@@ -170,7 +170,7 @@
 
 </asp:Panel>
 
-<asp:Panel ID="dropCoursepopUpWindow" runat="server" CssClass="pop-up-windows">
+<asp:Panel ID="dropCoursePopUpWindow" runat="server" CssClass="pop-up-windows">
     <div class="windows-contain">
         <h2>Course Code Listing</h2>
         <asp:DropDownList 
@@ -211,5 +211,45 @@
     </div>
 
 </asp:Panel>
+
+<asp:Panel ID="changeSectionPopUpWindow" runat="server" CssClass="pop-up-windows">
+    <div class="windows-contain">
+        <h2>Course Section</h2>
+        <asp:DropDownList ID="ddlTargetChangeSection" runat="server" CssClass="dropDownList">
+        </asp:DropDownList>
+        <h2>Reason</h2>
+        <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" CssClass="text-area"></asp:TextBox><br />
+        <asp:RequiredFieldValidator 
+            ID="RequiredFieldValidator1" 
+            runat="server" 
+            Display="Dynamic"
+            ErrorMessage="This field are requited"
+            ControlToValidate="txtAddCourseReason"
+            CssClass="validator"
+            ForeColor="Red"
+            ValidationGroup="addCoursePopUpWindow">
+        </asp:RequiredFieldValidator>
+        <asp:CustomValidator 
+            ID="CustomValidator2" 
+            runat="server" 
+            Display="Dynamic"
+            ControlToValidate="txtAddCourseReason"
+            CssClass="validator"
+            ErrorMessage="The length of input should not more than 1000"
+            OnServerValidate="OperationReasonLengthValidate"
+            ValidationGroup="addCoursePopUpWindow">
+        </asp:CustomValidator><br />
+
+        <asp:Button 
+            ID="Button1" 
+            runat="server" 
+            Text="Add Course" 
+            OnClick="btnAddCourse_Click1" 
+            ValidationGroup="addCoursePopUpWindow"/>
+        <asp:Button ID="Button2" runat="server" Text="Exit" OnClick="btnExitAddCourseWindow_Click"/>
+    </div>
+
+</asp:Panel>
+
     <script src="Scripts/courseAddAndDrop.js" type="text/javascript"></script>
 </asp:Content>

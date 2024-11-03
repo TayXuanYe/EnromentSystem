@@ -423,7 +423,7 @@ table td, table th {
 
 .text-area {
     caret-color: #000;
-    width: 100%;
+    width: 600px;
     padding: 10px;
     max-width: 100%;
     height: 100px;

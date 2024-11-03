@@ -127,16 +127,56 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                 TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
                 TableCell cellCourseName = new TableCell { Text = row["name"].ToString() };
                 TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
-
+                
                 TableCell cellAction = new TableCell();
-                Button btn = new Button
+
+                bool edited = false;
+                DataSet addCourseRecord = DatabaseManager.GetRecord(
+                    "request_add_course",
+                    new List<string> { "*" },
+                    "WHERE cid = \'" + row["cid"].ToString() +
+                    "\' AND sid = \'" + Session["sid"] + "\'"
+                    );
+                if (addCourseRecord.Tables[0].Rows.Count != 0)
                 {
-                    CssClass = "action-button",
-                    CommandArgument = (tblCurrentEnrolledCourse.Rows.Count).ToString(),
-                    Text = "Operation"
-                };
-                btn.Click += new EventHandler(btnOperateCourse_Click);
-                cellAction.Controls.Add(btn);
+                    edited = true;
+                }
+                DataSet dropCourseRecord = DatabaseManager.GetRecord(
+                    "request_drop_course",
+                    new List<string> { "*" },
+                    "WHERE cid = \'" + row["cid"].ToString() +
+                    "\' AND sid = \'" + Session["sid"] + "\'"
+                    );
+                if (dropCourseRecord.Tables[0].Rows.Count != 0)
+                {
+                    edited = true;
+                }
+                DataSet changeSectionRecord = DatabaseManager.GetRecord(
+                    "request_change_section",
+                    new List<string> { "*" },
+                    "WHERE cid = \'" + row["cid"].ToString() +
+                    "\' AND sid = \'" + Session["sid"] + "\'"
+                    );
+                if (changeSectionRecord.Tables[0].Rows.Count != 0)
+                {
+                    edited = true;
+                }
+                if(edited == false)
+                {
+                    Button btn = new Button
+                    {
+                        CssClass = "action-button",
+                        CommandArgument = (tblCurrentEnrolledCourse.Rows.Count).ToString(),
+                        Text = "Operation"
+                    };
+                    btn.Click += new EventHandler(btnOperateCourse_Click);
+                    cellAction.Controls.Add(btn);
+                }
+                else
+                {
+                    cellAction.Text = "<br>";
+                }
+
                 tbRow.Cells.Add(cellNo);
 
                 tbRow.Cells.Add(cellCourseCode);
@@ -210,23 +250,34 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     TableRow tbRow = new TableRow();
                     TableCell cellNo = new TableCell { Text = count.ToString() };
                     TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
-                    TableCell cellCourseInfo = new TableCell
+                    TableCell cellCourseInfo = new TableCell();
+                    if (row["status"].ToString() == "HOLD")
                     {
-                        Text =
-                        "You have selected to <b>DROP</b> Course <b>" +
-                        row["cid"].ToString() +
-                        "</b> and is's <span class=\"approve-status\">" +
-                        row["status"].ToString() +
-                        "</span> for your HOP Approve.<br>" +
-                        "<span class=\"request-reason\"><b>Reason:</b> " +
-                        row["reason"].ToString() +
-                        "</span>"
-                    };
+                        cellCourseInfo.Text =
+                            "You have selected to <b>DROP</b> Course <b>" +
+                            row["cid"].ToString() +
+                            "</b>. The request has not been sent yet.<br>" +
+                            "<span class=\"request-reason\"><b>Reason:</b> " +
+                            row["reason"].ToString() +
+                            "</span>";
+                    }
+                    else
+                    {
+                        cellCourseInfo.Text =
+                            "You have selected to <b>DROP</b> Course <b>" +
+                            row["cid"].ToString() +
+                            "</b> and is's <span class=\"approve-status\">" +
+                            row["status"].ToString() +
+                            "</span> for your HOP Approve.<br>" +
+                            "<span class=\"request-reason\"><b>Reason:</b> " +
+                            row["reason"].ToString() +
+                            "</span>";
+                    }
+                    
                     TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
 
                     TableCell cellAction = new TableCell();
-                    string status = row["status"].ToString();
-                    if (status == "PENDING")
+                    if (row["status"].ToString() == "PENDING" || row["status"].ToString() == "HOLD")
                     {
                         Button btn = new Button
                         {
@@ -281,25 +332,34 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     TableRow tbRow = new TableRow();
                     TableCell cellNo = new TableCell { Text = count.ToString() };
                     TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
-                    TableCell cellCourseInfo = new TableCell
+                    TableCell cellCourseInfo = new TableCell();
+                    if (row["status"].ToString() == "HOLD")
                     {
-                        Text =
-                        "You have selected to <b>ADD</b> Course <b>" +
-                        row["cid"].ToString() +
-                        "</b> under Section <b>" +
-                        row["name"].ToString() +
-                        "</b> and is's <span class=\"approve-status\">" +
-                        row["status"].ToString() +
-                        "</span> for your HOP Approve.<br>" +
-                        "<span class=\"request-reason\"><b>Reason:</b> " +
-                        row["reason"].ToString() +
-                        "</span>"
-                    };
+                        cellCourseInfo.Text =
+                            "You have selected to <b>DROP</b> Course <b>" +
+                            row["cid"].ToString() +
+                            "</b>. The request has not been sent yet.<br>" +
+                            "<span class=\"request-reason\"><b>Reason:</b> " +
+                            row["reason"].ToString() +
+                            "</span>";
+                    }
+                    else
+                    {
+                        cellCourseInfo.Text =
+                            "You have selected to <b>DROP</b> Course <b>" +
+                            row["cid"].ToString() +
+                            "</b> and is's <span class=\"approve-status\">" +
+                            row["status"].ToString() +
+                            "</span> for your HOP Approve.<br>" +
+                            "<span class=\"request-reason\"><b>Reason:</b> " +
+                            row["reason"].ToString() +
+                            "</span>";
+                    }
                     TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
 
                     TableCell cellAction = new TableCell();
                     string status = row["status"].ToString();
-                    if (status == "PENDING")
+                    if (status == "PENDING" || row["status"].ToString() == "HOLD")
                     {
                         Button btn = new Button
                         {
@@ -356,27 +416,34 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     TableRow tbRow = new TableRow();
                     TableCell cellNo = new TableCell { Text = count.ToString() };
                     TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
-                    TableCell cellCourseInfo = new TableCell
+                    TableCell cellCourseInfo = new TableCell();
+                    if (row["status"].ToString() == "HOLD")
                     {
-                        Text =
-                        "You have selected to <b>CHANGE</b> Section  <b>" +
-                        row["s1.name"].ToString() +
-                        "</b> to <b>" +
-                        row["s2.name"].ToString() +
-                        "</b> under Course <b>" +
-                        row["vid"].ToString() +
-                        "</b> and is's <span class=\"approve-status\">" +
-                        row["status"].ToString() +
-                        "</span> for your HOP Approve.<br>" +
-                        "<span class=\"request-reason\"><b>Reason:</b> " +
-                        row["reason"].ToString() +
-                        "</span>"
-                    };
+                        cellCourseInfo.Text =
+                            "You have selected to <b>DROP</b> Course <b>" +
+                            row["cid"].ToString() +
+                            "</b>. The request has not been sent yet.<br>" +
+                            "<span class=\"request-reason\"><b>Reason:</b> " +
+                            row["reason"].ToString() +
+                            "</span>";
+                    }
+                    else
+                    {
+                        cellCourseInfo.Text =
+                            "You have selected to <b>DROP</b> Course <b>" +
+                            row["cid"].ToString() +
+                            "</b> and is's <span class=\"approve-status\">" +
+                            row["status"].ToString() +
+                            "</span> for your HOP Approve.<br>" +
+                            "<span class=\"request-reason\"><b>Reason:</b> " +
+                            row["reason"].ToString() +
+                            "</span>";
+                    }
                     TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
 
                     TableCell cellAction = new TableCell();
                     string status = row["status"].ToString();
-                    if (status == "PENDING")
+                    if (status == "PENDING" || row["status"].ToString() == "HOLD")
                     {
                         Button btn = new Button
                         {
@@ -724,7 +791,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
             DatabaseManager.InsertData(
                 "request_add_course",
                 new List<string> { "sid", "cid" , "section_id", "reason", "status"},
-                new List<object> { Session["sid"], ddlCourseCodeListing.SelectedValue, ddlCourseSection.SelectedValue, txtAddCourseReason.Text,  "PENDING"}
+                new List<object> { Session["sid"], ddlCourseCodeListing.SelectedValue, ddlCourseSection.SelectedValue, txtAddCourseReason.Text, "HOLD" }
                 );
             addCoursePopUpWindow.Style["display"] = "none";
             SetRequestChangesTable();
@@ -954,7 +1021,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         PopulateDropCourseCodeListing();
         txtDropCourseReason.Text = "";
         selectOperationpopUpWindow.Style["display"] = "none";
-        dropCoursepopUpWindow.Style["display"] = "flex";
+        dropCoursePopUpWindow.Style["display"] = "flex";
     }
 
     /*Drop course windows*/
@@ -1000,6 +1067,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         }
         UIComponentGenerator.PopulateDropDownList(ddlDropCourseListing, course, courseCode);
     }
+
     protected void btnDropCourseApply_Click(object sender, EventArgs e)
     {
         lblErrorMessage.Text = "";
@@ -1007,16 +1075,19 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         DatabaseManager.InsertData(
             "request_drop_course",
             new List<string> { "sid", "cid", "reason", "status" },
-            new List<object> { Session["sid"], ddlDropCourseListing.SelectedValue, txtDropCourseReason.Text, "PENDING" }
+            new List<object> { Session["sid"], ddlDropCourseListing.SelectedValue, txtDropCourseReason.Text, "HOLD" }
             );
-        dropCoursepopUpWindow.Style["display"] = "none";
+        dropCoursePopUpWindow.Style["display"] = "none";
+        SetCurrentEnrolledCourseTable();
         SetRequestChangesTable();
     }
 
     protected void btnExitDropCourseWindow_Click(object sender, EventArgs e)
     {
-        dropCoursepopUpWindow.Style["display"] = "none";
+        dropCoursePopUpWindow.Style["display"] = "none";
     }
+
+    /*Change section windows*/
 
     /*bottom btn bar*/
     protected void btnCancel_Click(object sender, EventArgs e)
