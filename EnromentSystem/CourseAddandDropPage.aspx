@@ -136,14 +136,38 @@
         <h2>Pre Requisite Course</h2>
         <asp:Table ID="tblPreRequisite" runat="server" CssClass="PreRequisiteCourse"></asp:Table>
         <asp:Label ID="lblErrorMessage" runat="server" Text="" CssClass="validator"></asp:Label>
-        <h2>Re</h2>
+        <h2>Reason</h2>
+        <asp:TextBox ID="txtAddCourseReason" runat="server" TextMode="MultiLine" CssClass="text-area"></asp:TextBox><br />
+        <asp:RequiredFieldValidator 
+            ID="rfvAddCourseReason" 
+            runat="server" 
+            Display="Dynamic"
+            ErrorMessage="This field are requited"
+            ControlToValidate="txtAddCourseReason"
+            CssClass="validator"
+            ForeColor="Red"
+            ValidationGroup="addCoursePopUpWindow">
+        </asp:RequiredFieldValidator>
+        <asp:CustomValidator 
+            ID="csvAddCourseReasonLength" 
+            runat="server" 
+            Display="Dynamic"
+            ControlToValidate="txtAddCourseReason"
+            CssClass="validator"
+            ErrorMessage="The length of input should not more than 1000"
+            OnServerValidate="csvAddCourseReasonLength_ServerValidate"
+            ValidationGroup="addCoursePopUpWindow">
+        </asp:CustomValidator><br />
+
         <asp:Button 
             ID="btnAddCourse" 
             runat="server" 
             Text="Add Course" 
             OnClick="btnAddCourse_Click1" 
-            ValidationGroup="popUpWindows"/>
+            ValidationGroup="addCoursePopUpWindow"/>
         <asp:Button ID="btnExitAddCourseWindow" runat="server" Text="Exit" OnClick="btnExitAddCourseWindow_Click"/>
+
+        <script src="Scripts/courseAddAndDrop.js" type="text/javascript"></script>
     </div>
 </asp:Panel>
  

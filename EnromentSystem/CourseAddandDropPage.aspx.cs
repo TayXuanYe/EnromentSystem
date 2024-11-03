@@ -15,7 +15,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         {
             SetCourseEnrolmentDetails();
             SetCurrentEnrolledCourseTable();
-            SetRequestChanges();
+            SetRequestChangesTable();
             lblErrorMessage.Text = "";
             if (!IsPostBack)
             {
@@ -113,7 +113,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                 "INNER JOIN course AS c " +
                 "ON student_taken_course.cid = c.cid " +
                 "WHERE student_taken_course.sid = \'" + Session["sid"] + "\' " +
-                "AND  student_taken_course.status = 'TAKEN'"
+                "AND student_taken_course.status = 'TAKEN' "
             );
         if (courseDataSet != null)
         {
@@ -166,7 +166,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         }
     }
 
-    private void SetRequestChanges()
+    private void SetRequestChangesTable()
     {
         //Add header
         tblRequestChanges.Rows.Clear();
@@ -220,9 +220,9 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                         row["cid"].ToString() +
                         "</b> under Section <b>" +
                         row["name"].ToString() +
-                        "</b> and is's <span/ class=\"approve-status\">" +
+                        "</b> and is's <span class=\"approve-status\">" +
                         row["status"].ToString() +
-                        "<span> for your HOP Approve.<br>" +
+                        "</span> for your HOP Approve.<br>" +
                         "<span class=\"request-reason\"><b>Reason:</b> " +
                         row["reason"].ToString() +
                         "</span>"
@@ -230,14 +230,23 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
 
                     TableCell cellAction = new TableCell();
-                    Button btn = new Button
+                    string status = row["status"].ToString();
+                    if (status == "PENDING")
                     {
-                        CssClass = "action-button",
-                        CommandArgument = (tblRequestChanges.Rows.Count).ToString(),
-                        Text = "Delete"
-                    };
-                    btn.Click += new EventHandler(btnDeleteRequestChanges_Click);
-                    cellAction.Controls.Add(btn);
+                        Button btn = new Button
+                        {
+                            CssClass = "action-button",
+                            CommandArgument = (tblRequestChanges.Rows.Count).ToString(),
+                            Text = "Delete"
+                        };
+                        btn.Click += new EventHandler(btnDeleteRequestDropCourse_Click);
+                        cellAction.Controls.Add(btn);
+                    }
+                    else
+                    {
+                        cellAction.Text = "<br>";
+                    }
+
                     tbRow.Cells.Add(cellNo);
 
                     tbRow.Cells.Add(cellCourseCode);
@@ -284,9 +293,9 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                         row["cid"].ToString() +
                         "</b> under Section <b>" +
                         row["name"].ToString() +
-                        "</b> and is's <span/ class=\"approve-status\">" +
+                        "</b> and is's <span class=\"approve-status\">" +
                         row["status"].ToString() +
-                        "<span> for your HOP Approve.<br>" +
+                        "</span> for your HOP Approve.<br>" +
                         "<span class=\"request-reason\"><b>Reason:</b> " +
                         row["reason"].ToString() +
                         "</span>"
@@ -294,14 +303,22 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
 
                     TableCell cellAction = new TableCell();
-                    Button btn = new Button
+                    string status = row["status"].ToString();
+                    if (status == "PENDING")
                     {
-                        CssClass = "action-button",
-                        CommandArgument = (tblRequestChanges.Rows.Count).ToString(),
-                        Text = "Delete"
-                    };
-                    btn.Click += new EventHandler(btnDeleteRequestChanges_Click);
-                    cellAction.Controls.Add(btn);
+                        Button btn = new Button
+                        {
+                            CssClass = "action-button",
+                            CommandArgument = (tblRequestChanges.Rows.Count).ToString(),
+                            Text = "Delete"
+                        };
+                        btn.Click += new EventHandler(btnDeleteRequestAddCourse_Click);
+                        cellAction.Controls.Add(btn);
+                    }
+                    else
+                    {
+                        cellAction.Text = "<br>";
+                    }
                     tbRow.Cells.Add(cellNo);
 
                     tbRow.Cells.Add(cellCourseCode);
@@ -353,9 +370,9 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                         row["s2.name"].ToString() +
                         "</b> under Course <b>" +
                         row["vid"].ToString() +
-                        "</b> and is's <span/ class=\"approve-status\">" +
+                        "</b> and is's <span class=\"approve-status\">" +
                         row["status"].ToString() +
-                        "<span> for your HOP Approve.<br>" +
+                        "</span> for your HOP Approve.<br>" +
                         "<span class=\"request-reason\"><b>Reason:</b> " +
                         row["reason"].ToString() +
                         "</span>"
@@ -363,14 +380,22 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
 
                     TableCell cellAction = new TableCell();
-                    Button btn = new Button
+                    string status = row["status"].ToString();
+                    if (status == "PENDING")
                     {
-                        CssClass = "action-button",
-                        CommandArgument = (tblRequestChanges.Rows.Count).ToString(),
-                        Text = "Delete"
-                    };
-                    btn.Click += new EventHandler(btnDeleteRequestChanges_Click);
-                    cellAction.Controls.Add(btn);
+                        Button btn = new Button
+                        {
+                            CssClass = "action-button",
+                            CommandArgument = (tblRequestChanges.Rows.Count).ToString(),
+                            Text = "Delete"
+                        };
+                        btn.Click += new EventHandler(btnDeleteRequestChangeSection_Click);
+                        cellAction.Controls.Add(btn);
+                    }
+                    else
+                    {
+                        cellAction.Text = "<br>";
+                    }
                     tbRow.Cells.Add(cellNo);
 
                     tbRow.Cells.Add(cellCourseCode);
@@ -401,11 +426,12 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         }
     }
 
-    //not compleated and upside need test
     protected void btnAddCourse_Click(object sender, EventArgs e)
     {
         SetCurrentEnrolledCourseTable();
+        PopulateCourseCodeListing();
         SetPreRequisiteTable(ddlCourseCodeListing.SelectedValue);
+        txtAddCourseReason.Text = "";
         addCoursePopUpWindow.Style["display"] = "flex";
     }
 
@@ -426,7 +452,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         }
     }
 
-    protected void btnDeleteRequestChanges_Click(object sender, EventArgs e)
+    protected void btnDeleteRequestAddCourse_Click(object sender, EventArgs e)
     {
         Button btn = (Button)sender;
         int rowIndex = int.Parse(btn.CommandArgument);
@@ -436,6 +462,63 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
             TableCell cell = tblRequestChanges.Rows[rowIndex].Cells[1];
             courseId = cell.Text;
         }
+        if (courseId != null)
+        {
+            DatabaseManager.DeleteData(
+                "request_add_course",
+                "WHERE sid = " +
+                "\'" + Session["sid"] + "\' " +
+                "AND cid = \'" + courseId + "\'"
+                );
+        }
+
+        SetRequestChangesTable();
+    }    
+    
+    protected void btnDeleteRequestDropCourse_Click(object sender, EventArgs e)
+    {
+        Button btn = (Button)sender;
+        int rowIndex = int.Parse(btn.CommandArgument);
+        string courseId = null;
+        if (rowIndex < tblRequestChanges.Rows.Count)
+        {
+            TableCell cell = tblRequestChanges.Rows[rowIndex].Cells[1];
+            courseId = cell.Text;
+        }
+        if (courseId != null)
+        {
+            DatabaseManager.DeleteData(
+                "request_drop_course",
+                "WHERE sid = " +
+                "\'" + Session["sid"] + "\' " +
+                "AND cid = \'" + courseId + "\'"
+                );
+        }
+
+        SetRequestChangesTable();
+    }
+
+    protected void btnDeleteRequestChangeSection_Click(object sender, EventArgs e)
+    {
+        Button btn = (Button)sender;
+        int rowIndex = int.Parse(btn.CommandArgument);
+        string courseId = null;
+        if (rowIndex < tblRequestChanges.Rows.Count)
+        {
+            TableCell cell = tblRequestChanges.Rows[rowIndex].Cells[1];
+            courseId = cell.Text;
+        }
+        if (courseId != null)
+        {
+            DatabaseManager.DeleteData(
+                "request_change_section",
+                "WHERE sid = " +
+                "\'" + Session["sid"] + "\' " +
+                "AND cid = \'" + courseId + "\'"
+                );
+        }
+        PopulateCourseCodeListing();
+        SetRequestChangesTable();
     }
 
 
@@ -472,8 +555,10 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                "WHERE program = \'" + program + "\' " +
                "AND (major = \'" + major + "\'" + " OR major = \'NONE\') " +
                "AND available = '1' " +
-               "AND course.cid NOT IN (" +
-               "SELECT cid FROM student_taken_course WHERE sid = \'" + Session["sid"] + "\'" + " AND status != 'FAIL')"
+               "AND course.cid NOT IN (SELECT cid FROM student_taken_course WHERE sid = \'" + Session["sid"] + "\'" + " AND status != 'FAIL') " +
+               "AND course.cid NOT IN (SELECT cid FROM request_add_course WHERE status != 'NOT APPROVE') " +
+               "AND course.cid NOT IN (SELECT cid FROM request_drop_course WHERE status != 'NOT APPROVE') " +
+               "AND course.cid NOT IN (SELECT cid FROM request_change_section WHERE status != 'NOT APPROVE') "
            );
         dt = courseSet.Tables[0];
         List<string> course = new List<string>();
@@ -644,55 +729,13 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         if (preRequisiteMeet && courseAvailable && creidtHoursMeet && timeTabletNoCrash)
         {
             //check is fail?
-            DataSet dataSet = DatabaseManager.GetRecord(
-               "student_taken_course",
-               new List<string> { "cid" },
-               "WHERE sid = \'" + Session["sid"] + "\' " +
-               "AND cid = \'" + ddlCourseCodeListing.SelectedValue + "\' " +
-               "AND status = \'FAIL\'"
-           );
-            DataTable dt = dataSet.Tables[0];
-            if (dt.Rows.Count == 0)
-            {
-                DatabaseManager.InsertData(
-                    "student_taken_course",
-                    new List<string> { "sid", "cid", "section_id", "status" },
-                    new List<object> { Session["sid"].ToString(),
-                        ddlCourseCodeListing.SelectedValue,
-                        ddlCourseSection.SelectedValue,
-                        "ADD"
-                    });
-            }
-            else
-            {
-                DatabaseManager.UpdateData(
-                    "student_taken_course",
-                    new List<string> { "status", "section_id" },
-                    new List<object> { "ADD", ddlCourseSection.SelectedValue },
-                    "WHERE sid = \'" + Session["sid"] + "\' " +
-                    "AND cid = \'" + ddlCourseCodeListing.SelectedValue + "\' " +
-                    "AND status = \'FAIL\'"
-                    );
-            }
-            //update section current enroll
-            dataSet = DatabaseManager.GetRecord(
-               "section",
-               new List<string> { "current_enroll" },
-               "WHERE sid = \'" + ddlCourseSection.SelectedValue + "\' "
-            );
-            dt = dataSet.Tables[0];
-            int currentEnroll = 0;
-            foreach (DataRow row in dt.Rows)
-            {
-                currentEnroll = int.Parse(row["current_enroll"].ToString());
-            }
-            DatabaseManager.UpdateData(
-                "section",
-                new List<string> { "current_enroll" },
-                new List<object> { currentEnroll + 1 },
-                "WHERE sid = \'" + ddlCourseSection.SelectedValue + "\' "
+            DatabaseManager.InsertData(
+                "request_add_course",
+                new List<string> { "sid", "cid" , "section_id", "reason", "status"},
+                new List<object> { Session["sid"], ddlCourseCodeListing.SelectedValue, ddlCourseSection.SelectedValue, txtAddCourseReason.Text,  "PENDING"}
                 );
             addCoursePopUpWindow.Style["display"] = "none";
+            SetRequestChangesTable();
             PopulateCourseCodeListing();
             SetCurrentEnrolledCourseTable();
         }
@@ -891,6 +934,20 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         return true;
     }
 
+    protected void csvAddCourseReasonLength_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        string userInput = txtAddCourseReason.Text;
+        int maxLength = 1000;
+        if(userInput.Length > maxLength)
+        {
+            args.IsValid = false;
+        }
+        else
+        {
+            args.IsValid = true;
+        }
+    }
+
     /*Operation course pop up window*/
     protected void btnExitOperatingWindoiw_Click(object sender, EventArgs e)
     {
@@ -923,4 +980,6 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
           );*/
         Response.Redirect("StudentHomePage.aspx");
     }
+
+
 }

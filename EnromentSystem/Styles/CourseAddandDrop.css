@@ -243,6 +243,7 @@ h2 {
         width: 17%;
         padding-left: 10px;
         padding-right: 5px;
+        min-width: 75px;
     }
 
     .CourseEnrolled td:nth-child(5n+1) {
@@ -279,6 +280,7 @@ h2 {
         color: #333;
         width: 10%;
         vertical-align: middle;
+        min-width:75px;
     }
     
     .CourseEnrolled td:nth-child(5n+5) input{
@@ -289,6 +291,9 @@ table td, table th {
     vertical-align: top;
 }
 
+.approve-status{
+    font-weight: 600;
+}
 /*pop up windows*/
 .pop-up-windows {
     display: none;
@@ -411,8 +416,16 @@ table td, table th {
         width: 30%;
         padding-left: 10px;
     }
+
+.text-area {
+    caret-color: #000;
+    width: 100%;
+    padding: 10px;
+    max-width: 100%;
+    height: 100px;
+}
 /*pop up window select Operation*/
-.operation-button-contain{
+.operation-button-contain {
     display: inline-block;
 }
 
