@@ -538,6 +538,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         }
 
         SetRequestChangesTable();
+        SetCurrentEnrolledCourseTable();
     }    
     
     protected void btnDeleteRequestDropCourse_Click(object sender, EventArgs e)
@@ -561,6 +562,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         }
 
         SetRequestChangesTable();
+        SetCurrentEnrolledCourseTable();
     }
 
     protected void btnDeleteRequestChangeSection_Click(object sender, EventArgs e)
