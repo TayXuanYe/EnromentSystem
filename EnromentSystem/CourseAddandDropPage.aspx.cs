@@ -194,13 +194,10 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                         "request_drop_course.cid",
                         "credit_hours",
                         "status",
-                        "s.name",
                         "reason"
                     },
                     "INNER JOIN course AS c " +
                     "ON request_drop_course.cid = c.cid " +
-                    "INNER JOIN section AS s " +
-                    "ON request_drop_course.section_id = s.sid " +
                     "WHERE request_drop_course.sid = \'" + Session["sid"] + "\' "
                 );
             if (courseDropDataSet != null)
@@ -218,8 +215,6 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                         Text =
                         "You have selected to <b>DROP</b> Course <b>" +
                         row["cid"].ToString() +
-                        "</b> under Section <b>" +
-                        row["name"].ToString() +
                         "</b> and is's <span class=\"approve-status\">" +
                         row["status"].ToString() +
                         "</span> for your HOP Approve.<br>" +
@@ -556,9 +551,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                "AND (major = \'" + major + "\'" + " OR major = \'NONE\') " +
                "AND available = '1' " +
                "AND course.cid NOT IN (SELECT cid FROM student_taken_course WHERE sid = \'" + Session["sid"] + "\'" + " AND status != 'FAIL') " +
-               "AND course.cid NOT IN (SELECT cid FROM request_add_course WHERE status != 'NOT APPROVE') " +
-               "AND course.cid NOT IN (SELECT cid FROM request_drop_course WHERE status != 'NOT APPROVE') " +
-               "AND course.cid NOT IN (SELECT cid FROM request_change_section WHERE status != 'NOT APPROVE') "
+               "AND course.cid NOT IN (SELECT cid FROM request_add_course WHERE status != 'NOT APPROVE' AND sid = \'" + Session["sid"] + "\') "
            );
         dt = courseSet.Tables[0];
         List<string> course = new List<string>();
@@ -728,7 +721,6 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
 
         if (preRequisiteMeet && courseAvailable && creidtHoursMeet && timeTabletNoCrash)
         {
-            //check is fail?
             DatabaseManager.InsertData(
                 "request_add_course",
                 new List<string> { "sid", "cid" , "section_id", "reason", "status"},
@@ -736,8 +728,6 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                 );
             addCoursePopUpWindow.Style["display"] = "none";
             SetRequestChangesTable();
-            PopulateCourseCodeListing();
-            SetCurrentEnrolledCourseTable();
         }
     }
 
@@ -934,7 +924,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         return true;
     }
 
-    protected void csvAddCourseReasonLength_ServerValidate(object source, ServerValidateEventArgs args)
+    protected void OperationReasonLengthValidate(object source, ServerValidateEventArgs args)
     {
         string userInput = txtAddCourseReason.Text;
         int maxLength = 1000;
@@ -961,8 +951,73 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
 
     protected void btnDropCourse_Click(object sender, EventArgs e)
     {
-
+        PopulateDropCourseCodeListing();
+        txtDropCourseReason.Text = "";
+        selectOperationpopUpWindow.Style["display"] = "none";
+        dropCoursepopUpWindow.Style["display"] = "flex";
     }
+
+    /*Drop course windows*/
+    private void PopulateDropCourseCodeListing()
+    {
+        //get student details
+        DataSet studentSet = DatabaseManager.GetRecord(
+               "student",
+               new List<string> { "program", "major" },
+               "WHERE sid = \'" + Session["sid"] + "\'"
+           );
+
+        DataTable dt = studentSet.Tables[0];
+        string program = null;
+        string major = null;
+        foreach (DataRow row in dt.Rows)
+        {
+            program = row["program"].ToString();
+            major = row["major"].ToString();
+        }
+
+        //get course data
+        DataSet courseSet = DatabaseManager.GetRecord(
+               "student_taken_course",
+               new List<string> {
+                    "student_taken_course.cid",
+                    "name"
+               },
+               "INNER JOIN course AS c ON student_taken_course.cid = c.cid " +
+               "WHERE sid = \'" + Session["sid"] + "\' " +
+               "AND status = 'TAKEN' " +
+               "AND student_taken_course.cid NOT IN (SELECT cid FROM request_add_course WHERE status != 'NOT APPROVE' AND sid = \'" + Session["sid"]+ "\') " +
+               "AND student_taken_course.cid NOT IN (SELECT cid FROM request_drop_course WHERE status != 'NOT APPROVE' AND sid = \'" + Session["sid"]+ "\') " +
+               "AND student_taken_course.cid NOT IN (SELECT cid FROM request_change_section WHERE status != 'NOT APPROVE' AND sid = \'" + Session["sid"] + "\') "
+           );
+        dt = courseSet.Tables[0];
+        List<string> course = new List<string>();
+        List<string> courseCode = new List<string>();
+        foreach (DataRow row in dt.Rows)
+        {
+            course.Add(row["cid"].ToString() + ":" + row["name"].ToString());
+            courseCode.Add(row["cid"].ToString());
+        }
+        UIComponentGenerator.PopulateDropDownList(ddlDropCourseListing, course, courseCode);
+    }
+    protected void btnDropCourseApply_Click(object sender, EventArgs e)
+    {
+        lblErrorMessage.Text = "";
+
+        DatabaseManager.InsertData(
+            "request_drop_course",
+            new List<string> { "sid", "cid", "reason", "status" },
+            new List<object> { Session["sid"], ddlDropCourseListing.SelectedValue, txtDropCourseReason.Text, "PENDING" }
+            );
+        dropCoursepopUpWindow.Style["display"] = "none";
+        SetRequestChangesTable();
+    }
+
+    protected void btnExitDropCourseWindow_Click(object sender, EventArgs e)
+    {
+        dropCoursepopUpWindow.Style["display"] = "none";
+    }
+
     /*bottom btn bar*/
     protected void btnCancel_Click(object sender, EventArgs e)
     {
@@ -980,6 +1035,9 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
           );*/
         Response.Redirect("StudentHomePage.aspx");
     }
+
+
+
 
 
 }

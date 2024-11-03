@@ -155,7 +155,7 @@
             ControlToValidate="txtAddCourseReason"
             CssClass="validator"
             ErrorMessage="The length of input should not more than 1000"
-            OnServerValidate="csvAddCourseReasonLength_ServerValidate"
+            OnServerValidate="OperationReasonLengthValidate"
             ValidationGroup="addCoursePopUpWindow">
         </asp:CustomValidator><br />
 
@@ -166,9 +166,50 @@
             OnClick="btnAddCourse_Click1" 
             ValidationGroup="addCoursePopUpWindow"/>
         <asp:Button ID="btnExitAddCourseWindow" runat="server" Text="Exit" OnClick="btnExitAddCourseWindow_Click"/>
-
-        <script src="Scripts/courseAddAndDrop.js" type="text/javascript"></script>
     </div>
+
 </asp:Panel>
- 
-   </asp:Content>
+
+<asp:Panel ID="dropCoursepopUpWindow" runat="server" CssClass="pop-up-windows">
+    <div class="windows-contain">
+        <h2>Course Code Listing</h2>
+        <asp:DropDownList 
+            ID="ddlDropCourseListing" runat="server"
+            AutoPostBack="true"
+            CssClass="dropDownList"></asp:DropDownList>
+
+        <h2>Reason</h2>
+        <asp:TextBox ID="txtDropCourseReason" runat="server" TextMode="MultiLine" CssClass="text-area"></asp:TextBox><br />
+        <asp:RequiredFieldValidator 
+            ID="rfvDropCourseReason" 
+            runat="server" 
+            Display="Dynamic"
+            ErrorMessage="This field are requited"
+            ControlToValidate="txtDropCourseReason"
+            CssClass="validator"
+            ForeColor="Red"
+            ValidationGroup="dropCoursepopUpWindow">
+        </asp:RequiredFieldValidator>
+        <asp:CustomValidator 
+            ID="CustomValidator1" 
+            runat="server" 
+            Display="Dynamic"
+            ControlToValidate="txtDropCourseReason"
+            CssClass="validator"
+            ErrorMessage="The length of input should not more than 1000"
+            OnServerValidate="OperationReasonLengthValidate"
+            ValidationGroup="dropCoursepopUpWindow">
+        </asp:CustomValidator><br />
+
+        <asp:Button 
+            ID="btnDropCourseApply" 
+            runat="server" 
+            Text="Add Course" 
+            OnClick="btnDropCourseApply_Click" 
+            ValidationGroup="dropCoursepopUpWindow"/>
+        <asp:Button ID="btnExitDropCourseWindow" runat="server" Text="Exit" OnClick="btnExitDropCourseWindow_Click"/>
+    </div>
+
+</asp:Panel>
+    <script src="Scripts/courseAddAndDrop.js" type="text/javascript"></script>
+</asp:Content>
