@@ -185,53 +185,203 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
             headerRow.Cells.Add(cellActionHeader);
             tblRequestChanges.Rows.Add(headerRow);
         }
-        //insert data from database (DROP course)
-        DataSet courseDropDataSet = DatabaseManager.GetRecord(
-                "request_drop_course",
-                new List<string> {
-                    "student_taken_course.cid",
-                    "name",
-                    "credit_hours",
-                    "status"
-                },
-                "INNER JOIN course AS c " +
-                "ON request_drop_course.cid = c.cid " +
-                "WHERE request_drop_course.sid = \'" + Session["sid"] + "\' "
-            );
-        if (courseDropDataSet != null)
+        // DROP COURSE
         {
-            DataTable dt = courseDropDataSet.Tables[0];
-            int count = 0;
-            foreach (DataRow row in dt.Rows)
+            //insert data from database (DROP course)
+            DataSet courseDropDataSet = DatabaseManager.GetRecord(
+                    "request_drop_course",
+                    new List<string> {
+                        "request_drop_course.cid",
+                        "credit_hours",
+                        "status",
+                        "s.name",
+                        "reason"
+                    },
+                    "INNER JOIN course AS c " +
+                    "ON request_drop_course.cid = c.cid " +
+                    "INNER JOIN section AS s " +
+                    "ON request_drop_course.section_id = s.sid " +
+                    "WHERE request_drop_course.sid = \'" + Session["sid"] + "\' "
+                );
+            if (courseDropDataSet != null)
             {
-                count++;
-                TableRow tbRow = new TableRow();
-                TableCell cellNo = new TableCell { Text = count.ToString() };
-                TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
-                TableCell cellCourseInfo = new TableCell { Text = 
-                    "You have selected to <b>DROP</b> Course <b>PRG3201</b> under Section <b>B1</b> and is's <span/ class=\"approve-status\">PENDING<span> for your HOP Approve.<br>" +
-                    "<span class=\"request-reason\"><b>Reason:</b> resson</span>"
-                };
-                TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
-
-                TableCell cellAction = new TableCell();
-                Button btn = new Button
+                DataTable dt = courseDropDataSet.Tables[0];
+                int count = 0;
+                foreach (DataRow row in dt.Rows)
                 {
-                    CssClass = "action-button",
-                    CommandArgument = (tblRequestChanges.Rows.Count).ToString(),
-                    Text = "Delete"
-                };
-                btn.Click += new EventHandler(btnDeleteRequestChanges_Click);
-                cellAction.Controls.Add(btn);
-                tbRow.Cells.Add(cellNo);
+                    count++;
+                    TableRow tbRow = new TableRow();
+                    TableCell cellNo = new TableCell { Text = count.ToString() };
+                    TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
+                    TableCell cellCourseInfo = new TableCell
+                    {
+                        Text =
+                        "You have selected to <b>DROP</b> Course <b>" +
+                        row["cid"].ToString() +
+                        "</b> under Section <b>" +
+                        row["name"].ToString() +
+                        "</b> and is's <span/ class=\"approve-status\">" +
+                        row["status"].ToString() +
+                        "<span> for your HOP Approve.<br>" +
+                        "<span class=\"request-reason\"><b>Reason:</b> " +
+                        row["reason"].ToString() +
+                        "</span>"
+                    };
+                    TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
 
-                tbRow.Cells.Add(cellCourseCode);
-                tbRow.Cells.Add(cellCourseInfo);
-                tbRow.Cells.Add(cellCourseCredits);
-                tbRow.Cells.Add(cellAction);
-                tblRequestChanges.Rows.Add(tbRow);
+                    TableCell cellAction = new TableCell();
+                    Button btn = new Button
+                    {
+                        CssClass = "action-button",
+                        CommandArgument = (tblRequestChanges.Rows.Count).ToString(),
+                        Text = "Delete"
+                    };
+                    btn.Click += new EventHandler(btnDeleteRequestChanges_Click);
+                    cellAction.Controls.Add(btn);
+                    tbRow.Cells.Add(cellNo);
+
+                    tbRow.Cells.Add(cellCourseCode);
+                    tbRow.Cells.Add(cellCourseInfo);
+                    tbRow.Cells.Add(cellCourseCredits);
+                    tbRow.Cells.Add(cellAction);
+                    tblRequestChanges.Rows.Add(tbRow);
+                }
             }
         }
+
+        //ADD COURSE
+        {
+            //insert data from database (ADD course)
+            DataSet courseDropDataSet = DatabaseManager.GetRecord(
+                    "request_add_course",
+                    new List<string> {
+                        "request_add_course.cid",
+                        "credit_hours",
+                        "status",
+                        "s.name",
+                        "reason"
+                    },
+                    "INNER JOIN course AS c " +
+                    "ON request_add_course.cid = c.cid " +
+                    "INNER JOIN section AS s " +
+                    "ON request_add_course.section_id = s.sid " +
+                    "WHERE request_add_course.sid = \'" + Session["sid"] + "\' "
+                );
+            if (courseDropDataSet != null)
+            {
+                DataTable dt = courseDropDataSet.Tables[0];
+                int count = 0;
+                foreach (DataRow row in dt.Rows)
+                {
+                    count++;
+                    TableRow tbRow = new TableRow();
+                    TableCell cellNo = new TableCell { Text = count.ToString() };
+                    TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
+                    TableCell cellCourseInfo = new TableCell
+                    {
+                        Text =
+                        "You have selected to <b>ADD</b> Course <b>" +
+                        row["cid"].ToString() +
+                        "</b> under Section <b>" +
+                        row["name"].ToString() +
+                        "</b> and is's <span/ class=\"approve-status\">" +
+                        row["status"].ToString() +
+                        "<span> for your HOP Approve.<br>" +
+                        "<span class=\"request-reason\"><b>Reason:</b> " +
+                        row["reason"].ToString() +
+                        "</span>"
+                    };
+                    TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
+
+                    TableCell cellAction = new TableCell();
+                    Button btn = new Button
+                    {
+                        CssClass = "action-button",
+                        CommandArgument = (tblRequestChanges.Rows.Count).ToString(),
+                        Text = "Delete"
+                    };
+                    btn.Click += new EventHandler(btnDeleteRequestChanges_Click);
+                    cellAction.Controls.Add(btn);
+                    tbRow.Cells.Add(cellNo);
+
+                    tbRow.Cells.Add(cellCourseCode);
+                    tbRow.Cells.Add(cellCourseInfo);
+                    tbRow.Cells.Add(cellCourseCredits);
+                    tbRow.Cells.Add(cellAction);
+                    tblRequestChanges.Rows.Add(tbRow);
+                }
+            }
+        }
+
+        //CHANGE SECTION 
+        {
+            //insert data from database (CHANGE section)
+            DataSet courseDropDataSet = DatabaseManager.GetRecord(
+                    "request_change_section",
+                    new List<string> {
+                        "request_change_section.cid",
+                        "credit_hours",
+                        "status",
+                        "s1.name",
+                        "s2.name",
+                        "reason"
+                    },
+                    "INNER JOIN course AS c " +
+                    "ON request_change_section.cid = c.cid " +
+                    "INNER JOIN section AS s1 " +
+                    "ON request_change_section.current_section_id = s1.sid " +
+                    "INNER JOIN section AS s2 " +
+                    "ON request_change_section.target_section_id = s2.sid " +
+                    "WHERE request_change_section.sid = \'" + Session["sid"] + "\' "
+                );
+            if (courseDropDataSet != null)
+            {
+                DataTable dt = courseDropDataSet.Tables[0];
+                int count = 0;
+                foreach (DataRow row in dt.Rows)
+                {
+                    count++;
+                    TableRow tbRow = new TableRow();
+                    TableCell cellNo = new TableCell { Text = count.ToString() };
+                    TableCell cellCourseCode = new TableCell { Text = row["cid"].ToString() };
+                    TableCell cellCourseInfo = new TableCell
+                    {
+                        Text =
+                        "You have selected to <b>CHANGE</b> Section  <b>" +
+                        row["s1.name"].ToString() +
+                        "</b> to <b>" +
+                        row["s2.name"].ToString() +
+                        "</b> under Course <b>" +
+                        row["vid"].ToString() +
+                        "</b> and is's <span/ class=\"approve-status\">" +
+                        row["status"].ToString() +
+                        "<span> for your HOP Approve.<br>" +
+                        "<span class=\"request-reason\"><b>Reason:</b> " +
+                        row["reason"].ToString() +
+                        "</span>"
+                    };
+                    TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
+
+                    TableCell cellAction = new TableCell();
+                    Button btn = new Button
+                    {
+                        CssClass = "action-button",
+                        CommandArgument = (tblRequestChanges.Rows.Count).ToString(),
+                        Text = "Delete"
+                    };
+                    btn.Click += new EventHandler(btnDeleteRequestChanges_Click);
+                    cellAction.Controls.Add(btn);
+                    tbRow.Cells.Add(cellNo);
+
+                    tbRow.Cells.Add(cellCourseCode);
+                    tbRow.Cells.Add(cellCourseInfo);
+                    tbRow.Cells.Add(cellCourseCredits);
+                    tbRow.Cells.Add(cellAction);
+                    tblRequestChanges.Rows.Add(tbRow);
+                }
+            }
+        }
+
 
         if (tblRequestChanges.Rows.Count == 1)
         {
@@ -251,6 +401,7 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
         }
     }
 
+    //not compleated and upside need test
     protected void btnAddCourse_Click(object sender, EventArgs e)
     {
         SetCurrentEnrolledCourseTable();
