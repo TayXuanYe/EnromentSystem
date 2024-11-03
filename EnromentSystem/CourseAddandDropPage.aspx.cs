@@ -1146,13 +1146,29 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
 
     protected void btnRequestToApprove_Click(object sender, EventArgs e)
     {
-       /* DatabaseManager.UpdateData(
-          "student_taken_course",
+        DatabaseManager.UpdateData(
+          "request_add_course",
           new List<string> { "status" },
-          new List<object> { "TAKEN" },
-          "WHERE status = 'ADD' " +
+          new List<object> { "PENDING" },
+          "WHERE status = 'HOLD' " +
           "AND sid = \'" + Session["sid"] + "\'"
-          );*/
+          );
+        
+        DatabaseManager.UpdateData(
+          "request_drop_course",
+          new List<string> { "status" },
+          new List<object> { "PENDING" },
+          "WHERE status = 'HOLD' " +
+          "AND sid = \'" + Session["sid"] + "\'"
+          );
+
+        DatabaseManager.UpdateData(
+          "request_change_section",
+          new List<string> { "status" },
+          new List<object> { "PENDING" },
+          "WHERE status = 'HOLD' " +
+          "AND sid = \'" + Session["sid"] + "\'"
+          );
         Response.Redirect("StudentHomePage.aspx");
     }
 }
