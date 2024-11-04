@@ -809,7 +809,7 @@ public partial class CourseAddAndDropPage : System.Web.UI.Page
         bool preRequisiteMeet = PreRequisiteMeetValidate();
         bool courseAvailable = CourseAvailableValidate();
         bool creidtHoursMeet = AchieveMaxCreidtHoursValidate();
-        bool timeTabletNoCrash = TimeTableCrashCheckingValidate();
+        bool timeTabletNoCrash = TimeTableCrashCheckingValidate(ddlCourseCodeListing.SelectedValue, ddlCourseSection.SelectedValue);
 
         if (preRequisiteMeet && courseAvailable && creidtHoursMeet && timeTabletNoCrash)
         {
@@ -857,7 +857,7 @@ public partial class CourseAddAndDropPage : System.Web.UI.Page
         }
     }
 
-    private bool TimeTableCrashCheckingValidate()
+    private bool TimeTableCrashCheckingValidate(string courseCode, string sectionId)
     {
         //get seleced course time
         DataSet dataSet = DatabaseManager.GetRecord(
@@ -971,8 +971,8 @@ public partial class CourseAddAndDropPage : System.Web.UI.Page
                new List<string> { "time" },
                "INNER JOIN section AS s ON course.cid = s.cid " +
                "INNER JOIN class AS c ON s.sid = c.sid " +
-               "WHERE course.cid = \'" + ddlCourseCodeListing.SelectedValue + "\' " +
-               "AND s.sid = \'" + ddlCourseSection.SelectedValue + "\'"
+               "WHERE course.cid = \'" + courseCode + "\' " +
+               "AND s.sid = \'" + sectionId + "\'"
            );
         dt = null;
         if (dataSet != null)
@@ -1203,21 +1203,30 @@ public partial class CourseAddAndDropPage : System.Web.UI.Page
     {
         if(ddlTargetChangeSection.SelectedValue != "")
         {
-            DatabaseManager.InsertData(
-            "request_change_section",
-            new List<string> { "sid", "cid", "reason", "status", "current_section_id", "target_section_id" },
-            new List<object> {
-                Session["sid"],
-                lblChangingSectionCourse.Text,
-                txtDropCourseReason.Text,
-                "HOLD",
-                lblCurrentSectionId.Text,
-                ddlTargetChangeSection.SelectedValue
+            if (TimeTableCrashCheckingValidate(lblChangingSectionCourse.Text, ddlTargetChangeSection.SelectedValue))
+            {
+                DatabaseManager.InsertData(
+                    "request_change_section",
+                    new List<string> { "sid", "cid", "reason", "status", "current_section_id", "target_section_id" },
+                    new List<object> {
+                        Session["sid"],
+                        lblChangingSectionCourse.Text,
+                        txtDropCourseReason.Text,
+                        "HOLD",
+                        lblCurrentSectionId.Text,
+                        ddlTargetChangeSection.SelectedValue
+                    }
+                );
+                changeSectionPopUpWindow.Style["display"] = "none";
+                SetCurrentEnrolledCourseTable();
+                SetRequestChangesTable();
             }
-            );
-            changeSectionPopUpWindow.Style["display"] = "none";
-            SetCurrentEnrolledCourseTable();
-            SetRequestChangesTable();
+            else
+            {
+                lblChangeSectionErrorMessage.Text = "Time table crash <br>";
+
+            }
+
         }
         else
         {
