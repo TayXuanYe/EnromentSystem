@@ -16,6 +16,8 @@ public partial class CourseAddAndDropPage : System.Web.UI.Page
             SetCourseEnrolmentDetails();
             SetCurrentEnrolledCourseTable();
             SetRequestChangesTable();
+            CheckFunctionOpen();
+            CheckStudentEnrol();
             lblErrorMessage.Text = "";
             if (!IsPostBack)
             {
@@ -26,6 +28,40 @@ public partial class CourseAddAndDropPage : System.Web.UI.Page
         }
     }
 
+    private void CheckFunctionOpen()
+    {
+        DataSet dataSet = DatabaseManager.GetRecord(
+                "system_function_available",
+                new List<string> { "available" },
+                "WHERE system_function = \'ADDDROP\'"
+            );
+
+        string isOpen = null;
+        foreach(DataRow row in dataSet.Tables[0].Rows)
+        {
+            isOpen = row["available"].ToString();
+        }
+        if(isOpen != "True")
+        {
+            notOpenPopUpWindow.Style["display"] = "flex";
+        }
+    }
+
+    private void CheckStudentEnrol()
+    {
+        DataSet dataSet = DatabaseManager.GetRecord(
+                "student_enrol_successful",
+                new List<string> { "sid" },
+                "WHERE sid = \'" + 
+                Session["sid"] +
+                "\'"
+            );
+
+        if (dataSet.Tables[0].Rows.Count == 0)
+        {
+            haventEnrolWaringWindow.Style["display"] = "flex";
+        }
+    }
     private void SetCourseEnrolmentDetails()
     {
         DataSet dataSet = DatabaseManager.GetRecord(

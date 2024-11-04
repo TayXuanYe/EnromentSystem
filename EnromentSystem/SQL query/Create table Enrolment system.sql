@@ -1,5 +1,6 @@
 USE EnrolmentSystemDatabase
-
+DROP TABLE student_enrol_successful;
+DROP TABLE system_function_available;
 DROP TABLE request_drop_course;
 DROP TABLE request_add_course;
 DROP TABLE request_change_section;
@@ -165,5 +166,15 @@ CREATE TABLE request_change_section(
 );
 
 CREATE TABLE student_enrol_successful(
-	
+	sid varchar(255) PRIMARY KEY
 );
+
+CREATE TABLE system_function_available(
+	system_function varchar(255) PRIMARY KEY,
+	available bit
+);
+
+INSERT INTO system_function_available VALUES('ENROL','1')
+INSERT INTO system_function_available VALUES('ADDDROP','1')
+
+
