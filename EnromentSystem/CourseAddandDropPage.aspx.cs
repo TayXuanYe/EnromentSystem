@@ -1224,7 +1224,6 @@ public partial class CourseAddAndDropPage : System.Web.UI.Page
             else
             {
                 lblChangeSectionErrorMessage.Text = "Time table crash <br>";
-
             }
 
         }
