@@ -451,3 +451,8 @@ table td, table th {
     font-size: 16pt;
     margin-bottom: 10px;
 }
+
+.not-available-image{
+    display: block;
+    margin: 0px auto;
+}

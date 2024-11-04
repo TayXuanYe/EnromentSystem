@@ -247,7 +247,27 @@
             ValidationGroup="ddlTargetChangeSection"/>
         <asp:Button ID="btnExitChangeSectionWindow" runat="server" Text="Exit" OnClick="btnExitChangeSectionWindow_Click"/>
     </div>
+</asp:Panel>
 
+
+<asp:Panel ID="notOpenPopUpWindow" runat="server" CssClass="pop-up-windows">
+    <div class="windows-contain">
+        <br />
+        <h1>Add and Drop are not available</h1>
+        <br />
+        <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/not-available.png" CssClass="not-available-image"/><br />
+        <asp:Button ID="notOpenPopUpWindowExitButton" runat="server" Text="Exit" OnClick="btnCancel_Click"/>
+    </div>
+</asp:Panel>
+    
+<asp:Panel ID="haventEnrolWaringWindow" runat="server" CssClass="pop-up-windows">
+    <div class="windows-contain">
+        <br />
+        <h1>Add and Drop are not available.<br /> You must enrol course first.</h1>
+        <br />
+        <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/not-available.png" CssClass="not-available-image"/><br />
+        <asp:Button ID="haventEnrolWaringWindowExitButton" runat="server" Text="Exit" OnClick="btnCancel_Click"/>
+    </div>
 </asp:Panel>
 
     <script src="Scripts/courseAddAndDrop.js" type="text/javascript"></script>

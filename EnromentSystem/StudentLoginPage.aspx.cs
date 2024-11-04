@@ -36,7 +36,7 @@ public partial class StudentLoginPage : System.Web.UI.Page
     {
         if (Page.IsValid)
         {
-            Session["sid"] = txtUserId.Text;
+            Session["sid"] = txtUserId.Text.ToUpper();
             Session.Timeout = 30;
             Response.Redirect("StudentHomePage.aspx");
         }
