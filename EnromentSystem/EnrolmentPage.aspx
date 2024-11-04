@@ -144,4 +144,23 @@
     </div>
 </asp:Panel>
 
+<asp:Panel ID="notOpenPopUpWindow" runat="server" CssClass="pop-up-windows">
+    <div class="windows-contain">
+        <br />
+        <h1>Course Enrolment are not available</h1>
+        <br />
+        <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/not-available.png" CssClass="not-available-image"/><br />
+        <asp:Button ID="notOpenPopUpWindowExitButton" runat="server" Text="Exit" OnClick="btnCancel_Click"/>
+    </div>
+</asp:Panel>
+    
+<asp:Panel ID="multipleEnrolWaringWindow" runat="server" CssClass="pop-up-windows">
+    <div class="windows-contain">
+        <br />
+        <h1>You have enrol course in this semester</h1>
+        <br />
+        <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/not-available.png" CssClass="not-available-image"/><br />
+        <asp:Button ID="multipleEnrolWaringWindowExitButton" runat="server" Text="Exit" OnClick="btnCancel_Click"/>
+    </div>
+</asp:Panel>
 </asp:Content>
