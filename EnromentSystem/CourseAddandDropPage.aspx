@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="CourseAddandDropPage.aspx.cs" Inherits="CourseAddandDropPage" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="CourseAddAndDropPage.aspx.cs" Inherits="CourseAddAndDropPage" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" type="text/css" href="<%: ResolveUrl("~/Styles/CourseAddandDrop.css") %>" />
