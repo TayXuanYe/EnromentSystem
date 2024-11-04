@@ -859,7 +859,7 @@ public partial class CourseAddAndDropPage : System.Web.UI.Page
 
     private bool TimeTableCrashCheckingValidate()
     {
-        //get course credit hour
+        //get seleced course time
         DataSet dataSet = DatabaseManager.GetRecord(
                "course",
                new List<string> { "time" },
@@ -867,13 +867,83 @@ public partial class CourseAddAndDropPage : System.Web.UI.Page
                "INNER JOIN class AS c ON s.sid = c.sid " +
                "WHERE course.cid IN (" +
                "SELECT cid FROM student_taken_course WHERE sid = \'" + Session["sid"] + "\' " +
-               "AND status = 'ADD') " +
+               "AND status = 'TAKEN') " +
                "AND s.sid IN (" +
                "SELECT section_id FROM student_taken_course WHERE sid = \'" + Session["sid"] + "\' " +
-               "AND status = 'ADD')"
+               "AND status = 'TAKEN')"
            );
         DataTable dt = null;
         List<int> timeSelected = new List<int> { };
+        if (dataSet != null)
+        {
+            dt = dataSet.Tables[0];
+        }
+        else
+        {
+            Debug.WriteLine("TimeTableCrashCheckingValidate: get course time dataset is null");
+            return false;
+        }
+        if (dt != null)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                timeSelected.Add(int.Parse(row["time"].ToString()));
+            }
+        }
+        else
+        {
+            Debug.WriteLine("TimeTableCrashCheckingValidate: get course credit hour datatable is null");
+            return false;
+        }
+        //get added request course time
+        dataSet = DatabaseManager.GetRecord(
+               "course",
+               new List<string> { "time" },
+               "INNER JOIN section AS s ON course.cid = s.cid " +
+               "INNER JOIN class AS c ON s.sid = c.sid " +
+               "WHERE course.cid IN (" +
+               "SELECT cid FROM request_add_course WHERE sid = \'" + Session["sid"] + "\' " +
+               "AND status IN ('PENDING','HOLD')) " +
+               "AND s.sid IN (" +
+               "SELECT section_id FROM request_add_course WHERE sid = \'" + Session["sid"] + "\' " +
+               "AND status IN ('PENDING','HOLD'))"
+           );
+        dt = null;
+        if (dataSet != null)
+        {
+            dt = dataSet.Tables[0];
+        }
+        else
+        {
+            Debug.WriteLine("TimeTableCrashCheckingValidate: get course credit hour dataset is null");
+            return false;
+        }
+        if (dt != null)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                timeSelected.Add(int.Parse(row["time"].ToString()));
+            }
+        }
+        else
+        {
+            Debug.WriteLine("TimeTableCrashCheckingValidate: get course credit hour datatable is null");
+            return false;
+        }
+        //get change section time
+        dataSet = DatabaseManager.GetRecord(
+               "course",
+               new List<string> { "time" },
+               "INNER JOIN section AS s ON course.cid = s.cid " +
+               "INNER JOIN class AS c ON s.sid = c.sid " +
+               "WHERE course.cid IN (" +
+               "SELECT cid FROM request_change_section WHERE sid = \'" + Session["sid"] + "\' " +
+               "AND status IN ('PENDING','HOLD')) " +
+               "AND s.sid IN (" +
+               "SELECT target_section_id FROM request_change_section WHERE sid = \'" + Session["sid"] + "\' " +
+               "AND status IN ('PENDING','HOLD'))"
+           );
+        dt = null;
         if (dataSet != null)
         {
             dt = dataSet.Tables[0];

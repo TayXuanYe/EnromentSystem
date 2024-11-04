@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using System.Web.DynamicData;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml.Linq;
 
 public partial class EnrolmentPage : System.Web.UI.Page
 {
@@ -662,7 +655,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
 
     private bool TimeTableCrashCheckingValidate()
     {
-        //get course credit hour
+        // get seleced course time
         DataSet dataSet = DatabaseManager.GetRecord(
                "course",
                new List<string> { "time" },
