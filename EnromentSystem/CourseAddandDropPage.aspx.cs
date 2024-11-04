@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class CourseAddandDropPage : System.Web.UI.Page
+public partial class CourseAddAndDropPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -339,9 +339,13 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     if (row["status"].ToString() == "HOLD")
                     {
                         cellCourseInfo.Text =
-                            "You have selected to <b>DROP</b> Course <b>" +
+                            "You have selected to <b>ADD</b> Course <b>" +
                             row["cid"].ToString() +
-                            "</b>. The request has not been sent yet.<br>" +
+                            "</b>." +
+                            "Under <b>" +
+                            row["name"] +
+                            "</b> section" +
+                            " The request has not been sent yet.<br>" +
                             "<span class=\"request-reason\"><b>Reason:</b> " +
                             row["reason"].ToString() +
                             "</span>";
@@ -349,15 +353,20 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     else
                     {
                         cellCourseInfo.Text =
-                            "You have selected to <b>DROP</b> Course <b>" +
+                            "You have selected to <b>ADD</b> Course <b>" +
                             row["cid"].ToString() +
-                            "</b> and is's <span class=\"approve-status\">" +
+                            "</b> " +
+                            "under <b>" +
+                            row["name"] +
+                            "</b> section " +
+                            "and is's <span class=\"approve-status\">" +
                             row["status"].ToString() +
                             "</span> for your HOP Approve.<br>" +
                             "<span class=\"request-reason\"><b>Reason:</b> " +
                             row["reason"].ToString() +
                             "</span>";
                     }
+
                     TableCell cellCourseCredits = new TableCell { Text = row["credit_hours"].ToString() };
 
                     TableCell cellAction = new TableCell();
@@ -397,8 +406,8 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                         "request_change_section.cid",
                         "credit_hours",
                         "status",
-                        "s1.name",
-                        "s2.name",
+                        "s1.name AS currestSection",
+                        "s2.name AS targetSection",
                         "reason"
                     },
                     "INNER JOIN course AS c " +
@@ -423,7 +432,12 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     if (row["status"].ToString() == "HOLD")
                     {
                         cellCourseInfo.Text =
-                            "You have selected to <b>DROP</b> Course <b>" +
+                            "You have selected to <b>CHANGE</b> Section from <b>" +
+                            row["currestSection"] +
+                            "</b> to <b>" +
+                            row["targetSection"] +
+                            "</b> " +
+                            "of Course <b>" +
                             row["cid"].ToString() +
                             "</b>. The request has not been sent yet.<br>" +
                             "<span class=\"request-reason\"><b>Reason:</b> " +
@@ -433,9 +447,14 @@ public partial class CourseAddandDropPage : System.Web.UI.Page
                     else
                     {
                         cellCourseInfo.Text =
-                            "You have selected to <b>DROP</b> Course <b>" +
+                            "You have selected to <b>CHANGE</b> Section from <b>" +
+                            row["currestSection"] +
+                            "</b> to <b>" +
+                            row["targetSection"] +
+                            "</b> " +
+                            "of Course <b>" +
                             row["cid"].ToString() +
-                            "</b> and is's <span class=\"approve-status\">" +
+                            "</b> and  is's <span class=\"approve-status\">" +
                             row["status"].ToString() +
                             "</span> for your HOP Approve.<br>" +
                             "<span class=\"request-reason\"><b>Reason:</b> " +
