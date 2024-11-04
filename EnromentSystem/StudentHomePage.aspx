@@ -41,8 +41,8 @@
             </div>
             <div class="card-content">
                 <ul>
-                    <li><a href="CourseAddandDropPage.aspx">Course Add & Drop</a></li>
-                    <li><a href="#">Add & Drop History</a></li>
+                    <li><a href="CourseAddAndDropPage.aspx">Course Add & Drop</a></li>
+                    <li><a href="AddDropHistoryPage.aspx">Add & Drop History</a></li>
                 </ul>
             </div>
         </div>
