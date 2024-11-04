@@ -55,7 +55,7 @@
             <ul id="nav-one" class="dropmenu">
                 <!--Home-->
                 <li>
-                    <p><a href="#">Home</a></p>
+                    <p><a href="StudentHomePage.aspx">Home</a></p>
                 </li>
 
                 <!--Enrolment-->
