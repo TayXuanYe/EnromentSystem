@@ -14,7 +14,7 @@ DROP TABLE current_semester
 DROP TABLE class
 DROP TABLE section
 DROP TABLE lecture
-
+DROP TABLE program
 DROP TABLE course_prerequisite
 DROP TABLE course_major
 DROP TABLE course
@@ -83,6 +83,9 @@ CREATE TABLE course_major(
 	PRIMARY KEY (cid,major,program),
 	FOREIGN KEY (cid) REFERENCES course(cid)
 )
+CREATE TABLE program(
+	program varchar(255)
+);
 
 CREATE TABLE lecture(
 	lid varchar(255) PRIMARY KEY,
@@ -128,7 +131,9 @@ CREATE TABLE student_taken_course(
 	FOREIGN KEY (cid) REFERENCES course(cid),
 	FOREIGN KEY (section_id) REFERENCES section(sid)
 );
+-- status {'FAIL','ADD','TAKEN','COMPLETE'}
 
+-- STATUS {'HOLD','PENDING','APPROVE','NOT APPROVE'}
 CREATE TABLE request_drop_course(
 	rid int IDENTITY(1,1) PRIMARY KEY,
 	sid varchar(255),
@@ -139,7 +144,6 @@ CREATE TABLE request_drop_course(
 	FOREIGN KEY (sid) REFERENCES student(sid),
 	FOREIGN KEY (cid) REFERENCES course(cid),
 );
-
 CREATE TABLE request_add_course(
 	rid int IDENTITY(1,1) PRIMARY KEY,
 	sid varchar(255),
@@ -152,7 +156,6 @@ CREATE TABLE request_add_course(
 	FOREIGN KEY (cid) REFERENCES course(cid),
 	FOREIGN KEY (section_id) REFERENCES section(sid)
 );
-
 CREATE TABLE request_change_section(
 	rid int IDENTITY(1,1) PRIMARY KEY,
 	sid varchar(255),

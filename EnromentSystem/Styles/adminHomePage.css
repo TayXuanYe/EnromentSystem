@@ -1,0 +1,96 @@
+﻿body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #df595c,#6b2424);
+}
+
+span, h1, li, div {
+    user-select: none;
+}
+
+* {
+    caret-color: transparent;
+}
+
+.box > table{
+    margin: 10px;
+}
+
+.adminInfoCard{
+    display: inline-block;
+    background-color:#fff;
+    padding: 30px;
+    border: solid;
+    border-color: #FFF;
+    border-radius: 10px;
+    margin: 20px;
+    height: 474px;
+}
+.adminInfoCard img {
+    /*    transform: scale(0.6);*/
+    display: block;
+    margin: 0px auto;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 50px;
+    margin-top: 25px;
+}
+
+.adminInfoCard h1{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.adminInfoCard span{
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    padding-bottom: 25px;
+}
+
+.functionCard {
+    background-color: #FFF;
+    border: solid;
+    border-color: #FFF;
+    border-radius: 5px;
+    height: 100%;
+    width: 216px;
+    cursor: pointer;
+    color: #000;
+}
+
+.functionCard:hover {
+    border: solid;
+    border-color: #123;
+    border-radius: 5px;
+    transform: scale(1.05);
+    transition: transform 0.3s ease; 
+}
+
+.card-contain{
+    height:494px;
+}
+
+.card-contain td{
+    padding: 10px;
+}
+
+.functionCard img {
+    display: block;
+    margin: 10px auto;
+}
+
+.functionCard span {
+    display: block;
+    text-align: center;
+    font-size: 16pt;
+}
+
+a {
+    text-decoration: none;
+}
+
+
