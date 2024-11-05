@@ -1,4 +1,7 @@
 USE EnrolmentSystemDatabase
+
+DROP TABLE admin;
+
 DROP TABLE student_enrol_successful;
 DROP TABLE system_function_available;
 DROP TABLE request_drop_course;
@@ -177,4 +180,11 @@ CREATE TABLE system_function_available(
 INSERT INTO system_function_available VALUES('ENROL','1')
 INSERT INTO system_function_available VALUES('ADDDROP','1')
 
+CREATE TABLE admin(
+	aid varchar(255) primary key,
+	name varchar(255),
+	password varchar(255)
+);
+
+INSERT INTO admin VALUES ('A23024312','Admin 1','admin');
 
