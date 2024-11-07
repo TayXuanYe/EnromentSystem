@@ -54,61 +54,49 @@
         <td style=" text-align:left;">
             <ul id="nav-one" class="dropmenu">
                 <!--Home-->
-                <li>
-                    <p><a href="StudentHomePage.aspx">Home</a></p>
-                </li>
-
-                <!--Enrolment-->
                 <li> 
-	                        <p>Enrolment</p>
+	                <p><a href="AdminHomePage.aspx">Home</a></p>
+                </li>
+                
+                <!--Student-->
+                <li> 
+	                <p><a href="#">Student</a></p>
                     <ul>
-                        <li><a href="#">Course Enrolment</a></li>
+                        <li><a href="#">Add new student</a></li>
+                        <li><a href="#">Update student info</a></li>
+                        <li><a href="#">Delete student</a></li>
                     </ul>
                 </li>
 
-                <!--Add and Drop-->
+                <!--Lecturer-->
                 <li> 
-	                        <p>Add & Drop</p>
+                    <p>Lecturer</p>
                     <ul>
-                        <li><a href="#">Course Add / Drop</a></li>
-                        <li><a href="#">Add / Drop History</a></li>
+                        <li><a href="#">Add new lecturer</a></li>
+                        <li><a href="#">Update lecturer info</a></li>
+                        <li><a href="#">Delete lecturer</a></li>
                     </ul>
                 </li>
 
-                <!--Attendance-->
+                <!--Progran & Major-->
                 <li> 
-	                <p><a href="#">Attendance</a></p>
-                </li>
-
-                <!--Statement-->
-                <li> 
-	                        <p>Statement</p>
+                    <p>Progran & Major</p>
                     <ul>
                         <li><a href="#">Student Statement</a></li>
                         <li><a href="#">Registration Summary</a></li>
                     </ul>
                 </li>
 
-                <!--Payment-->
+                <!--Course & Section-->
                 <li> 
-	                        <p>Payment</p>
+	                <p>Course & Section</p>
                     <ul>
                         <li><a href="#">Payment</a></li>
-                        <li><a href="#">Online Payment History <br /> Receipt</a></li>
-                        <li><a href="#">Invoice and Adjustment <br /> Note</a></li>
+                        <li><a href="#">Online Payment <br />History Receipt</a></li>
+                        <li><a href="#">Invoice and <br />Adjustment Note</a></li>
                     </ul>
                 </li>
-
-                <!--Account-->
-                <li> 
-	                        <p>Account</p>
-                    <ul>
-                        <li><a href="#">Change Password</a></li>
-                        <li><a href="#">Update Profile</a></li>
-                        <li><a href="#">Update Bank Details</a></li>
-                    </ul>
-                </li>
-        </ul>
+            </ul>
         </td>
         </tr>
         </table>
