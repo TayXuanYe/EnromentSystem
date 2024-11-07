@@ -59,11 +59,11 @@
                 
                 <!--Student-->
                 <li> 
-	                <p><a href="#">Student</a></p>
+	                <p><a href="AdminMaintainStudentMainPage.aspx">Student</a></p>
                     <ul>
-                        <li><a href="#">Add new student</a></li>
-                        <li><a href="#">Update student info</a></li>
-                        <li><a href="#">Delete student</a></li>
+                        <li><a href="AdminAddStudentPage.aspx">Add new student</a></li>
+                        <li><a href="AdminModifyStudentPage.aspx">Modify student info</a></li>
+                        <li><a href="AdminDeleteStudentPage.aspx">Delete student</a></li>
                     </ul>
                 </li>
 

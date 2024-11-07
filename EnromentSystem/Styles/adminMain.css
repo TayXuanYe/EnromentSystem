@@ -124,6 +124,8 @@ button, input[type="button"], input[type="submit"] {
     .dropmenu a {
         text-decoration: none;
         color: #333;
+        width:100%;
+        display:block;
     }
 
     .dropmenu > li:hover > p,
