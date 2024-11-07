@@ -1,16 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AdminHomePage.aspx.cs" Inherits="AdminHomePage" %>
+﻿<%@ Page 
+    Title="Home Page"
+    MasterPageFile="~/AdminSite.master"
+    Language="C#" 
+    AutoEventWireup="true" 
+    CodeFile="AdminHomePage.aspx.cs" 
+    Inherits="AdminHomePage" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Home Page</title>
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/main.css") %>" />
+<asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminHomePage.css") %>" />
+</asp:Content>
 
-</head>
-<body>
-<form id="form1" runat="server">
+<asp:Content  ContentPlaceHolderID="MainContent" runat="server">
     <div class="box">
         <table>
             <tr>
@@ -65,6 +65,5 @@
             </tr>
         </table>
     </div>
-</form>
-</body>
-</html>
+</asp:Content>
+

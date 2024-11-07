@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminSite.master.cs" Inherits="AdminSite" %>
 
 <!DOCTYPE html>
 
@@ -11,8 +11,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/main.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminMain.css") %>" />
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
 </head>
@@ -46,7 +45,7 @@
                 <asp:Label ID="lblAdminDetails" runat="server" Text=""></asp:Label>
             </div>
             <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" />
-        </div>
+        </div><br />
 
         <div class="navigation-bar">
         <table>

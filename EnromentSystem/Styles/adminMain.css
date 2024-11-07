@@ -1,0 +1,181 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffffff;
+}
+
+button, input[type="button"], input[type="submit"] {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    box-shadow: none; /* Remove shadow */
+    text-align: inherit; /* Keep text alignment consistent with parent */
+    font: inherit; /* Keep font consistent with parent */
+    color: inherit; /* Keep text color consistent with parent */
+    cursor: pointer; /* Set cursor to pointer (clickable) */
+    outline: none; /* Remove outline on focus */
+}
+
+
+.header {
+    text-align: center;
+    padding: 20px 15px;
+    caret-color: transparent;
+    user-select: none;
+}
+
+    .header span {
+        user-select: none;
+    }
+
+    .header div {
+        display: inline-block;
+        vertical-align: middle;
+        user-select: none;
+    }
+
+#intiLogo, .intiLogo {
+    background-image: url("../Images/INTI_IU_logo.png");
+    height: 92px;
+    width: 378px;
+    margin-right: 250px;
+}
+
+#identityCard {
+    border: solid;
+    border-color: #cccccc;
+    border-radius: 3px;
+    background-color: #ececec;
+    text-align: left;
+}
+
+#btnHomeButton {
+    margin: 2px 2px;
+    background-image: url("../Images/home.png");
+    width: 49px;
+    height: 49px;
+}
+
+    #btnHomeButton:hover {
+        background-color: #b9b9b9;
+        border-radius: 25px;
+    }
+
+#adminDetails {
+    margin-left: 4px;
+    color: #82828D;
+    font-family: Arial;
+    font-size: 14px;
+}
+
+#btnLogout {
+    margin: 0px 5px;
+    padding: 0px 5px;
+    background-color: #970003;
+    border-radius: 3px;
+    color: #dddddd;
+}
+
+    #btnLogout:hover {
+        background-color: #8a0001;
+        border-radius: 3px;
+    }
+
+.navigation-bar {
+    margin: 30px 30px 15px 30px;
+}
+
+
+.dropmenu, .dropmenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropmenu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    display: flex;
+}
+
+    .dropmenu > li {
+        width: 150px;
+        position: relative;
+        cursor: pointer;
+        border-right: 1px solid #ccc;
+    }
+
+        .dropmenu > li > p {
+            margin: 0;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #f2f2f2;
+            font-size: 14px;
+            color: #333;
+        }
+
+    .dropmenu a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .dropmenu > li:hover > p,
+    .dropmenu > li:hover > a {
+        background-color: #ddd;
+    }
+
+    .dropmenu li ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #fff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+    }
+
+        .dropmenu li ul li {
+            width: 150px;
+            padding: 10px;
+            white-space: nowrap;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .dropmenu li ul li a {
+                text-decoration: none;
+                color: #333;
+                font-size: 14px;
+                display: block;
+            }
+
+            .dropmenu li ul li:hover {
+                background-color: #ddd;
+            }
+
+    .dropmenu li:hover ul {
+        display: block;
+    }
+
+.body-content {
+    height:75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+.header{
+    width: 100vw;
+/*    background-color: #FFF;*/
+    height: 25%;
+}
+form{
+    height:100%;
+}

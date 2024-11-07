@@ -16,6 +16,7 @@ span, h1, li, div {
 
 .box > table{
     margin: 10px;
+    margin-bottom: 10%;
 }
 
 .adminInfoCard{

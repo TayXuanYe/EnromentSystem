@@ -41,7 +41,7 @@ public partial class AdminLoginPage : System.Web.UI.Page
         {
             Session["aid"] = txtUserId.Text.ToUpper();
             Session.Timeout = 30;
-            Response.Redirect("StudentHomePage.aspx");
+            Response.Redirect("AdminHomePage.aspx");
         }
     }
 }
