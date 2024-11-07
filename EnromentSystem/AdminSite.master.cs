@@ -13,8 +13,8 @@ public partial class AdminSite : MasterPage
         {
             DataSet dataSet = DatabaseManager.GetRecord(
                 "admin",
-                new List<string> { "name", "program" },
-                "WHERE sid = \'" + Session["sid"] + "\'"
+                new List<string> { "name" },
+                "WHERE aid = \'" + Session["aid"] + "\'"
             );
 
             DataTable dt = dataSet.Tables[0];
@@ -23,23 +23,20 @@ public partial class AdminSite : MasterPage
             foreach (DataRow row in dt.Rows)
             {
                 name = row["name"].ToString();
-                program = row["program"].ToString();
             }
 
-            lblStudentDetails.Text =
+            lblAdminDetails.Text =
                 name + "<br>" +
-                Session["sid"].ToString() + "<br>" +
-                program;
+                Session["aid"].ToString();
         }else
         {
-            Debug.WriteLine("return");
-            Response.Redirect("StudentLoginPage.aspx");
+            Response.Redirect("AdminLoginPage.aspx");
         }
     }
 
     protected void btnLogout_Click(object sender, EventArgs e)
     {
         Session["aid"] = null;
-        Response.Redirect("StudentLoginPage.aspx");
+        Response.Redirect("AdminLoginPage.aspx");
     }
 }
