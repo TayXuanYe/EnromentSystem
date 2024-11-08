@@ -166,6 +166,10 @@ public partial class AdminAddStudentPage : System.Web.UI.Page
         PopulateMajor(ddlProgram.SelectedValue);
     }
 
+    protected void ProgramIsEmpty_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        args.IsValid = (ddlProgram.SelectedIndex != -1);
+    }
     //button contain
     protected void btnCancel_Click(object sender, EventArgs e)
     {
@@ -193,10 +197,5 @@ public partial class AdminAddStudentPage : System.Web.UI.Page
                 }
                 );
         }
-    }
-
-    protected void ProgramIsEmpty_ServerValidate(object source, ServerValidateEventArgs args)
-    {
-        args.IsValid = (ddlProgram.SelectedIndex != -1);
     }
 }

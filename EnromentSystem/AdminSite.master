@@ -62,8 +62,8 @@
 	                <p><a href="AdminMaintainStudentMainPage.aspx">Student</a></p>
                     <ul>
                         <li><a href="AdminAddStudentPage.aspx">Add new student</a></li>
-                        <li><a href="AdminModifyStudentPage.aspx">Modify student info</a></li>
-                        <li><a href="AdminDeleteStudentPage.aspx">Delete student</a></li>
+                        <li><a href="AdminMaintainStudentMainPage.aspx">Modify student info</a></li>
+                        <li><a href="AdminMaintainStudentMainPage.aspx">Delete student</a></li>
                     </ul>
                 </li>
 
