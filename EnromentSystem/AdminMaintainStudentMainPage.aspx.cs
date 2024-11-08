@@ -70,7 +70,6 @@ public partial class AdminMaintainStudentMainPage : System.Web.UI.Page
                 new List<string> { "name", "sid", "program", "major" }
             );
         }
-        Debug.WriteLine(condition);
 
         if(dataSet != null)
         {
