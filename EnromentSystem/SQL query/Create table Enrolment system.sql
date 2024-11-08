@@ -16,6 +16,7 @@ DROP TABLE section
 DROP TABLE lecture
 DROP TABLE major
 DROP TABLE program
+DROP TABLE school
 DROP TABLE course_prerequisite
 DROP TABLE course_major
 DROP TABLE course
@@ -24,13 +25,14 @@ CREATE TABLE student(
 	sid varchar(255) primary key,
 	ic_or_passport varchar(255),
 	name varchar(255),
+	date_of_birth date,
 	password varchar(255),
 	mode_of_study varchar(255),
 	school varchar(255),
 	level varchar(255),
 	program varchar(255),
 	major varchar(255),
-	scholarship int,
+	scholarship float,
 	permanent_address varchar(255),
 	premenant_postcode int,
 	permenant_city varchar(255),
@@ -45,7 +47,7 @@ CREATE TABLE student(
 	alternative_email varchar(255),
 	student_email varchar(255),
 	tel_no bigint,
-	hp_no bigint,
+	hp_no varchar(20),
 	emergency_contach_relationship varchar(255),
 	emergency_contach_person varchar(255),
 	emergency_contach_number varchar(255),
@@ -85,12 +87,19 @@ CREATE TABLE course_major(
 	PRIMARY KEY (cid,major,program),
 	FOREIGN KEY (cid) REFERENCES course(cid)
 )
+CREATE TABLE school(
+	school varchar(255) PRIMARY KEY
+);
 CREATE TABLE program(
-	program varchar(255) PRIMARY KEY
+	program varchar(255) PRIMARY KEY,
+	school varchar(255),
+	level varchar(255),
+	FOREIGN KEY (school) REFERENCES school(school)
 );
 CREATE TABLE major(
-	major varchar(255) PRIMARY KEY,
-	program varchar(255),
+	major varchar(255) ,
+	program varchar(255) ,
+	PRIMARY KEY (major,program),
 	FOREIGN KEY (program) REFERENCES program(program)
 );
 CREATE TABLE lecture(

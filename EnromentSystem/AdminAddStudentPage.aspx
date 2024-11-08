@@ -1,4 +1,4 @@
-﻿<%@ Page 
+﻿       <%@ Page 
     Title="Add Student Page"
     MasterPageFile="~/AdminSite.master"
     Language="C#" 
@@ -84,7 +84,7 @@
                 </td>
                 <td>Postcode</td>
                 <td>
-                    <asp:TextBox ID="txtPermanentPostcode" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtPermanentPostcode" runat="server" TextMode="Number"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" 
                         ErrorMessage="This field is require"
@@ -113,13 +113,39 @@
                 </td>
                 <td>State</td>
                 <td>
-                    <asp:DropDownList ID="ddlPermanentState" runat="server" CssClass="dropDownList"></asp:DropDownList>
+                    <asp:TextBox ID="txtState" runat="server"></asp:TextBox>
+                    <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" 
+                        ErrorMessage="This field is require"
+                        CssClass="validator"
+                        ControlToValidate="txtState"
+                        Display="Dynamic"></asp:RequiredFieldValidator>
+
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
+                        ErrorMessage="This field only accept alphabet"
+                        CssClass="validator"
+                        ControlToValidate="txtState"
+                        Display="Dynamic"
+                        ValidationExpression="[A-Za-z][A-Za-z\s]+"></asp:RegularExpressionValidator>
                 </td>
             </tr>
             <tr>
                 <td>Country</td>
                 <td>
-                    <asp:DropDownList ID="ddlPermanentCountry" runat="server" CssClass="dropDownList"></asp:DropDownList>
+                    <asp:TextBox ID="txtCountry" runat="server"></asp:TextBox>
+                    <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" 
+                        ErrorMessage="This field is require"
+                        CssClass="validator"
+                        ControlToValidate="txtCountry"
+                        Display="Dynamic"></asp:RequiredFieldValidator>
+
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" 
+                        ErrorMessage="This field only accept alphabet"
+                        CssClass="validator"
+                        ControlToValidate="txtCountry"
+                        Display="Dynamic"
+                        ValidationExpression="[A-Za-z][A-Za-z\s]+"></asp:RegularExpressionValidator>
                 </td>
             </tr>
         </table>
@@ -141,7 +167,7 @@
                     <asp:RegularExpressionValidator 
                         ID="RegularExpressionValidator2" 
                         runat="server" 
-                        ControlToValidate="txtUserId"
+                        ControlToValidate="txtStudentId"
                         Display="dynamic"
                         CssClass="validator"
                         ErrorMessage="Student ID not in required format"
@@ -151,7 +177,7 @@
                         CssClass="validator"
                         ControlToValidate="txtStudentId"
                         Display="Dynamic"
-                        OnServerValidate="CheckStudentIdIsExist"></asp:CustomValidator>
+                        OnServerValidate="CheckStudentIdIsExist_ServerValidate"></asp:CustomValidator>
                 </td>
                 <td>Mode of Study</td>
                 <td>
@@ -164,14 +190,13 @@
             <tr>
                 <td>School</td>
                 <td>
-                    <asp:DropDownList ID="ddlSchool" runat="server">
-                        <asp:ListItem Text="GBL110 INFORMATION TECHNOLOGY" Value="GBL110 INFORMATION TECHNOLOGY"></asp:ListItem>
-                        <asp:ListItem Text="Part-time Learning" Value="Part-time Learning"></asp:ListItem>
-                    </asp:DropDownList>
+                    <asp:DropDownList ID="ddlSchool" runat="server" OnSelectedIndexChanged="ddlSchool_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                 </td>
                 <td>Level</td>
                 <td>
-                    <asp:DropDownList ID="DropDownList1" runat="server">
+                    <asp:DropDownList ID="ddlLevel" runat="server" OnSelectedIndexChanged="ddlLevel_SelectedIndexChanged" AutoPostBack="true">
+                        <asp:ListItem Text="Foundation" Value="Foundation"></asp:ListItem>
+                        <asp:ListItem Text="Certificate" Value="Certificate"></asp:ListItem>
                         <asp:ListItem Text="Diploma" Value="Diploma"></asp:ListItem>
                         <asp:ListItem Text="Degree" Value="Degree"></asp:ListItem>
                         <asp:ListItem Text="Master" Value="Master"></asp:ListItem>
@@ -182,7 +207,13 @@
             <tr>
                 <td>Program</td>
                 <td>
-                    <asp:DropDownList ID="ddlProgram" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlProgram" runat="server" OnSelectedIndexChanged="ddlProgram_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                    <br />
+                    <asp:CustomValidator ID="CustomValidator3" runat="server" 
+                        ErrorMessage="No program can be select, pls change level or school"
+                        CssClass="validator"
+                        Display="Dynamic"
+                        OnServerValidate="ProgramIsEmpty_ServerValidate"></asp:CustomValidator>
                 </td>
                 <td>Major</td>
                 <td>
@@ -205,13 +236,13 @@
                         Display="dynamic"
                         CssClass="validator"
                         ErrorMessage="Email not in required format"
-                        ValidationExpression="[Ii]\d{8}"></asp:RegularExpressionValidator>
+                        ValidationExpression="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"></asp:RegularExpressionValidator>
                     <asp:CustomValidator ID="CustomValidator2" runat="server" 
                         ErrorMessage="This student ID is already exits"
                         CssClass="validator"
                         ControlToValidate="txtStudentEmail"
                         Display="Dynamic"
-                        OnServerValidate="CheckStudentEmailIsExist"></asp:CustomValidator>
+                        OnServerValidate="CheckStudentEmailIsExist_ServerValidate"></asp:CustomValidator>
                 </td>
                 <td>Scholarship (%)</td>
                 <td>
@@ -235,6 +266,18 @@
 
     <div class="button-container">
         <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click"/>
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click"/>
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CausesValidation="false"/>
     </div>
+
+    <asp:Panel ID="successfulWindow" runat="server" CssClass="pop-up-windows">
+        <div class="windows-contain">
+            <br />
+            <h1>Add Student Successful</h1>
+            <br />
+            <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/successful.png" CssClass="successful-image"/><br />
+            <div class="button-container">
+                <asp:Button runat="server" Text="Exit" OnClick="btnCancel_Click" CausesValidation="false"/>
+            </div>
+        </div>
+    </asp:Panel>
 </asp:Content>
