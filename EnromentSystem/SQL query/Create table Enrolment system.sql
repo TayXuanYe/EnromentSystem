@@ -18,6 +18,7 @@ DROP TABLE program
 DROP TABLE course_prerequisite
 DROP TABLE course_major
 DROP TABLE course
+
 CREATE TABLE student(
 	sid varchar(255) primary key,
 	ic_or_passport varchar(255),
@@ -175,7 +176,7 @@ CREATE TABLE student_enrol_successful(
 	sid varchar(255) PRIMARY KEY
 );
 
-CREATE TABLE system_function_available(
+CREATE TABLE system_function_available(lecturer
 	system_function varchar(255) PRIMARY KEY,
 	available bit
 );
