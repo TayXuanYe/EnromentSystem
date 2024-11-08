@@ -111,11 +111,8 @@
         border-color: #d22a46;
         border-radius: 4px;
         cursor: pointer;
-        /* 可以设置最小宽度 */
         min-width: 100px;
-        /* 文本居中 */
         text-align: center;
-        /* 可以使用 flex-grow 来控制按钮是否增长填充空间 */
         flex-grow: 0;
     }
 

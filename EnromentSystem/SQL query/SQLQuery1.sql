@@ -8,8 +8,8 @@ INSERT INTO lecture
 ('L1','SB','SBSBBSBSB')
 
 /*PRG3201*/
-INSERT INTO course
-(cid,name,credit_hours,available,price) VALUES 
+INSERT INTO course 
+(cid,name,credit_hours,available,price) VALUES
 ('PRG3201','OBJECT ORIENTED PROGRAMMING',4,1,2555)
 INSERT INTO course_major
 (cid,major,program) VALUES

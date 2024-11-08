@@ -14,6 +14,7 @@ DROP TABLE current_semester
 DROP TABLE class
 DROP TABLE section
 DROP TABLE lecture
+DROP TABLE major
 DROP TABLE program
 DROP TABLE course_prerequisite
 DROP TABLE course_major
@@ -24,7 +25,6 @@ CREATE TABLE student(
 	ic_or_passport varchar(255),
 	name varchar(255),
 	password varchar(255),
-	is_international_student BIT,
 	mode_of_study varchar(255),
 	school varchar(255),
 	level varchar(255),
@@ -52,7 +52,8 @@ CREATE TABLE student(
 	bank_name varchar(255),
 	bank_account varchar(255),
 	bank_holder_name varchar(255),
-	bank_verification_document varchar(max)
+	bank_verification_document varchar(max),
+	admission_date date
 )
 
 CREATE TABLE current_semester(
@@ -85,9 +86,13 @@ CREATE TABLE course_major(
 	FOREIGN KEY (cid) REFERENCES course(cid)
 )
 CREATE TABLE program(
-	program varchar(255)
+	program varchar(255) PRIMARY KEY
 );
-
+CREATE TABLE major(
+	major varchar(255) PRIMARY KEY,
+	program varchar(255),
+	FOREIGN KEY (program) REFERENCES program(program)
+);
 CREATE TABLE lecture(
 	lid varchar(255) PRIMARY KEY,
 	name varchar(255),
@@ -176,7 +181,7 @@ CREATE TABLE student_enrol_successful(
 	sid varchar(255) PRIMARY KEY
 );
 
-CREATE TABLE system_function_available(lecturer
+CREATE TABLE system_function_available(
 	system_function varchar(255) PRIMARY KEY,
 	available bit
 );
