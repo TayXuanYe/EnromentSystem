@@ -221,8 +221,8 @@
                 </td></tr>
 
                 <tr><td class="footer-button">
-                    <asp:Button ID="btnSave" runat="server" Text="Save" />
-                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+                    <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
+                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                 </td></tr>
             </tbody>
 		</table>
