@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 public partial class AdminAddStudentPage : System.Web.UI.Page
 {

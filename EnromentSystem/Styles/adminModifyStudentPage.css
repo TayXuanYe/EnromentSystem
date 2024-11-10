@@ -159,3 +159,57 @@
         padding:0px 20%;
         padding-bottom:30px;
     }
+
+.student-confirm-details-table{
+    width: 800px;
+    padding: 20px;
+}
+    .student-confirm-details-table th {
+        text-align: center;
+        padding: 2px 12px;
+        font-size: 24px;
+        padding-bottom: 4px;
+    }
+
+.student-confirm-details-table td {
+    vertical-align: top;
+    padding: 2px;
+}
+
+    .student-confirm-details-table td:nth-child(2n+1) {
+        width: 12%;
+        min-width: 120px;
+    }
+
+    .student-confirm-details-table td:nth-child(2n) {
+        width: 40%;
+    }
+
+    .student-confirm-details-table td:nth-child(2n+1)::after {
+        content: ":";
+        float: right;
+        font-weight: 600;
+        margin-right: 2px;
+    }
+
+.student-confirm-details-table input {
+    padding: 4px;
+    width: 90%;
+}
+
+.student-confirm-details-table textarea {
+    padding: 4px;
+    width: 90%;
+    min-width: 90%;
+    max-width: 90%;
+    min-height: 45px;
+}
+
+.student-confirm-details-table select {
+    padding: 4px;
+    width: 90%;
+}
+
+    .student-confirm-details-table select:hover {
+        background-color: #ddd;
+    }

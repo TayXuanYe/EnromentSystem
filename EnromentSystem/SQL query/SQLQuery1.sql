@@ -1,7 +1,7 @@
 USE EnrolmentSystemDatabase
 INSERT INTO student 
 (sid,name,password,program,student_email,ic_or_passport,mode_of_study,school,level,major,scholarship) VALUES 
-('I23024312','Tay Xuan Ye','iu040804130465','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)','i23024312@student.newiniti.edu.my','040804130465','Full Time','GBL110 INFORMATION TECHNOLOGY','DEGREE','SOFTWARE ENGINEERING',60)
+('I23024312','Tay Xuan Ye','iu040804130465','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)','i23024312@student.newiniti.edu.my','040804130465','Full-time Learning','GBL110 INFORMATION TECHNOLOGY','Degree','SOFTWARE ENGINEERING',60)
 
 INSERT INTO lecture
 (lid,name,password) values

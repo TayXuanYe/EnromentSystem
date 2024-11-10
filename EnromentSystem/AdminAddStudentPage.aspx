@@ -258,7 +258,8 @@
                         ControlToValidate="txtScholarship"
                         Display="Dynamic"
                         MinimumValue="0"
-                        MaximumValue="100"></asp:RangeValidator>
+                        MaximumValue="100"
+                        Type="Integer"></asp:RangeValidator>
                 </td>
             </tr>
         </table>

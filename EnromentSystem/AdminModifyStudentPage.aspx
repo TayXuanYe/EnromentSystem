@@ -26,7 +26,7 @@
             <tr>
                 <td>Student ID</td>
                 <td>
-                    <asp:Label ID="lblId" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="lblId" runat="server"></asp:Label>
                 </td>
             </tr>
         </table>
@@ -50,7 +50,8 @@
                         ControlToValidate="txtScholarship"
                         Display="Dynamic"
                         MinimumValue="0"
-                        MaximumValue="100"></asp:RangeValidator>
+                        MaximumValue="100"
+                        Type="Integer"></asp:RangeValidator>
                 </td>
                 <td>Mode of Study</td>
                 <td>
@@ -97,9 +98,101 @@
     </div>
 
     <div class="button-container">
-        <asp:Button ID="btnAdd" runat="server" Text="Update" OnClick="btnUpdate_Click"/>
+        <asp:Button ID="btnAdd" runat="server" Text="Update" OnClick="btnAdd_Click"/>
         <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CausesValidation="false"/>
     </div>
+
+    <asp:Panel ID="confirmationWindow" runat="server" CssClass="pop-up-windows">
+        <div class="windows-contain">
+            <br />
+            <h2>Confirm to update the following data:</h2>
+            <table class="student-confirm-details-table">
+                <tr>
+                    <th colspan="2">Current Information</th>
+                    <th></th>
+                    <th></th>
+                    <th colspan="2">Update Information</th>
+                </tr>
+                <tr>
+                    <td>Scholarship (%)</td>
+                    <td>
+                        <asp:Label ID="lblCurrenScholarship" runat="server"></asp:Label>
+                    </td>
+                    <th></th>
+                    <th></th>
+                    <td>Scholarship (%)</td>
+                    <td>
+                        <asp:Label ID="lblUpdateScholarship" runat="server"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mode of Study</td>
+                    <td>
+                        <asp:Label ID="lblCurrenStudyMode" runat="server"></asp:Label>                        
+                    </td>                    
+                    <th></th>
+                    <th></th>
+                    <td>Mode of Study</td>
+                    <td>
+                        <asp:Label ID="lblUpdateStudyMode" runat="server"></asp:Label>                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>School</td>
+                    <td>
+                        <asp:Label ID="lblCurrenSchool" runat="server"></asp:Label>                        
+                    </td>
+                    <th></th>
+                    <th></th>
+                    <td>School</td>
+                    <td>
+                        <asp:Label ID="lblUpdateSchool" runat="server"></asp:Label>                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>Level</td>
+                    <td>
+                        <asp:Label ID="lblCurrenLevel" runat="server"></asp:Label>                                                
+                    </td>
+                    <th></th>
+                    <th></th>
+                    <td>Level</td>
+                    <td>
+                        <asp:Label ID="lblUpdateLevel" runat="server"></asp:Label>                                                
+                    </td>
+                </tr>
+                <tr>
+                    <td>Program</td>
+                    <td>
+                        <asp:Label ID="lblCurrenProgram" runat="server"></asp:Label>                                                
+                    </td>
+                    <th></th>
+                    <th></th>
+                    <td>Program</td>
+                    <td>
+                        <asp:Label ID="lblUpdateProgram" runat="server"></asp:Label>                                                
+                    </td>
+                </tr>
+                <tr>
+                    <td>Major</td>
+                    <td>
+                        <asp:Label ID="lblCurrenMajor" runat="server"></asp:Label>                                                
+                    </td>
+                    <th></th>
+                    <th></th>
+                    <td>Major</td>
+                    <td>
+                        <asp:Label ID="lblUpdateMajor" runat="server"></asp:Label>                                                
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="button-container">
+                <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click"/>
+                <asp:Button ID="btnCancelUpdate" runat="server" Text="Cancel" OnClick="btnCancelUpdate_Click" CausesValidation="false"/>
+            </div>
+        </div>
+    </asp:Panel>
 
     <asp:Panel ID="successfulWindow" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
