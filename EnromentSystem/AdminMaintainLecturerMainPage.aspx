@@ -7,7 +7,7 @@
     Inherits="AdminMaintainLecturerMainPage" %>
 
 <asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/studentChangePasswordPage.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminMaintainLecturerMainPage.css") %>" />
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
@@ -17,7 +17,7 @@
         <asp:DropDownList ID="ddlSearch" runat="server">
             <asp:ListItem Text="All" Value="all"></asp:ListItem>
             <asp:ListItem Text="Name" Value="name"></asp:ListItem>
-            <asp:ListItem Text="ID" Value="sid"></asp:ListItem>
+            <asp:ListItem Text="ID" Value="lid"></asp:ListItem>
         </asp:DropDownList>
     </div>
     <asp:GridView ID="gvLecturerInfo" runat="server" 
@@ -37,14 +37,14 @@
                         runat="server" 
                         ImageUrl="~/Images/edit.png"
                         CommandName="Edit"
-                        CommandArgument='<%# Eval("sid") %>'
+                        CommandArgument='<%# Eval("lid") %>'
                         ToolTip="Click to edit student details"/>
                     <asp:ImageButton 
                         ID="btnDelete" 
                         runat="server" 
                         ImageUrl="~/Images/delete.png"
                         CommandName="Delete"
-                        CommandArgument='<%# Eval("sid") %>'
+                        CommandArgument='<%# Eval("lid") %>'
                         ToolTip="Click to delete student"/>
                 </ItemTemplate>
             </asp:TemplateField>

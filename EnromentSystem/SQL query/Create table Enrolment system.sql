@@ -107,7 +107,7 @@ CREATE TABLE lecture(
 	name varchar(255),
 	password varchar(255)
 )
-
+SELECT * FROM lecture WHERE lid like '%AAA%'
 CREATE TABLE section(
 	sid varchar(255) PRIMARY KEY,
 	name varchar(255),
