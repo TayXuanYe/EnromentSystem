@@ -1,0 +1,115 @@
+﻿body {
+}
+
+.table-contain {
+    width: 100vw;
+    padding: 0px 30%;
+}
+
+    .table-contain .lecturer-details-table {
+        width: 100%;
+        padding-bottom: 30px;
+    }
+
+.lecturer-details-table th {
+    text-align: left;
+    padding: 2px;
+    font-size: 24px;
+    padding-bottom: 4px;
+}
+
+.lecturer-details-table td {
+    vertical-align: top;
+    padding: 2px;
+}
+
+    .lecturer-details-table td:nth-child(2n+1) {
+        width: 12%;
+        min-width: 120px;
+    }
+
+    .lecturer-details-table td:nth-child(2n) {
+        width: 40%;
+    }
+
+    .lecturer-details-table td:nth-child(2n+1)::after {
+        content: ":";
+        float: right;
+        font-weight: 600;
+        margin-right: 2px;
+    }
+
+.lecturer-details-table input {
+    padding: 4px;
+    width: 90%;
+}
+
+.lecturer-details-table textarea {
+    padding: 4px;
+    width: 90%;
+    min-width: 90%;
+    max-width: 90%;
+    min-height: 45px;
+}
+
+.lecturer-details-table select {
+    padding: 4px;
+    width: 90%;
+}
+
+    .lecturer-details-table select:hover {
+        background-color: #ddd;
+    }
+
+.button-container {
+    width: 100vw;
+    padding: 0px 22%;
+    text-align: right;
+}
+
+    .button-container input, .pop-up-windows input {
+        margin: 5px;
+        padding: 5px 10px;
+        border: solid 1px;
+        border-radius: 5px;
+        background-color: #d22a46;
+        color: white;
+        border-color: #d22a46;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+        .button-container input:hover, .pop-up-windows input:hover {
+            background-color: #af1f35;
+        }
+
+        .button-container input[type="number"],
+        .button-container input[type="number"]:hover,
+        .button-container input[type="number"]:focus {
+            -moz-appearance: textfield;
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+            .button-container input[type="number"]::-webkit-outer-spin-button,
+            .button-container input[type="number"]::-webkit-inner-spin-button,
+            .button-container input[type="number"]:hover,
+            .button-container input[type="number"]:focus {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+.validator {
+    color: red;
+    font-size: 12px;
+}
+
+.windows-contain {
+    flex-direction: column;
+}
+
+    .windows-contain .button-container {
+        width: 100%;
+        padding: 0px 5%;
+    }
