@@ -22,7 +22,7 @@ public partial class AdminModifyStudentPage : System.Web.UI.Page
             }
             else
             {
-                Response.Redirect("AdminLoginPage.aspx");
+                Response.Redirect("AdminMaintainStudentMainPage.aspx");
             }
         }
     }

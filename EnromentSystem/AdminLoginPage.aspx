@@ -34,7 +34,7 @@
                         ForeColor="red"
                         Display="dynamic"
                         CssClass="validator"
-                        ErrorMessage="Student ID not in required fromat"
+                        ErrorMessage="Admin ID not in required fromat"
                         ValidationExpression="[Aa]\d{8}">
                     </asp:RegularExpressionValidator>
                 </div>
