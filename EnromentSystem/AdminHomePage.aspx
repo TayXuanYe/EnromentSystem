@@ -25,7 +25,7 @@
                     <table class="card-contain">
                         <tr>
                             <td>
-                                <a href="#" >
+                                <a href="AdminMaintainStudentMainPage.aspx" >
                                     <div class="functionCard">
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/student (1).png"/>
                                         <span>Student</span>
@@ -33,7 +33,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="#">
+                                <a href="AdminMaintainLecturerMainPage.aspx">
                                     <div class="functionCard">
                                         <asp:Image ID="Image3" runat="server" ImageUrl="~/Images/lecturer (1).png"/>
                                         <span>Lecture</span>

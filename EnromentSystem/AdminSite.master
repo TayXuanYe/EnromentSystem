@@ -69,11 +69,11 @@
 
                 <!--Lecturer-->
                 <li> 
-                    <p>Lecturer</p>
+                    <p><a href="AdminMaintainLecturerMainPage.aspx">Lecturer</a></p>
                     <ul>
-                        <li><a href="#">Add new lecturer</a></li>
-                        <li><a href="#">Update lecturer info</a></li>
-                        <li><a href="#">Delete lecturer</a></li>
+                        <li><a href="AdminAddLecturerPage.aspx">Add new lecturer</a></li>
+                        <li><a href="AdminMaintainLecturerMainPage.aspx">Update lecturer info</a></li>
+                        <li><a href="AdminMaintainLecturerMainPage.aspx">Delete lecturer</a></li>
                     </ul>
                 </li>
 
