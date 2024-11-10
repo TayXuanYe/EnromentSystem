@@ -1,5 +1,5 @@
 ﻿<%@ Page 
-    Title="Delete Lecture Page"
+    Title="Delete Lecturer Page"
     MasterPageFile="~/AdminSite.master"
     Language="C#" 
     AutoEventWireup="true" 

@@ -1,5 +1,5 @@
 ﻿<%@ Page 
-    Title="Maintain Student Main Page"
+    Title="Maintain Lecturer Main Page"
     MasterPageFile="~/AdminSite.master"
     Language="C#" 
     AutoEventWireup="true" 
