@@ -226,6 +226,7 @@
                 </td></tr>
             </tbody>
 		</table>
+        <asp:Label ID="Label1" runat="server"></asp:Label>
     </div>
 </div>
 </asp:Content>

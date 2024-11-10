@@ -67,15 +67,15 @@ public partial class StudentUpdateProfilePage : System.Web.UI.Page
                     else
                     {
                         // No data found for the given SID
-                        Label1.Text = "Student data not found.";
+                       Label1.Text = "Student data not found.";
                     }
                     reader.Close();
                 }
             }
             catch (Exception ex)
             {
-                // Handle potential exceptions (e.g., database connection issues)
-                Label1.Text = "Error loading data: " + ex.Message;
+              
+               Label1.Text = "Error loading data: " + ex.Message;
             }
         }
 
