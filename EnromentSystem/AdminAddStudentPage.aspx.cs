@@ -94,7 +94,6 @@ public partial class AdminAddStudentPage : System.Web.UI.Page
         {
             txtStudentEmail.Text = email;
         }
-        
     }
 
     private bool CheckStudentIdIsExist(string id)
@@ -178,8 +177,7 @@ public partial class AdminAddStudentPage : System.Web.UI.Page
     {
         if (Page.IsValid)
         {
-            successfulWindow.Style["display"] = "flex";
-            DatabaseManager.InsertData(
+            bool success = DatabaseManager.InsertData(
                 "student",
                 new List<string> { "name", "ic_or_passport", "date_of_birth", "hp_no",
                     "permanent_address", "premenant_postcode", "permenant_city", "permenant_state", "permenant_country",
@@ -194,6 +192,10 @@ public partial class AdminAddStudentPage : System.Web.UI.Page
                     "iu"+txtPassportOrIC.Text, DateTime.Now.Date
                 }
                 );
+            if (success)
+            {
+                successfulWindow.Style["display"] = "flex";
+            }
         }
     }
 }
