@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminAddLecturerPage.css") %>" />
 </asp:Content>
 
-<asp:Content  ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="table-contain">
         <table class="lecturer-details-table">
             <tr>

@@ -1,4 +1,4 @@
-﻿       <%@ Page 
+﻿<%@ Page 
     Title="Add Student Page"
     MasterPageFile="~/AdminSite.master"
     Language="C#" 
