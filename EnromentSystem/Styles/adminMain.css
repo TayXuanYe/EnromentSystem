@@ -29,17 +29,17 @@ button, input[type="button"], input[type="submit"] {
     user-select: none;
 }
 
-.header span{
-    user-select: none;
-}
+    .header span {
+        user-select: none;
+    }
 
-.header div {
-    display: inline-block;
-    vertical-align: middle; 
-    user-select: none;
-}
+    .header div {
+        display: inline-block;
+        vertical-align: middle;
+        user-select: none;
+    }
 
-#intiLogo ,.intiLogo {
+#intiLogo, .intiLogo {
     background-image: url("../Images/INTI_IU_logo.png");
     height: 92px;
     width: 378px;
@@ -61,16 +61,16 @@ button, input[type="button"], input[type="submit"] {
     height: 49px;
 }
 
-#btnHomeButton:hover {
-    background-color: #b9b9b9;
-    border-radius: 25px;
-}
+    #btnHomeButton:hover {
+        background-color: #b9b9b9;
+        border-radius: 25px;
+    }
 
-#studentDetails, #adminDetails {
+#adminDetails {
     margin-left: 4px;
     color: #82828D;
     font-family: Arial;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 #btnLogout {
@@ -81,10 +81,10 @@ button, input[type="button"], input[type="submit"] {
     color: #dddddd;
 }
 
-#btnLogout:hover {
-    background-color: #8a0001;
-    border-radius: 3px;
-}
+    #btnLogout:hover {
+        background-color: #8a0001;
+        border-radius: 3px;
+    }
 
 .navigation-bar {
     margin: 30px 30px 15px 30px;
@@ -124,6 +124,8 @@ button, input[type="button"], input[type="submit"] {
     .dropmenu a {
         text-decoration: none;
         color: #333;
+        width:100%;
+        display:block;
     }
 
     .dropmenu > li:hover > p,
@@ -163,3 +165,49 @@ button, input[type="button"], input[type="submit"] {
         display: block;
     }
 
+.body-content {
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    flex-wrap: wrap;
+}
+
+.header{
+    width: 100vw;
+/*    background-color: #FFF;*/
+    height: 25%;
+}
+form{
+    height:100%;
+}
+
+
+.pop-up-windows {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+    .pop-up-windows .windows-contain {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 20px;
+        border: 1px solid #888;
+/*        width: 600px;*/
+        border-radius: 5px;
+    }
+
+    

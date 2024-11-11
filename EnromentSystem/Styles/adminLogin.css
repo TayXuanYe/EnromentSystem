@@ -1,0 +1,182 @@
+﻿body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #df595c,#6b2424);
+}
+
+p, img {
+    caret-color: transparent;
+    user-select: none;
+}
+
+.box {
+    width: 460px;
+    height: 600px;
+    background: #ffffff;
+    border: 0px solid #ffffff;
+    border-radius: 5px;
+    padding: 20px;
+    padding-bottom: 25px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.15);
+    font-size: 12pt;
+    font-weight: 100;
+    line-height: 1.6;
+    overflow: clip;
+    overflow-clip-margin: content-box;
+}
+
+    .box img {
+        display: block;
+        margin: 20px auto 10px;
+        width: 70%;
+    }
+
+    .box p {
+        font-size: 14pt;
+        font-weight: 100;
+        line-height: 1.6;
+    }
+
+#infoBox {
+    margin: 0px 40px 15px 40px;
+    padding: 10px 10px 10px 10px;
+}
+
+.textBox {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-color: #808080;
+    border-radius: 2px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #e8f0fe;
+}
+
+    .textBox focus {
+        border-color: #808080;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .textBox::placeholder {
+        color: #aaa;
+        font-style: italic;
+    }
+
+#infoBox > p {
+    margin-top: 10px;
+}
+
+#btnLogin {
+    width: 320px;
+    height: 42px;
+    background-color: #A00000;
+    margin: 0px auto 25px;
+    color: #FFF;
+    text-align: center;
+    display: block;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-color: #e8f0fe;
+    border-radius: 7px;
+}
+
+    #btnLogin:hover {
+        background-color: #8d0000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.terms > p {
+    font-size: 7.5pt;
+    text-align: center;
+    margin: 10px 0px 5px 0px;
+}
+
+.terms p > span {
+    color: #f00000;
+    font-weight: 800;
+}
+
+#infoBox a {
+    text-decoration: none;
+    color: #777777;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.validator {
+    font-size: 12px;
+}
+
+/*pop up windows*/
+.pop-up-windows {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.windows-contain {
+    background-color: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+}
+
+#btnPopWindowsClose, #btnExitForgetWindows {
+    background-color: #eee;
+    color: #777;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px;
+    padding: 0px 10px;
+    cursor: pointer;
+    border: solid 2px #888;
+    border-radius: 5px;
+}
+
+.windows-contain h1 {
+    --rem: 16;
+    width: 100%;
+    text-align: left;
+    color: gray;
+    font-size: 16pt;
+    font-family: Arial;
+    font-weight: bold;
+    height: 40px;
+    margin: 0px;
+}
+
+.windows-contain > p {
+    margin: 5px 0px;
+    --rem: 16;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    color: gray;
+    font-size: 10pt;
+}
+
+    .windows-contain > p > span {
+        padding-left: 15px;
+        display: block;
+        --rem: 16;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 9.5pt;
+        text-align: left;
+        color: Gray;
+    }

@@ -1,4 +1,5 @@
 USE EnrolmentSystemDatabase
+DROP TABLE admin;
 DROP TABLE bank
 DROP TABLE student_enrol_successful;
 DROP TABLE system_function_available;
@@ -12,22 +13,25 @@ DROP TABLE current_semester
 DROP TABLE class
 DROP TABLE section
 DROP TABLE lecture
-
+DROP TABLE major
+DROP TABLE program
+DROP TABLE school
 DROP TABLE course_prerequisite
 DROP TABLE course_major
 DROP TABLE course
+
 CREATE TABLE student(
 	sid varchar(255) primary key,
 	ic_or_passport varchar(255),
 	name varchar(255),
+	date_of_birth date,
 	password varchar(255),
-	is_international_student BIT,
 	mode_of_study varchar(255),
 	school varchar(255),
 	level varchar(255),
 	program varchar(255),
 	major varchar(255),
-	scholarship int,
+	scholarship float,
 	permanent_address varchar(255),
 	permanent_postcode int,
 	permanent_city varchar(255),
@@ -50,6 +54,7 @@ CREATE TABLE student(
 	bank_account varchar(255),
 	bank_holder_name varchar(255),
 	bank_verification_document varchar(255)
+ 	admission_date date
 )
 
 CREATE TABLE current_semester(
@@ -81,13 +86,27 @@ CREATE TABLE course_major(
 	PRIMARY KEY (cid,major,program),
 	FOREIGN KEY (cid) REFERENCES course(cid)
 )
-
+CREATE TABLE school(
+	school varchar(255) PRIMARY KEY
+);
+CREATE TABLE program(
+	program varchar(255) PRIMARY KEY,
+	school varchar(255),
+	level varchar(255),
+	FOREIGN KEY (school) REFERENCES school(school)
+);
+CREATE TABLE major(
+	major varchar(255) ,
+	program varchar(255) ,
+	PRIMARY KEY (major,program),
+	FOREIGN KEY (program) REFERENCES program(program)
+);
 CREATE TABLE lecture(
 	lid varchar(255) PRIMARY KEY,
 	name varchar(255),
 	password varchar(255)
 )
-
+SELECT * FROM lecture WHERE lid like '%AAA%'
 CREATE TABLE section(
 	sid varchar(255) PRIMARY KEY,
 	name varchar(255),
@@ -126,7 +145,9 @@ CREATE TABLE student_taken_course(
 	FOREIGN KEY (cid) REFERENCES course(cid),
 	FOREIGN KEY (section_id) REFERENCES section(sid)
 );
+-- status {'FAIL','ADD','TAKEN','COMPLETE'}
 
+-- STATUS {'HOLD','PENDING','APPROVE','NOT APPROVE'}
 CREATE TABLE request_drop_course(
 	rid int IDENTITY(1,1) PRIMARY KEY,
 	sid varchar(255),
@@ -137,7 +158,6 @@ CREATE TABLE request_drop_course(
 	FOREIGN KEY (sid) REFERENCES student(sid),
 	FOREIGN KEY (cid) REFERENCES course(cid),
 );
-
 CREATE TABLE request_add_course(
 	rid int IDENTITY(1,1) PRIMARY KEY,
 	sid varchar(255),
@@ -150,7 +170,6 @@ CREATE TABLE request_add_course(
 	FOREIGN KEY (cid) REFERENCES course(cid),
 	FOREIGN KEY (section_id) REFERENCES section(sid)
 );
-
 CREATE TABLE request_change_section(
 	rid int IDENTITY(1,1) PRIMARY KEY,
 	sid varchar(255),
@@ -178,6 +197,14 @@ CREATE TABLE system_function_available(
 INSERT INTO system_function_available VALUES('ENROL','1')
 INSERT INTO system_function_available VALUES('ADDDROP','1')
 
+CREATE TABLE admin(
+	aid varchar(255) primary key,
+	name varchar(255),
+	password varchar(255)
+);
+
+INSERT INTO admin VALUES ('A23024312','Admin 1','admin');
+
 CREATE TABLE bank(
 	bank_name varchar(255)
 );
@@ -198,4 +225,5 @@ INSERT INTO bank (bank_name) VALUES
     ('Bank Muamalat Malaysia Berhad'),
     ('Affin Bank Berhad'),
     ('Bank Pertanian Malaysia Berhad');
+
 
