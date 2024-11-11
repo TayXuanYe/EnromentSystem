@@ -11,7 +11,7 @@
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
-<div class="box">
+    <div class="box">
     <div class="body">
         <div>
             <h1>Update Bank Details Page</h1>
@@ -70,8 +70,8 @@
                         </table>
                     </td></tr>
                     <tr><td class="footer-button">
-                        <asp:Button ID="Button1" runat="server" Text="Upload and Save Bank Details" />
-                        <asp:Button ID="Button2" runat="server" Text="Exit without Saving" />
+                        <asp:Button ID="Button1" runat="server" Text="Upload and Save Bank Details" OnClick="Button1_Click" />
+                        <asp:Button ID="Button2" runat="server" Text="Exit without Saving" OnClick="Button2_Click" />
                     </td></tr>
                 </tbody>
 		    </table>
