@@ -180,7 +180,7 @@ public partial class AdminAddStudentPage : System.Web.UI.Page
             bool success = DatabaseManager.InsertData(
                 "student",
                 new List<string> { "name", "ic_or_passport", "date_of_birth", "hp_no",
-                    "permanent_address", "premenant_postcode", "permenant_city", "permenant_state", "permenant_country",
+                    "permanent_address", "permanent_postcode", "permanent_city", "permanent_state", "permanent_country",
                     "sid", "mode_of_study", "school", "level", "program", "major", "student_email", "scholarship",
                     "password", "admission_date"
                 },
