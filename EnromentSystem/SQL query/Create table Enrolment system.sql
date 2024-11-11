@@ -1,7 +1,6 @@
 USE EnrolmentSystemDatabase
-
 DROP TABLE admin;
-
+DROP TABLE bank
 DROP TABLE student_enrol_successful;
 DROP TABLE system_function_available;
 DROP TABLE request_drop_course;
@@ -34,10 +33,10 @@ CREATE TABLE student(
 	major varchar(255),
 	scholarship float,
 	permanent_address varchar(255),
-	premenant_postcode int,
-	permenant_city varchar(255),
-	permenant_state varchar(255),
-	permenant_country varchar(255),
+	permanent_postcode int,
+	permanent_city varchar(255),
+	permanent_state varchar(255),
+	permanent_country varchar(255),
 	current_address varchar(255),
 	current_postcode int,
 	current_city varchar(255),
@@ -48,14 +47,14 @@ CREATE TABLE student(
 	student_email varchar(255),
 	tel_no bigint,
 	hp_no varchar(20),
-	emergency_contach_relationship varchar(255),
-	emergency_contach_person varchar(255),
-	emergency_contach_number varchar(255),
+	emergency_contact_relationship varchar(255),
+	emergency_contact_person varchar(255),
+	emergency_contact_number varchar(255),
 	bank_name varchar(255),
 	bank_account varchar(255),
 	bank_holder_name varchar(255),
-	bank_verification_document varchar(max),
-	admission_date date
+	bank_verification_document varchar(255)
+ 	admission_date date
 )
 
 CREATE TABLE current_semester(
@@ -205,4 +204,26 @@ CREATE TABLE admin(
 );
 
 INSERT INTO admin VALUES ('A23024312','Admin 1','admin');
+
+CREATE TABLE bank(
+	bank_name varchar(255)
+);
+
+INSERT INTO bank (bank_name) VALUES
+    ('Malayan Banking Berhad'),
+    ('CIMB Bank Berhad'),
+    ('Public Bank Berhad'),
+    ('RHB Bank Berhad'),
+    ('Hong Leong Bank Berhad'),
+    ('AmBank (M) Berhad'),
+    ('Bank Islam Malaysia Berhad'),
+    ('Alliance Bank Malaysia Berhad'),
+    ('OCBC Bank (Malaysia) Berhad'),
+    ('HSBC Bank Malaysia Berhad'),
+    ('Standard Chartered Bank Malaysia Berhad'),
+    ('United Overseas Bank (Malaysia) Berhad'),
+    ('Bank Muamalat Malaysia Berhad'),
+    ('Affin Bank Berhad'),
+    ('Bank Pertanian Malaysia Berhad');
+
 

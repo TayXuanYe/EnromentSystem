@@ -102,9 +102,9 @@
                 <li> 
 	                <p>Account</p>
                     <ul>
-                        <li><a href="#">Change Password</a></li>
-                        <li><a href="#">Update Profile</a></li>
-                        <li><a href="#">Update Bank Details</a></li>
+                        <li><a href="StudentResetPasswordPage.aspx">Change Password</a></li>
+                        <li><a href="StudentUpdateProfilePage.aspx">Update Profile</a></li>
+                        <li><a href="StudentUpdateBankDetailsPage.aspx">Update Bank Details</a></li>
                     </ul>
                 </li>
             </ul>
