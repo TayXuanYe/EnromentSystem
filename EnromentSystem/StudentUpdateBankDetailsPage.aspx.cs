@@ -1,10 +1,10 @@
-﻿using System;
+﻿using iText.Layout.Element;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
+using System.Diagnostics;
+using System.IO;
 using System.Web.UI.WebControls;
 
 public partial class StudentUpdateBankDetailsPage : System.Web.UI.Page
@@ -14,23 +14,39 @@ public partial class StudentUpdateBankDetailsPage : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            if (Session["SID"] == null)
+            if (Session["sid"] == null)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("StudentLoginPage.aspx");
                 return;
             }
-            string studentId = Session["SID"].ToString();
+            string studentId = Session["sid"].ToString();
             LoadStudentBankDetails(studentId);
+            PopulateBankName();
         }
+    }
+
+    private void PopulateBankName()
+    {
+        //get bank details
+        DataSet studentSet = DatabaseManager.GetRecord(
+               "bank",
+               new List<string> { "bank_name" }
+           );
+
+        DataTable dt = studentSet.Tables[0];
+        List<string> value = new List<string>();
+        foreach (DataRow row in dt.Rows)
+        {
+            value.Add(row["bank_name"].ToString());
+        }
+        UIComponentGenerator.PopulateDropDownList(ddlBankName, value, value);
     }
 
     private void LoadStudentBankDetails(string studentId)
     {
-        string connectionString = "Data Source=LAPTOP-25QCMRDF\\SQLEXPRESS; Initial Catalog=StudentDB; Integrated Security=True;";
-
         string query = "SELECT bank_name, bank_account, bank_holder_name, bank_verification_document FROM student WHERE sid = @StudentID";
 
-        using (SqlConnection conn = new SqlConnection(connectionString))
+        using (SqlConnection conn = DatabaseManager.GetConnection())
         {
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -40,20 +56,21 @@ public partial class StudentUpdateBankDetailsPage : System.Web.UI.Page
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.Read())
             {
-                DropDownList1.SelectedValue = reader["bank_name"].ToString();
-                TextBox1.Text = reader["bank_account"].ToString();
-                TextBox2.Text = reader["bank_holder_name"].ToString();
+                ddlBankName.SelectedValue = reader["bank_name"].ToString();
+                txtAcountNo.Text = reader["bank_account"].ToString();
+                txtHolderName.Text = reader["bank_holder_name"].ToString();
 
                 if (!DBNull.Value.Equals(reader["bank_verification_document"]))
                 {
-                    Literal1.Text = $"<a href='uploads/{reader["bank_verification_document"].ToString()}' target='_blank'>Download</a>";
+                    Literal1.Text = $"<a href='/uploads/{reader["bank_verification_document"].ToString()}' target='_blank'>Download</a>";
                 }
             }
             conn.Close();
+
         }
     }
 
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void btnUpload_Click(object sender, EventArgs e)
     {
         string studentId = Session["SID"].ToString();
         if (string.IsNullOrEmpty(studentId))
@@ -62,17 +79,18 @@ public partial class StudentUpdateBankDetailsPage : System.Web.UI.Page
             return;
         }
 
-        string bankName = DropDownList1.SelectedValue;
-        string bankAccount = TextBox1.Text;
-        string bankHolderName = TextBox2.Text;
+        string bankName = ddlBankName.SelectedValue;
+        string bankAccount = txtAcountNo.Text;
+        string bankHolderName = txtHolderName.Text;
         string verificationDocument = null;
 
         // If a file is uploaded, save it and get the file name
-        if (FileUpload1.HasFile)
+        if (fileUploadVerificationDocument.HasFile)
         {
-            string filePath = Server.MapPath("~/uploads/") + FileUpload1.FileName;
-            FileUpload1.SaveAs(filePath);
-            verificationDocument = FileUpload1.FileName;
+            string originalExtension = Path.GetExtension(fileUploadVerificationDocument.FileName);
+            string filePath = Server.MapPath("~/uploads/") + Session["sid"] + "_Bank_Verification_Document" + originalExtension;
+            fileUploadVerificationDocument.SaveAs(filePath);
+            verificationDocument = Session["sid"] + "_Bank_Verification_Document" + originalExtension;
         }
 
         UpdateBankDetails(studentId, bankName, bankAccount, bankHolderName, verificationDocument);
@@ -80,9 +98,7 @@ public partial class StudentUpdateBankDetailsPage : System.Web.UI.Page
 
     private void UpdateBankDetails(string studentId, string bankName, string bankAccount, string bankHolderName, string verificationDocument)
     {
-        string connectionString = "Data Source=LAPTOP-25QCMRDF\\SQLEXPRESS; Initial Catalog=StudentDB; Integrated Security=True;";
-
-        using (SqlConnection conn = new SqlConnection(connectionString))
+        using (SqlConnection conn = DatabaseManager.GetConnection())
         {
             string query = "UPDATE student SET bank_name = @BankName, bank_account = @BankAccount, bank_holder_name = @BankHolderName";
 
@@ -125,10 +141,9 @@ public partial class StudentUpdateBankDetailsPage : System.Web.UI.Page
         }
     }
 
-    protected void Button2_Click(object sender, EventArgs e)
+    protected void btnExit_Click(object sender, EventArgs e)
     {
         Response.Redirect("StudentHomePage.aspx");
     }
-
 }
 

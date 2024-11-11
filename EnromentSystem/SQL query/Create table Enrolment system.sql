@@ -1,4 +1,5 @@
 USE EnrolmentSystemDatabase
+DROP TABLE bank
 DROP TABLE student_enrol_successful;
 DROP TABLE system_function_available;
 DROP TABLE request_drop_course;
@@ -48,7 +49,7 @@ CREATE TABLE student(
 	bank_name varchar(255),
 	bank_account varchar(255),
 	bank_holder_name varchar(255),
-	bank_verification_document varchar(max)
+	bank_verification_document varchar(255)
 )
 
 CREATE TABLE current_semester(
@@ -177,4 +178,24 @@ CREATE TABLE system_function_available(
 INSERT INTO system_function_available VALUES('ENROL','1')
 INSERT INTO system_function_available VALUES('ADDDROP','1')
 
+CREATE TABLE bank(
+	bank_name varchar(255)
+);
+
+INSERT INTO bank (bank_name) VALUES
+    ('Malayan Banking Berhad'),
+    ('CIMB Bank Berhad'),
+    ('Public Bank Berhad'),
+    ('RHB Bank Berhad'),
+    ('Hong Leong Bank Berhad'),
+    ('AmBank (M) Berhad'),
+    ('Bank Islam Malaysia Berhad'),
+    ('Alliance Bank Malaysia Berhad'),
+    ('OCBC Bank (Malaysia) Berhad'),
+    ('HSBC Bank Malaysia Berhad'),
+    ('Standard Chartered Bank Malaysia Berhad'),
+    ('United Overseas Bank (Malaysia) Berhad'),
+    ('Bank Muamalat Malaysia Berhad'),
+    ('Affin Bank Berhad'),
+    ('Bank Pertanian Malaysia Berhad');
 

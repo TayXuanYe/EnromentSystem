@@ -89,9 +89,9 @@
             </div>
             <div class="card-content">
                 <ul>
-                    <li><a href="#">Change Password</a></li>
-                    <li><a href="#">Update Profile</a></li>
-                    <li><a href="#">Update Bank Details</a></li>
+                    <li><a href="StudentChangePasswordPage.aspx">Change Password</a></li>
+                    <li><a href="StudentUpdateProfilePage.aspx">Update Profile</a></li>
+                    <li><a href="StudentUpdateBankDetailsPage.aspx">Update Bank Details</a></li>
                 </ul>
             </div>
         </div>

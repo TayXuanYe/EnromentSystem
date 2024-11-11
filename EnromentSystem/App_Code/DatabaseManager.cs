@@ -43,6 +43,16 @@ public static class DatabaseManager
         }
     }
 
+    public static SqlConnection GetConnection()
+    {
+        string connectionString =
+            "Server=" + serverName + ";"
+            + "Database=" + databaseName + ";"
+            + "Integrated Security=True;";
+
+        return new SqlConnection(connectionString);
+    } 
+
     public static DataSet GetRecord(string table, List<string> selectColumns)
     {
         if (connection == null)
@@ -124,7 +134,7 @@ public static class DatabaseManager
         catch (Exception ex)
         {
             Console.WriteLine("An error occurred - get record: " + ex.Message);
-            Debug.WriteLine("SQL error occurred - get record: " + ex.Message);
+            Debug.WriteLine("An error occurred - get record: " + ex.Message);
             return null;
         }
     }
@@ -167,7 +177,7 @@ public static class DatabaseManager
         catch (Exception ex)
         {
             Console.WriteLine("An error occurred - get distinct record: " + ex.Message);
-            Debug.WriteLine("SQL error occurred - get distinct record: " + ex.Message);
+            Debug.WriteLine("An error occurred - get distinct record: " + ex.Message);
             return null;
         }
     }
@@ -210,7 +220,7 @@ public static class DatabaseManager
         catch (Exception ex)
         {
             Console.WriteLine("An error occurred - get distinct record: " + ex.Message);
-            Debug.WriteLine("SQL error occurred - get distinct record: " + ex.Message);
+            Debug.WriteLine("An error occurred - get distinct record: " + ex.Message);
             return null;
         }
     }
