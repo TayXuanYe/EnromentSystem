@@ -60,7 +60,7 @@
 
                 <!--Enrolment-->
                 <li> 
-	                        <p>Enrolment</p>
+	                <p>Enrolment</p>
                     <ul>
                         <li><a href="#">Course Enrolment</a></li>
                     </ul>
@@ -68,7 +68,7 @@
 
                 <!--Add and Drop-->
                 <li> 
-	                        <p>Add & Drop</p>
+	                <p>Add & Drop</p>
                     <ul>
                         <li><a href="#">Course Add / Drop</a></li>
                         <li><a href="#">Add / Drop History</a></li>
@@ -82,7 +82,7 @@
 
                 <!--Statement-->
                 <li> 
-	                        <p>Statement</p>
+	                <p>Statement</p>
                     <ul>
                         <li><a href="#">Student Statement</a></li>
                         <li><a href="#">Registration Summary</a></li>
@@ -91,7 +91,7 @@
 
                 <!--Payment-->
                 <li> 
-	                        <p>Payment</p>
+	                <p>Payment</p>
                     <ul>
                         <li><a href="#">Payment</a></li>
                         <li><a href="#">Online Payment History <br /> Receipt</a></li>
@@ -101,11 +101,11 @@
 
                 <!--Account-->
                 <li> 
-	                        <p>Account</p>
+	                <p>Account</p>
                     <ul>
-                        <li><a href="#">Change Password</a></li>
-                        <li><a href="#">Update Profile</a></li>
-                        <li><a href="#">Update Bank Details</a></li>
+                        <li><a href="StudentResetPasswordPage.aspx">Change Password</a></li>
+                        <li><a href="StudentUpdateProfilePage.aspx">Update Profile</a></li>
+                        <li><a href="StudentUpdateBankDetailsPage.aspx">Update Bank Details</a></li>
                     </ul>
                 </li>
         </ul>

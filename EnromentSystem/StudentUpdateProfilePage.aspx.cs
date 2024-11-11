@@ -13,21 +13,19 @@ public partial class StudentUpdateProfilePage : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            if (Session["SID"] == null)
+            if (Session["sid"] == null)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("StudentLoginPage.aspx");
                 return;
             }
 
-            LoadStudentData(Session["SID"].ToString());
+            LoadStudentData(Session["sid"].ToString());
         }
     }
 
     protected void LoadStudentData(string studentId)
     {
-        string connectionString = "Data Source= change to yours; Initial Catalog=StudentDB; Integrated Security=True;";
-
-        using (SqlConnection conn = new SqlConnection(connectionString))
+        using (SqlConnection conn = DatabaseManager.GetConnection())
         {
             try
             {
@@ -51,10 +49,10 @@ public partial class StudentUpdateProfilePage : System.Web.UI.Page
                         txtCurrentPostcode.Text = reader["current_postcode"] != DBNull.Value ? reader["current_postcode"].ToString() : string.Empty;
                         txtPermanentCity.Text = reader["permanent_city"] != DBNull.Value ? reader["permanent_city"].ToString() : string.Empty;
                         txtCurrentCity.Text = reader["current_city"] != DBNull.Value ? reader["current_city"].ToString() : string.Empty;
-                        ddlPermanentState.SelectedValue = reader["permanent_state"] != DBNull.Value ? reader["permanent_state"].ToString() : string.Empty;
-                        ddlCurrentState.SelectedValue = reader["current_state"] != DBNull.Value ? reader["current_state"].ToString() : string.Empty;
-                        ddlPermanentCountry.SelectedValue = reader["permanent_country"] != DBNull.Value ? reader["permanent_country"].ToString() : string.Empty;
-                        ddlCurrentCountry.SelectedValue = reader["current_country"] != DBNull.Value ? reader["current_country"].ToString() : string.Empty;
+                        txtPermanentState.Text = reader["permanent_state"] != DBNull.Value ? reader["permanent_state"].ToString() : string.Empty;
+                        txtCurrentState.Text = reader["current_state"] != DBNull.Value ? reader["current_state"].ToString() : string.Empty;
+                        txtPermanentCountry.Text = reader["permanent_country"] != DBNull.Value ? reader["permanent_country"].ToString() : string.Empty;
+                        txtCurrentCountry.Text = reader["current_country"] != DBNull.Value ? reader["current_country"].ToString() : string.Empty;
                         ddlRelationship.SelectedValue = reader["emergency_contact_relationship"] != DBNull.Value ? reader["emergency_contact_relationship"].ToString() : string.Empty;
                         txtPrimaryEmail.Text = reader["primary_email"] != DBNull.Value ? reader["primary_email"].ToString() : string.Empty;
                         txtAlternativeEmail.Text = reader["alternative_email"] != DBNull.Value ? reader["alternative_email"].ToString() : string.Empty;
@@ -85,8 +83,6 @@ public partial class StudentUpdateProfilePage : System.Web.UI.Page
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        string connectionString = "Data Source= change to yours; Initial Catalog=StudentDB; Integrated Security=True;";
-
         string query = "UPDATE student SET permanent_address = @PermanentAddress, permanent_postcode = @PermanentPostcode," +
             " permanent_city = @PermanentCity, permanent_state = @PermanentState, permanent_country = @PermanentCountry," +
             " current_address = @CurrentAddress, current_postcode = @CurrentPostcode, current_city = @CurrentCity," +
@@ -95,20 +91,20 @@ public partial class StudentUpdateProfilePage : System.Web.UI.Page
             "emergency_contact_relationship = @EmergencyRelationship, emergency_contact_person = @EmergencyContactPerson," +
             " emergency_contact_number = @EmergencyContactNumber WHERE sid = @SID;";
 
-        using (SqlConnection con = new SqlConnection(connectionString))
+        using (SqlConnection con = DatabaseManager.GetConnection())
         {
             SqlCommand cmd = new SqlCommand(query, con);
 
             cmd.Parameters.AddWithValue("@PermanentAddress", txtPermanentAddress.Text);
             cmd.Parameters.AddWithValue("@PermanentPostcode", txtPermanentPostcode.Text);
             cmd.Parameters.AddWithValue("@PermanentCity", txtPermanentCity.Text);
-            cmd.Parameters.AddWithValue("@PermanentState", ddlPermanentState.SelectedValue);
-            cmd.Parameters.AddWithValue("@PermanentCountry", ddlPermanentCountry.SelectedValue);
+            cmd.Parameters.AddWithValue("@PermanentState", txtPermanentState.Text);
+            cmd.Parameters.AddWithValue("@PermanentCountry", txtPermanentCountry.Text);
             cmd.Parameters.AddWithValue("@CurrentAddress", txtCurrentAddress.Text);
             cmd.Parameters.AddWithValue("@CurrentPostcode", txtCurrentPostcode.Text);
             cmd.Parameters.AddWithValue("@CurrentCity", txtCurrentCity.Text);
-            cmd.Parameters.AddWithValue("@CurrentState", ddlCurrentState.SelectedValue);
-            cmd.Parameters.AddWithValue("@CurrentCountry", ddlCurrentCountry.SelectedValue);
+            cmd.Parameters.AddWithValue("@CurrentState", txtCurrentState.Text);
+            cmd.Parameters.AddWithValue("@CurrentCountry", txtCurrentCountry.Text);
             cmd.Parameters.AddWithValue("@PrimaryEmail", txtPrimaryEmail.Text);
             cmd.Parameters.AddWithValue("@AlternativeEmail", txtAlternativeEmail.Text);
             cmd.Parameters.AddWithValue("@TelNo", txtTelNo.Text);
@@ -138,24 +134,6 @@ public partial class StudentUpdateProfilePage : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-
-        txtPermanentAddress.Text = "";
-        txtPermanentPostcode.Text = "";
-        txtPermanentCity.Text = "";
-        ddlPermanentState.SelectedIndex = 0;
-        ddlPermanentCountry.SelectedIndex = 0;
-        txtCurrentAddress.Text = "";
-        txtCurrentPostcode.Text = "";
-        txtCurrentCity.Text = "";
-        ddlCurrentState.SelectedIndex = 0;
-        ddlCurrentCountry.SelectedIndex = 0;
-        txtPrimaryEmail.Text = "";
-        txtAlternativeEmail.Text = "";
-        txtTelNo.Text = "";
-        txtHpNo.Text = "";
-        ddlRelationship.SelectedIndex = 0;
-        txtContactPerson.Text = "";
-        txtContactPersonHpNo.Text = "";
-        Label1.Text = ""; // Clear any messages if necessary
+        Response.Redirect("StudentHomePage.aspx");
     }
 }
