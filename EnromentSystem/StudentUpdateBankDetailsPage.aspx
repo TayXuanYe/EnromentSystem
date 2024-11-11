@@ -84,7 +84,7 @@
                                         ForeColor="red"
                                         Display="dynamic"
                                         CssClass="validator"
-                                        ErrorMessage="This field only accepts number"
+                                        ErrorMessage="This field only accepts letter and space"
                                         ValidationExpression="[A-Za-z\s]+">
                                     </asp:RegularExpressionValidator>
                                 </td>
