@@ -13,6 +13,7 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
             if (!IsPostBack)
             {
                 SetProgramInfoGridView();
+                SetMajorInfoGridView(gvProgramInfo.Rows[1].Cells[0].Text);
             }
         }
         else
@@ -118,6 +119,7 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
     }
     private void SetMajorInfoGridView(string program)
     {
+        Session["currenSelectMajor"] = program;
         DataSet dataSet = null;
         dataSet = DatabaseManager.GetRecord(
             "major",
