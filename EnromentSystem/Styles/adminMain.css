@@ -106,7 +106,7 @@ button, input[type="button"], input[type="submit"] {
 }
 
     .dropmenu > li {
-        width: 150px;
+        width: 180px;
         position: relative;
         cursor: pointer;
         border-right: 1px solid #ccc;
@@ -144,7 +144,7 @@ button, input[type="button"], input[type="submit"] {
     }
 
         .dropmenu li ul li {
-            width: 150px;
+            width: 180px;
             padding: 10px;
             white-space: nowrap;
             border-bottom: 1px solid #ddd;

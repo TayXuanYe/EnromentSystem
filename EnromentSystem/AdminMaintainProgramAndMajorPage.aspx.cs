@@ -97,43 +97,7 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
     {
         Response.Redirect("AdminAddProgramPage.aspx");
     }
-
-    protected void gvProgramInfo_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        string program = gvProgramInfo.SelectedRow.Cells[0].Text;
-        SetMajorInfoGridView(program);
-    }
-
-    //gridview -- major
-    protected void gvMajorInfo_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-        if (e.CommandName == "Edit")
-        {
-            string major = e.CommandArgument.ToString();
-            Response.Redirect($"AdminModifyMajorPage.aspx?program={major}");
-        }
-        else if (e.CommandName == "Delete")
-        {
-            string major = e.CommandArgument.ToString();
-            Response.Redirect($"AdminDeleteMajorPage.aspx?program={major}");
-        }
-    }
-    private void SetMajorInfoGridView(string program)
-    {
-        DataSet dataSet = null;
-        dataSet = DatabaseManager.GetRecord(
-            "major",
-            new List<string> { "major" },
-            $@"WHERE program = '{program}'"
-
-        );
-        if (dataSet != null)
-        {
-            DataTable table = dataSet.Tables[0];
-            gvMajorInfo.DataSource = table;
-            gvMajorInfo.DataBind();
-        }
-    }
+   
     protected void btnAddMajor_Click(object sender, EventArgs e)
     {
         Response.Redirect("AdminAddMajorPage.aspx");

@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="#">
+                                <a href="AdminMaintainProgramAndMajorPage.aspx">
                                     <div class="functionCard">
                                         <asp:Image ID="Image4" runat="server" ImageUrl="~/Images/program.png"/>
                                         <span>Program & Major</span>
@@ -59,7 +59,6 @@
                                 </a>
                             </td>
                         </tr>
-                            
                     </table>
                 </td>
             </tr>

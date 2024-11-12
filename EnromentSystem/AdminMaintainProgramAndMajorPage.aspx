@@ -7,7 +7,7 @@
     Inherits="AdminMaintainProgramAndMajorPage" %>
 
 <asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminMaintainLecturerMainPage.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminMaintainProgramMajorPage.css") %>" />
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
@@ -27,8 +27,7 @@
         CssClass="grid-view"
         OnRowCommand="gvProgramInfo_RowCommand" 
         DataKeyNames="program" 
-        ShowHeaderWhenEmpty="True"
-        OnSelectedIndexChanged="gvProgramInfo_SelectedIndexChanged">
+        ShowHeaderWhenEmpty="True">
         <Columns>
             <asp:BoundField HeaderText="Program" DataField="program" SortExpression="program"/>
             <asp:BoundField HeaderText="School" DataField="school" SortExpression="school"/>
@@ -59,41 +58,7 @@
         </EmptyDataTemplate>
     </asp:GridView>
     
-    <h1>Major</h1>
-    <asp:GridView ID="gvMajorInfo" runat="server" 
-        AutoGenerateColumns="false" 
-        CssClass="grid-view"
-        OnRowCommand="gvMajorInfo_RowCommand" 
-        DataKeyNames="major" 
-        ShowHeaderWhenEmpty="True">
-        <Columns>
-            <asp:BoundField HeaderText="Major" DataField="major" SortExpression="major"/>
-        
-            <asp:TemplateField HeaderText="Operate">
-                <ItemTemplate>
-                    <asp:ImageButton 
-                        ID="btnEdit" 
-                        runat="server" 
-                        ImageUrl="~/Images/edit.png"
-                        CommandName="Edit"
-                        CommandArgument='<%# Eval("major") %>'
-                        ToolTip="Click to edit program details"/>
-                    <asp:ImageButton 
-                        ID="btnDelete" 
-                        runat="server" 
-                        ImageUrl="~/Images/delete.png"
-                        CommandName="Delete"
-                        CommandArgument='<%# Eval("major") %>'
-                        ToolTip="Click to program student"/>
-                </ItemTemplate>
-            </asp:TemplateField>
-        </Columns>
-
-        <EmptyDataTemplate>
-            <p class="center">No major found</p>
-        </EmptyDataTemplate>
-    </asp:GridView>
-
+    
     <div class="button-container">
         <asp:Button ID="btnAddMajor" runat="server" Text="Add New Major" OnClick="btnAddMajor_Click" />
     </div>
