@@ -68,39 +68,14 @@
     <asp:GridView ID="gvMajorInfo" runat="server" 
         AutoGenerateColumns="false" 
         CssClass="grid-view-major"
-        OnRowCommand="gvMajorInfo_RowCommand" 
         DataKeyNames="major" 
-        ShowHeaderWhenEmpty="True"
-        OnSelectedIndexChanged="gvProgramInfo_SelectedIndexChanged">
+        ShowHeaderWhenEmpty="True">
         <Columns>
             <asp:BoundField HeaderText="Major" DataField="major" SortExpression="major"/>
-        
-            <asp:TemplateField HeaderText="Operate">
-                <ItemTemplate>
-                    <asp:ImageButton 
-                        ID="btnEdit" 
-                        runat="server" 
-                        ImageUrl="~/Images/edit.png"
-                        CommandName="Edit"
-                        CommandArgument='<%# Eval("major") %>'
-                        ToolTip="Click to edit program details"/>
-                    <asp:ImageButton 
-                        ID="btnDelete" 
-                        runat="server" 
-                        ImageUrl="~/Images/delete.png"
-                        CommandName="Delete"
-                        CommandArgument='<%# Eval("major") %>'
-                        ToolTip="Click to program student"/>
-                </ItemTemplate>
-            </asp:TemplateField>
         </Columns>
 
         <EmptyDataTemplate>
             <p class="center">No major found</p>
         </EmptyDataTemplate>
     </asp:GridView>
-
-    <div class="button-container">
-        <asp:Button ID="btnAddMajor" runat="server" Text="Add New Major" OnClick="btnAddMajor_Click" />
-    </div>
 </asp:Content>

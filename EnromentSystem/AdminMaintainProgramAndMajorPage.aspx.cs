@@ -13,7 +13,6 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
             if (!IsPostBack)
             {
                 SetProgramInfoGridView();
-                SetMajorInfoGridView(gvProgramInfo.Rows[1].Cells[0].Text);
             }
         }
         else
@@ -104,19 +103,6 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
     }
 
     //gridview -- major
-    protected void gvMajorInfo_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-        if (e.CommandName == "Edit")
-        {
-            string major = e.CommandArgument.ToString();
-            Response.Redirect($"AdminModifyMajorPage.aspx?program={major}");
-        }
-        else if (e.CommandName == "Delete")
-        {
-            string major = e.CommandArgument.ToString();
-            Response.Redirect($"AdminDeleteMajorPage.aspx?program={major}");
-        }
-    }
     private void SetMajorInfoGridView(string program)
     {
         Session["currenSelectMajor"] = program;
@@ -132,9 +118,5 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
             gvMajorInfo.DataSource = table;
             gvMajorInfo.DataBind();
         }
-    }
-    protected void btnAddMajor_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("AdminAddMajorPage.aspx");
     }
 }
