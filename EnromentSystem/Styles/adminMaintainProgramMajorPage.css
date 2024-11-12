@@ -49,22 +49,24 @@ h1{
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
 
-.grid-view {
+.grid-view, .grid-view-major {
     flex: 1;
     margin-top: 20px;
     width: 50vw;
+    max-height: 100px;
+    overflow-y: auto;
 }
 
-    .grid-view th {
+    .grid-view th ,.grid-view-major th{
         padding: 2px 5px;
         background-color: #ddd;
     }
 
-    .grid-view td {
+    .grid-view td ,.grid-view-major td{
         padding: 5px 5px;
     }
 
-    .grid-view input[type="image"] {
+    .grid-view input[type="image"], .grid-view-major input[type="image"] {
         border: solid 1px;
         border-color: #d22a46;
         border-radius: 100%;
@@ -76,21 +78,37 @@ h1{
         vertical-align: middle;
     }
 
-        .grid-view input[type="image"]:hover {
+        .grid-view input[type="image"]:hover, .grid-view-major input[type="image"]:hover {
             background-color: #af1f35;
         }
 
-    .grid-view tr th:nth-child(4n+1) {
+    .grid-view tr th:nth-child(5n+1) {
         min-width: 94px;
     }
 
-    .grid-view tr th:nth-child(4n+2) {
+    .grid-view tr th:nth-child(5n+2) {
         min-width: 94px;
     }
 
-    .grid-view tr th:nth-child(4n), .grid-view tr td:nth-child(4n) {
+    .grid-view tr th:nth-child(5n+4), .grid-view tr td:nth-child(5n+4),
+    .grid-view-major tr th:nth-child(2n), .grid-view-major tr td:nth-child(2n) {
         width: 78px;
     }
+    
+    .grid-view tr th:nth-child(5n), .grid-view tr td:nth-child(5n) {
+        width: 0px;
+    }
+        .grid-view tr td:nth-child(5n) input {
+            border: solid 1px;
+            border-color: #d22a46;
+            border-radius: 10%;
+/*            background-color: #d22a46;*/
+            padding: 4px;
+/*            width: 30px;*/
+            height: 30px;
+            display: inline-block;
+            vertical-align: middle;
+        }
 
 .center {
     text-align: center;
@@ -102,6 +120,7 @@ h1{
     gap: 10px;
     width: 100vw;
     padding: 5px 25vw;
+    margin-bottom: 1vw;
 }
 
     .button-container input[type="submit"] {
