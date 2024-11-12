@@ -46,7 +46,7 @@
                                 <a href="#">
                                     <div class="functionCard">
                                         <asp:Image ID="Image4" runat="server" ImageUrl="~/Images/program.png"/>
-                                        <span>Program</span>
+                                        <span>Program & Major</span>
                                     </div>
                                 </a>
                             </td>
@@ -54,7 +54,7 @@
                                 <a href="#">
                                     <div class="functionCard">
                                         <asp:Image ID="Image5" runat="server" ImageUrl="~/Images/course.png"/>
-                                        <span>Course</span>
+                                        <span>Course & Section</span>
                                     </div>
                                 </a>
                             </td>
