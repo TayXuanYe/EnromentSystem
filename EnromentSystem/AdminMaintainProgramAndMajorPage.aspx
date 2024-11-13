@@ -49,11 +49,10 @@
                         ImageUrl="~/Images/delete.png"
                         CommandName="Delete"
                         CommandArgument='<%# Eval("program") %>'
-                        ToolTip="Click to program student"/>
+                        ToolTip="Click to delete program"/>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:CommandField ShowSelectButton="true" HeaderText="Show Major"  ButtonType="Button" SelectText="Display"/>
-
         </Columns>
 
         <EmptyDataTemplate>
