@@ -1,5 +1,5 @@
 ﻿<%@ Page 
-    Title="Add Delete Program Page"
+    Title="Delete Program Page"
     MasterPageFile="~/AdminSite.master"
     Language="C#" 
     AutoEventWireup="true" 

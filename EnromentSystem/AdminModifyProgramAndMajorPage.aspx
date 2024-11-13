@@ -1,5 +1,5 @@
 ﻿<%@ Page 
-    Title="Add Modify Program & Major Page"
+    Title="Modify Program & Major Page"
     MasterPageFile="~/AdminSite.master"
     Language="C#" 
     AutoEventWireup="true" 
