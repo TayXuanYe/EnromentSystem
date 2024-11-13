@@ -1,0 +1,214 @@
+﻿body {
+}
+
+.table-contain {
+    width: 100vw;
+    padding: 0px 20%;
+}
+
+    .table-contain .program-details-table {
+        width: 100%;
+        padding-bottom: 30px;
+    }
+
+.program-details-table th, h2 {
+    text-align: left;
+    padding: 2px;
+    font-size: 24px;
+    padding-bottom: 4px;
+}
+
+
+    .program-details-table td {
+        vertical-align: top;
+        padding: 2px;
+    }
+
+    .program-details-table td:nth-child(2n+1) {
+        width: 12%;
+        min-width: 120px;
+    }
+
+    .program-details-table td:nth-child(2n) {
+        width: 40%;
+    }
+
+    .program-details-table td:nth-child(2n+1)::after {
+        content: ":";
+        float: right;
+        font-weight: 600;
+        margin-right: 2px;
+    }
+
+.program-details-table input {
+    padding: 4px;
+    width: 90%;
+    max-width: 350px;
+}
+
+.program-details-table textarea {
+    padding: 4px;
+    width: 45%;
+    min-width: 90%;
+    max-width: 90%;
+    min-height: 45px;
+}
+
+.program-details-table select {
+    padding: 4px;
+    max-width: 350px;
+    width: 90%;
+}
+
+    .program-details-table select:hover {
+        background-color: #ddd;
+    }
+
+.major-details-table td {
+    vertical-align: top;
+    font-size: 14pt;
+    padding: 2px;
+}
+
+    .major-details-table td:nth-child(2n+1) {
+        width: 12%;
+        min-width: 12%;
+        vertical-align: central ;
+    }
+
+    .major-details-table td:nth-child(2n+2) {
+        width: 88%;
+        min-width: 120px;
+        display: flex;  
+        flex-wrap: wrap;
+    }
+
+.major-details-table div {
+    width: 100%;
+    flex: 0 0 100%;
+    display: flex;
+    gap: 4px;
+}
+        .major-details-table td:nth-child(2n+1)::after {
+            content: ":";
+            float: right;
+            font-weight: 600;
+            margin-right: 2px;
+
+        }
+
+    
+    .major-details-table td:nth-child(2n+2) input[type=image]{
+        width: 27px;
+        height: 27px;
+
+    }
+
+.major-details-table input[type="text"] {
+    flex: 0 0 90%;
+    padding: 4px;
+    max-width: 350px;
+    width: 90%;
+}
+
+
+.button-container {
+    width: 100vw;
+    padding: 0px 20%;
+    text-align: right;
+}
+
+    .button-container input, .pop-up-windows input {
+        margin: 5px;
+        padding: 5px 10px;
+        border: solid 1px;
+        border-radius: 5px;
+        background-color: #d22a46;
+        color: white;
+        border-color: #d22a46;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+        .button-container input:hover, .pop-up-windows input:hover {
+            background-color: #af1f35;
+        }
+
+        .button-container input[type="number"],
+        .button-container input[type="number"]:hover,
+        .button-container input[type="number"]:focus {
+            -moz-appearance: textfield;
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+            .button-container input[type="number"]::-webkit-outer-spin-button,
+            .button-container input[type="number"]::-webkit-inner-spin-button,
+            .button-container input[type="number"]:hover,
+            .button-container input[type="number"]:focus {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+.validator {
+    color: red;
+    font-size: 12px;
+}
+
+.windows-contain {
+    flex-direction: column;
+}
+
+    .windows-contain .button-container {
+        width: 100%;
+        padding: 0px 5%;
+    }
+
+
+h2{
+    width: 100vw;
+    padding:0px 20%;
+}
+
+.grid-view {
+    flex: 1;
+    margin-top: 20px;
+    width: 60vw;
+}
+
+    .grid-view th {
+        padding: 2px 5px;
+        background-color: #ddd;
+    }
+
+    .grid-view td {
+        padding: 5px 5px;
+    }
+
+    .grid-view input {
+        border: solid 1px;
+        border-color: #d22a46;
+        border-radius: 100%;
+        background-color: #d22a46;
+        padding: 4px;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px 24px;
+        background-image: url("../Images/delete.png") ;
+        background-size: cover;
+    }
+
+        .grid-view input:hover {
+            background-color: #af1f35;
+        }
+
+    .grid-view tr th:nth-child(2n+1) {
+        min-width: 94px;
+    }
+
+    .grid-view tr th:nth-child(2n), .grid-view tr td:nth-child(2n) {
+        width: 78px;
+    }

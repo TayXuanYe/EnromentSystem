@@ -1,11 +1,8 @@
-﻿using iText.Layout.Element;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.IO;
-using System.Web.UI.WebControls;
 
 public partial class StudentUpdateBankDetailsPage : System.Web.UI.Page
 {

@@ -53,7 +53,7 @@ CREATE TABLE student(
 	bank_name varchar(255),
 	bank_account varchar(255),
 	bank_holder_name varchar(255),
-	bank_verification_document varchar(255)
+	bank_verification_document varchar(255),
  	admission_date date
 )
 

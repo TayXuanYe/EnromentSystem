@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Activities.Statements;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -60,7 +58,7 @@ public static class DatabaseManager
             ConnectDatabase();
         }
 
-        if (connection.State != ConnectionState.Open)
+        if (connection.State == ConnectionState.Closed)
         {
             connection.Open();
         }
@@ -103,7 +101,7 @@ public static class DatabaseManager
             ConnectDatabase();
         }
 
-        if (connection.State != ConnectionState.Open)
+        if (connection.State == ConnectionState.Closed)
         {
             connection.Open();
         }
@@ -146,7 +144,7 @@ public static class DatabaseManager
             ConnectDatabase();
         }
 
-        if (connection.State != ConnectionState.Open)
+        if (connection.State == ConnectionState.Closed)
         {
             connection.Open();
         }
@@ -189,7 +187,7 @@ public static class DatabaseManager
             ConnectDatabase();
         }
 
-        if (connection.State != ConnectionState.Open)
+        if (connection.State == ConnectionState.Closed)
         {
             connection.Open();
         }
@@ -232,7 +230,7 @@ public static class DatabaseManager
             ConnectDatabase();
         }
 
-        if (connection.State != ConnectionState.Open)
+        if (connection.State == ConnectionState.Closed)
         {
             connection.Open();
         }
@@ -290,7 +288,7 @@ public static class DatabaseManager
             ConnectDatabase();
         }
 
-        if (connection.State != ConnectionState.Open)
+        if (connection.State == ConnectionState.Closed)
         {
             connection.Open();
         }
@@ -344,7 +342,7 @@ public static class DatabaseManager
             ConnectDatabase();
         }
 
-        if (connection.State != ConnectionState.Open)
+        if (connection.State == ConnectionState.Closed)
         {
             connection.Open();
         }

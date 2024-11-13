@@ -1,5 +1,5 @@
 ﻿<%@ Page 
-    Title="Maintain Student Main Page"
+    Title="Add New Lecturer Page"
     MasterPageFile="~/AdminSite.master"
     Language="C#" 
     AutoEventWireup="true" 
@@ -63,7 +63,7 @@
     <asp:Panel ID="successfulWindow" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
             <br />
-            <h1>Add Student Successful</h1>
+            <h1>Add New Lecturer Successful</h1>
             <br />
             <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/successful.png" CssClass="successful-image"/><br />
             <div class="button-container">
