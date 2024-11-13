@@ -11,17 +11,18 @@
         padding-bottom: 30px;
     }
 
-.program-details-table th, h1 {
+.program-details-table th, h2 {
     text-align: left;
     padding: 2px;
     font-size: 24px;
     padding-bottom: 4px;
 }
 
-.program-details-table td {
-    vertical-align: top;
-    padding: 2px;
-}
+
+    .program-details-table td {
+        vertical-align: top;
+        padding: 2px;
+    }
 
     .program-details-table td:nth-child(2n+1) {
         width: 12%;
@@ -62,6 +63,54 @@
     .program-details-table select:hover {
         background-color: #ddd;
     }
+
+.major-details-table td {
+    vertical-align: top;
+    font-size: 14pt;
+    padding: 2px;
+}
+
+    .major-details-table td:nth-child(2n+1) {
+        width: 12%;
+        min-width: 12%;
+        vertical-align: central ;
+    }
+
+    .major-details-table td:nth-child(2n+2) {
+        width: 88%;
+        min-width: 120px;
+        display: flex;  
+        flex-wrap: wrap;
+    }
+
+.major-details-table div {
+    width: 100%;
+    flex: 0 0 100%;
+    display: flex;
+    gap: 4px;
+}
+        .major-details-table td:nth-child(2n+1)::after {
+            content: ":";
+            float: right;
+            font-weight: 600;
+            margin-right: 2px;
+
+        }
+
+    
+    .major-details-table td:nth-child(2n+2) input[type=image]{
+        width: 27px;
+        height: 27px;
+
+    }
+
+.major-details-table input[type="text"] {
+    flex: 0 0 90%;
+    padding: 4px;
+    max-width: 350px;
+    width: 90%;
+}
+
 
 .button-container {
     width: 100vw;
@@ -117,7 +166,7 @@
     }
 
 
-h1{
+h2{
     width: 100vw;
     padding:0px 20%;
 }
@@ -137,7 +186,7 @@ h1{
         padding: 5px 5px;
     }
 
-    .grid-view input[type="image"] {
+    .grid-view input {
         border: solid 1px;
         border-color: #d22a46;
         border-radius: 100%;
@@ -147,9 +196,12 @@ h1{
         height: 30px;
         display: inline-block;
         vertical-align: middle;
+        margin: 0px 24px;
+        background-image: url("../Images/delete.png") ;
+        background-size: cover;
     }
 
-        .grid-view input[type="image"]:hover {
+        .grid-view input:hover {
             background-color: #af1f35;
         }
 

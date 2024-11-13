@@ -63,44 +63,47 @@
         </table>
     </div>
 
-    <h1>Major</h1>
+    <h2>Major</h2>
+    <div class="table-contain">
+        <table class="major-details-table">
+            <tr>
+                <td>Name</td>
+                <td>
+                    <div>
+                        <asp:TextBox ID="txtMajorName" runat="server"></asp:TextBox>
+                        <asp:ImageButton ID="btnAddMajor" runat="server" OnClick="btnAddMajor_Click" ImageUrl="~/Images/add.png"/>
+                    </div>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
+                        ErrorMessage="This field only accept alphabet"
+                        CssClass="validator"
+                        ControlToValidate="txtMajorName"
+                        Display="Dynamic"
+                        ValidationExpression="[A-Za-z][A-Za-z\s]+"></asp:RegularExpressionValidator>
+                    <asp:CustomValidator ID="CustomValidator2" runat="server" 
+                        ErrorMessage="This major have already exist"
+                        CssClass="validator"
+                        ControlToValidate="txtMajorName"
+                        Display="Dynamic"
+                        OnServerValidate="CheckMajorExist_ServerValidate"></asp:CustomValidator>
+                </td>
+            </tr>
+        </table>
+    </div>
     <asp:GridView ID="gvMajorInfo" runat="server" 
         AutoGenerateColumns="false" 
         CssClass="grid-view"
-        OnRowCommand="gvMajorInfo_RowCommand" 
+        OnSelectedIndexChanged="gvMajorInfo_RowCommand" 
         DataKeyNames="major" 
         ShowHeaderWhenEmpty="True">
         <Columns>
             <asp:BoundField HeaderText="Major" DataField="major" SortExpression="major"/>
-    
-            <asp:TemplateField HeaderText="Operate">
-                <ItemTemplate>
-                    <asp:ImageButton 
-                        ID="btnEdit" 
-                        runat="server" 
-                        ImageUrl="~/Images/edit.png"
-                        CommandName="Edit"
-                        CommandArgument='<%# Eval("major") %>'
-                        ToolTip="Click to edit major details"/>
-                    <asp:ImageButton 
-                        ID="btnDelete" 
-                        runat="server" 
-                        ImageUrl="~/Images/delete.png"
-                        CommandName="Delete"
-                        CommandArgument='<%# Eval("major") %>'
-                        ToolTip="Click to delete major"/>
-                </ItemTemplate>
-            </asp:TemplateField>
+            <asp:CommandField ShowSelectButton="true" HeaderText="Operate" ButtonType="Button" SelectText=" "/>            
         </Columns>
 
         <EmptyDataTemplate>
             <p class="center">No major</p>
         </EmptyDataTemplate>
     </asp:GridView>
-    
-    <div class="button-container">
-        <asp:Button ID="btnAddMajor" runat="server" Text="Add New Major" OnClick="btnAddMajor_Click" />
-    </div>
 
     <div class="button-container">
         <asp:Button ID="btnAddProgram" runat="server" Text="Add Program" OnClick="btnAddProgram_Click"/>

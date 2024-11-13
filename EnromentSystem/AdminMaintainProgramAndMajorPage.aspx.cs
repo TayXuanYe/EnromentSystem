@@ -93,7 +93,7 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
 
     protected void btnAddProgram_Click(object sender, EventArgs e)
     {
-        Response.Redirect("AdminAddProgramPage.aspx");
+        Response.Redirect("AdminAddProgramAndMajorPage.aspx");
     }
 
     protected void gvProgramInfo_SelectedIndexChanged(object sender, EventArgs e)
