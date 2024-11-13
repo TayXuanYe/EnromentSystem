@@ -38,7 +38,7 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
         else if (e.CommandName == "Delete")
         {
             string program = e.CommandArgument.ToString();
-            Response.Redirect($"AdminDeleteProgramAndMajorPage.aspx?program={program}");
+            Response.Redirect($"AdminDeleteProgramPage.aspx?program={program}");
         }
     }
 
