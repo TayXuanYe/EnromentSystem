@@ -81,7 +81,7 @@
                 <li> 
                     <p><a href="AdminMaintainProgramAndMajorPage.aspx">Progran & Major</a></p>
                     <ul>
-                        <li><a href="#">Add Program & Major</a></li>
+                        <li><a href="AdminAddProgramAndMajorPage.aspx">Add Program & Major</a></li>
                         <li><a href="AdminMaintainProgramAndMajorPage.aspx">Delete Program & Major</a></li>
                         <li><a href="AdminMaintainProgramAndMajorPage.aspx">Modify Program & Major</a></li>
                     </ul>

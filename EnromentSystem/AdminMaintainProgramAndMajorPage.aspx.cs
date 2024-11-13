@@ -33,12 +33,12 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
         if (e.CommandName == "Edit")
         {
             string program = e.CommandArgument.ToString();
-            Response.Redirect($"AdminModifyProgramPage.aspx?program={program}");
+            Response.Redirect($"AdminModifyProgramAndMajorPage.aspx?program={program}");
         }
         else if (e.CommandName == "Delete")
         {
             string program = e.CommandArgument.ToString();
-            Response.Redirect($"AdminDeleteProgramPage.aspx?program={program}");
+            Response.Redirect($"AdminDeleteProgramAndMajorPage.aspx?program={program}");
         }
     }
 

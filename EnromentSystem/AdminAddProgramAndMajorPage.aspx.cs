@@ -82,7 +82,6 @@ public partial class AdminAddProgramAndMajorPage : System.Web.UI.Page
         gvMajorInfo.DataBind();
     }
 
-    
     protected void btnAddMajor_Click(object sender, EventArgs e)
     {
         DataTable majorInfo = Session["majorInfo"] as DataTable;
