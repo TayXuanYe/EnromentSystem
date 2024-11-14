@@ -270,8 +270,9 @@ h2 {
         width: 70px;
     }
 
-.class-details-table-contain {
+.class-details-table-contain, .class-timetable-display-contain {
     width: 100%;
+    padding: 0px 5%;
 }
 
 
@@ -300,3 +301,8 @@ h2 {
 .class-details-table tr:first-child span{
     font-size: 14pt;
 }
+.button-container-class-windows .button-container {
+    padding: 0px;
+    width: 100vw;
+}
+
