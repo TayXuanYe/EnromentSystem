@@ -1,5 +1,5 @@
 ﻿<%@ Page 
-    Title="Add New Session & Program Page"
+    Title="Add New Course & Section Page"
     MasterPageFile="~/AdminSite.master"
     Language="C#" 
     AutoEventWireup="true" 
@@ -139,7 +139,7 @@
         </Columns>
 
         <EmptyDataTemplate>
-            <p class="center">No major</p>
+            <p class="center">No section</p>
         </EmptyDataTemplate>
     </asp:GridView>
 
@@ -162,7 +162,7 @@
 
     <asp:Panel ID="classWindows" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
-            <div>
+            <div class="class-details-table-contain">
                 <table class="class-details-table">
                     <tr>
                         <td>Section Name</td>
@@ -174,23 +174,66 @@
                     <tr>
                         <td>Lecture Class Lecturer Name</td>
                         <td>
-                            <asp:TextBox ID="txtLectureClassLecturerName" runat="server"></asp:TextBox>
-                            <asp:CheckBox ID="cbxLectureClassSelect" runat="server" />
+                            <asp:TextBox ID="txtLectureClassLecturerName" runat="server" ></asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" 
+                                ErrorMessage="This field is requited to add class"
+                                CssClass="validator"
+                                ControlToValidate="txtLectureClassLecturerName"
+                                ValidationGroup="addLecturerClass"></asp:RequiredFieldValidator>
                         </td>
+                        <td>
+                            <asp:ImageButton ID="btnAddLectureClass" runat="server" 
+                                ValidationGroup="addLecturerClass"
+                                OnClick="btnAddLectureClass_Click"
+                                ImageUrl="~/Images/edit.png"
+                                CssClass="add-class-button"/>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Practical Class Lecturer Name</td>
                         <td>
                             <asp:TextBox ID="txtPracticalClassLecturerName" runat="server"></asp:TextBox>
-                            <asp:CheckBox ID="cxbPracticalClassSelect" runat="server" />
+                            <asp:RequiredFieldValidator runat="server" 
+                                ErrorMessage="This field is requited to add class"
+                                CssClass="validator"
+                                ControlToValidate="txtPracticalClassLecturerName"
+                                ValidationGroup="addPracticalClass"></asp:RequiredFieldValidator>
+                        </td>
+                        <td>
+                            <asp:ImageButton ID="btnAddPracticalClass" runat="server" 
+                                ValidationGroup="addPracticalClass"
+                                OnClick="btnAddPracticalClass_Click"
+                                ImageUrl="~/Images/edit.png"
+                                CssClass="add-class-button"/>
                         </td>
                     </tr>
                 </table>
             </div>
-            <div>
-                <asp:GridView ID="gvClassTimetable" runat="server"></asp:GridView>
+            <div class="class-timetable-display-contain">
+                <asp:GridView ID="gvClassTimetable" runat="server" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundField HeaderText="Day" DataField="day" SortExpression="day"/>     
+                        <asp:BoundField HeaderText="0800" DataField="0800" SortExpression="0800"/>     
+                        <asp:BoundField HeaderText="0900" DataField="0900" SortExpression="0900"/>     
+                        <asp:BoundField HeaderText="1000" DataField="1000" SortExpression="1000"/>     
+                        <asp:BoundField HeaderText="1100" DataField="1100" SortExpression="1100"/>     
+                        <asp:BoundField HeaderText="1200" DataField="1200" SortExpression="1200"/>     
+                        <asp:BoundField HeaderText="1300" DataField="1300" SortExpression="1300"/>     
+                        <asp:BoundField HeaderText="1400" DataField="1400" SortExpression="1400"/>     
+                        <asp:BoundField HeaderText="1500" DataField="1500" SortExpression="1500"/>     
+                        <asp:BoundField HeaderText="1600" DataField="1600" SortExpression="1600"/>     
+                        <asp:BoundField HeaderText="1700" DataField="1700" SortExpression="1700"/>     
+                        <asp:BoundField HeaderText="1800" DataField="1800" SortExpression="1800"/>     
+                        <asp:BoundField HeaderText="1900" DataField="1900" SortExpression="1900"/>     
+                        <asp:BoundField HeaderText="2000" DataField="2000" SortExpression="2000"/>     
+                        <asp:BoundField HeaderText="2100" DataField="2100" SortExpression="2100"/>     
+                        <asp:BoundField HeaderText="2200" DataField="2200" SortExpression="2200"/>          
+                    </Columns>
+                </asp:GridView>
             </div>
             <div class="button-container">
-                <asp:Button runat="server" Text="Exit" OnClick="btnCancel_Click" CausesValidation="false"/>
-                <asp:Button runat="server" Text="Add" OnClick="btnAddClass_Click"/>
+                <asp:Button runat="server" Text="Add" OnClick="btnAddClass_Click" ValidationGroup="class-windows"/>
+                <asp:Button runat="server" Text="Exit" OnClick="btnCancelAddClass_Click" CausesValidation="false"/>
             </div>
         </div>
     </asp:Panel>

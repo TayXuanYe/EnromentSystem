@@ -1,0 +1,280 @@
+﻿body {
+}
+
+.table-contain {
+    width: 100vw;
+    padding: 0px 20%;
+}
+
+    .table-contain .course-details-table {
+        width: 100%;
+        padding-bottom: 30px;
+    }
+
+.course-details-table th, h2 {
+    text-align: left;
+    padding: 2px;
+    font-size: 24px;
+    padding-bottom: 4px;
+}
+
+
+.course-details-table td {
+    vertical-align: top;
+    padding: 2px;
+}
+
+    .course-details-table td:nth-child(2n+1) {
+        width: 12%;
+        min-width: 120px;
+    }
+
+    .course-details-table td:nth-child(2n) {
+        width: 40%;
+    }
+
+    .course-details-table td:nth-child(2n+1)::after {
+        content: ":";
+        float: right;
+        font-weight: 600;
+        margin-right: 2px;
+    }
+
+.course-details-table input {
+    padding: 4px;
+    width: 90%;
+    max-width: 350px;
+}
+
+.course-details-table textarea {
+    padding: 4px;
+    width: 45%;
+    min-width: 90%;
+    max-width: 90%;
+    min-height: 45px;
+}
+
+.course-details-table select {
+    padding: 4px;
+    max-width: 350px;
+    width: 90%;
+}
+
+    .course-details-table select:hover {
+        background-color: #ddd;
+    }
+
+.section-details-table td {
+    vertical-align: top;
+    font-size: 14pt;
+    padding: 2px;
+}
+
+    .section-details-table td:nth-child(2n+1) {
+        width: 12%;
+        min-width: 12%;
+        vertical-align: central;
+    }
+
+    .section-details-table td:nth-child(3n+2) {
+/*        width: 88%;
+        min-width: 120px;
+        display: flex;
+        flex-wrap: wrap;*/
+    }
+
+.section-details-table div {
+    width: 100%;
+    flex: 0 0 100%;
+    display: flex;
+    gap: 4px;
+}
+
+.section-details-table td:nth-child(2n+1)::after {
+    content: ":";
+    float: right;
+    font-weight: 600;
+    margin-right: 2px;
+}
+
+
+.section-details-table td:nth-child(2n+2) input[type=image] {
+    width: 27px;
+    height: 27px;
+}
+
+.section-details-table input[type="text"] {
+    flex: 0 0 90%;
+    padding: 4px;
+    max-width: 350px;
+    width: 90%;
+}
+
+
+.button-container {
+    width: 100vw;
+    padding: 0px 20%;
+    text-align: right;
+}
+
+    .button-container input[type=submit], .pop-up-windows input[type=submit] {
+        margin: 5px;
+        padding: 5px 10px;
+        border: solid 1px;
+        border-radius: 5px;
+        background-color: #d22a46;
+        color: white;
+        border-color: #d22a46;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .button-container input[type=submit]:hover, .pop-up-windows input[type=submit]:hover {
+        background-color: #af1f35;
+    }
+
+        .button-container input[type="number"],
+        .button-container input[type="number"]:hover,
+        .button-container input[type="number"]:focus {
+            -moz-appearance: textfield;
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+            .button-container input[type="number"]::-webkit-outer-spin-button,
+            .button-container input[type="number"]::-webkit-inner-spin-button,
+            .button-container input[type="number"]:hover,
+            .button-container input[type="number"]:focus {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+.validator {
+    color: red;
+    font-size: 12px;
+}
+
+.windows-contain {
+    flex-direction: column;
+}
+
+    .windows-contain .button-container {
+        width: 100%;
+        padding: 0px 5%;
+    }
+
+
+h2 {
+    width: 100vw;
+    padding: 0px 20%;
+}
+
+.grid-view {
+    flex: 1;
+    margin-top: 20px;
+    width: 60vw;
+}
+
+    .grid-view th {
+        padding: 2px 5px;
+        background-color: #ddd;
+    }
+
+    .grid-view td {
+        padding: 5px 5px;
+    }
+
+    .grid-view input[type="button"] {
+        border: solid 1px;
+        border-color: #d22a46;
+        border-radius: 100%;
+        background-color: #d22a46;
+        padding: 4px;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px 24px;
+        background-image: url("../Images/delete.png");
+        background-size: cover;
+    }
+
+        .grid-view input[type="button"]:hover {
+            background-color: #af1f35;
+        }
+
+    .grid-view tr th:nth-child(3n+1) {
+        min-width: 94px;
+    }
+
+    .grid-view tr th:nth-child(3n+2), .grid-view tr td:nth-child(3n+2) {
+        width: 78px;
+    }
+    .grid-view tr th:nth-child(3n), .grid-view tr td:nth-child(3n) {
+        width: 78px;
+    }
+
+    .grid-view input[type="image"] {
+        border: solid white;
+        border-radius: 100%;
+        padding: 4px;
+/*        width: 30px;*/
+/*        height: 30px;*/
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px 24px;
+        background-size: cover;
+    }
+
+        .grid-view input[type="image"]:hover {
+            background-color: #eaeded;
+        }
+
+
+.class-details-table td:nth-child(3n+1)::after {
+    content: ":";
+    float: right;
+    font-weight: 600;
+    margin-right: 2px;
+}
+
+.class-details-table th{
+   padding-top: 20px;
+   font-size: 18pt;
+   text-align:left;
+}
+
+.class-details-table input[type=text] {
+    padding: 4px;
+    max-width: 350px;
+    width: 100%;
+}
+
+.class-details-table input[type=checkbox] {
+    margin: 4px;
+    width: 25px;
+    height: 25px;
+}
+
+
+.class-timetable-display-contain th, .class-timetable-display-contain td {
+    padding: 4px;
+}
+
+.class-timetable-display-contain td:first-child{
+    max-width: 40px;
+}
+
+    .class-timetable-display-contain td {
+        width: 70px;
+    }
+
+.class-details-table-contain {
+    width: 100%;
+}
+
+
+.add-class-button{
+
+}
