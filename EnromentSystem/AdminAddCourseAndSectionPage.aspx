@@ -291,5 +291,38 @@
             </div>
         </div>
     </asp:Panel>
+
+    <asp:Panel ID="selectClassWindow" runat="server" CssClass="pop-up-windows">
+        <div class="windows-contain">
+            <asp:Label ID="lblSelectingClass" runat="server" Text="Label"></asp:Label>
+            <div class="class-timetable-display-contain">
+                <asp:GridView ID="gvSelectClass" runat="server" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundField HeaderText="Day" DataField="day" SortExpression="day"/>     
+                        <asp:BoundField HeaderText="0800" DataField="0800" SortExpression="0800"/>     
+                        <asp:BoundField HeaderText="0900" DataField="0900" SortExpression="0900"/>     
+                        <asp:BoundField HeaderText="1000" DataField="1000" SortExpression="1000"/>     
+                        <asp:BoundField HeaderText="1100" DataField="1100" SortExpression="1100"/>     
+                        <asp:BoundField HeaderText="1200" DataField="1200" SortExpression="1200"/>     
+                        <asp:BoundField HeaderText="1300" DataField="1300" SortExpression="1300"/>     
+                        <asp:BoundField HeaderText="1400" DataField="1400" SortExpression="1400"/>     
+                        <asp:BoundField HeaderText="1500" DataField="1500" SortExpression="1500"/>     
+                        <asp:BoundField HeaderText="1600" DataField="1600" SortExpression="1600"/>     
+                        <asp:BoundField HeaderText="1700" DataField="1700" SortExpression="1700"/>     
+                        <asp:BoundField HeaderText="1800" DataField="1800" SortExpression="1800"/>     
+                        <asp:BoundField HeaderText="1900" DataField="1900" SortExpression="1900"/>     
+                        <asp:BoundField HeaderText="2000" DataField="2000" SortExpression="2000"/>     
+                        <asp:BoundField HeaderText="2100" DataField="2100" SortExpression="2100"/>     
+                        <asp:BoundField HeaderText="2200" DataField="2200" SortExpression="2200"/>          
+                    </Columns>
+                </asp:GridView>
+            </div>
+            <div class="button-container">
+                <asp:Button runat="server" Text="Continue" OnClick="btnContinueSelectClass_Click" ValidationGroup="class-windows"/>
+                <asp:Button runat="server" Text="Cancel" OnClick="btnCancelSelectClass_Click" CausesValidation="false"/>
+            </div>
+        </div>
+    </asp:Panel>
+
 </asp:Content>
 

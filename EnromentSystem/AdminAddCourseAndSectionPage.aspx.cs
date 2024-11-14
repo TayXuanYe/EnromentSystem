@@ -12,18 +12,30 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            SetClassTimetable();
             PopulateProgram();
+            //let gvPrerequisite and gvSectionInfo display
             DataTable dt = new DataTable();
             gvPrerequisite.DataSource = dt;
             gvPrerequisite.DataBind();
             gvSectionInfo.DataSource = dt;
             gvSectionInfo.DataBind();
+            //set pre requisite session and populate prerequisite details
             DataTable preCourse = new DataTable();
             preCourse.Columns.Add("cid",typeof(string));
             preCourse.Columns.Add("name",typeof(string));
             Session["preCourseAdded"] = preCourse;
             PopulatePrerequisite(ddlProgram.SelectedValue,ddlMajor.SelectedValue, preCourse);
+            //set class info session
+            DataSet classInfo = new DataSet();
+            DataTable lectureClass = new DataTable("lectureClass");
+            lectureClass.Columns.Add("classRoom",typeof(string));
+            lectureClass.Columns.Add("timeIndex",typeof(int));
+            DataTable practicalClass = new DataTable("practicalClass");
+            practicalClass.Columns.Add("classRoom", typeof(string));
+            practicalClass.Columns.Add("timeIndex", typeof(int));
+            classInfo.Tables.Add(lectureClass);
+            classInfo.Tables.Add(practicalClass);
+            Session["classInfo"] = classInfo;
         }
     }
     //course part
@@ -189,8 +201,8 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         classWindows.Style["display"] = "flex";
         lblClassWindowsSectionName.Text = txtSectionName.Text;
         PopulateLecturer();
+        SetClassTimetable(Session["classInfo"] as DataSet);
     }
-
 
     protected void gvSectionInfo_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -206,7 +218,7 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         }
     }
     // class select pop up windows
-    private void SetClassTimetable()
+    private void SetClassTimetable(DataSet classInfo)
     {
         DataTable dt = new DataTable();
         dt.Columns.Add("day", typeof(string));
@@ -225,16 +237,160 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         dt.Columns.Add("2000", typeof(string));
         dt.Columns.Add("2100", typeof(string));
         dt.Columns.Add("2200", typeof(string));
-        dt.Rows.Add("Mon");
-        dt.Rows.Add("Tue");
-        dt.Rows.Add("Wed");
-        dt.Rows.Add("Thu");
-        dt.Rows.Add("Fri");
-        dt.Rows.Add("Sat");
-        dt.Rows.Add("Sun");
 
+        DataTable lectureClass = classInfo.Tables["lectureClass"];
+        DataTable practicalClass = classInfo.Tables["practicalClass"];
+        DataRow monDay = dt.NewRow();
+        monDay["day"] = "Mon";
+
+        DataRow tueDay = dt.NewRow();
+        tueDay["day"] = "Tue";
+
+        DataRow wedDay = dt.NewRow();
+        wedDay["day"] = "Wed";
+
+        DataRow thuDay = dt.NewRow();
+        thuDay["day"] = "Thu";
+
+        DataRow friDay = dt.NewRow();
+        friDay["day"] = "Fri";
+
+        DataRow satDay = dt.NewRow();
+        satDay["day"] = "Sat";
+
+        DataRow sunDay = dt.NewRow();
+        sunDay["day"] = "Sun";
+        foreach (DataRow row in lectureClass.Rows)
+        {
+            switch (int.Parse(row["timeIndex"].ToString()) /16)
+            {
+                case 0:
+                    monDay = SetDailyClass(monDay, row, "LECTURE", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 1:
+                    tueDay = SetDailyClass(tueDay, row, "LECTURE", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 2:
+                    wedDay = SetDailyClass(wedDay, row, "LECTURE", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 3:
+                    thuDay = SetDailyClass(thuDay, row, "LECTURE", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 4:
+                    friDay = SetDailyClass(friDay, row, "LECTURE", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 5:
+                    satDay = SetDailyClass(satDay, row, "LECTURE", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 6:
+                    sunDay = SetDailyClass(sunDay, row, "LECTURE", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+            }
+        }
+        
+        foreach (DataRow row in practicalClass.Rows)
+        {
+            switch (int.Parse(row["timeIndex"].ToString()) /16)
+            {
+                case 0:
+                    monDay = SetDailyClass(monDay, row, "PRACTICAL", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 1:
+                    tueDay = SetDailyClass(tueDay, row, "PRACTICAL", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 2:
+                    wedDay = SetDailyClass(wedDay, row, "PRACTICAL", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 3:
+                    thuDay = SetDailyClass(thuDay, row, "PRACTICAL", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 4:
+                    friDay = SetDailyClass(friDay, row, "PRACTICAL", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 5:
+                    satDay = SetDailyClass(satDay, row, "PRACTICAL", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+                case 6:
+                    sunDay = SetDailyClass(sunDay, row, "PRACTICAL", int.Parse(row["timeIndex"].ToString()) % 16);
+                    break;
+
+            }
+        }
+        dt.Rows.Add(monDay);
+        dt.Rows.Add(tueDay);
+        dt.Rows.Add(wedDay);
+        dt.Rows.Add(thuDay);
+        dt.Rows.Add(friDay);
+        dt.Rows.Add(satDay);
+        dt.Rows.Add(sunDay);
         gvClassTimetable.DataSource = dt;
         gvClassTimetable.DataBind();
+    }
+
+    private DataRow SetDailyClass(DataRow targetRow, DataRow info, string classType, int timeIndex)
+    {
+        switch (timeIndex)
+        {
+            case 1:
+                targetRow["0800"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 2:
+                targetRow["0900"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 3:
+                targetRow["1000"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 4:
+                targetRow["1100"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 5:
+                targetRow["1200"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 6:
+                targetRow["1300"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 7:
+                targetRow["1400"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 8:
+                targetRow["1500"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 9:
+                targetRow["1600"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 10:
+                targetRow["1700"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 11:
+                targetRow["1800"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 12:
+                targetRow["1900"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 13:
+                targetRow["2000"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 14:
+                targetRow["2100"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+            case 0:
+                targetRow["2200"] = $"{info["classRoom"]}</br>{classType}";
+                return targetRow;
+        }
+        return null;
     }
 
     private void PopulateLecturer()
@@ -265,7 +421,9 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         else
         {
             lblWarningLectureClassLecturer.Style["display"] = "none";
-
+            lblSelectingClass.Text = "Lecture Class";
+            selectClassWindow.Style["display"] = "flex";
+            classWindows.Style["display"] = "none";
         }
     }
 
@@ -278,20 +436,33 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         else
         {
             lblWarningPracticalClassLecturer.Style["display"] = "none";
-
+            lblSelectingClass.Text = "Practical Class";
+            selectClassWindow.Style["display"] = "flex";
+            classWindows.Style["display"] = "none";
         }
     }
 
     protected void btnAddClass_Click(object sender, EventArgs e)
     {
-        SetClassTimetable();
+
     }
 
     protected void btnCancelAddClass_Click(object sender, EventArgs e)
     {
         classWindows.Style["display"] = "none";
     }
-    
+    //selectClassWindow
+    protected void btnContinueSelectClass_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnCancelSelectClass_Click(object sender, EventArgs e)
+    {
+        classWindows.Style["display"] = "flex";
+        selectClassWindow.Style["display"] = "none";
+    }
+
     //btn bottom
     protected void btnCancel_Click(object sender, EventArgs e)
     {
