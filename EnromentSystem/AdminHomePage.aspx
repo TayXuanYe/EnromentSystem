@@ -51,7 +51,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="#">
+                                <a href="AdminMaintainCourseAndSectionPage.aspx">
                                     <div class="functionCard">
                                         <asp:Image ID="Image5" runat="server" ImageUrl="~/Images/course.png"/>
                                         <span>Course & Section</span>
