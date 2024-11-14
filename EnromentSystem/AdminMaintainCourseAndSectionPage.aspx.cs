@@ -120,7 +120,7 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
 
     protected void btnAddCourse_Click(object sender, EventArgs e)
     {
-        Response.Redirect("AdminAddProgramAndMajorPage.aspx");
+        Response.Redirect("AdminAddCourseAndSectionPage.aspx");
     }
 
     protected void gvCourseInfo_SelectedIndexChanged(object sender, EventArgs e)
