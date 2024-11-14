@@ -18,7 +18,8 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
     //Section
     protected void btnAddSection_Click(object sender, ImageClickEventArgs e)
     {
-
+        classWindows.Style["display"] = "flex";
+        lblClassWindowsSectionName.Text = txtSectionName.Text;
     }
 
 
@@ -34,11 +35,6 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         {
 
         }
-    }
-
-    protected void CheckCourseDetailsFillIn_ServerValidate(object source, ServerValidateEventArgs args)
-    {
-
     }
     // class select pop up windows
     private void SetClassTimetable()

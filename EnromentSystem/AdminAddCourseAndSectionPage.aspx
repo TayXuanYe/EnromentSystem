@@ -108,11 +108,11 @@
                             ValidationGroup="section"/>
                     </div>
                     <asp:RegularExpressionValidator runat="server" 
-                        ErrorMessage="This field only accept alphabet"
+                        ErrorMessage="This field only accept capital alphabet and number"
                         CssClass="validator"
                         ControlToValidate="txtSectionName"
                         Display="Dynamic"
-                        ValidationExpression="[A-Za-z][A-Za-z\s]+"
+                        ValidationExpression="[A-Z][A-Z\d]+"
                         ValidationGroup="section"></asp:RegularExpressionValidator>
                     <asp:RequiredFieldValidator runat="server" 
                         ErrorMessage="This field is require"
@@ -120,13 +120,6 @@
                         ControlToValidate="txtSectionName"
                         Display="Dynamic"
                         ValidationGroup="section"></asp:RequiredFieldValidator>
-                    <asp:CustomValidator runat="server" 
-                        ErrorMessage="Pls fill in course details before create section"
-                        ValidationGroup="section"
-                        CssClass="validator"
-                        ControlToValidate="txtSectionName"
-                        Display="Dynamic"
-                        OnServerValidate="CheckCourseDetailsFillIn_ServerValidate"></asp:CustomValidator>
                 </td>
                 
             </tr>
@@ -191,7 +184,7 @@
                     <tr>
                         <td>Lecture Class Lecturer Name</td>
                         <td>
-                            <asp:TextBox ID="txtLectureClassLecturerName" runat="server" ></asp:TextBox>
+                            <asp:TextBox ID="txtLectureClassLecturerName" runat="server" ></asp:TextBox><br />
                             <asp:RequiredFieldValidator runat="server" 
                                 ErrorMessage="This field is requited to add class"
                                 CssClass="validator"
@@ -209,7 +202,7 @@
                     <tr>
                         <td>Practical Class Lecturer Name</td>
                         <td>
-                            <asp:TextBox ID="txtPracticalClassLecturerName" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtPracticalClassLecturerName" runat="server"></asp:TextBox><br />
                             <asp:RequiredFieldValidator runat="server" 
                                 ErrorMessage="This field is requited to add class"
                                 CssClass="validator"

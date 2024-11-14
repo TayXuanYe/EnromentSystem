@@ -276,5 +276,27 @@ h2 {
 
 
 .add-class-button{
+    width: 35px;
+    height: 35px;
+    border: solid #FFF;
+    border-radius: 100%;
+    padding: 5px;
+/*    padding-top: 0px;*/
+    position: relative;
+    bottom: 4px;
+}
 
+.add-class-button:hover{
+    background-color:#eee;
+}
+.class-details-table td:last-child{
+    display:flex;
+    
+}
+.class-details-table td:first-child{
+    vertical-align: top;
+    font-size: 14pt;
+}
+.class-details-table tr:first-child span{
+    font-size: 14pt;
 }
