@@ -25,7 +25,9 @@
                 </td>
                 <td>Major</td>
                 <td>
-                    <asp:DropDownList ID="ddlMajor" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlMajor" runat="server"
+                        OnSelectedIndexChanged="ddlMajor_SelectedIndexChanged"
+                        AutoPostBack="true"></asp:DropDownList>
                 </td>
             </tr>
             <tr>
@@ -94,6 +96,40 @@
                 </td>
             </tr>
         </table>
+        <div>
+            <table class="section-details-table">
+                <tr>
+                    <td>Pre-requisite course</td>
+                    <td>
+                        <div>
+                            <asp:DropDownList ID="ddlPrerequisite" runat="server"></asp:DropDownList>
+                            <asp:ImageButton ID="btnAddPrerequisite" runat="server" 
+                                OnClick="btnAddPrerequisite_Click" 
+                                ImageUrl="~/Images/add.png" 
+                                CausesValidation="false"/>
+                        </div>
+                    </td>
+                
+                </tr>
+            </table>
+        </div>
+        <asp:GridView ID="gvPrerequisite" runat="server" 
+            AutoGenerateColumns="false" 
+            CssClass="grid-view-prerequisite"
+            OnSelectedIndexChanged="gvPrerequisite_SelectedIndexChanged" 
+            DataKeyNames="cid" 
+            ShowHeaderWhenEmpty="True">
+            <Columns>
+                <asp:BoundField HeaderText="Course ID" DataField="cid" SortExpression="cid"/>
+                <asp:BoundField HeaderText="Course Name" DataField="name" SortExpression="name"/>
+
+                <asp:CommandField ShowSelectButton="true" HeaderText="Delete" ButtonType="Button" SelectText=" "/>            
+            </Columns>
+
+            <EmptyDataTemplate>
+                <p class="center">No pre-requisite course</p>
+            </EmptyDataTemplate>
+        </asp:GridView>
     </div>
 
     <h2>Section</h2>

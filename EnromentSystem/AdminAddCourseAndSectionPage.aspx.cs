@@ -1,9 +1,8 @@
-﻿//using iText.Forms.Form.Element;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Web;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,6 +14,16 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         {
             SetClassTimetable();
             PopulateProgram();
+            DataTable dt = new DataTable();
+            gvPrerequisite.DataSource = dt;
+            gvPrerequisite.DataBind();
+            gvSectionInfo.DataSource = dt;
+            gvSectionInfo.DataBind();
+            DataTable preCourse = new DataTable();
+            preCourse.Columns.Add("cid",typeof(string));
+            preCourse.Columns.Add("name",typeof(string));
+            Session["preCourseAdded"] = preCourse;
+            PopulatePrerequisite(ddlProgram.SelectedValue,ddlMajor.SelectedValue, preCourse);
         }
     }
     //course part
@@ -46,7 +55,7 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         if (dataSet != null)
         {
             List<string> value = new List<string>();
-            value.Add("None");
+            value.Add("NONE");
             foreach (DataRow row in dataSet.Tables[0].Rows)
             {
                 value.Add(row["major"].ToString());
@@ -64,7 +73,6 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
             );
         if(dataSet != null)
         {
-            Debug.WriteLine(dataSet.Tables[0].Rows.Count == 0);
             if(dataSet.Tables[0].Rows.Count == 0)
             {
                 args.IsValid = true;
@@ -76,12 +84,105 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         }
     }
 
-
     protected void ddlProgram_SelectedIndexChanged(object sender, EventArgs e)
     {
         PopulateMajor(ddlProgram.SelectedValue);
+        //reset prerequisit ddl and session
+        DataTable preCourse = new DataTable();
+        preCourse.Columns.Add("cid", typeof(string));
+        preCourse.Columns.Add("name", typeof(string));
+        Session["preCourseAdded"] = preCourse;
+        PopulatePrerequisite(ddlProgram.SelectedValue, ddlMajor.SelectedValue, preCourse);
+        //empty gvPrerequisite
+        DataTable empty = new DataTable();
+        empty.Columns.Add("cid", typeof(string));
+        empty.Columns.Add("name", typeof(string));
+        gvPrerequisite.DataSource = empty;
+        gvPrerequisite.DataBind();
     }
 
+    protected void ddlMajor_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //reset prerequisit ddl and session
+        DataTable preCourse = new DataTable();
+        preCourse.Columns.Add("cid", typeof(string));
+        preCourse.Columns.Add("name", typeof(string));
+        Session["preCourseAdded"] = preCourse;
+        PopulatePrerequisite(ddlProgram.SelectedValue, ddlMajor.SelectedValue, preCourse);
+        //empty gvPrerequisite
+        DataTable empty = new DataTable();
+        empty.Columns.Add("cid", typeof(string));
+        empty.Columns.Add("name", typeof(string));
+        gvPrerequisite.DataSource = empty;
+        gvPrerequisite.DataBind();
+    }
+
+    private void PopulatePrerequisite(string program, string major, DataTable addedCourse)
+    {
+        List<string> addedCourseList = new List<string>();
+        addedCourseList.Add("empty");
+        foreach (DataRow row in addedCourse.Rows)
+        {
+            addedCourseList.Add(row["cid"].ToString());
+        }
+        string removeCourses = string.Join(",", addedCourseList.Select(item => $"'{item}'"));
+        DataSet dataSet = DatabaseManager.GetRecord(
+            "course",
+            new List<string> { "course.cid", "name" },
+            $@"JOIN course_major as cm ON course.cid = cm.cid WHERE program = '{program}' AND major in ('{major}', 'NONE') AND course.cid NOT IN ({removeCourses})"
+        );
+        if(dataSet != null)
+        {
+            List<string> value = new List<string>();
+            List<string> text = new List<string>();
+            foreach(DataRow row in dataSet.Tables[0].Rows)
+            {
+                value.Add(row["cid"].ToString());
+                text.Add($"{row["cid"].ToString()} - {row["name"].ToString()}");
+            }
+            UIComponentGenerator.PopulateDropDownList(ddlPrerequisite, text, value);
+        }
+    }
+
+    protected void gvPrerequisite_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        string cid = gvPrerequisite.SelectedRow.Cells[0].Text;
+        DataTable dataTable = Session["preCourseAdded"] as DataTable;
+        if (dataTable == null) return;
+        for (int i = dataTable.Rows.Count - 1; i >= 0; i--)
+        {
+            if (dataTable.Rows[i]["cid"].ToString() == cid)
+            {
+                dataTable.Rows[i].Delete();
+            }
+        }
+        dataTable.AcceptChanges();
+        gvPrerequisite.DataSource = dataTable;
+        gvPrerequisite.DataBind();
+    }
+
+    protected void btnAddPrerequisite_Click(object sender, ImageClickEventArgs e)
+    {
+        DataTable displayValue = Session["preCourseAdded"] as DataTable;
+        DataSet dataSet = DatabaseManager.GetRecord(
+            "course",
+            new List<string> { "name" },
+            $@"WHERE cid = '{ddlPrerequisite.SelectedValue}'"
+            );
+        string courseName = "";
+        if (dataSet != null)
+        {
+            foreach(DataRow row in dataSet.Tables[0].Rows)
+            {
+                courseName = row["name"].ToString();
+            }
+        }
+        displayValue.Rows.Add(ddlPrerequisite.SelectedValue, courseName);
+        gvPrerequisite.DataSource = displayValue;
+        gvPrerequisite.DataBind();
+        Session["preCourseAdded"] = displayValue;
+        PopulatePrerequisite(ddlProgram.SelectedValue, ddlMajor.SelectedValue, displayValue);
+    }
     //Section
     protected void btnAddSection_Click(object sender, ImageClickEventArgs e)
     {
