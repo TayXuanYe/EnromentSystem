@@ -14,6 +14,7 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
             if (!IsPostBack)
             {
                 SetCourseInfoGridView();
+                PopulateSemester();
             }
         }
         else
@@ -95,7 +96,6 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
                 "FULL JOIN course_prerequisite AS cp ON course.cid = cp.cid FULL JOIN course_major AS cm ON course.cid = cm.cid "
             );
         }
-        Debug.WriteLine(condition);
         if (dataSet != null)
         {
             DataTable table = dataSet.Tables[0];
@@ -126,17 +126,36 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
     protected void gvCourseInfo_SelectedIndexChanged(object sender, EventArgs e)
     {
         string course = gvCourseInfo.SelectedRow.Cells[0].Text;
-        SetSectionInfoGridView(course, ddlSectionSemester.SelectedValue);
+        string program = gvCourseInfo.SelectedRow.Cells[6].Text;
+        SetSectionInfoGridView(course, ddlSectionSemester.SelectedValue, program);
     }
 
     //section part
-    private void SetSectionInfoGridView(string course,string semester)
+    private void PopulateSemester()
     {
         DataSet dataSet = null;
-        dataSet = DatabaseManager.GetRecord(
+        dataSet = DatabaseManager.GetDistinctRecord(
             "section",
-            new List<string> { "major" },
-            $@"INNER JOIN lecture as l ON section.lid = l.lid WHERE cid = '{course}' AND semester = '{semester}'"
+            new List<string> { "semester" }
+            );
+        if(dataSet != null)
+        {
+            List<string> value = new List<string>();
+            foreach(DataRow row in dataSet.Tables[0].Rows)
+            {
+                value.Add(row["semester"].ToString());
+            }
+            UIComponentGenerator.PopulateDropDownList(ddlSectionSemester, value, value);
+
+        }
+    }
+    private void SetSectionInfoGridView(string course, string semester, string program)
+    {
+        DataSet dataSet = null;
+        dataSet = DatabaseManager.GetRecord(   
+            "section",
+            new List<string> { "sid", "section.name", "l.name as lecture_name", "max_enroll" },
+            $@"INNER JOIN lecture as l ON section.lid = l.lid WHERE cid = '{course}' AND semester = '{semester}' AND program = '{program}'"
         );
         if (dataSet != null)
         {

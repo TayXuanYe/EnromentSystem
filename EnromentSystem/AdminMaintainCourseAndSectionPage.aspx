@@ -7,7 +7,7 @@
     Inherits="AdminMaintainCourseAndSectionPage" %>
 
 <asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminMaintainProgramMajorPage.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminMaintainCourseSectionPage.css") %>" />
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
@@ -79,7 +79,7 @@
     <asp:GridView ID="gvSectionInfo" runat="server" 
         AutoGenerateColumns="false" 
         CssClass="grid-view-section"
-        DataKeyNames="section" 
+        DataKeyNames="sid" 
         ShowHeaderWhenEmpty="True">
         <Columns>
             <asp:BoundField HeaderText="Section ID" DataField="sid" SortExpression="sid"/>

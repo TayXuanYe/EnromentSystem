@@ -84,7 +84,7 @@ INSERT INTO class
 
 INSERT INTO section
 (sid,name,cid,semester,lid,program,max_enroll,current_enroll) VALUES
-('PRG3201-AUG2024-8H1','8H1','PRG3201','AUG2024','L0000001','BITI',30,0)
+('PRG3201-AUG2024-8H1','8H1','PRG3201','AUG2024','L0000001','BITI - BACHELOR OF INFORMATION TECHNOLOGY(HONS)',30,0)
 INSERT INTO class
 (id,sid,time,class_room,type) VALUES
 ('PRG3201-AUG2024-8H1-1','PRG3201-AUG2024-8H1',42,'C1','lectural')
