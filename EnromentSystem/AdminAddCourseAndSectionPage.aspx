@@ -19,7 +19,9 @@
             <tr>
                 <td>Program</td>
                 <td>
-                    <asp:DropDownList ID="ddlProgram" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlProgram" runat="server" 
+                        OnSelectedIndexChanged="ddlProgram_SelectedIndexChanged"
+                        AutoPostBack="true"></asp:DropDownList>
                 </td>
                 <td>Major</td>
                 <td>
@@ -184,12 +186,7 @@
                     <tr>
                         <td>Lecture Class Lecturer Name</td>
                         <td>
-                            <asp:TextBox ID="txtLectureClassLecturerName" runat="server" ></asp:TextBox><br />
-                            <asp:RequiredFieldValidator runat="server" 
-                                ErrorMessage="This field is requited to add class"
-                                CssClass="validator"
-                                ControlToValidate="txtLectureClassLecturerName"
-                                ValidationGroup="addLecturerClass"></asp:RequiredFieldValidator>
+                            <asp:DropDownList ID="ddlLectureClassLecturer" runat="server"></asp:DropDownList>
                         </td>
                         <td>
                             <asp:ImageButton ID="btnAddLectureClass" runat="server" 
@@ -200,14 +197,17 @@
                         </td>
                     </tr>
                     <tr>
+                        <th></th>
+                        <td>
+                            <asp:Label ID="lblWarningLectureClassLecturer" runat="server" 
+                                CssClass="warning-label"
+                                Text="Pls select lecturer before add class"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Practical Class Lecturer Name</td>
                         <td>
-                            <asp:TextBox ID="txtPracticalClassLecturerName" runat="server"></asp:TextBox><br />
-                            <asp:RequiredFieldValidator runat="server" 
-                                ErrorMessage="This field is requited to add class"
-                                CssClass="validator"
-                                ControlToValidate="txtPracticalClassLecturerName"
-                                ValidationGroup="addPracticalClass"></asp:RequiredFieldValidator>
+                            <asp:DropDownList ID="ddlPracticalClassLecturer" runat="server"></asp:DropDownList>
                         </td>
                         <td>
                             <asp:ImageButton ID="btnAddPracticalClass" runat="server" 
@@ -215,6 +215,14 @@
                                 OnClick="btnAddPracticalClass_Click"
                                 ImageUrl="~/Images/edit.png"
                                 CssClass="add-class-button"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <asp:Label ID="lblWarningPracticalClassLecturer" runat="server" 
+                                CssClass="warning-label"
+                                Text="Pls select lecturer before add class"></asp:Label>
                         </td>
                     </tr>
                 </table>

@@ -56,6 +56,7 @@
 
 .course-details-table select {
     padding: 4px;
+
     max-width: 350px;
     width: 90%;
 }
@@ -71,8 +72,8 @@
 }
 
     .section-details-table td:nth-child(2n+1) {
-        width: 12%;
-        min-width: 12%;
+        width: 25%;
+/*        min-width: 12%;*/
         vertical-align: central;
     }
 
@@ -245,7 +246,8 @@ h2 {
    text-align:left;
 }
 
-.class-details-table input[type=text] {
+.class-details-table select {
+    min-width: 200px;
     padding: 4px;
     max-width: 350px;
     width: 100%;
@@ -283,8 +285,8 @@ h2 {
     border-radius: 100%;
     padding: 5px;
 /*    padding-top: 0px;*/
-    position: relative;
-    bottom: 4px;
+/*    position: relative;
+    bottom: 4px;*/
 }
 
 .add-class-button:hover{
@@ -295,7 +297,7 @@ h2 {
     
 }
 .class-details-table td:first-child{
-    vertical-align: top;
+    vertical-align: central;
     font-size: 14pt;
 }
 .class-details-table tr:first-child span{
@@ -306,3 +308,8 @@ h2 {
     width: 100vw;
 }
 
+.warning-label{
+    font-size: 10pt;
+    color:red;
+    display:none;
+}
