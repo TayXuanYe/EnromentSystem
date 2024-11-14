@@ -62,7 +62,7 @@
                 </div>
             </div>
             
-            <asp:Button ID="btnLogin" runat="server" Text="Login to Online Enrolment Portal" OnClick="btnLogin_Click" />
+            <asp:Button ID="btnLogin" runat="server" Text="Login to Admin Online Enrolment Portal" OnClick="btnLogin_Click" />
 
             <div class="terms">
                 <p>
