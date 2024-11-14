@@ -381,3 +381,67 @@ h2 {
         .grid-view-prerequisite input[type="image"]:hover {
             background-color: #eaeded;
         }
+
+
+.lblSelectingClass{
+    font-size: 16pt;
+    margin: 5px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.class-timetable-display-contain input[type=checkbox]{
+    display:block;
+    width: 50px;
+    height: 50px;
+    margin: 0px auto;
+}
+
+.class-timetable-display-contain div span {
+    display:block;
+    width: 50px;
+    height: 50px;
+        margin: 0px auto;
+}
+
+.unable-select-checkbox {
+    background-color: #ff0000;
+}
+
+.have-select-checkbox {
+    background-color: yellow;
+}
+
+
+.assign-classroom-contain{
+    padding: 0px 5%;
+}
+
+.assign-classroom-contain td:first-child {
+    padding: 5PX;
+    min-width: 100px;
+}
+/*    .assign-classroom-contain td:last-child {
+        display:none;
+        padding: 0px;
+        max-width: 0px;
+    }.assign-classroom-contain th:last-child {
+        display:none;
+        padding: 0px;
+        max-width: 0px;
+    }
+*/
+.assign-classroom-contain th {
+    padding: 5PX;
+}
+
+.assign-classroom-contain input {
+    border:none;
+    padding: 5PX;
+    height: 100%;
+    width: 100%;
+}
+    .assign-classroom-contain input:focus {
+        outline: none;
+        box-shadow: none;
+    }

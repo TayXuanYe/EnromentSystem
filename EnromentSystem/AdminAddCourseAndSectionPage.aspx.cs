@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iText.Layout.Element;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -171,6 +172,8 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         dataTable.AcceptChanges();
         gvPrerequisite.DataSource = dataTable;
         gvPrerequisite.DataBind();
+        Session["preCourseAdded"] = dataTable;
+        PopulatePrerequisite(ddlProgram.SelectedValue, ddlMajor.SelectedValue, dataTable);
     }
 
     protected void btnAddPrerequisite_Click(object sender, ImageClickEventArgs e)
@@ -201,7 +204,18 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         classWindows.Style["display"] = "flex";
         lblClassWindowsSectionName.Text = txtSectionName.Text;
         PopulateLecturer();
-        SetClassTimetable(Session["classInfo"] as DataSet);
+        //set class info session
+        DataSet classInfo = new DataSet();
+        DataTable lectureClass = new DataTable("lectureClass");
+        lectureClass.Columns.Add("classRoom", typeof(string));
+        lectureClass.Columns.Add("timeIndex", typeof(int));
+        DataTable practicalClass = new DataTable("practicalClass");
+        practicalClass.Columns.Add("classRoom", typeof(string));
+        practicalClass.Columns.Add("timeIndex", typeof(int));
+        classInfo.Tables.Add(lectureClass);
+        classInfo.Tables.Add(practicalClass);
+        Session["classInfo"] = classInfo;
+        SetClassTimetable(classInfo);
     }
 
     protected void gvSectionInfo_SelectedIndexChanged(object sender, EventArgs e)
@@ -397,18 +411,21 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
     {
         DataSet dataSet = DatabaseManager.GetRecord(
             "lecture",
-            new List<string> { "name" }
+            new List<string> { "name", "lid" }
             );
         if(dataSet != null)
         {
             List<string> value = new List<string>();
             value.Add("None");
+            List<string> text = new List<string>();
+            text.Add("None");
             foreach(DataRow row in dataSet.Tables[0].Rows)
             {
-                value.Add(row["name"].ToString());
+                value.Add(row["lid"].ToString());
+                text.Add(row["name"].ToString());
             }
-            UIComponentGenerator.PopulateDropDownList(ddlLectureClassLecturer,value,value);
-            UIComponentGenerator.PopulateDropDownList(ddlPracticalClassLecturer,value,value);
+            UIComponentGenerator.PopulateDropDownList(ddlLectureClassLecturer, text, value);
+            UIComponentGenerator.PopulateDropDownList(ddlPracticalClassLecturer, text, value);
         }
     }
 
@@ -424,6 +441,7 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
             lblSelectingClass.Text = "Lecture Class";
             selectClassWindow.Style["display"] = "flex";
             classWindows.Style["display"] = "none";
+            SetSelectTable(Session["classInfo"] as DataSet);
         }
     }
 
@@ -452,15 +470,682 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         classWindows.Style["display"] = "none";
     }
     //selectClassWindow
+    private void SetSelectTable(DataSet classInfo)
+    {
+        DataTable dt = new DataTable();
+        dt.Columns.Add("day", typeof(string));
+        dt.Rows.Add("Mon");
+        dt.Rows.Add("Tue");
+        dt.Rows.Add("Wed");
+        dt.Rows.Add("Thu");
+        dt.Rows.Add("Fri");
+        dt.Rows.Add("Sat");
+        dt.Rows.Add("Sun");
+        gvSelectClass.DataSource = dt;
+        gvSelectClass.DataBind();
+        //get lecture all time
+        string lecturer = "";
+        if(lblSelectingClass.Text == "Lecture Class")
+        {
+            lecturer = ddlLectureClassLecturer.SelectedValue;
+        }
+        else
+        {
+            lecturer = ddlPracticalClassLecturer.SelectedValue;
+        }
+
+        DataSet lectureTime = DatabaseManager.GetRecord(
+            "class",
+            new List<string> { "time" },
+            $@"JOIN section as s on s.sid = class.sid WHERE lid = '{lecturer}' "
+            );
+        HashSet<int> lecturerUseTime = new HashSet<int>();
+        if(lectureTime != null)
+        {
+            foreach (DataRow row in lectureTime.Tables[0].Rows)
+            {
+                lecturerUseTime.Add(int.Parse(row["time"].ToString()));
+            }
+        }
+        
+        for(int i = 0; i < gvSelectClass.Rows.Count; i++)
+        {
+            GridViewRow row = gvSelectClass.Rows[i];
+            CheckBox chkSelect08 = (CheckBox)row.FindControl("chkSelect08");
+            CheckBox chkSelect09 = (CheckBox)row.FindControl("chkSelect09");
+            CheckBox chkSelect10 = (CheckBox)row.FindControl("chkSelect10");
+            CheckBox chkSelect11 = (CheckBox)row.FindControl("chkSelect11");
+            CheckBox chkSelect12 = (CheckBox)row.FindControl("chkSelect12");
+            CheckBox chkSelect13 = (CheckBox)row.FindControl("chkSelect13");
+            CheckBox chkSelect14 = (CheckBox)row.FindControl("chkSelect14");
+            CheckBox chkSelect15 = (CheckBox)row.FindControl("chkSelect15");
+            CheckBox chkSelect16 = (CheckBox)row.FindControl("chkSelect16");
+            CheckBox chkSelect17 = (CheckBox)row.FindControl("chkSelect17");
+            CheckBox chkSelect18 = (CheckBox)row.FindControl("chkSelect18");
+            CheckBox chkSelect19 = (CheckBox)row.FindControl("chkSelect19");
+            CheckBox chkSelect20 = (CheckBox)row.FindControl("chkSelect20");
+            CheckBox chkSelect21 = (CheckBox)row.FindControl("chkSelect21");
+            CheckBox chkSelect22 = (CheckBox)row.FindControl("chkSelect22");
+
+            if (lecturerUseTime.Contains(i * 15 + 1))
+            {
+                DisableUnavailableCheckBox(chkSelect08);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 2))
+            {
+                DisableUnavailableCheckBox(chkSelect09);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 3))
+            {
+                DisableUnavailableCheckBox(chkSelect10);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 4))
+            {
+                DisableUnavailableCheckBox(chkSelect11);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 5))
+            {
+                DisableUnavailableCheckBox(chkSelect12);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 6))
+            {
+                DisableUnavailableCheckBox(chkSelect13);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 7))
+            {
+                DisableUnavailableCheckBox(chkSelect14);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 8))
+            {
+                DisableUnavailableCheckBox(chkSelect15);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 9))
+            {
+                DisableUnavailableCheckBox(chkSelect16);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 10))
+            {
+                DisableUnavailableCheckBox(chkSelect17);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 11))
+            {
+                DisableUnavailableCheckBox(chkSelect18);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 12))
+            {
+                DisableUnavailableCheckBox(chkSelect19);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 13))
+            {
+                DisableUnavailableCheckBox(chkSelect20);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 14))
+            {
+                DisableUnavailableCheckBox(chkSelect21);
+            }
+            if (lecturerUseTime.Contains(i * 15 + 15))
+            {
+                DisableUnavailableCheckBox(chkSelect22);
+            }
+        }
+
+        //get class time
+        DataTable lectureClass = classInfo.Tables["lectureClass"];
+        HashSet<int> lectureClassTime = new HashSet<int>();
+        foreach(DataRow row in lectureClass.Rows)
+        {
+            lectureClassTime.Add(int.Parse(row["timeIndex"].ToString()));
+        }
+
+        DataTable practicalClass = classInfo.Tables["practicalClass"];
+        HashSet<int> practicalClassTime = new HashSet<int>();
+        foreach (DataRow row in lectureClass.Rows)
+        {
+            practicalClassTime.Add(int.Parse(row["timeIndex"].ToString()));
+        }
+
+        //set check box curren class and disable the check box for another class
+        if(lblSelectingClass.Text == "Lecture Class")
+        {
+            for (int i = 0; i < gvSelectClass.Rows.Count; i++)
+            {
+                GridViewRow row = gvSelectClass.Rows[i];
+                CheckBox chkSelect08 = (CheckBox)row.FindControl("chkSelect08");
+                CheckBox chkSelect09 = (CheckBox)row.FindControl("chkSelect09");
+                CheckBox chkSelect10 = (CheckBox)row.FindControl("chkSelect10");
+                CheckBox chkSelect11 = (CheckBox)row.FindControl("chkSelect11");
+                CheckBox chkSelect12 = (CheckBox)row.FindControl("chkSelect12");
+                CheckBox chkSelect13 = (CheckBox)row.FindControl("chkSelect13");
+                CheckBox chkSelect14 = (CheckBox)row.FindControl("chkSelect14");
+                CheckBox chkSelect15 = (CheckBox)row.FindControl("chkSelect15");
+                CheckBox chkSelect16 = (CheckBox)row.FindControl("chkSelect16");
+                CheckBox chkSelect17 = (CheckBox)row.FindControl("chkSelect17");
+                CheckBox chkSelect18 = (CheckBox)row.FindControl("chkSelect18");
+                CheckBox chkSelect19 = (CheckBox)row.FindControl("chkSelect19");
+                CheckBox chkSelect20 = (CheckBox)row.FindControl("chkSelect20");
+                CheckBox chkSelect21 = (CheckBox)row.FindControl("chkSelect21");
+                CheckBox chkSelect22 = (CheckBox)row.FindControl("chkSelect22");
+
+                //set practical selected class disable
+                if (practicalClassTime.Contains(i * 15 + 1))
+                {
+                    DisableUsedCheckBox(chkSelect08);
+                }
+                if (practicalClassTime.Contains(i * 15 + 2))
+                {
+                    DisableUsedCheckBox(chkSelect09);
+                }
+                if (practicalClassTime.Contains(i * 15 + 3))
+                {
+                    DisableUsedCheckBox(chkSelect10);
+                }
+                if (practicalClassTime.Contains(i * 15 + 4))
+                {
+                    DisableUsedCheckBox(chkSelect11);
+                }
+                if (practicalClassTime.Contains(i * 15 + 5))
+                {
+                    DisableUsedCheckBox(chkSelect12);
+                }
+                if (practicalClassTime.Contains(i * 15 + 6))
+                {
+                    DisableUsedCheckBox(chkSelect13);
+                }
+                if (practicalClassTime.Contains(i * 15 + 7))
+                {
+                    DisableUsedCheckBox(chkSelect14);
+                }
+                if (practicalClassTime.Contains(i * 15 + 8))
+                {
+                    DisableUsedCheckBox(chkSelect15);
+                }
+                if (practicalClassTime.Contains(i * 15 + 9))
+                {
+                    DisableUsedCheckBox(chkSelect16);
+                }
+                if (practicalClassTime.Contains(i * 15 + 10))
+                {
+                    DisableUsedCheckBox(chkSelect17);
+                }
+                if (practicalClassTime.Contains(i * 15 + 11))
+                {
+                    DisableUsedCheckBox(chkSelect18);
+                }
+                if (practicalClassTime.Contains(i * 15 + 12))
+                {
+                    DisableUsedCheckBox(chkSelect19);
+                }
+                if (practicalClassTime.Contains(i * 15 + 13))
+                {
+                    DisableUsedCheckBox(chkSelect20);
+                }
+                if (practicalClassTime.Contains(i * 15 + 14))
+                {
+                    DisableUsedCheckBox(chkSelect21);
+                }
+                if (practicalClassTime.Contains(i * 15 + 15))
+                {
+                    DisableUsedCheckBox(chkSelect22);
+                }
+                //set lecturer selected check box checked
+                if (lectureClassTime.Contains(i * 15 + 1))
+                {
+                    CheckCheckBox(chkSelect08);
+                }
+                if (lectureClassTime.Contains(i * 15 + 2))
+                {
+                    CheckCheckBox(chkSelect09);
+                }
+                if (lectureClassTime.Contains(i * 15 + 3))
+                {
+                    CheckCheckBox(chkSelect10);
+                }
+                if (lectureClassTime.Contains(i * 15 + 4))
+                {
+                    CheckCheckBox(chkSelect11);
+                }
+                if (lectureClassTime.Contains(i * 15 + 5))
+                {
+                    CheckCheckBox(chkSelect12);
+                }
+                if (lectureClassTime.Contains(i * 15 + 6))
+                {
+                    CheckCheckBox(chkSelect13);
+                }
+                if (lectureClassTime.Contains(i * 15 + 7))
+                {
+                    CheckCheckBox(chkSelect14);
+                }
+                if (lectureClassTime.Contains(i * 15 + 8))
+                {
+                    CheckCheckBox(chkSelect15);
+                }
+                if (lectureClassTime.Contains(i * 15 + 9))
+                {
+                    CheckCheckBox(chkSelect16);
+                }
+                if (lectureClassTime.Contains(i * 15 + 10))
+                {
+                    CheckCheckBox(chkSelect17);
+                }
+                if (lectureClassTime.Contains(i * 15 + 11))
+                {
+                    CheckCheckBox(chkSelect18);
+                }
+                if (lectureClassTime.Contains(i * 15 + 12))
+                {
+                    CheckCheckBox(chkSelect19);
+                }
+                if (lectureClassTime.Contains(i * 15 + 13))
+                {
+                    CheckCheckBox(chkSelect20);
+                }
+                if (lectureClassTime.Contains(i * 15 + 14))
+                {
+                    CheckCheckBox(chkSelect21);
+                }
+                if (lectureClassTime.Contains(i * 15 + 15))
+                {
+                    CheckCheckBox(chkSelect22);
+                }
+            }
+
+        }
+        else
+        {
+            for (int i = 0; i < gvSelectClass.Rows.Count; i++)
+            {
+                GridViewRow row = gvSelectClass.Rows[i];
+                CheckBox chkSelect08 = (CheckBox)row.FindControl("chkSelect08");
+                CheckBox chkSelect09 = (CheckBox)row.FindControl("chkSelect09");
+                CheckBox chkSelect10 = (CheckBox)row.FindControl("chkSelect10");
+                CheckBox chkSelect11 = (CheckBox)row.FindControl("chkSelect11");
+                CheckBox chkSelect12 = (CheckBox)row.FindControl("chkSelect12");
+                CheckBox chkSelect13 = (CheckBox)row.FindControl("chkSelect13");
+                CheckBox chkSelect14 = (CheckBox)row.FindControl("chkSelect14");
+                CheckBox chkSelect15 = (CheckBox)row.FindControl("chkSelect15");
+                CheckBox chkSelect16 = (CheckBox)row.FindControl("chkSelect16");
+                CheckBox chkSelect17 = (CheckBox)row.FindControl("chkSelect17");
+                CheckBox chkSelect18 = (CheckBox)row.FindControl("chkSelect18");
+                CheckBox chkSelect19 = (CheckBox)row.FindControl("chkSelect19");
+                CheckBox chkSelect20 = (CheckBox)row.FindControl("chkSelect20");
+                CheckBox chkSelect21 = (CheckBox)row.FindControl("chkSelect21");
+                CheckBox chkSelect22 = (CheckBox)row.FindControl("chkSelect22");
+
+                //set lecturer selected class disable
+                if (lectureClassTime.Contains(i * 15 + 1))
+                {
+                    DisableUsedCheckBox(chkSelect08);
+                }
+                if (lectureClassTime.Contains(i * 15 + 2))
+                {
+                    DisableUsedCheckBox(chkSelect09);
+                }
+                if (lectureClassTime.Contains(i * 15 + 3))
+                {
+                    DisableUsedCheckBox(chkSelect10);
+                }
+                if (lectureClassTime.Contains(i * 15 + 4))
+                {
+                    DisableUsedCheckBox(chkSelect11);
+                }
+                if (lectureClassTime.Contains(i * 15 + 5))
+                {
+                    DisableUsedCheckBox(chkSelect12);
+                }
+                if (lectureClassTime.Contains(i * 15 + 6))
+                {
+                    DisableUsedCheckBox(chkSelect13);
+                }
+                if (lectureClassTime.Contains(i * 15 + 7))
+                {
+                    DisableUsedCheckBox(chkSelect14);
+                }
+                if (lectureClassTime.Contains(i * 15 + 8))
+                {
+                    DisableUsedCheckBox(chkSelect15);
+                }
+                if (lectureClassTime.Contains(i * 15 + 9))
+                {
+                    DisableUsedCheckBox(chkSelect16);
+                }
+                if (lectureClassTime.Contains(i * 15 + 10))
+                {
+                    DisableUsedCheckBox(chkSelect17);
+                }
+                if (lectureClassTime.Contains(i * 15 + 11))
+                {
+                    DisableUsedCheckBox(chkSelect18);
+                }
+                if (lectureClassTime.Contains(i * 15 + 12))
+                {
+                    DisableUsedCheckBox(chkSelect19);
+                }
+                if (lectureClassTime.Contains(i * 15 + 13))
+                {
+                    DisableUsedCheckBox(chkSelect20);
+                }
+                if (lectureClassTime.Contains(i * 15 + 14))
+                {
+                    DisableUsedCheckBox(chkSelect21);
+                }
+                if (lectureClassTime.Contains(i * 15 + 15))
+                {
+                    DisableUsedCheckBox(chkSelect22);
+                }
+                //set practical selected check box checked
+                if (practicalClassTime.Contains(i * 15 + 1))
+                {
+                    CheckCheckBox(chkSelect08);
+                }
+                if (practicalClassTime.Contains(i * 15 + 2))
+                {
+                    CheckCheckBox(chkSelect09);
+                }
+                if (practicalClassTime.Contains(i * 15 + 3))
+                {
+                    CheckCheckBox(chkSelect10);
+                }
+                if (practicalClassTime.Contains(i * 15 + 4))
+                {
+                    CheckCheckBox(chkSelect11);
+                }
+                if (practicalClassTime.Contains(i * 15 + 5))
+                {
+                    CheckCheckBox(chkSelect12);
+                }
+                if (practicalClassTime.Contains(i * 15 + 6))
+                {
+                    CheckCheckBox(chkSelect13);
+                }
+                if (practicalClassTime.Contains(i * 15 + 7))
+                {
+                    CheckCheckBox(chkSelect14);
+                }
+                if (practicalClassTime.Contains(i * 15 + 8))
+                {
+                    CheckCheckBox(chkSelect15);
+                }
+                if (practicalClassTime.Contains(i * 15 + 9))
+                {
+                    CheckCheckBox(chkSelect16);
+                }
+                if (practicalClassTime.Contains(i * 15 + 10))
+                {
+                    CheckCheckBox(chkSelect17);
+                }
+                if (practicalClassTime.Contains(i * 15 + 11))
+                {
+                    CheckCheckBox(chkSelect18);
+                }
+                if (practicalClassTime.Contains(i * 15 + 12))
+                {
+                    CheckCheckBox(chkSelect19);
+                }
+                if (practicalClassTime.Contains(i * 15 + 13))
+                {
+                    CheckCheckBox(chkSelect20);
+                }
+                if (practicalClassTime.Contains(i * 15 + 14))
+                {
+                    CheckCheckBox(chkSelect21);
+                }
+                if (practicalClassTime.Contains(i * 15 + 15))
+                {
+                    CheckCheckBox(chkSelect22);
+                }
+            }
+
+        }
+    }
+
+    private CheckBox DisableUnavailableCheckBox(CheckBox checkBox)
+    {
+        checkBox.Enabled = false;
+        checkBox.CssClass = "unable-select-checkbox";
+        return checkBox;
+    }
+
+    private CheckBox DisableUsedCheckBox(CheckBox checkBox)
+    {
+        checkBox.Enabled = false;
+        checkBox.CssClass = "unable-select-checkbox";
+        return checkBox;
+    }
+    
+    private CheckBox CheckCheckBox(CheckBox checkBox)
+    {
+        checkBox.Checked = true;
+        return checkBox;
+    }
+
     protected void btnContinueSelectClass_Click(object sender, EventArgs e)
     {
+        List<int> selectedTime = new List<int>();
+        for (int i = 0; i < gvSelectClass.Rows.Count; i++)
+        {
+            GridViewRow row = gvSelectClass.Rows[i];
+            CheckBox chkSelect08 = (CheckBox)row.FindControl("chkSelect08");
+            CheckBox chkSelect09 = (CheckBox)row.FindControl("chkSelect09");
+            CheckBox chkSelect10 = (CheckBox)row.FindControl("chkSelect10");
+            CheckBox chkSelect11 = (CheckBox)row.FindControl("chkSelect11");
+            CheckBox chkSelect12 = (CheckBox)row.FindControl("chkSelect12");
+            CheckBox chkSelect13 = (CheckBox)row.FindControl("chkSelect13");
+            CheckBox chkSelect14 = (CheckBox)row.FindControl("chkSelect14");
+            CheckBox chkSelect15 = (CheckBox)row.FindControl("chkSelect15");
+            CheckBox chkSelect16 = (CheckBox)row.FindControl("chkSelect16");
+            CheckBox chkSelect17 = (CheckBox)row.FindControl("chkSelect17");
+            CheckBox chkSelect18 = (CheckBox)row.FindControl("chkSelect18");
+            CheckBox chkSelect19 = (CheckBox)row.FindControl("chkSelect19");
+            CheckBox chkSelect20 = (CheckBox)row.FindControl("chkSelect20");
+            CheckBox chkSelect21 = (CheckBox)row.FindControl("chkSelect21");
+            CheckBox chkSelect22 = (CheckBox)row.FindControl("chkSelect22");
 
+            if (chkSelect08.Checked)
+            {
+                selectedTime.Add(i * 15 + 1);
+            }
+            if (chkSelect09.Checked)
+            {
+                selectedTime.Add(i * 15 + 2);
+            }
+            if (chkSelect10.Checked)
+            {
+                selectedTime.Add(i * 15 + 3);
+            }
+            if (chkSelect11.Checked)
+            {
+                selectedTime.Add(i * 15 + 4);
+            }
+            if (chkSelect12.Checked)
+            {
+                selectedTime.Add(i * 15 + 5);
+            }
+            if (chkSelect13.Checked)
+            {
+                selectedTime.Add(i * 15 + 6);
+            }
+            if (chkSelect14.Checked)
+            {
+                selectedTime.Add(i * 15 + 7);
+            }
+            if (chkSelect15.Checked)
+            {
+                selectedTime.Add(i * 15 + 8);
+            }
+            if (chkSelect16.Checked)
+            {
+                selectedTime.Add(i * 15 + 9);
+            }
+            if (chkSelect17.Checked)
+            {
+                selectedTime.Add(i * 15 + 10);
+            }
+            if (chkSelect18.Checked)
+            {
+                selectedTime.Add(i * 15 + 11);
+            }
+            if (chkSelect19.Checked)
+            {
+                selectedTime.Add(i * 15 + 12);
+            }
+            if (chkSelect20.Checked)
+            {
+                selectedTime.Add(i * 15 + 13);
+            }
+            if (chkSelect21.Checked)
+            {
+                selectedTime.Add(i * 15 + 14);
+            }
+            if (chkSelect22.Checked)
+            {
+                selectedTime.Add(i * 15 + 15);
+            }
+        }
+        if(selectedTime.Count > 0)
+        {
+            lblNoTimeSelected.Style["display"] = "none";
+            SetAssignClassroom(selectedTime);
+            assignClassroomWindow.Style["display"] = "flex";
+            selectClassWindow.Style["display"] = "none";
+        }
+        else
+        {
+            lblNoTimeSelected.Style["display"] = "inline";
+        }
     }
 
     protected void btnCancelSelectClass_Click(object sender, EventArgs e)
     {
         classWindows.Style["display"] = "flex";
+        lblNoTimeSelected.Style["display"] = "none";
         selectClassWindow.Style["display"] = "none";
+    }
+    //assign classrom window
+    private void SetAssignClassroom(List<int> timeIndex)
+    {
+        DataTable dt = new DataTable();
+        dt.Columns.Add("timeDay",typeof(string));
+        dt.Columns.Add("timeIndex",typeof(int));
+        timeIndex.Sort();
+        for(int i = 0; i < timeIndex.Count; i++)
+        {
+            DataRow row = dt.NewRow();
+            row["timeIndex"] = timeIndex[i];
+            string timeDay = "";
+            switch (timeIndex[i] / 16)
+            {
+                case 0:
+                    timeDay += "Mon - ";
+                    break;
+                case 1:
+                    timeDay += "Tue - ";
+                    break;
+                case 2:
+                    timeDay += "Wen - ";
+                    break;
+                case 3:
+                    timeDay += "Thu - ";
+                    break;
+                case 4:
+                    timeDay += "Fri - ";
+                    break;
+                case 5:
+                    timeDay += "Sat - ";
+                    break;
+                case 6:
+                    timeDay += "Sun - ";
+                    break;
+            }
+            switch (timeIndex[i] % 15)
+            {
+                case 1:
+                    timeDay += "0800";
+                    break;
+                case 2:
+                    timeDay += "0900";
+                    break;
+                case 3:
+                    timeDay += "1000";
+                    break;
+                case 4:
+                    timeDay += "1100";
+                    break;
+                case 5:
+                    timeDay += "1200";
+                    break;
+                case 6:
+                    timeDay += "1300";
+                    break;
+                case 7:
+                    timeDay += "1400";
+                    break;
+                case 8:
+                    timeDay += "1500";
+                    break;
+                case 9:
+                    timeDay += "1600";
+                    break;
+                case 10:
+                    timeDay += "1700";
+                    break;
+                case 11:
+                    timeDay += "1800";
+                    break;
+                case 12:
+                    timeDay += "1900";
+                    break;
+                case 13:
+                    timeDay += "2000";
+                    break;
+                case 14:
+                    timeDay += "2100";
+                    break;
+                case 0:
+                    timeDay += "2200";
+                    break;
+            }
+            row["timeDay"] = timeDay;
+            dt.Rows.Add(row);
+        }
+        gvAssignClassroom.DataSource = dt;
+        gvAssignClassroom.DataBind();
+    }
+
+    protected void CheckClassIsUsed_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        CustomValidator validator = (CustomValidator)source;
+        GridViewRow row = (GridViewRow)validator.NamingContainer;
+        int rowIndex = row.RowIndex;
+        string inputValue = args.Value;
+        int timeIndex = int.Parse(row.Cells[2].Text);
+        DataSet dataSet = DatabaseManager.GetRecord(
+            "class",
+            new List<string> { "time" },
+            $@"WHERE time = '{timeIndex}' AND class_room = '{inputValue}'"
+            );  
+        if(dataSet != null)
+        {
+            if (dataSet.Tables[0].Rows.Count == 0)
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+        }
+    }
+
+    protected void btnSaveAssignClassroom_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnCancelAssignClassroom_Click(object sender, EventArgs e)
+    {
+        selectClassWindow.Style["display"] = "flex";
+        assignClassroomWindow.Style["display"] = "none";
     }
 
     //btn bottom

@@ -5,7 +5,8 @@ INSERT INTO student
 
 INSERT INTO lecture
 (lid,name,password) values
-('L0000001','test lecturer 1','test1')
+('L0000001','test lecturer 1','test1'),
+('L0000002','test lecturer 2','test2')
 /*school:'GBL000 TEST'*/
 INSERT INTO school values('GBL000 TEST')
 INSERT INTO program VALUES('TTTT - TEST','GBL000 TEST','Foundation')

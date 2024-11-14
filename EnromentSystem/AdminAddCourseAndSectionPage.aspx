@@ -294,35 +294,158 @@
 
     <asp:Panel ID="selectClassWindow" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
-            <asp:Label ID="lblSelectingClass" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="lblSelectingClass" runat="server" CssClass="lblSelectingClass"></asp:Label>
             <div class="class-timetable-display-contain">
                 <asp:GridView ID="gvSelectClass" runat="server" AutoGenerateColumns="false">
                     <Columns>
-                        <asp:BoundField HeaderText="Day" DataField="day" SortExpression="day"/>     
-                        <asp:BoundField HeaderText="0800" DataField="0800" SortExpression="0800"/>     
-                        <asp:BoundField HeaderText="0900" DataField="0900" SortExpression="0900"/>     
-                        <asp:BoundField HeaderText="1000" DataField="1000" SortExpression="1000"/>     
-                        <asp:BoundField HeaderText="1100" DataField="1100" SortExpression="1100"/>     
-                        <asp:BoundField HeaderText="1200" DataField="1200" SortExpression="1200"/>     
-                        <asp:BoundField HeaderText="1300" DataField="1300" SortExpression="1300"/>     
-                        <asp:BoundField HeaderText="1400" DataField="1400" SortExpression="1400"/>     
-                        <asp:BoundField HeaderText="1500" DataField="1500" SortExpression="1500"/>     
-                        <asp:BoundField HeaderText="1600" DataField="1600" SortExpression="1600"/>     
-                        <asp:BoundField HeaderText="1700" DataField="1700" SortExpression="1700"/>     
-                        <asp:BoundField HeaderText="1800" DataField="1800" SortExpression="1800"/>     
-                        <asp:BoundField HeaderText="1900" DataField="1900" SortExpression="1900"/>     
-                        <asp:BoundField HeaderText="2000" DataField="2000" SortExpression="2000"/>     
-                        <asp:BoundField HeaderText="2100" DataField="2100" SortExpression="2100"/>     
-                        <asp:BoundField HeaderText="2200" DataField="2200" SortExpression="2200"/>          
+                        <asp:BoundField HeaderText="Day" DataField="day" SortExpression="day"/>
+
+                        <asp:TemplateField HeaderText="0800">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect08" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        
+                        <asp:TemplateField HeaderText="0900">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect09" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        
+                        <asp:TemplateField HeaderText="1000">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect10" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        
+                        <asp:TemplateField HeaderText="1100">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect11" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        
+                        <asp:TemplateField HeaderText="1200">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect12" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        
+                        <asp:TemplateField HeaderText="1300">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect13" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        
+                        <asp:TemplateField HeaderText="1400">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect14" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+      
+                        <asp:TemplateField HeaderText="1500">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect15" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+      
+                        <asp:TemplateField HeaderText="1600">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect16" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+      
+                        <asp:TemplateField HeaderText="1700">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect17" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+      
+                        <asp:TemplateField HeaderText="1800">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect18" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+      
+                        <asp:TemplateField HeaderText="1900">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect19" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+      
+                        <asp:TemplateField HeaderText="2000">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect20" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+      
+                        <asp:TemplateField HeaderText="2100">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect21" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+      
+                        <asp:TemplateField HeaderText="2200">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect22" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+      
                     </Columns>
                 </asp:GridView>
+                <asp:Label ID="lblNoTimeSelected" runat="server" Text="Pls select atleast one time" CssClass="warning-label"></asp:Label>
             </div>
             <div class="button-container">
-                <asp:Button runat="server" Text="Continue" OnClick="btnContinueSelectClass_Click" ValidationGroup="class-windows"/>
+                <asp:Button runat="server" Text="Continue" OnClick="btnContinueSelectClass_Click" CausesValidation="false"/>
                 <asp:Button runat="server" Text="Cancel" OnClick="btnCancelSelectClass_Click" CausesValidation="false"/>
             </div>
         </div>
     </asp:Panel>
+
+    <asp:Panel ID="assignClassroomWindow" runat="server" CssClass="pop-up-windows">
+        <div class="windows-contain">
+            <div class="assign-classroom-contain">
+                <asp:GridView ID="gvAssignClassroom" runat="server" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundField HeaderText="Day & Time" DataField="timeDay" SortExpression="timeDay"/>
+
+                        <asp:TemplateField HeaderText="Class room">
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtClassRoomName" runat="server" ValidationGroup="assignClassroom"></asp:TextBox><br />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                                    ErrorMessage="This field is require"
+                                    CssClass="validator"
+                                    ControlToValidate="txtClassRoomName"
+                                    Display="Dynamic"
+                                    ValidationGroup="assignClassroom"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator 
+                                    ID="RegularExpressionValidator2" 
+                                    runat="server" 
+                                    ControlToValidate="txtClassRoomName"
+                                    Display="dynamic"
+                                    CssClass="validator"
+                                    ErrorMessage="This field only accept capital letter, number and space"
+                                    ValidationExpression="[A-Z][A-Z\d\s]+"
+                                    ValidationGroup="assignClassroom"></asp:RegularExpressionValidator>
+                                <asp:CustomValidator ID="CustomValidator1" runat="server" 
+                                    ErrorMessage="This class have been use in this time"
+                                    CssClass="validator"
+                                    ControlToValidate="txtClassRoomName"
+                                    Display="Dynamic"
+                                    OnServerValidate="CheckClassIsUsed_ServerValidate"
+                                    ValidationGroup="assignClassroom"></asp:CustomValidator>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="timeIndex"/>     
+                    </Columns>
+                </asp:GridView>
+            </div>
+            <div class="button-container">
+                <asp:Button runat="server" Text="Save" OnClick="btnSaveAssignClassroom_Click" ValidationGroup="assignClassroom"/>
+                <asp:Button runat="server" Text="Cancel" OnClick="btnCancelAssignClassroom_Click" CausesValidation="false"/>
+            </div>
+        </div>
+    </asp:Panel>
+    
 
 </asp:Content>
 
