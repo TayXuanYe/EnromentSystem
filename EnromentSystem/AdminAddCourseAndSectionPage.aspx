@@ -98,18 +98,35 @@
     <div class="table-contain">
         <table class="section-details-table">
             <tr>
-                <td>Session Name</td>
+                <td>Section Name</td>
                 <td>
                     <div>
-                        <asp:TextBox ID="txtSessionName" runat="server"></asp:TextBox>
-                        <asp:ImageButton ID="btnAddSession" runat="server" OnClick="btnAddSession_Click" ImageUrl="~/Images/add.png"/>
+                        <asp:TextBox ID="txtSectionName" runat="server"></asp:TextBox>
+                        <asp:ImageButton ID="btnAddSection" runat="server" 
+                            OnClick="btnAddSection_Click" 
+                            ImageUrl="~/Images/add.png" 
+                            ValidationGroup="section"/>
                     </div>
                     <asp:RegularExpressionValidator runat="server" 
                         ErrorMessage="This field only accept alphabet"
                         CssClass="validator"
-                        ControlToValidate="txtSessionName"
+                        ControlToValidate="txtSectionName"
                         Display="Dynamic"
-                        ValidationExpression="[A-Za-z][A-Za-z\s]+"></asp:RegularExpressionValidator>
+                        ValidationExpression="[A-Za-z][A-Za-z\s]+"
+                        ValidationGroup="section"></asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator runat="server" 
+                        ErrorMessage="This field is require"
+                        CssClass="validator"
+                        ControlToValidate="txtSectionName"
+                        Display="Dynamic"
+                        ValidationGroup="section"></asp:RequiredFieldValidator>
+                    <asp:CustomValidator runat="server" 
+                        ErrorMessage="Pls fill in course details before create section"
+                        ValidationGroup="section"
+                        CssClass="validator"
+                        ControlToValidate="txtSectionName"
+                        Display="Dynamic"
+                        OnServerValidate="CheckCourseDetailsFillIn_ServerValidate"></asp:CustomValidator>
                 </td>
                 
             </tr>

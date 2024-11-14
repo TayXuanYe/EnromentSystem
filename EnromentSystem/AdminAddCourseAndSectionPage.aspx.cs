@@ -15,7 +15,31 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
             SetClassTimetable();
         }
     }
-    
+    //Section
+    protected void btnAddSection_Click(object sender, ImageClickEventArgs e)
+    {
+
+    }
+
+
+    protected void gvSectionInfo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+
+    protected void gvSectionInfo_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "view")
+        {
+
+        }
+    }
+
+    protected void CheckCourseDetailsFillIn_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+
+    }
     // class select pop up windows
     private void SetClassTimetable()
     {
@@ -68,43 +92,22 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         classWindows.Style["display"] = "none";
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="source"></param>
-    /// <param name="args"></param>
 
+    //course part
     protected void CheckCourseIdIsExist_ServerValidate(object source, ServerValidateEventArgs args)
     {
 
     }
 
-    protected void btnAddSession_Click(object sender, ImageClickEventArgs e)
-    {
-
-    }
-
-    protected void gvSectionInfo_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    protected void gvSectionInfo_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-        if(e.CommandName == "view")
-        {
-
-        }
-    }
-
+    
+    //btn bottom
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("AdminMaintainCourseAndSectionPage.aspx");
     }
 
     protected void btnAddCourse_Click(object sender, EventArgs e)
     {
 
     }
-
 }
