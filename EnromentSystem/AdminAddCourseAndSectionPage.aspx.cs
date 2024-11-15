@@ -241,14 +241,33 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
 
     protected void gvSectionInfo_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        string name = gvSectionInfo.SelectedRow.Cells[0].Text;
+        DataTable dataTable = Session["sectionAdded"] as DataTable;
+        for (int i = dataTable.Rows.Count - 1; i >= 0; i--)
+        {
+            if (dataTable.Rows[i]["name"].ToString() == name)
+            {
+                dataTable.Rows[i].Delete();
+            }
+        }
+        dataTable.AcceptChanges();
+        gvSectionInfo.DataSource = dataTable;
+        gvSectionInfo.DataBind();
+        Session[name + "_class_info"] = null;
+        Session[name + "_practical_lecturer"] = null;
+        Session[name + "_lecture_lecturer"] = null;
     }
 
     protected void gvSectionInfo_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "view")
         {
-            Debug.WriteLine("txt:");
+            string name = e.CommandArgument.ToString();
+            Session["classInfo"] = Session[name + "_class_info"];
+            classWindows.Style["display"] = "flex";
+            lblClassWindowsSectionName.Text = name;
+            PopulateLecturer();
+            SetClassTimetable(Session["classInfo"] as DataSet);
         }
     }
     // class select pop up windows
