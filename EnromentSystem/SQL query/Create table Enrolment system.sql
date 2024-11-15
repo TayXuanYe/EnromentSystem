@@ -113,7 +113,7 @@ CREATE TABLE section(
 	semester varchar(255),
 	program varchar(255),
 	max_enroll int,
-	current_enroll int,
+	current_enroll INT DEFAULT 0,
 	FOREIGN KEY (cid) REFERENCES course(cid),
 )
 

@@ -1,8 +1,6 @@
-﻿using Microsoft.Ajax.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -104,6 +102,11 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         empty.Columns.Add("name", typeof(string));
         gvPrerequisite.DataSource = empty;
         gvPrerequisite.DataBind();
+        //empty section select
+        Session["sectionAdded"] = null;
+        List<Section> sectionsAdded = new List<Section>();
+        Session["sectionAdded"] = sectionsAdded;
+        SetSectionInfoTable(sectionsAdded);
     }
 
     protected void ddlMajor_SelectedIndexChanged(object sender, EventArgs e)
@@ -120,6 +123,11 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         empty.Columns.Add("name", typeof(string));
         gvPrerequisite.DataSource = empty;
         gvPrerequisite.DataBind();
+        //empty section select
+        Session["sectionAdded"] = null;
+        List<Section> sectionsAdded = new List<Section>();
+        Session["sectionAdded"] = sectionsAdded;
+        SetSectionInfoTable(sectionsAdded);
     }
 
     private void PopulatePrerequisite(string program, string major, DataTable addedCourse)
@@ -216,7 +224,7 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
             //get current semester
             DataSet semesterData = DatabaseManager.GetRecord(
                 "current_semester",
-                new List<string> { "semetser" }
+                new List<string> { "semester" }
                 );
             string currentSemester = "";
             if(semesterData != null)
@@ -1353,37 +1361,69 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
 
     protected void btnAddCourse_Click(object sender, EventArgs e)
     {
-        //DatabaseManager.InsertData(
-        //    "course",
-        //    new List<string> { "cid", "name", "credit_hours", "available", "price" },
-        //    new List<object> { txtCourseId.Text, txtCourseName.Text, ddlCreditHours.SelectedValue, "1", txtPrice.Text }
-        //    );
-        //DatabaseManager.InsertData(
-        //    "course_major",
-        //    new List<string> { "cid", "major", "program" },
-        //    new List<object> { txtCourseId.Text, ddlMajor.SelectedValue, ddlProgram.SelectedValue }
-        //    );
-        //DataTable preCourseAdded = Session["preCourseAdded"] as DataTable;
-        //if(preCourseAdded != null)
-        //{
-        //    foreach(DataRow row in preCourseAdded.Rows)
-        //    {
-        //        DatabaseManager.InsertData(
-        //            "course_prerequisite",
-        //            new List<string> { "cid", "prerequisite" },
-        //            new List<object> { txtCourseId.Text, row["cid"].ToString() }
-        //            );
-        //    }
-        //}
-        //DataTable sectionAdded = Session["sectionAdded"] as DataTable;
-        //if(sectionAdded != null)
-        //{
-        //    foreach(DataRow row in sectionAdded.Rows)
-        //    {
-        //        string name = row["name"].ToString();
-        //    }
-        //}
-
+        //insert course
+        DatabaseManager.InsertData(
+            "course",
+            new List<string> { "cid", "name", "credit_hours", "available", "price" },
+            new List<object> { txtCourseId.Text, txtCourseName.Text, ddlCreditHours.SelectedValue, "1", txtPrice.Text }
+            );
+        //course major
+        DatabaseManager.InsertData(
+            "course_major",
+            new List<string> { "cid", "major", "program" },
+            new List<object> { txtCourseId.Text, ddlMajor.SelectedValue, ddlProgram.SelectedValue }
+            );
+        //pre requisite
+        DataTable preCourseAdded = Session["preCourseAdded"] as DataTable;
+        if (preCourseAdded != null)
+        {
+            foreach (DataRow row in preCourseAdded.Rows)
+            {
+                DatabaseManager.InsertData(
+                    "course_prerequisite",
+                    new List<string> { "cid", "prerequisite" },
+                    new List<object> { txtCourseId.Text, row["cid"].ToString() }
+                    );
+            }
+        }
+        //section and class
+        List<Section> sectionAdded = Session["sectionAdded"] as List<Section>;
+        if (sectionAdded != null)
+        {
+            for (int i = 0; i < sectionAdded.Count; i++)
+            {
+                DatabaseManager.InsertData(
+                    "section",
+                    new List<string> { "sid", "name", "cid", "semester", "program", "max_enroll" },
+                    new List<object> { sectionAdded[i].sectionId, sectionAdded[i].name, sectionAdded[i].courseId,
+                        sectionAdded[i].semester, ddlProgram.SelectedValue, sectionAdded[i].maxEnrollAllow }
+                    );
+                List<Class> lectureClass = sectionAdded[i].lectureClass;
+                List<Class> practicalClass = sectionAdded[i].practicalClass;
+                for (int j = 0; j < lectureClass.Count; j++)
+                {
+                    DatabaseManager.InsertData(
+                        "class",
+                        new List<string> { "id", "sid", "time", "class_room", "lid", "type" },
+                        new List<object> { lectureClass[j].classId, sectionAdded[i].sectionId, lectureClass[j].timeIndex,
+                            lectureClass[j].classRoom, lectureClass[j].lecturerId, lectureClass[j].classType
+                        }
+                        );
+                }
+                
+                for (int j = 0; j < practicalClass.Count; j++)
+                {
+                    DatabaseManager.InsertData(
+                        "class",
+                        new List<string> { "id", "sid", "time", "class_room", "lid", "type" },
+                        new List<object> { practicalClass[j].classId, sectionAdded[i].sectionId, practicalClass[j].timeIndex,
+                            practicalClass[j].classRoom, practicalClass[j].lecturerId, practicalClass[j].classType
+                        }
+                        );
+                }
+            }
+        }
+        successfulWindow.Style["display"] = "flex";
     }
 
 }
