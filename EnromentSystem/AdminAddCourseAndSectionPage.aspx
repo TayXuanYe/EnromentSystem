@@ -167,7 +167,6 @@
                         OnServerValidate="CheckSectionIsExist_ServerValidate"
                         ValidationGroup="section"></asp:CustomValidator>
                 </td>
-                
             </tr>
         </table>
     </div>
@@ -222,10 +221,6 @@
             <div class="class-details-table-contain">
                 <table class="class-details-table">
                     <tr>
-                        <td>Section Name</td>
-                        <td><asp:Label ID="lblClassWindowsSectionName" runat="server"></asp:Label></td>
-                    </tr>
-                    <tr>
                         <th>Class Type</th>
                     </tr>
                     <tr>
@@ -242,6 +237,7 @@
                                 ImageUrl="~/Images/edit.png"
                                 CssClass="add-class-button"/>
                         </td>
+
                     </tr>
                     <tr>
                         <th></th>
@@ -276,6 +272,47 @@
                         </td>
                     </tr>
                 </table>
+                <table class="class-details-table">
+                    <tr>
+                        <th>
+                            &nbsp
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>Section Name</td>
+                        <td><asp:Label ID="lblClassWindowsSectionName" runat="server" CssClass="lblClassWindowsSectionName"></asp:Label></td>
+                    </tr>  
+                    <tr>
+                        <th>
+  
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>Maximum Enroll Allow</td>
+                        <td>
+                            <asp:TextBox ID="txtMaxEnroll" runat="server" TextMode="Number"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                        </th>
+                        <td>
+                            <asp:RequiredFieldValidator runat="server" 
+                            ErrorMessage="This field is require"
+                            CssClass="validator"
+                            ControlToValidate="txtMaxEnroll"
+                            Display="Dynamic"
+                            ValidationGroup="classWindows"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator runat="server" 
+                            ErrorMessage="This field only accept number"
+                            CssClass="validator"
+                            ControlToValidate="txtMaxEnroll"
+                            Display="Dynamic"
+                            ValidationExpression="\d+"
+                            ValidationGroup="classWindows"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="class-timetable-display-contain">
                 <asp:GridView ID="gvClassTimetable" runat="server" AutoGenerateColumns="false">
@@ -305,7 +342,7 @@
                 Text="Class are requited!"></asp:Label>
             </div>
             <div class="button-container">
-                <asp:Button runat="server" Text="Add" OnClick="btnAddClass_Click" ValidationGroup="class-windows"/>
+                <asp:Button runat="server" Text="Add" OnClick="btnAddClass_Click" ValidationGroup="classWindows"/>
                 <asp:Button runat="server" Text="Exit" OnClick="btnCancelAddClass_Click" CausesValidation="false"/>
             </div>
         </div>

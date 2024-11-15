@@ -257,6 +257,13 @@ h2 {
     width: 100%;
 }
 
+.class-details-table input[type=number] {
+    min-width: 200px;
+    padding: 4px;
+    max-width: 350px;
+    width: 100%;
+}
+
 .class-details-table input[type=checkbox] {
     margin: 4px;
     width: 25px;
@@ -273,7 +280,8 @@ h2 {
 }
 
     .class-timetable-display-contain td {
-        width: 70px;
+        width: 100px;
+        height: 80px;
     }
 
 .class-details-table-contain, .class-timetable-display-contain {
@@ -281,17 +289,31 @@ h2 {
     padding: 0px 5%;
 }
 
+    .class-details-table-contain{
+        width: 100%;
+        display:flex;
+    }
 
-.add-class-button{
-    width: 35px;
-    height: 35px;
-    border: solid #FFF;
-    border-radius: 100%;
-    padding: 5px;
-/*    padding-top: 0px;*/
-/*    position: relative;
+    .class-details-table-contain table{
+        margin-right: 15px;
+    }
+
+        .class-details-table-contain table .lblClassWindowsSectionName {
+            /*        display: block;*/
+            font-size: 14pt;
+            text-align: center;
+            height: 100%;
+        }
+    .add-class-button {
+        width: 35px;
+        height: 35px;
+        border: solid #FFF;
+        border-radius: 100%;
+        padding: 5px;
+        /*    padding-top: 0px;*/
+        /*    position: relative;
     bottom: 4px;*/
-}
+    }
 
 .add-class-button:hover{
     background-color:#eee;

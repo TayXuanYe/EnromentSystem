@@ -50,54 +50,56 @@ INSERT INTO course_major
 
 
 INSERT INTO section
-(sid,name,cid,semester,lid,program,max_enroll,current_enroll) VALUES
-('PRG3201-AUG2024-8G1','8G1','PRG3201','AUG2024','L0000001','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)',30,0)
-INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8G1-1','PRG3201-AUG2024-8G1',40,'C1','LECTURE')
-INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8G1-2','PRG3201-AUG2024-8G1',41,'C1','LECTURE')
-INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8G1-3','PRG3201-AUG2024-8G1',8,'C1','PRACTICAL')
-INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8G1-4','PRG3201-AUG2024-8G1',9,'C1','PRACTICAL')
-
+(sid, name, cid, semester, program, max_enroll, current_enroll) VALUES
+('PRG3201-AUG2024-8G1', '8G1', 'PRG3201', 'AUG2024', 'BCSI - BACHELER OF COMPUTER SCIENCES (HONS)', 30, 0);
 
 INSERT INTO section
-(sid,name,cid,semester,lid,program,max_enroll,current_enroll) VALUES
-('PRG3201-AUG2024-8G2','8G2','PRG3201','AUG2024','L0000001','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)',30,0)
-INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8G2-1','PRG3201-AUG2024-8G2',42,'C1','LECTURE')
-INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8G2-2','PRG3201-AUG2024-8G2',43,'C1','LECTURE')
-INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8G2-3','PRG3201-AUG2024-8G2',7,'C1','PRACTICAL')
-INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8G2-4','PRG3201-AUG2024-8G2',6,'C1','PRACTICAL')
-
+(sid, name, cid, semester, program, max_enroll, current_enroll) VALUES
+('PRG3201-AUG2024-8G2', '8G2', 'PRG3201', 'AUG2024', 'BCSI - BACHELER OF COMPUTER SCIENCES (HONS)', 30, 0);
 
 INSERT INTO section
-(sid,name,cid,semester,lid,program,max_enroll,current_enroll) VALUES
-('PRG3201-AUG2024-8H1','8H1','PRG3201','AUG2024','L0000001','BITI - BACHELOR OF INFORMATION TECHNOLOGY(HONS)',30,0)
+(sid, name, cid, semester, program, max_enroll, current_enroll) VALUES
+('PRG3201-AUG2024-8H1', '8H1', 'PRG3201', 'AUG2024', 'BITI - BACHELOR OF INFORMATION TECHNOLOGY(HONS)', 30, 0);
+
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8H1-1','PRG3201-AUG2024-8H1',42,'C1','LECTURE')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8G1-1', 'PRG3201-AUG2024-8G1', 40, 'C1', 'L0000001', 'LECTURE');
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8H1-2','PRG3201-AUG2024-8H1',43,'C1','LECTURE')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8G1-2', 'PRG3201-AUG2024-8G1', 41, 'C1', 'L0000001', 'LECTURE');
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8H1-3','PRG3201-AUG2024-8H1',7,'C1','PRACTICAL')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8G1-3', 'PRG3201-AUG2024-8G1', 8, 'C1', 'L0000001', 'PRACTICAL');
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3201-AUG2024-8H1-4','PRG3201-AUG2024-8H1',6,'C1','PRACTICAL')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8G1-4', 'PRG3201-AUG2024-8G1', 9, 'C1', 'L0000001', 'PRACTICAL');
+
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8G2-1', 'PRG3201-AUG2024-8G2', 42, 'C1', 'L0000001', 'LECTURE');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8G2-2', 'PRG3201-AUG2024-8G2', 43, 'C1', 'L0000001', 'LECTURE');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8G2-3', 'PRG3201-AUG2024-8G2', 7, 'C1', 'L0000001', 'PRACTICAL');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8G2-4', 'PRG3201-AUG2024-8G2', 6, 'C1', 'L0000001', 'PRACTICAL');
+
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8H1-1', 'PRG3201-AUG2024-8H1', 42, 'C1', 'L0000001', 'LECTURE');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8H1-2', 'PRG3201-AUG2024-8H1', 43, 'C1', 'L0000001', 'LECTURE');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8H1-3', 'PRG3201-AUG2024-8H1', 7, 'C1', 'L0000001', 'PRACTICAL');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3201-AUG2024-8H1-4', 'PRG3201-AUG2024-8H1', 6, 'C1', 'L0000001', 'PRACTICAL');
+
 
 /*PRG3204*/
 INSERT INTO course
@@ -110,20 +112,21 @@ INSERT INTO course_prerequisite
 (cid,prerequisite) VALUES
 ('PRG3204','PRG3201')
 INSERT INTO section
-(sid,name,cid,semester,lid,program,max_enroll,current_enroll) VALUES
-('PRG3204-AUG2024-8G1','8G1','PRG3204','AUG2024','L0000001','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)',30,0)
+(sid, name, cid, semester, program, max_enroll, current_enroll) VALUES
+('PRG3204-AUG2024-8G1', '8G1', 'PRG3204', 'AUG2024', 'BCSI - BACHELER OF COMPUTER SCIENCES (HONS)', 30, 0);
+
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3204-AUG2024-8G1-1','PRG3204-AUG2024-8G1',42,'C1','LECTURE')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3204-AUG2024-8G1-1', 'PRG3204-AUG2024-8G1', 42, 'C1', 'L0000001', 'LECTURE');
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3204-AUG2024-8G1-2','PRG3204-AUG2024-8G1',43,'C1','LECTURE')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3204-AUG2024-8G1-2', 'PRG3204-AUG2024-8G1', 43, 'C1', 'L0000001', 'LECTURE');
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3204-AUG2024-8G1-3','PRG3204-AUG2024-8G1',7,'C1','PRACTICAL')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3204-AUG2024-8G1-3', 'PRG3204-AUG2024-8G1', 7, 'C1', 'L0000001', 'PRACTICAL');
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3204-AUG2024-8G1-4','PRG3204-AUG2024-8G1',6,'C1','PRACTICAL')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3204-AUG2024-8G1-4', 'PRG3204-AUG2024-8G1', 6, 'C1', 'L0000001', 'PRACTICAL');
 
 /*PRG3205*/
 INSERT INTO course
@@ -133,20 +136,20 @@ INSERT INTO course_major
 (cid,major,program) VALUES
 ('PRG3205','SOFTWARE ENGINEERING','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)')
 INSERT INTO section
-(sid,name,cid,semester,lid,program,max_enroll,current_enroll) VALUES
-('PRG3205-AUG2024-8G1','8G1','PRG3205','AUG2024','L0000001','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)',30,0)
+(sid, name, cid, semester, program, max_enroll, current_enroll) VALUES
+('PRG3205-AUG2024-8G1', '8G1', 'PRG3205', 'AUG2024', 'BCSI - BACHELER OF COMPUTER SCIENCES (HONS)', 30, 0);
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3205-AUG2024-8G1-1','PRG3205-AUG2024-8G1',42,'C1','LECTURE')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-1', 'PRG3205-AUG2024-8G1', 42, 'C1', 'L0000001', 'LECTURE');
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3205-AUG2024-8G1-2','PRG3205-AUG2024-8G1',43,'C1','LECTURE')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-2', 'PRG3205-AUG2024-8G1', 43, 'C1', 'L0000001', 'LECTURE');
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3205-AUG2024-8G1-3','PRG3205-AUG2024-8G1',7,'C1','PRACTICAL')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-3', 'PRG3205-AUG2024-8G1', 7, 'C1', 'L0000001', 'PRACTICAL');
 INSERT INTO class
-(id,sid,time,class_room,type) VALUES
-('PRG3205-AUG2024-8G1-4','PRG3205-AUG2024-8G1',6,'C1','PRACTICAL')
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-4', 'PRG3205-AUG2024-8G1', 6, 'C1', 'L0000001', 'PRACTICAL');
 
 INSERT INTO previous_compulsory_course
 (sid,cid) VALUES 
