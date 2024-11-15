@@ -82,18 +82,18 @@
                     <p><a href="AdminMaintainProgramAndMajorPage.aspx">Progran & Major</a></p>
                     <ul>
                         <li><a href="AdminAddProgramAndMajorPage.aspx">Add Program & Major</a></li>
+                        <li><a href="AdminMaintainProgramAndMajorPage.aspx">Update Program & Major</a></li>
                         <li><a href="AdminMaintainProgramAndMajorPage.aspx">Delete Program & Major</a></li>
-                        <li><a href="AdminMaintainProgramAndMajorPage.aspx">Modify Program & Major</a></li>
                     </ul>
                 </li>
 
                 <!--Course & Section-->
                 <li> 
-	                <p>Course & Section</p>
+	                <p><a href="AdminMaintainCourseAndSectionPage.aspx">Course & Section</a></p>
                     <ul>
-                        <li><a href="#">Payment</a></li>
-                        <li><a href="#">Online Payment <br />History Receipt</a></li>
-                        <li><a href="#">Invoice and <br />Adjustment Note</a></li>
+                        <li><a href="AdminAddCourseAndSectionPage.aspx">Add New Course & Section</a></li>
+                        <li><a href="AdminMaintainCourseAndSectionPage.aspx">Update Course & Section</a></li>
+                        <li><a href="AdminMaintainCourseAndSectionPage.aspx">Delete Course & Section</a></li>
                     </ul>
                 </li>
             </ul>

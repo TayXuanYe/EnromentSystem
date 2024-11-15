@@ -105,7 +105,6 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
     //gridview -- major
     private void SetMajorInfoGridView(string program)
     {
-        Session["currenSelectMajor"] = program;
         DataSet dataSet = null;
         dataSet = DatabaseManager.GetRecord(
             "major",

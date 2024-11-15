@@ -106,18 +106,15 @@ CREATE TABLE lecture(
 	name varchar(255),
 	password varchar(255)
 )
-SELECT * FROM lecture WHERE lid like '%AAA%'
 CREATE TABLE section(
 	sid varchar(255) PRIMARY KEY,
 	name varchar(255),
 	cid varchar(255),
 	semester varchar(255),
-	lid varchar(255),
 	program varchar(255),
 	max_enroll int,
-	current_enroll int,
+	current_enroll INT DEFAULT 0,
 	FOREIGN KEY (cid) REFERENCES course(cid),
-	FOREIGN KEY (lid) REFERENCES lecture(lid)
 )
 
 CREATE TABLE class(
@@ -125,7 +122,9 @@ CREATE TABLE class(
 	sid varchar(255),
 	time int,
 	class_room VARCHAR(255),
-	type varchar(255)
+	lid varchar(255),
+	type varchar(255),
+	FOREIGN KEY (lid) REFERENCES lecture(lid),
 	FOREIGN KEY (sid) REFERENCES section(sid)
 )
 
