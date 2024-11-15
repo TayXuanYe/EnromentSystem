@@ -151,7 +151,7 @@
                         CssClass="validator"
                         ControlToValidate="txtSectionName"
                         Display="Dynamic"
-                        ValidationExpression="[A-Z][A-Z\d]+"
+                        ValidationExpression="[A-Z\d][A-Z\d]+"
                         ValidationGroup="section"></asp:RegularExpressionValidator>
                     <asp:RequiredFieldValidator runat="server" 
                         ErrorMessage="This field is require"

@@ -1357,7 +1357,36 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
 
     protected void btnAddCourse_Click(object sender, EventArgs e)
     {
-
+        DatabaseManager.InsertData(
+            "course",
+            new List<string> { "cid", "name", "credit_hours", "available", "price" },
+            new List<object> { txtCourseId.Text, txtCourseName.Text, ddlCreditHours.SelectedValue, "1", txtPrice.Text }
+            );
+        DatabaseManager.InsertData(
+            "course_major",
+            new List<string> { "cid", "major", "program" },
+            new List<object> { txtCourseId.Text, ddlMajor.SelectedValue, ddlProgram.SelectedValue }
+            );
+        DataTable preCourseAdded = Session["preCourseAdded"] as DataTable;
+        if(preCourseAdded != null)
+        {
+            foreach(DataRow row in preCourseAdded.Rows)
+            {
+                DatabaseManager.InsertData(
+                    "course_prerequisite",
+                    new List<string> { "cid", "prerequisite" },
+                    new List<object> { txtCourseId.Text, row["cid"].ToString() }
+                    );
+            }
+        }
+        //DataTable sectionAdded = Session["sectionAdded"] as DataTable;
+        //if(sectionAdded != null)
+        //{
+        //    foreach(DataRow row in sectionAdded.Rows)
+        //    {
+        //        string name = row["name"].ToString();
+        //    }
+        //}
     }
 
 }
