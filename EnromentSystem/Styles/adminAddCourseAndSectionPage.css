@@ -421,16 +421,19 @@ h2 {
     padding: 5PX;
     min-width: 100px;
 }
-/*    .assign-classroom-contain td:last-child {
-        display:none;
-        padding: 0px;
-        max-width: 0px;
-    }.assign-classroom-contain th:last-child {
-        display:none;
+    .assign-classroom-contain td:last-child {
+/*        display:none;*/
+        color: #fff;
         padding: 0px;
         max-width: 0px;
     }
-*/
+    .assign-classroom-contain th:last-child {
+        color: #fff;
+        /*        display:none;*/
+        padding: 0px;
+        max-width: 0px;
+    }
+
 .assign-classroom-contain th {
     padding: 5PX;
 }

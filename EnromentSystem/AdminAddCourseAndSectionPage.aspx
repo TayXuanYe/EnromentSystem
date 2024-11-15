@@ -403,6 +403,7 @@
 
     <asp:Panel ID="assignClassroomWindow" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
+            <asp:Label ID="lblAssigningClassType" runat="server" CssClass="lblSelectingClass"></asp:Label>
             <div class="assign-classroom-contain">
                 <asp:GridView ID="gvAssignClassroom" runat="server" AutoGenerateColumns="false">
                     <Columns>
@@ -446,6 +447,6 @@
         </div>
     </asp:Panel>
     
-
+    
 </asp:Content>
 
