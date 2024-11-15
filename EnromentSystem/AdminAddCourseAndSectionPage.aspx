@@ -222,7 +222,9 @@
                     <tr>
                         <td>Lecture Class Lecturer Name</td>
                         <td>
-                            <asp:DropDownList ID="ddlLectureClassLecturer" runat="server"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlLectureClassLecturer" runat="server"
+                                OnSelectedIndexChanged="ddlLectureClassLecturer_SelectedIndexChanged"
+                                AutoPostBack="true"></asp:DropDownList>
                         </td>
                         <td>
                             <asp:ImageButton ID="btnAddLectureClass" runat="server" 
@@ -243,7 +245,10 @@
                     <tr>
                         <td>Practical Class Lecturer Name</td>
                         <td>
-                            <asp:DropDownList ID="ddlPracticalClassLecturer" runat="server"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlPracticalClassLecturer" runat="server"
+                                OnSelectedIndexChanged="ddlPracticalClassLecturer_SelectedIndexChanged"
+                                AutoPostBack="true">
+                            </asp:DropDownList>
                         </td>
                         <td>
                             <asp:ImageButton ID="btnAddPracticalClass" runat="server" 
@@ -284,6 +289,11 @@
                         <asp:BoundField HeaderText="2200" DataField="2200" SortExpression="2200"/>          
                     </Columns>
                 </asp:GridView>
+            </div>
+            <div class="warning-contain">
+                <asp:Label ID="lblWarningNoClassAdded" runat="server" 
+                CssClass="warning-label"
+                Text="Class are requited!"></asp:Label>
             </div>
             <div class="button-container">
                 <asp:Button runat="server" Text="Add" OnClick="btnAddClass_Click" ValidationGroup="class-windows"/>

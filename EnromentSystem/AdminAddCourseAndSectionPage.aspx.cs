@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -24,6 +25,10 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
             preCourse.Columns.Add("name",typeof(string));
             Session["preCourseAdded"] = preCourse;
             PopulatePrerequisite(ddlProgram.SelectedValue,ddlMajor.SelectedValue, preCourse);
+            //set section session
+            DataTable sectionAdded = new DataTable();
+            sectionAdded.Columns.Add("name", typeof(string));
+            Session["sectionAdded"] = sectionAdded;
             //set class info session
             DataSet classInfo = new DataSet();
             DataTable lectureClass = new DataTable("lectureClass");
@@ -212,6 +217,7 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         practicalClass.Columns.Add("timeIndex", typeof(int));
         classInfo.Tables.Add(lectureClass);
         classInfo.Tables.Add(practicalClass);
+        Session["classInfo"] = null;
         Session["classInfo"] = classInfo;
         SetClassTimetable(classInfo);
     }
@@ -457,17 +463,62 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
             lblSelectingClass.Text = "Practical Class";
             selectClassWindow.Style["display"] = "flex";
             classWindows.Style["display"] = "none";
+            SetSelectTable(Session["classInfo"] as DataSet);
         }
     }
 
     protected void btnAddClass_Click(object sender, EventArgs e)
     {
-
+        DataTable displayValue = Session["sectionAdded"] as DataTable;
+        DataSet classInfo = Session["classInfo"] as DataSet;
+        DataTable lectureClass = classInfo.Tables["lectureClass"];
+        DataTable practicalClass = classInfo.Tables["practicalClass"];
+        if (lectureClass.Rows.Count == 0 && practicalClass.Rows.Count == 0)
+        {
+            lblWarningNoClassAdded.Style["display"] = "inline";
+        }
+        else
+        {
+            lblWarningNoClassAdded.Style["display"] = "none";
+            string name = lblClassWindowsSectionName.Text;
+            Session[name+"_class_info"] = Session["classInfo"] as DataSet;
+            displayValue.Rows.Add(name);
+            gvSectionInfo.DataSource = displayValue;
+            gvSectionInfo.DataBind();
+            Session["sectionAdded"] = displayValue;
+            if (lectureClass.Rows.Count != 0)
+            {
+                Session[name + "_lecture_lecturer"] = ddlLectureClassLecturer.SelectedValue;
+            }
+            if(practicalClass.Rows.Count != 0)
+            {
+                Session[name + "_practical_lecturer"] = ddlPracticalClassLecturer.SelectedValue;
+            }
+            classWindows.Style["display"] = "none";
+        }
     }
 
     protected void btnCancelAddClass_Click(object sender, EventArgs e)
     {
         classWindows.Style["display"] = "none";
+    }
+
+    protected void ddlPracticalClassLecturer_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        DataSet classInfo = Session["classInfo"] as DataSet;
+        DataTable practicalClass = classInfo.Tables["practicalClass"];
+        practicalClass.Rows.Clear();
+        Session["classInfo"] = classInfo;
+        SetClassTimetable(classInfo); 
+    }
+
+    protected void ddlLectureClassLecturer_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        DataSet classInfo = Session["classInfo"] as DataSet;
+        DataTable lectureClass = classInfo.Tables["lectureClass"];
+        lectureClass.Rows.Clear();
+        Session["classInfo"] = classInfo;
+        SetClassTimetable(classInfo);
     }
     //selectClassWindow
     private void SetSelectTable(DataSet classInfo)
@@ -483,6 +534,8 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         dt.Rows.Add("Sun");
         gvSelectClass.DataSource = dt;
         gvSelectClass.DataBind();
+        ResetSelectTable();
+
         //get lecture all time
         string lecturer = "";
         if(lblSelectingClass.Text == "Lecture Class")
@@ -493,7 +546,6 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         {
             lecturer = ddlPracticalClassLecturer.SelectedValue;
         }
-
         DataSet lectureTime = DatabaseManager.GetRecord(
             "class",
             new List<string> { "time" },
@@ -898,6 +950,90 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
         }
     }
 
+    private void ResetSelectTable()
+    {
+        for (int i = 0; i < gvSelectClass.Rows.Count; i++)
+        {
+            GridViewRow row = gvSelectClass.Rows[i];
+            CheckBox chkSelect08 = (CheckBox)row.FindControl("chkSelect08");
+            CheckBox chkSelect09 = (CheckBox)row.FindControl("chkSelect09");
+            CheckBox chkSelect10 = (CheckBox)row.FindControl("chkSelect10");
+            CheckBox chkSelect11 = (CheckBox)row.FindControl("chkSelect11");
+            CheckBox chkSelect12 = (CheckBox)row.FindControl("chkSelect12");
+            CheckBox chkSelect13 = (CheckBox)row.FindControl("chkSelect13");
+            CheckBox chkSelect14 = (CheckBox)row.FindControl("chkSelect14");
+            CheckBox chkSelect15 = (CheckBox)row.FindControl("chkSelect15");
+            CheckBox chkSelect16 = (CheckBox)row.FindControl("chkSelect16");
+            CheckBox chkSelect17 = (CheckBox)row.FindControl("chkSelect17");
+            CheckBox chkSelect18 = (CheckBox)row.FindControl("chkSelect18");
+            CheckBox chkSelect19 = (CheckBox)row.FindControl("chkSelect19");
+            CheckBox chkSelect20 = (CheckBox)row.FindControl("chkSelect20");
+            CheckBox chkSelect21 = (CheckBox)row.FindControl("chkSelect21");
+            CheckBox chkSelect22 = (CheckBox)row.FindControl("chkSelect22");
+
+            chkSelect08.Enabled = true;
+            chkSelect08.CssClass = "can-select-checkbox";
+            chkSelect08.Checked = false;
+
+            chkSelect09.Enabled = true;
+            chkSelect09.CssClass = "can-select-checkbox";
+            chkSelect09.Checked = false;
+
+            chkSelect10.Enabled = true;
+            chkSelect10.CssClass = "can-select-checkbox";
+            chkSelect10.Checked = false;
+
+            chkSelect11.Enabled = true;
+            chkSelect11.CssClass = "can-select-checkbox";
+            chkSelect11.Checked = false;
+
+            chkSelect12.Enabled = true;
+            chkSelect12.CssClass = "can-select-checkbox";
+            chkSelect12.Checked = false;
+
+            chkSelect13.Enabled = true;
+            chkSelect13.CssClass = "can-select-checkbox";
+            chkSelect13.Checked = false;
+
+            chkSelect14.Enabled = true;
+            chkSelect14.CssClass = "can-select-checkbox";
+            chkSelect14.Checked = false;
+
+            chkSelect15.Enabled = true;
+            chkSelect15.CssClass = "can-select-checkbox";
+            chkSelect15.Checked = false;
+
+            chkSelect16.Enabled = true;
+            chkSelect16.CssClass = "can-select-checkbox";
+            chkSelect16.Checked = false;
+
+            chkSelect17.Enabled = true;
+            chkSelect17.CssClass = "can-select-checkbox";
+            chkSelect17.Checked = false;
+
+
+            chkSelect18.Enabled = true;
+            chkSelect18.CssClass = "can-select-checkbox";
+            chkSelect18.Checked = false;
+
+            chkSelect19.Enabled = true;
+            chkSelect19.CssClass = "can-select-checkbox";
+            chkSelect19.Checked = false;
+
+            chkSelect20.Enabled = true;
+            chkSelect20.CssClass = "can-select-checkbox";
+            chkSelect20.Checked = false;
+
+            chkSelect21.Enabled = true;
+            chkSelect21.CssClass = "can-select-checkbox";
+            chkSelect21.Checked = false;
+
+            chkSelect22.Enabled = true;
+            chkSelect22.CssClass = "can-select-checkbox";
+            chkSelect22.Checked = false;
+        }
+    }
+
     private CheckBox DisableUnavailableCheckBox(CheckBox checkBox)
     {
         checkBox.Enabled = false;
@@ -1159,8 +1295,9 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
             for (int i = 0; i < gvAssignClassroom.Rows.Count; i++)
             {
                 GridViewRow row = gvAssignClassroom.Rows[i];
+                TextBox txtClassRoom = (TextBox)row.FindControl("txtClassRoomName");
                 DataRow dataRow = practicalClass.NewRow();
-                dataRow["classRoom"] = row.Cells[1].Text;
+                dataRow["classRoom"] = txtClassRoom.Text;
                 dataRow["timeIndex"] = int.Parse(row.Cells[2].Text);
                 practicalClass.Rows.Add(dataRow);
             }
