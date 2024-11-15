@@ -108,13 +108,13 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
     {
         if (e.CommandName == "Edit")
         {
-            string program = e.CommandArgument.ToString();
-            //Response.Redirect($"AdminModifyProgramAndMajorPage.aspx?program={program}");
+            string course = e.CommandArgument.ToString();
+            //Response.Redirect($"AdminModifyProgramAndMajorPage.aspx?course={course}");
         }
         else if (e.CommandName == "Delete")
         {
-            string program = e.CommandArgument.ToString();
-            //Response.Redirect($"AdminDeleteProgramPage.aspx?program={program}");
+            string course = e.CommandArgument.ToString();
+            //Response.Redirect($"AdminDeleteProgramPage.aspx?course={course}");
         }
     }
 
