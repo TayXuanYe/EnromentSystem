@@ -143,7 +143,8 @@
                         <asp:ImageButton ID="btnAddSection" runat="server" 
                             OnClick="btnAddSection_Click" 
                             ImageUrl="~/Images/add.png" 
-                            ValidationGroup="section"/>
+                            ValidationGroup="section"
+                            CausesValidation="true"/>
                     </div>
                     <asp:RegularExpressionValidator runat="server" 
                         ErrorMessage="This field only accept capital alphabet and number"
@@ -158,6 +159,13 @@
                         ControlToValidate="txtSectionName"
                         Display="Dynamic"
                         ValidationGroup="section"></asp:RequiredFieldValidator>
+                    <asp:CustomValidator ID="CustomValidator2" runat="server" 
+                        ErrorMessage="This section is already exits"
+                        CssClass="validator"
+                        ControlToValidate="txtSectionName"
+                        Display="Dynamic"
+                        OnServerValidate="CheckSectionIsExist_ServerValidate"
+                        ValidationGroup="section"></asp:CustomValidator>
                 </td>
                 
             </tr>
@@ -180,7 +188,8 @@
                         ImageUrl="~/Images/send.png"
                         CommandName="view"
                         CommandArgument='<%# Eval("name") %>'
-                        ToolTip="Click to edit course details"/>
+                        ToolTip="Click to edit course details"
+                        CausesValidation="false"/>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:CommandField ShowSelectButton="true" HeaderText="Delete" ButtonType="Button" SelectText=" "/>            

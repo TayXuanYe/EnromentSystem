@@ -204,22 +204,39 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
     //Section
     protected void btnAddSection_Click(object sender, ImageClickEventArgs e)
     {
-        classWindows.Style["display"] = "flex";
-        lblClassWindowsSectionName.Text = txtSectionName.Text;
-        PopulateLecturer();
-        //set class info session
-        DataSet classInfo = new DataSet();
-        DataTable lectureClass = new DataTable("lectureClass");
-        lectureClass.Columns.Add("classRoom", typeof(string));
-        lectureClass.Columns.Add("timeIndex", typeof(int));
-        DataTable practicalClass = new DataTable("practicalClass");
-        practicalClass.Columns.Add("classRoom", typeof(string));
-        practicalClass.Columns.Add("timeIndex", typeof(int));
-        classInfo.Tables.Add(lectureClass);
-        classInfo.Tables.Add(practicalClass);
-        Session["classInfo"] = null;
-        Session["classInfo"] = classInfo;
-        SetClassTimetable(classInfo);
+        Page.Validate("section");
+        if (Page.IsValid)
+        {
+            classWindows.Style["display"] = "flex";
+            lblClassWindowsSectionName.Text = txtSectionName.Text;
+            PopulateLecturer();
+            //set class info session
+            DataSet classInfo = new DataSet();
+            DataTable lectureClass = new DataTable("lectureClass");
+            lectureClass.Columns.Add("classRoom", typeof(string));
+            lectureClass.Columns.Add("timeIndex", typeof(int));
+            DataTable practicalClass = new DataTable("practicalClass");
+            practicalClass.Columns.Add("classRoom", typeof(string));
+            practicalClass.Columns.Add("timeIndex", typeof(int));
+            classInfo.Tables.Add(lectureClass);
+            classInfo.Tables.Add(practicalClass);
+            Session["classInfo"] = null;
+            Session["classInfo"] = classInfo;
+            SetClassTimetable(classInfo);
+        }
+    }
+
+    protected void CheckSectionIsExist_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        string name = args.Value;
+        if (Session[name + "_class_info"] == null)
+        {
+            args.IsValid = true;
+        }
+        else
+        {
+            args.IsValid = false;
+        }
     }
 
     protected void gvSectionInfo_SelectedIndexChanged(object sender, EventArgs e)
@@ -227,12 +244,11 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
 
     }
 
-
     protected void gvSectionInfo_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "view")
         {
-
+            Debug.WriteLine("txt:");
         }
     }
     // class select pop up windows
@@ -1324,4 +1340,5 @@ public partial class AdminAddCourseAndSectionPage : System.Web.UI.Page
     {
 
     }
+
 }
