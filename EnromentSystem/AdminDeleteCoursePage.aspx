@@ -4,15 +4,16 @@
     Language="C#" 
     AutoEventWireup="true" 
     CodeFile="AdminDeleteCoursePage.aspx.cs" 
-    Inherits="AdminDeleteCoursePage" %>
+    Inherits="AdminDeleteCoursePage" 
+    EnableEventValidation="false"%>
 
 <asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminDeleteProgramPage.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminDeleteCoursePage.css") %>" />
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="table-contain">
-        <table class="program-details-table">
+        <table class="course-details-table">
             <tr>
                 <th colspan="4">Course</th>
             </tr>
@@ -47,7 +48,10 @@
                 </td>
             </tr>
             <tr>
-                <td>Pre-requisite course</td>
+                <th>&nbsp</th>
+            </tr>
+            <tr>
+                <td><b>Pre-requisite course</b></td>
             </tr>
             <tr>
                 <asp:GridView ID="gvPrerequisite" runat="server" 
@@ -73,34 +77,21 @@
         <asp:GridView ID="gvSectionInfo" runat="server" 
             AutoGenerateColumns="false" 
             CssClass="grid-view"
-            OnRowCommand="gvSectionInfo_RowCommand"
-            DataKeyNames="name" 
+            DataKeyNames="sid" 
             ShowHeaderWhenEmpty="True">
             <Columns>
+                <asp:BoundField HeaderText="Section ID" DataField="sid" SortExpression="sid"/>
                 <asp:BoundField HeaderText="Section Name" DataField="name" SortExpression="name"/>
-                <asp:TemplateField HeaderText="Show Time Table">
-                    <ItemTemplate>
-                        <asp:ImageButton 
-                            ID="btnView" 
-                            runat="server" 
-                            ImageUrl="~/Images/send.png"
-                            CommandName="view"
-                            CommandArgument='<%# Eval("name") %>'
-                            ToolTip="Click to edit course details"
-                            CausesValidation="false"/>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:BoundField HeaderText="Semester" DataField="semester" SortExpression="semester"/>
             </Columns>
-
             <EmptyDataTemplate>
                 <p class="center">No section</p>
             </EmptyDataTemplate>
         </asp:GridView>
-
     </div>
 
     <div class="button-container">
-        <asp:Button ID="btnDeleteProgram" runat="server" Text="Delete Program" OnClick="btnDeleteProgram_Click"/>
+        <asp:Button ID="btnDeleteCourse" runat="server" Text="Delete Course" OnClick="btnDeleteCourse_Click"/>
         <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CausesValidation="false"/>
     </div>
 
@@ -132,11 +123,11 @@
         <div class="windows-contain">
             <br />
             <h1>Conform Delete?</h1>
-            <p>Once deleted, it cannot be recovered<br />All majors under it will also be deleted.</p>
+            <p>Once deleted, it cannot be recovered<br />All section under it will also be deleted.</p>
             <br />
-            <p>To delete this program pleas enter following word</p>
+            <p>To delete this course pleas enter following word</p>
             <asp:Label ID="lblConformText" runat="server"></asp:Label>
-            <asp:TextBox ID="txtConformText" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtConformText" runat="server" ValidationGroup="conformWindow"></asp:TextBox>
             <asp:CustomValidator ID="ConformTextCustomValidator" runat="server" 
                 ErrorMessage="Conform Text Not Match"
                 CssClass="validator"
@@ -149,7 +140,7 @@
                     CausesValidation="false"
                     OnClick="btnCancelDeleteConform_Click"/>
                 <asp:Button runat="server" Text="Conform" 
-                    OnClick="btnConformDeleteProgram_Click" 
+                    OnClick="btnConformDeleteCourse_Click" 
                     ValidationGroup="conformWindow"/>
             </div>
         </div>

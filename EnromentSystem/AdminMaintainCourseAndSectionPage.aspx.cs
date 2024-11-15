@@ -106,15 +106,20 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
 
     protected void gvCourseInfo_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        Control commandSource = (Control)e.CommandSource;
+        GridViewRow row = (GridViewRow)commandSource.NamingContainer;
+
+        string courseId = row.Cells[0].Text; 
+        string program = row.Cells[6].Text; 
+        int index = row.RowIndex;
+
         if (e.CommandName == "Edit")
         {
-            string course = e.CommandArgument.ToString();
-            //Response.Redirect($"AdminModifyProgramAndMajorPage.aspx?course={course}");
+            //Response.Redirect($"AdminModifyProgramAndMajorPage.aspx?course={course}&index={index}");
         }
         else if (e.CommandName == "Delete")
         {
-            string course = e.CommandArgument.ToString();
-            //Response.Redirect($"AdminDeleteProgramPage.aspx?course={course}");
+            Response.Redirect($"AdminDeleteCoursePage.aspx?course={courseId}&program={program}");
         }
     }
 
@@ -154,8 +159,8 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
         DataSet dataSet = null;
         dataSet = DatabaseManager.GetRecord(   
             "section",
-            new List<string> { "sid", "section.name", "l.name as lecture_name", "max_enroll" },
-            $@"INNER JOIN lecture as l ON section.lid = l.lid WHERE cid = '{course}' AND semester = '{semester}' AND program = '{program}'"
+            new List<string> { "sid", "section.name",  "max_enroll" },
+            $@"WHERE cid = '{course}' AND semester = '{semester}' AND program = '{program}'"
         );
         if (dataSet != null)
         {
