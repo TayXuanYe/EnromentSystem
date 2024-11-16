@@ -147,7 +147,7 @@
     <asp:Panel ID="failWindow" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
             <br />
-            <h1>Student Delete Successful</h1>
+            <h1>Student Delete Fail</h1>
             <br />
             <asp:Image runat="server" ImageUrl="~/Images/not-available.png" CssClass="successful-image"/><br />
             <div class="button-container">
