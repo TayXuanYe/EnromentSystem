@@ -8,6 +8,33 @@
 
 <asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/studentChangePasswordPage.css") %>" />
+     <script type="text/javascript">
+        function validatePassword(sender, args) {
+           
+            var newPassword = document.getElementById('<%= txtNewPassword.ClientID %>').value;
+            var confirmPassword = document.getElementById('<%= txtConfirmNewPassword.ClientID %>').value;
+
+            // Regex for validating password: 8-20 characters, at least one letter and one digit
+            var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+
+            // Validate new password
+            if (!regex.test(newPassword)) {
+                args.IsValid = false;  
+                args.ErrorMessage = "Password must be between 8 to 20 alphanumeric characters and include at least one letter and one numeric digit.";
+                return;
+            }
+
+            // Check if the passwords match
+            if (newPassword !== confirmPassword) {
+                args.IsValid = false; 
+                args.ErrorMessage = "New password and confirm password must match.";
+                return;
+            }
+
+            // If all checks pass, validation is successful
+            args.IsValid = true;
+        }
+    </script>
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
@@ -32,8 +59,7 @@
                     Display="Dynamic"
                     ForeColor="Red"
                     ErrorMessage="This field is requited"
-                    CssClass="validator">
-                </asp:RequiredFieldValidator>
+                    CssClass="validator"> </asp:RequiredFieldValidator>
                 <asp:CustomValidator
                     ID="CustomValidator4" 
                     runat="server" 
@@ -42,8 +68,7 @@
                     ErrorMessage="CustomValidator"
                     CssClass="validator"
                     ClientValidationFunction=""
-                    OnServerValidate="PasswordFormat_ServerValidate">
-                </asp:CustomValidator>
+                    OnServerValidate="PasswordFormat_ServerValidate"> </asp:CustomValidator>
             </div>
             <!--New Password-->
             <div class="text-box">
@@ -56,8 +81,7 @@
                     Display="Dynamic"
                     ForeColor="Red"
                     ErrorMessage="This field is requited"
-                    CssClass="validator">
-                </asp:RequiredFieldValidator>
+                    CssClass="validator"> </asp:RequiredFieldValidator>
                 <asp:CustomValidator 
                     ID="CustomValidator5" 
                     runat="server" 
@@ -65,9 +89,8 @@
                     ForeColor="Red"
                     ErrorMessage="CustomValidator"
                     CssClass="validator"
-                    ClientValidationFunction=""
-                    OnServerValidate="PasswordFormat_ServerValidate">
-                </asp:CustomValidator>
+                    ClientValidationFunction="validatePassword"
+                    OnServerValidate="PasswordFormat_ServerValidate"> </asp:CustomValidator>
             </div>
             <!--Confirm New Password-->
             <div class="text-box">
@@ -80,8 +103,7 @@
                     Display="Dynamic"
                     ForeColor="Red"
                     ErrorMessage="This field is requited"
-                    CssClass="validator">
-                </asp:RequiredFieldValidator>
+                    CssClass="validator"> </asp:RequiredFieldValidator>
                 <asp:CustomValidator
                     ID="CustomValidator6" 
                     runat="server" 
@@ -89,16 +111,24 @@
                     ForeColor="Red"
                     ErrorMessage="CustomValidator"
                     CssClass="validator"
-                    ClientValidationFunction=""
-                    OnServerValidate="PasswordFormat_ServerValidate">
-                </asp:CustomValidator>
+                    ClientValidationFunction="validatePassword"
+                    OnServerValidate="PasswordFormat_ServerValidate"> </asp:CustomValidator>
             </div>
             
             <div class="button">
-                <asp:Button ID="Button1" runat="server" Text="Update Password" CssClass="button"/>
-                <asp:Button ID="Button2" runat="server" Text="Cancel" CssClass="button"/>
+                <asp:Button ID="Button1" runat="server" Text="Update Password" CssClass="button" OnClick="Button1_Click"/>
+                <asp:Button ID="Button2" runat="server" Text="Cancel" CssClass="button" OnClick="Button2_Click"/>
             </div>
         </div>
+        <div id="verificationPopUp" runat="server" style="display:none;">
+    <div class="popup-content">
+        <h3>Enter Verification Code</h3>
+        <asp:TextBox ID="txtVerificationCode" runat="server" CssClass="input" Required="true" />
+        <asp:Button ID="btnVerifyCode" runat="server" Text="Verify" OnClick="btnVerifyCode_Click" CssClass="button" />
+        <asp:Label ID="lblVerificationMessage" runat="server" ForeColor="Red" />
     </div>
 </div>
+  </div>
+ <asp:Label ID="lblMessage" runat="server" ForeColor="Red" />
+    </div>
 </asp:Content>
