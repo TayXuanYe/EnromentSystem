@@ -40,9 +40,20 @@
     <asp:Panel ID="successfulWindow" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
             <br />
-            <h1>Student Delete Successful</h1>
+            <h1>Lecturer Delete Successful</h1>
             <br />
             <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/successful.png" CssClass="successful-image"/><br />
+            <div class="button-container">
+                <asp:Button runat="server" Text="Exit" OnClick="btnCancel_Click" CausesValidation="false"/>
+            </div>
+        </div>
+    </asp:Panel>
+    <asp:Panel ID="failWindow" runat="server" CssClass="pop-up-windows">
+        <div class="windows-contain">
+            <br />
+            <h1>Lecturer Delete Fail</h1>
+            <br />
+            <asp:Image runat="server" ImageUrl="~/Images/not-available.png" CssClass="successful-image"/><br />
             <div class="button-container">
                 <asp:Button runat="server" Text="Exit" OnClick="btnCancel_Click" CausesValidation="false"/>
             </div>

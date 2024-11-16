@@ -45,10 +45,14 @@ public partial class AdminDeleteLecturerPage : System.Web.UI.Page
         {
             successfulWindow.Style["display"] = "flex";
         }
+        else
+        {
+            failWindow.Style["display"] = "flex";
+        }
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("AdminMaintainStudentMainPage.aspx");
+        Response.Redirect("AdminMaintainLecturerMainPage.aspx");
     }
 }

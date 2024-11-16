@@ -3,11 +3,11 @@
     MasterPageFile="~/AdminSite.master"
     Language="C#" 
     AutoEventWireup="true" 
-    CodeFile="AdminAddCourseAndSectionPage.aspx.cs" 
-    Inherits="AdminAddCourseAndSectionPage" %>
+    CodeFile="AdminModifyCourseAndSectionPage.aspx.cs" 
+    Inherits="AdminModifyCourseAndSectionPage" %>
 
 <asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminAddCourseAndSectionPage.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminModifyCourseAndSectionPage.css") %>" />
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
@@ -19,56 +19,21 @@
             <tr>
                 <td>Program</td>
                 <td>
-                    <asp:DropDownList ID="ddlProgram" runat="server" 
-                        OnSelectedIndexChanged="ddlProgram_SelectedIndexChanged"
-                        AutoPostBack="true"></asp:DropDownList>
+                    <asp:Label ID="lblProgram" runat="server"></asp:Label>
                 </td>
                 <td>Major</td>
                 <td>
-                    <asp:DropDownList ID="ddlMajor" runat="server"
-                        OnSelectedIndexChanged="ddlMajor_SelectedIndexChanged"
-                        AutoPostBack="true"></asp:DropDownList>
+                    <asp:Label ID="lblMajor" runat="server"></asp:Label>
                 </td>
             </tr>
             <tr>
                 <td>Course ID</td>
                 <td>
-                    <asp:TextBox ID="txtCourseId" runat="server"></asp:TextBox><br />
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
-                        ErrorMessage="This field is require"
-                        CssClass="validator"
-                        ControlToValidate="txtCourseId"
-                        Display="Dynamic"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator 
-                        ID="RegularExpressionValidator2" 
-                        runat="server" 
-                        ControlToValidate="txtCourseId"
-                        Display="dynamic"
-                        CssClass="validator"
-                        ErrorMessage="Name not in requited format, example: PRG3201"
-                        ValidationExpression="[A-Z]{2,}\d+"></asp:RegularExpressionValidator>
-                    <asp:CustomValidator ID="CustomValidator1" runat="server" 
-                        ErrorMessage="This course id is already exits"
-                        CssClass="validator"
-                        ControlToValidate="txtCourseId"
-                        Display="Dynamic"
-                        OnServerValidate="CheckCourseIdIsExist_ServerValidate"></asp:CustomValidator>
+                    <asp:Label ID="lblCourseId" runat="server"></asp:Label>
                 </td>
                 <td>Course Name</td>
                 <td>
-                    <asp:TextBox ID="txtCourseName" runat="server"></asp:TextBox><br />
-                    <asp:RequiredFieldValidator runat="server" 
-                        ErrorMessage="This field is require"
-                        CssClass="validator"
-                        ControlToValidate="txtCourseName"
-                        Display="Dynamic"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator 
-                        runat="server" 
-                        ControlToValidate="txtCourseName"
-                        Display="dynamic"
-                        CssClass="validator"
-                        ErrorMessage="Name not in requited format, only allow capital letter and space"
-                        ValidationExpression="[A-Z][A-Z\s]+"></asp:RegularExpressionValidator>
+                    <asp:Label ID="lblCourseName" runat="server"></asp:Label>
                 </td>
             </tr>
             <tr>
@@ -93,6 +58,15 @@
                         CssClass="validator"
                         ControlToValidate="txtPrice"
                         Display="Dynamic"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>Available</td>
+                <td>
+                    <asp:DropDownList ID="ddlAvailable" runat="server">
+                        <asp:ListItem Text = "Available" Value = "1"></asp:ListItem>
+                        <asp:ListItem Text = "Not Available" Value = "0"></asp:ListItem>
+                    </asp:DropDownList>
                 </td>
             </tr>
         </table>
@@ -175,10 +149,12 @@
         CssClass="grid-view"
         OnSelectedIndexChanged="gvSectionInfo_SelectedIndexChanged" 
         OnRowCommand="gvSectionInfo_RowCommand"
-        DataKeyNames="name" 
+        DataKeyNames="sid" 
         ShowHeaderWhenEmpty="True">
         <Columns>
+            <asp:BoundField HeaderText="Section ID" DataField="sid" SortExpression="sid"/>
             <asp:BoundField HeaderText="Section Name" DataField="name" SortExpression="name"/>
+            <asp:BoundField HeaderText="Semester" DataField="semester" SortExpression="semester"/>
             <asp:TemplateField HeaderText="Show Time Table">
                 <ItemTemplate>
                     <asp:ImageButton 
@@ -186,8 +162,8 @@
                         runat="server" 
                         ImageUrl="~/Images/send.png"
                         CommandName="view"
-                        CommandArgument='<%# Eval("name") %>'
-                        ToolTip="Click to edit course details"
+                        CommandArgument='<%# Eval("sid") %>'
+                        ToolTip="Click to edit section details"
                         CausesValidation="false"/>
                 </ItemTemplate>
             </asp:TemplateField>
@@ -200,14 +176,14 @@
     </asp:GridView>
 
     <div class="button-container">
-        <asp:Button ID="btnAddCourse" runat="server" Text="Add Course" OnClick="btnAddCourse_Click"/>
+        <asp:Button ID="btnUpdateCourse" runat="server" Text="Update Course" OnClick="btnUpdateCourse_Click"/>
         <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CausesValidation="false"/>
     </div>
 
     <asp:Panel ID="successfulWindow" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
             <br />
-            <h1>Add Successful</h1>
+            <h1>Edit Successful</h1>
             <br />
             <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/successful.png" CssClass="successful-image"/><br />
             <div class="button-container">
@@ -279,8 +255,8 @@
                         </th>
                     </tr>
                     <tr>
-                        <td>Section Name</td>
-                        <td><asp:Label ID="lblClassWindowsSectionName" runat="server" CssClass="lblClassWindowsSectionName"></asp:Label></td>
+                        <td>Section Id</td>
+                        <td><asp:Label ID="lblClassWindowsSectionId" runat="server" CssClass="lblClassWindowsSectionName"></asp:Label></td>
                     </tr>  
                     <tr>
                         <th>
@@ -468,14 +444,14 @@
                         <asp:TemplateField HeaderText="Class room">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtClassRoomName" runat="server" ValidationGroup="assignClassroom"></asp:TextBox><br />
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                     ErrorMessage="This field is require"
                                     CssClass="validator"
                                     ControlToValidate="txtClassRoomName"
                                     Display="Dynamic"
                                     ValidationGroup="assignClassroom"></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator 
-                                    ID="RegularExpressionValidator2" 
+                                    ID="RegularExpressionValidator1" 
                                     runat="server" 
                                     ControlToValidate="txtClassRoomName"
                                     Display="dynamic"
@@ -483,7 +459,7 @@
                                     ErrorMessage="This field only accept capital letter, number and space"
                                     ValidationExpression="[A-Z][A-Z\d\s]+"
                                     ValidationGroup="assignClassroom"></asp:RegularExpressionValidator>
-                                <asp:CustomValidator ID="CustomValidator1" runat="server" 
+                                <asp:CustomValidator ID="CustomValidator3" runat="server" 
                                     ErrorMessage="This class have been use in this time"
                                     CssClass="validator"
                                     ControlToValidate="txtClassRoomName"

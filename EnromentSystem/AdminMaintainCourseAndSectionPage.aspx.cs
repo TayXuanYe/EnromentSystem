@@ -106,15 +106,30 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
 
     protected void gvCourseInfo_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if (e.CommandName == "Edit")
+        Control commandSource = e.CommandSource as Control;
+        if (commandSource != null)
         {
-            string program = e.CommandArgument.ToString();
-            //Response.Redirect($"AdminModifyProgramAndMajorPage.aspx?program={program}");
-        }
-        else if (e.CommandName == "Delete")
-        {
-            string program = e.CommandArgument.ToString();
-            //Response.Redirect($"AdminDeleteProgramPage.aspx?program={program}");
+            GridViewRow row = commandSource.NamingContainer as GridViewRow;
+            if (row != null)
+            {
+                string courseId = row.Cells[0].Text.Trim();
+                string program = row.Cells[6].Text.Trim();
+                int index = row.RowIndex;
+
+                switch (e.CommandName)
+                {
+                    case "Edit":
+                        Response.Redirect($"AdminModifyCourseAndSectionPage.aspx?course={courseId}&program={program}");
+                        break;
+
+                    case "Delete":
+                        Response.Redirect($"AdminDeleteCoursePage.aspx?course={courseId}&program={program}");
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
     }
 
@@ -154,8 +169,8 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
         DataSet dataSet = null;
         dataSet = DatabaseManager.GetRecord(   
             "section",
-            new List<string> { "sid", "section.name", "l.name as lecture_name", "max_enroll" },
-            $@"INNER JOIN lecture as l ON section.lid = l.lid WHERE cid = '{course}' AND semester = '{semester}' AND program = '{program}'"
+            new List<string> { "sid", "section.name",  "max_enroll" },
+            $@"WHERE cid = '{course}' AND semester = '{semester}' AND program = '{program}'"
         );
         if (dataSet != null)
         {

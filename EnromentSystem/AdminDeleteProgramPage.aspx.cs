@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Web.UI;
 
 public partial class AdminDeleteProgramPage : System.Web.UI.Page
@@ -75,21 +76,30 @@ public partial class AdminDeleteProgramPage : System.Web.UI.Page
         {
             conformWindow.Style["display"] = "none";
             bool successDeleteMajor = true;
+            DataSet ds = DatabaseManager.GetRecord(
+            "major",
+            new List<string> { "major" },
+            $@"WHERE program = '{lblProgramName.Text}'"
+            );
             successDeleteMajor = DatabaseManager.DeleteData(
             "major",
             $@"WHERE program = '{lblProgramName.Text}'"
             );
-            bool successDeleteProgram = false;
+            if (ds != null)
+            {
+                DataTable majorInfo = ds.Tables[0];
+                if (majorInfo.Rows.Count == 0)
+                {
+                    successDeleteMajor = true;
+                }
+            }
+            bool successDeleteProgram = true;
             if (successDeleteMajor)
             {
                 successDeleteProgram = DatabaseManager.DeleteData(
                 "program",
                 $@"WHERE program = '{lblProgramName.Text}'"
                 );
-            }
-            else
-            {
-                successDeleteProgram = false;
             }
             if (successDeleteProgram && successDeleteMajor)
             {
