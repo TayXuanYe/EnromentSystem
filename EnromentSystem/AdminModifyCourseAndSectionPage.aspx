@@ -318,7 +318,7 @@
                 Text="Class are requited!"></asp:Label>
             </div>
             <div class="button-container">
-                <asp:Button runat="server" Text="Update" OnClick="btnAddClass_Click" ValidationGroup="classWindows"/>
+                <asp:Button runat="server" Text="Apply" OnClick="btnAddClass_Click" ValidationGroup="classWindows"/>
                 <asp:Button runat="server" Text="Exit" OnClick="btnCancelAddClass_Click" CausesValidation="false"/>
             </div>
         </div>
