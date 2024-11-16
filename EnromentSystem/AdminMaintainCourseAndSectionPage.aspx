@@ -31,7 +31,7 @@
         AutoGenerateColumns="false" 
         CssClass="course-grid-view"
         OnRowCommand="gvCourseInfo_RowCommand" 
-        DataKeyNames="program" 
+        DataKeyNames="cid" 
         OnSelectedIndexChanged="gvCourseInfo_SelectedIndexChanged"
         ShowHeaderWhenEmpty="True">
         <Columns>
@@ -84,7 +84,6 @@
         <Columns>
             <asp:BoundField HeaderText="Section ID" DataField="sid" SortExpression="sid"/>
             <asp:BoundField HeaderText="Name" DataField="name" SortExpression="name"/>
-            <asp:BoundField HeaderText="Lecturer Name" DataField="lecture_name" SortExpression="lecture_name"/>
             <asp:BoundField HeaderText="Max enroll allow" DataField="max_enroll" SortExpression="max_enroll"/>
         </Columns>
 

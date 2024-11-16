@@ -52,8 +52,8 @@ public partial class AdminMaintainProgramAndMajorPage : System.Web.UI.Page
             switch (ddlSearch.SelectedValue)
             {
                 case "all":
-                    condition = "WHERE program like \'%" + value + "%\' "
-                        + "school like \'%" + value + "%\' "
+                    condition = "WHERE program like \'%" + value + "%\' OR "
+                        + "school like \'%" + value + "%\' OR "
                         + "level like \'%" + value + "%\' ";
                     break;
 

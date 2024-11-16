@@ -1,0 +1,489 @@
+﻿body {
+}
+
+.table-contain {
+    width: 100vw;
+    padding: 0px 20%;
+}
+
+    .table-contain .course-details-table {
+        width: 100%;
+        padding-bottom: 30px;
+    }
+
+.course-details-table th, h2 {
+    text-align: left;
+    padding: 2px;
+    font-size: 24px;
+    padding-bottom: 4px;
+}
+
+
+.course-details-table td {
+    vertical-align: top;
+    padding: 2px;
+}
+
+    .course-details-table td:nth-child(2n+1) {
+        width: 12%;
+        min-width: 120px;
+    }
+
+    .course-details-table td:nth-child(2n) {
+        width: 40%;
+    }
+
+    .course-details-table td:nth-child(2n+1)::after {
+        content: ":";
+        float: right;
+        font-weight: 600;
+        margin-right: 2px;
+    }
+
+.course-details-table input {
+    padding: 4px;
+    width: 90%;
+    max-width: 350px;
+}
+
+.course-details-table textarea {
+    padding: 4px;
+    width: 45%;
+    min-width: 90%;
+    max-width: 90%;
+    min-height: 45px;
+}
+
+.course-details-table select {
+    padding: 4px;
+    max-width: 350px;
+    width: 90%;
+}
+
+    .course-details-table select:hover {
+        background-color: #ddd;
+    }
+
+.section-details-table td {
+    vertical-align: top;
+    font-size: 14pt;
+    padding: 2px;
+}
+
+    .section-details-table td:nth-child(2n+1) {
+        width: 30%;
+        /*        min-width: 12%;*/
+        vertical-align: central;
+    }
+
+    .section-details-table td:nth-child(3n+2) {
+        /*        width: 88%;
+        min-width: 120px;
+        display: flex;
+        flex-wrap: wrap;*/
+    }
+
+.section-details-table div {
+    width: 100%;
+    flex: 0 0 100%;
+    display: flex;
+    gap: 4px;
+}
+
+    .section-details-table div select {
+        min-width: 180px;
+    }
+
+.section-details-table td:nth-child(2n+1)::after {
+    content: ":";
+    float: right;
+    font-weight: 600;
+    margin-right: 2px;
+}
+
+
+.section-details-table td:nth-child(2n+2) input[type=image] {
+    width: 27px;
+    height: 27px;
+}
+
+.section-details-table input[type="text"] {
+    flex: 0 0 90%;
+    padding: 4px;
+    max-width: 350px;
+    width: 90%;
+}
+
+
+.button-container {
+    width: 100vw;
+    padding: 0px 20%;
+    text-align: right;
+}
+
+    .button-container input[type=submit], .pop-up-windows input[type=submit] {
+        margin: 5px;
+        padding: 5px 10px;
+        border: solid 1px;
+        border-radius: 5px;
+        background-color: #d22a46;
+        color: white;
+        border-color: #d22a46;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+        .button-container input[type=submit]:hover, .pop-up-windows input[type=submit]:hover {
+            background-color: #af1f35;
+        }
+
+    .button-container input[type="number"],
+    .button-container input[type="number"]:hover,
+    .button-container input[type="number"]:focus {
+        -moz-appearance: textfield;
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+        .button-container input[type="number"]::-webkit-outer-spin-button,
+        .button-container input[type="number"]::-webkit-inner-spin-button,
+        .button-container input[type="number"]:hover,
+        .button-container input[type="number"]:focus {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+.validator {
+    color: red;
+    font-size: 12px;
+}
+
+.windows-contain {
+    flex-direction: column;
+}
+
+    .windows-contain .button-container {
+        width: 100%;
+        padding: 0px 5%;
+    }
+
+
+h2 {
+    width: 100vw;
+    padding: 0px 20%;
+}
+
+.grid-view {
+    flex: 1;
+    margin-top: 20px;
+    width: 60vw;
+}
+
+    .grid-view th {
+        padding: 2px 5px;
+        background-color: #ddd;
+    }
+
+    .grid-view td {
+        padding: 5px 5px;
+    }
+
+    .grid-view input[type="button"] {
+        border: solid 1px;
+        border-color: #d22a46;
+        border-radius: 100%;
+        background-color: #d22a46;
+        padding: 4px;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px 24px;
+        background-image: url("../Images/delete.png");
+        background-size: cover;
+    }
+
+        .grid-view input[type="button"]:hover {
+            background-color: #af1f35;
+        }
+
+    .grid-view tr th:nth-child(3n+1) {
+        min-width: 94px;
+    }
+
+    .grid-view tr th:nth-child(5n+4), .grid-view tr td:nth-child(5n+4) {
+        width: 78px;
+    }
+
+    .grid-view tr th:nth-child(5n), .grid-view tr td:nth-child(5n) {
+        width: 78px;
+    }
+
+    .grid-view input[type="image"] {
+        border: solid white;
+        border-radius: 100%;
+        padding: 4px;
+        /*        width: 30px;*/
+        /*        height: 30px;*/
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px 24px;
+        background-size: cover;
+    }
+
+        .grid-view input[type="image"]:hover {
+            background-color: #eaeded;
+        }
+
+
+.class-details-table td:nth-child(3n+1)::after {
+    content: ":";
+    float: right;
+    font-weight: 600;
+    margin-right: 2px;
+}
+
+.class-details-table th {
+    padding-top: 20px;
+    font-size: 18pt;
+    text-align: left;
+}
+
+.class-details-table select {
+    min-width: 200px;
+    padding: 4px;
+    max-width: 350px;
+    width: 100%;
+}
+
+.class-details-table input[type=number] {
+    min-width: 200px;
+    padding: 4px;
+    max-width: 350px;
+    width: 100%;
+}
+
+.class-details-table input[type=checkbox] {
+    margin: 4px;
+    width: 25px;
+    height: 25px;
+}
+
+
+.class-timetable-display-contain th, .class-timetable-display-contain td {
+    padding: 4px;
+}
+
+    .class-timetable-display-contain td:first-child {
+        max-width: 40px;
+    }
+
+.class-timetable-display-contain td {
+    width: 100px;
+    height: 80px;
+}
+
+.class-details-table-contain, .class-timetable-display-contain {
+    width: 100%;
+    padding: 0px 5%;
+}
+
+.class-details-table-contain {
+    width: 100%;
+    display: flex;
+}
+
+    .class-details-table-contain table {
+        margin-right: 15px;
+    }
+
+        .class-details-table-contain table .lblClassWindowsSectionName {
+            /*        display: block;*/
+            font-size: 14pt;
+            text-align: center;
+            height: 100%;
+        }
+
+.add-class-button {
+    width: 35px;
+    height: 35px;
+    border: solid #FFF;
+    border-radius: 100%;
+    padding: 5px;
+    /*    padding-top: 0px;*/
+    /*    position: relative;
+    bottom: 4px;*/
+}
+
+    .add-class-button:hover {
+        background-color: #eee;
+    }
+
+.class-details-table td:last-child {
+    display: flex;
+}
+
+.class-details-table td:first-child {
+    vertical-align: central;
+    font-size: 14pt;
+}
+
+.class-details-table tr:first-child span {
+    font-size: 14pt;
+}
+
+.button-container-class-windows .button-container {
+    padding: 0px;
+    width: 100vw;
+}
+
+.warning-label {
+    font-size: 10pt;
+    color: red;
+    display: none;
+}
+
+
+
+.grid-view-prerequisite {
+    flex: 1;
+    margin-top: 20px;
+    width: 60vw;
+}
+
+    .grid-view-prerequisite th {
+        padding: 2px 5px;
+        background-color: #ddd;
+    }
+
+    .grid-view-prerequisite td {
+        padding: 5px 5px;
+    }
+
+    .grid-view-prerequisite input[type="button"] {
+        border: solid 1px;
+        border-color: #d22a46;
+        border-radius: 100%;
+        background-color: #d22a46;
+        padding: 4px;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px 24px;
+        background-image: url("../Images/delete.png");
+        background-size: cover;
+    }
+
+        .grid-view-prerequisite input[type="button"]:hover {
+            background-color: #af1f35;
+        }
+
+    .grid-view-prerequisite tr th:nth-child(3n+1) {
+        min-width: 94px;
+    }
+
+    .grid-view-prerequisite tr th:nth-child(3n+2), .grid-view-prerequisite tr td:nth-child(3n+2) {
+        min-width: 94px;
+    }
+
+    .grid-view-prerequisite tr th:nth-child(3n), .grid-view-prerequisite tr td:nth-child(3n) {
+        width: 78px;
+    }
+
+    .grid-view-prerequisite input[type="image"] {
+        border: solid white;
+        border-radius: 100%;
+        padding: 4px;
+        /*        width: 30px;*/
+        /*        height: 30px;*/
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px 24px;
+        background-size: cover;
+    }
+
+        .grid-view-prerequisite input[type="image"]:hover {
+            background-color: #eaeded;
+        }
+
+
+.lblSelectingClass {
+    font-size: 16pt;
+    margin: 5px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.class-timetable-display-contain input[type=checkbox] {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 0px auto;
+}
+
+.class-timetable-display-contain div span {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 0px auto;
+}
+
+.unable-select-checkbox {
+    background-color: #ff0000;
+}
+
+.have-select-checkbox {
+    background-color: yellow;
+}
+
+.can-select-checkbox {
+}
+
+
+.assign-classroom-contain {
+    padding: 0px 5%;
+}
+
+    .assign-classroom-contain td:first-child {
+        padding: 5PX;
+        min-width: 100px;
+    }
+
+    .assign-classroom-contain td:last-child {
+        /*        display:none;*/
+        color: #fff;
+        padding: 0px;
+        max-width: 0px;
+    }
+
+    .assign-classroom-contain th:last-child {
+        color: #fff;
+        /*        display:none;*/
+        padding: 0px;
+        max-width: 0px;
+    }
+
+    .assign-classroom-contain th {
+        padding: 5PX;
+    }
+
+    .assign-classroom-contain input {
+        border: none;
+        padding: 5PX;
+        height: 100%;
+        width: 100%;
+    }
+
+        .assign-classroom-contain input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+
+.warning-contain {
+    width: 100%;
+    padding: 0px 5%;
+    text-align: right;
+}

@@ -27,7 +27,7 @@ public partial class AdminDeleteStudentPage : System.Web.UI.Page
         DataSet dataSet = DatabaseManager.GetRecord(
             "student",
             new List<string> { "name", "ic_or_passport", "date_of_birth", "hp_no",
-                    "permanent_address", "premenant_postcode", "permenant_city", "permenant_state", "permenant_country",
+                    "permanent_address", "permanent_postcode", "permanent_city", "permanent_state", "permanent_country",
                     "mode_of_study", "school", "level", "program", "major", "student_email", "scholarship",
                     "password", "admission_date" },
             $@"WHERE sid = '{id}'" 
@@ -42,10 +42,10 @@ public partial class AdminDeleteStudentPage : System.Web.UI.Page
                 lblDateOfBirth.Text = row["date_of_birth"].ToString();
                 lblPhoneNumber.Text = row["hp_no"].ToString();
                 lblAddress.Text = row["permanent_address"].ToString();
-                lblPostcode.Text = row["premenant_postcode"].ToString();
-                lblCity.Text = row["permenant_city"].ToString();
-                lblState.Text = row["permenant_state"].ToString();
-                lblCountry.Text = row["permenant_country"].ToString();
+                lblPostcode.Text = row["permanent_postcode"].ToString();
+                lblCity.Text = row["permanent_city"].ToString();
+                lblState.Text = row["permanent_state"].ToString();
+                lblCountry.Text = row["permanent_country"].ToString();
                 lblModeOfStudy.Text = row["mode_of_study"].ToString();
                 lblSchool.Text = row["school"].ToString();
                 lblLevel.Text = row["level"].ToString();
@@ -67,6 +67,10 @@ public partial class AdminDeleteStudentPage : System.Web.UI.Page
         if (succesful)
         {
             successfulWindow.Style["display"] = "flex";
+        }
+        else
+        {
+            failWindow.Style["display"] = "flex";
         }
     }
     

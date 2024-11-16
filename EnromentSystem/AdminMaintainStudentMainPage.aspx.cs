@@ -31,9 +31,9 @@ public partial class AdminMaintainStudentMainPage : System.Web.UI.Page
             switch (ddlSearch.SelectedValue)
             {
                 case "all":
-                    condition = "WHERE name like \'%" + value + "%\' "
-                        + "sid like \'%" + value + "%\' "
-                        + "program like \'%" + value + "%\' "
+                    condition = "WHERE name like \'%" + value + "%\' OR "
+                        + "sid like \'%" + value + "%\' OR "
+                        + "program like \'%" + value + "%\' OR "
                         + "major like \'%" + value + "%\' ";
                     break;
 

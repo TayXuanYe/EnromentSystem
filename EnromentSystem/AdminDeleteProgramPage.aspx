@@ -97,13 +97,13 @@
                 OnServerValidate="ConformTextCustomValidator_ServerValidate"
                 ValidationGroup="conformWindow"></asp:CustomValidator>
             <div class="button-container">
+                <asp:Button runat="server" Text="Conform" 
+                    OnClick="btnConformDeleteProgram_Click" 
+                    ValidationGroup="conformWindow"/>
                 <asp:Button ID="btnCancelDeleteConform" runat="server" 
                     Text="Cancel" 
                     CausesValidation="false"
                     OnClick="btnCancelDeleteConform_Click"/>
-                <asp:Button runat="server" Text="Conform" 
-                    OnClick="btnConformDeleteProgram_Click" 
-                    ValidationGroup="conformWindow"/>
             </div>
         </div>
     </asp:Panel>

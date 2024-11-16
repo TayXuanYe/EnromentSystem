@@ -33,7 +33,7 @@ CREATE TABLE student(
 	major varchar(255),
 	scholarship float,
 	permanent_address varchar(255),
-	permanent_postcode int,
+	permanent_postcode varchar(255),
 	permanent_city varchar(255),
 	permanent_state varchar(255),
 	permanent_country varchar(255),

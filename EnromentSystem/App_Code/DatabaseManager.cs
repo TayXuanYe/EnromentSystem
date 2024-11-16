@@ -222,6 +222,51 @@ public static class DatabaseManager
             return null;
         }
     }
+    
+    public static int GetRecordCount(string table, string condition)
+    {
+        if (connection == null)
+        {
+            ConnectDatabase();
+        }
+
+        if (connection.State == ConnectionState.Closed)
+        {
+            connection.Open();
+        }
+
+        //create query
+        String query = $"SELECT * FROM {table} {condition}";
+
+        try
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                {
+                    DataSet dataSet = new DataSet();
+                    adapter.Fill(dataSet);
+                    if(dataSet != null)
+                    {
+                        return dataSet.Tables[0].Rows.Count;
+                    }
+                    return 0;
+                }
+            }
+        }
+        catch (SqlException sqlEx)
+        {
+            Console.WriteLine("SQL error occurred - get record count: " + sqlEx.Message);
+            Debug.WriteLine("SQL error occurred - get record count: " + sqlEx.Message);
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred - get record count: " + ex.Message);
+            Debug.WriteLine("An error occurred - get record count: " + ex.Message);
+            return 0;
+        }
+    }
 
     public static bool UpdateData(string table, List<string> columnNames, List<object> values, string condition)
     {
