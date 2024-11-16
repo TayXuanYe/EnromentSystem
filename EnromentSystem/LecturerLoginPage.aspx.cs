@@ -39,7 +39,7 @@ public partial class LecturerLoginPage : System.Web.UI.Page
         {
             Session["lid"] = txtUserId.Text.ToUpper();
             Session.Timeout = 30;
-            Response.Redirect("StudentHomePage.aspx");
+            Response.Redirect("LecturerHomePage.aspx");
         }
     }
 }

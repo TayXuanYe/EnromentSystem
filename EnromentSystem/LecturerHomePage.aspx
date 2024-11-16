@@ -7,7 +7,7 @@
     Inherits="LecturerHomePage" %>
 
 <asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/adminHomePage.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/lecturerHomePage.css") %>" />
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
@@ -28,19 +28,20 @@
                 </td>
             </tr>
         </table>
-        <asp:GridView ID="gvMajorInfo" runat="server" 
+        <asp:GridView ID="gvCourse" runat="server" 
             AutoGenerateColumns="false" 
             CssClass="grid-view"
-            OnSelectedIndexChanged="gvMajorInfo_RowCommand" 
-            DataKeyNames="major" 
+            OnSelectedIndexChanged="gvCourse_SelectedIndexChanged" 
+            DataKeyNames="cid" 
             ShowHeaderWhenEmpty="True">
             <Columns>
-                <asp:BoundField HeaderText="Major" DataField="major" SortExpression="major"/>
-                <asp:CommandField ShowSelectButton="true" HeaderText="Operate" ButtonType="Button" SelectText=" "/>            
+                <asp:BoundField HeaderText="Course Id" DataField="cid" SortExpression="cid"/>
+                <asp:BoundField HeaderText="Course Name" DataField="name" SortExpression="name"/>
+                <asp:CommandField ShowSelectButton="true" HeaderText="Action" ButtonType="Button" SelectText=" "/>            
             </Columns>
 
             <EmptyDataTemplate>
-                <p class="center">No major</p>
+                <p class="center">No course</p>
             </EmptyDataTemplate>
         </asp:GridView>
     </div>
