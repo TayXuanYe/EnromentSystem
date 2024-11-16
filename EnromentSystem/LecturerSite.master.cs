@@ -4,41 +4,36 @@ using System.Data;
 using System.Diagnostics;
 using System.Web.UI;
 
-public partial class SiteMaster : MasterPage
+public partial class LecturerSiteMaster : MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         Session.Timeout = 30;
-        if (Session["sid"] != null)
+        if (Session["lid"] != null)
         {
             DataSet dataSet = DatabaseManager.GetRecord(
-                "student",
-                new List<string> { "name", "program" },
-                "WHERE sid = \'" + Session["sid"] + "\'"
+                "lecture",
+                new List<string> { "name" },
+                $@"WHERE lid = '{Session["lid"].ToString()}'"
             );
 
             DataTable dt = dataSet.Tables[0];
             string name = null;
-            string program = null;
             foreach (DataRow row in dt.Rows)
             {
                 name = row["name"].ToString();
-                program = row["program"].ToString();
             }
 
-            lblStudentDetails.Text =
-                name + "<br>" +
-                Session["sid"].ToString() + "<br>" +
-                program;
+            lblLecturerDetails.Text = $@"name<br>Session[""lid""].ToString()"
         }else
         {
-            Debug.WriteLine("return");
-            Response.Redirect("StudentLoginPage.aspx");
+            Response.Redirect("LecturerLoginPage.aspx");
         }
     }
 
     protected void btnLogout_Click(object sender, EventArgs e)
     {
-        Response.Redirect("StudentLoginPage.aspx");
+        Session["sid"] = null;
+        Response.Redirect("LecturerLoginPage.aspx");
     }
 }
