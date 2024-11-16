@@ -1,0 +1,118 @@
+﻿.table-contain {
+    width: 100vw;
+    padding: 0px 20%;
+}
+
+    .table-contain .semester-details-table {
+        width: 100%;
+        padding-bottom: 30px;
+    }
+
+        .table-contain .semester-details-table th span {
+            text-align: left;
+            padding: 2px;
+            font-size: 24px;
+            padding-bottom: 4px;
+            display: block;
+        }
+
+    .table-contain td:nth-child(2n+1){
+        width: 15%;
+    }
+    
+    .table-contain td:nth-child(2n){
+        width: 35%;
+    }
+
+
+.semester-details-table td:nth-child(2n+1)::after {
+    content: ":";
+    float: right;
+    font-weight: 600;
+    margin-right: 2px;
+}
+
+.semester-details-table input[type=text] {
+    padding: 4px;
+    width: 90%;
+    max-width: 350px;
+}
+
+.semester-details-table input[type=number] {
+    padding: 4px;
+    width: 90%;
+    max-width: 350px;
+}
+
+.update-button {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.update-button input {
+    border: solid 1px;
+    border-color: #d22a46;
+    border-radius: 5px;
+    background-color: #d22a46;
+    padding: 4px;
+    margin-top: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px 24px;
+    margin-right: 10%;
+}
+.update-button input:hover {
+    background-color: #c22a46;
+}
+
+.toggle-btn input[type=submit]{
+    text-align:center;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ccc;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.toggle-btn-active {
+    background-color: #4caf50;
+    color: white;
+}
+.validator {
+    color: red;
+    font-size: 12px;
+}
+
+
+.button-container input, .pop-up-windows input {
+    margin: 5px;
+    padding: 5px 10px;
+    border: solid 1px;
+    border-radius: 5px;
+    background-color: #d22a46;
+    color: white;
+    border-color: #d22a46;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+    .button-container input:hover, .pop-up-windows input:hover {
+        background-color: #af1f35;
+    }
+
+.windows-contain {
+    flex-direction: column;
+}
+
+    .windows-contain .button-container {
+        width: 100%;
+        padding: 0px 5%;
+    }

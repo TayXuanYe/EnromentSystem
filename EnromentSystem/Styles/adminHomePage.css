@@ -22,12 +22,13 @@ span, h1, li, div {
 .adminInfoCard{
     display: inline-block;
     background-color:#fff;
-    padding: 30px;
+    padding: 20px;
     border: solid;
     border-color: #FFF;
     border-radius: 10px;
-    margin: 20px;
-    height: 474px;
+/*    margin: 20px;*/
+/*    height: 474px;*/
+    width: 100%;
 }
 .adminInfoCard img {
     /*    transform: scale(0.6);*/
@@ -36,7 +37,7 @@ span, h1, li, div {
     width: 200px;
     height: 200px;
     margin-bottom: 50px;
-    margin-top: 25px;
+/*    margin-top: 25px;*/
 }
 
 .adminInfoCard h1{
@@ -47,7 +48,7 @@ span, h1, li, div {
 .adminInfoCard span{
     display: block;
     text-align: center;
-    margin-bottom: 20px;
+/*    margin-bottom: 20px;*/
     font-size: 1.5em;
     padding-bottom: 25px;
 }
@@ -58,7 +59,8 @@ span, h1, li, div {
     border-color: #FFF;
     border-radius: 5px;
     height: 100%;
-    width: 216px;
+    width: 180px;
+    height: 180px;
     cursor: pointer;
     color: #000;
 }
@@ -68,7 +70,7 @@ span, h1, li, div {
     border-color: #123;
     border-radius: 5px;
     transform: scale(1.05);
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
 }
 
 .card-contain{
@@ -82,6 +84,8 @@ span, h1, li, div {
 .functionCard img {
     display: block;
     margin: 10px auto;
+    width: 130px;
+    height: 130px;
 }
 
 .functionCard span {

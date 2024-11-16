@@ -95,6 +95,9 @@
                         <li><a href="AdminMaintainCourseAndSectionPage.aspx">Update Course & Section</a></li>
                         <li><a href="AdminMaintainCourseAndSectionPage.aspx">Delete Course & Section</a></li>
                     </ul>
+                </li>                
+                <li> 
+	                <p><a href="AdminSettingPage.aspx">Setting</a></p>
                 </li>
             </ul>
         </td>
