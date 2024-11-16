@@ -84,7 +84,7 @@
                 </td>
                 <td>Postcode</td>
                 <td>
-                    <asp:TextBox ID="txtPermanentPostcode" runat="server" TextMode="Number"></asp:TextBox>
+                    <asp:TextBox ID="txtPermanentPostcode" runat="server"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" 
                         ErrorMessage="This field is require"
