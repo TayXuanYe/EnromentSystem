@@ -22,7 +22,6 @@ public partial class LecturerLoginPage : System.Web.UI.Page
         {
             password = row["password"].ToString();
         }
-        Debug.WriteLine(password);
         if (password == txtPassword.Text)
         {
             return true;

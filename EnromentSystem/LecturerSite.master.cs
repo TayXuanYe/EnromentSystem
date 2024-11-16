@@ -24,7 +24,7 @@ public partial class LecturerSiteMaster : MasterPage
                 name = row["name"].ToString();
             }
 
-            lblLecturerDetails.Text = $@"name<br>Session[""lid""].ToString()";
+            lblLecturerDetails.Text = $@"{name}<br>{Session["lid"].ToString()}";
         }else
         {
             Response.Redirect("LecturerLoginPage.aspx");
