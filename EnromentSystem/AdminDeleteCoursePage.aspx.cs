@@ -107,26 +107,46 @@ public partial class AdminDeleteCoursePage : System.Web.UI.Page
         {
             conformWindow.Style["display"] = "none";
             string cid = lblCourseId.Text;
+            string condition = $@"WHERE sid IN (SELECT sid FROM section WHERE cid = '{cid}')";
             bool successDeleteClass = DatabaseManager.DeleteData(
                 "class",
-                $@"WHERE sid IN (SELECT sid FROM section WHERE cid = '{cid}')"
+                condition
                 );
+            if(DatabaseManager.GetRecordCount("class", condition) == 0)
+            {
+                successDeleteClass = true;
+            }
 
+            condition = $@"WHERE cid = '{cid}'";
             bool successDeleteSection = DatabaseManager.DeleteData(
                 "section",
-                $@"WHERE cid = '{cid}'"
+                condition
             );
+            if (DatabaseManager.GetRecordCount("class", condition) == 0)
+            {
+                successDeleteSection = true;
+            }
 
+            condition = $@"WHERE cid = '{cid}' OR prerequisite = '{cid}'";
             bool successDeletePreCourse = DatabaseManager.DeleteData(
                 "course_prerequisite",
-                $@"WHERE cid = '{cid}' OR prerequisite = '{cid}'"
+                condition
             );
+            if (DatabaseManager.GetRecordCount("class", condition) == 0)
+            {
+                successDeletePreCourse = true;
+            }
 
+            condition = $@"WHERE cid = '{cid}'";
             bool successDeleteCourseMajor = DatabaseManager.DeleteData(
                 "course_major",
-                $@"WHERE cid = '{cid}'"
+                condition
             );
-            
+            if (DatabaseManager.GetRecordCount("class", condition) == 0)
+            {
+                successDeleteCourseMajor = true;
+            }
+
             bool successDeleteCourse = DatabaseManager.DeleteData(
                 "course",
                 $@"WHERE cid = '{cid}'"

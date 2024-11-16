@@ -106,20 +106,30 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
 
     protected void gvCourseInfo_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        Control commandSource = (Control)e.CommandSource;
-        GridViewRow row = (GridViewRow)commandSource.NamingContainer;
-
-        string courseId = row.Cells[0].Text; 
-        string program = row.Cells[6].Text; 
-        int index = row.RowIndex;
-
-        if (e.CommandName == "Edit")
+        Control commandSource = e.CommandSource as Control;
+        if (commandSource != null)
         {
-            Response.Redirect($"AdminModifyCourseAndSectionPage.aspx?course={courseId}&program={program}");
-        }
-        else if (e.CommandName == "Delete")
-        {
-            Response.Redirect($"AdminDeleteCoursePage.aspx?course={courseId}&program={program}");
+            GridViewRow row = commandSource.NamingContainer as GridViewRow;
+            if (row != null)
+            {
+                string courseId = row.Cells[0].Text.Trim();
+                string program = row.Cells[6].Text.Trim();
+                int index = row.RowIndex;
+
+                switch (e.CommandName)
+                {
+                    case "Edit":
+                        Response.Redirect($"AdminModifyCourseAndSectionPage.aspx?course={courseId}&program={program}");
+                        break;
+
+                    case "Delete":
+                        Response.Redirect($"AdminDeleteCoursePage.aspx?course={courseId}&program={program}");
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
     }
 
