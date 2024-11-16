@@ -115,7 +115,7 @@ public partial class AdminMaintainCourseAndSectionPage : System.Web.UI.Page
 
         if (e.CommandName == "Edit")
         {
-            //Response.Redirect($"AdminModifyProgramAndMajorPage.aspx?course={course}&index={index}");
+            Response.Redirect($"AdminModifyCourseAndSectionPage.aspx?course={courseId}&program={program}");
         }
         else if (e.CommandName == "Delete")
         {

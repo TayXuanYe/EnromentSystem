@@ -14,7 +14,6 @@ public class Section
     public string semester;
     public string courseId;
     public int maxEnrollAllow;
-    public bool available;
     public List<Class> lectureClass = new List<Class>();
     public List<Class> practicalClass = new List<Class>();
 
@@ -24,6 +23,14 @@ public class Section
         this.semester = semester.ToUpper();
         this.courseId = courseId.ToUpper();
         sectionId = GenerateSectionId(name,semester,courseId).ToUpper();
+    }
+    public Section(string name, string sectionId, string semester, string courseId, int maxEnrollAllow)
+    {
+        this.name = name.ToUpper();
+        this.sectionId = sectionId.ToUpper();
+        this.semester = semester.ToUpper();
+        this.courseId = courseId.ToUpper();
+        this.maxEnrollAllow = maxEnrollAllow;
     }
 
     private string GenerateSectionId(string name, string semester, string courseId)

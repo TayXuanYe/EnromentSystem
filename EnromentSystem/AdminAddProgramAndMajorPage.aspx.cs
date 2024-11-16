@@ -17,7 +17,6 @@ public partial class AdminAddProgramAndMajorPage : System.Web.UI.Page
             gvMajorInfo.DataBind();
             Session["majorInfo"] = majorInfo;
         }
-
     }
 
     //program details part
