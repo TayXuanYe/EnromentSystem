@@ -13,5 +13,7 @@
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
     <h1>Registration Summary / Class Timetable</h1>
     <h1>&nbsp</h1>
-    <asp:Panel ID="pnDisplayPdf" runat="server" CssClass="pdfPanel"></asp:Panel>
+    <asp:Panel ID="pnDisplayPdf" runat="server" CssClass="pdfPanel">
+        <iframe id="pdfFrame" runat="server"></iframe>
+    </asp:Panel>
 </asp:Content>
