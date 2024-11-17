@@ -19,6 +19,8 @@ DROP TABLE school
 DROP TABLE course_prerequisite
 DROP TABLE course_major
 DROP TABLE course
+DROP TABLE student_take_attendance
+DROP TABLE lecturer_create_attendance_record
 
 CREATE TABLE student(
 	sid varchar(255) primary key,
@@ -226,3 +228,17 @@ INSERT INTO bank (bank_name) VALUES
     ('Bank Pertanian Malaysia Berhad');
 
 
+CREATE TABLE lecturer_create_attendance_record(
+	rid varchar(255) PRIMARY KEY,
+	classId varchar(255),
+	courseId varchar(255),
+	sectionId varchar(255),
+	FOREIGN KEY (classId) REFERENCES class(id)
+);
+
+CREATE TABLE student_take_attendance(
+	rid varchar(255) PRIMARY KEY,
+	sid varchar(255),
+	FOREIGN KEY (sid) REFERENCES student(sid),
+	FOREIGN KEY (rid) REFERENCES lecturer_create_attendance_record(rid)
+);
