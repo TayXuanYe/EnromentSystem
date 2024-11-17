@@ -11,7 +11,14 @@ public partial class AddDropHistoryPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        SetAddDropHistoryTable();
+        if (Session["sid"] != null)
+        {
+            SetAddDropHistoryTable();
+        }
+        else
+        {
+            Response.Redirect("StudentLoginPage.aspx");
+        }
     }
 
     private void SetAddDropHistoryTable()

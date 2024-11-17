@@ -32,7 +32,6 @@ public partial class SiteMaster : MasterPage
                 program;
         }else
         {
-            Debug.WriteLine("return");
             Response.Redirect("StudentLoginPage.aspx");
         }
     }

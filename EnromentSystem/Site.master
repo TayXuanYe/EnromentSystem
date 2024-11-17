@@ -83,7 +83,7 @@
                 <li> 
 	                <p>Statement</p>
                     <ul>
-                        <li><a href="#">Student Statement</a></li>
+                        <li><a href="StudentStatementPage.aspx">Student Statement</a></li>
                         <li><a href="#">Registration <br />Summary</a></li>
                     </ul>
                 </li>

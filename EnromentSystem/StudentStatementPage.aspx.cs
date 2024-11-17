@@ -9,6 +9,13 @@ public partial class StudentStatementPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["sid"] != null)
+        {
 
+        }
+        else
+        {
+            Response.Redirect("StudentLoginPage.aspx");
+        }
     }
 }
