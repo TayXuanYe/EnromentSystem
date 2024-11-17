@@ -64,7 +64,7 @@
             </div>
             <div class="card-content">
                 <ul>
-                    <li><a href="#">Student Statement</a></li>
+                    <li><a href="StudentStatementPage.aspx">Student Statement</a></li>
                     <li><a href="#">Registration Summary / Class Timetable</a></li>
                 </ul>
             </div>
