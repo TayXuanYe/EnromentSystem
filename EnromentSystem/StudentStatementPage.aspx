@@ -1,5 +1,5 @@
 ﻿<%@ Page 
-    Title="Update Bank Details Page"
+    Title="Student Statement Page"
     MasterPageFile="~/Site.master"
     Language="C#" 
     AutoEventWireup="true" 

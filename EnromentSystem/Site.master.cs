@@ -38,6 +38,7 @@ public partial class SiteMaster : MasterPage
 
     protected void btnLogout_Click(object sender, EventArgs e)
     {
+        Session["sid"] = null;
         Response.Redirect("StudentLoginPage.aspx");
     }
 }
