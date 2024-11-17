@@ -48,5 +48,5 @@
             </tr>
         </table>
     </div>
-    <asp:Panel ID="pnDisplayPdf" runat="server"></asp:Panel>
+    <asp:Panel ID="pnDisplayPdf" runat="server" CssClass="pdfPanel"></asp:Panel>
 </asp:Content>
