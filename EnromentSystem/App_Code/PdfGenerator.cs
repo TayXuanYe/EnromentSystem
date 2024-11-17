@@ -25,7 +25,7 @@ public class PdfGenerator : System.Web.UI.Page
         string tempHtmlFile = Path.Combine(Server.MapPath($"~/{folderPath}"), "temp.html");
         File.WriteAllText(tempHtmlFile, htmlContent);
 
-        string wkHtmlToPdfPath = @"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe";  // 修改为实际路径
+        string wkHtmlToPdfPath = @"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe";
 
         string pdfOutputPath = Path.Combine(Server.MapPath($"~/{folderPath}"), fileName);
 
@@ -46,7 +46,7 @@ public class PdfGenerator : System.Web.UI.Page
         string tempHtmlFile = Path.Combine(Server.MapPath($"~/{folderPath}"), "temp.html");
         File.WriteAllText(tempHtmlFile, htmlContent);
 
-        string wkHtmlToPdfPath = @"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe";  // 修改为实际路径
+        string wkHtmlToPdfPath = @"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe";
 
         string pdfOutputPath = Path.Combine(Server.MapPath($"~/{folderPath}"), fileName);
 
