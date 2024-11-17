@@ -53,7 +53,7 @@
             </div>
             <div class="card-content">
                 <ul>
-                    <li><a href="#">Take Attendance</a></li>
+                    <li><a href="StudentTakeAttendentPage.aspx">Take Attendance</a></li>
                     <li><a href="#">Attendance</a></li>
                 </ul>
             </div>
