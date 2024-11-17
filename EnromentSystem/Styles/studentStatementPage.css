@@ -1,0 +1,56 @@
+﻿body {
+}
+
+h1 {
+    width: 100vw;
+    padding:0px 20%;
+}
+
+.table-contain{
+    padding: 10px 20%;
+    padding-bottom: 30px;
+}
+
+.table-contain table{
+    padding: 5px;
+    width: 100%;
+}
+
+.table-contain table input[type=date]{
+    padding: 5px;
+    width: 80%;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+    .table-contain table input[type=submit] {
+        padding: 5px;
+        text-align: center;
+        color: white;
+        display: block;
+        /*        height: 45px;*/
+        border: solid 1px;
+        border-color: white;
+        border-radius: 5px;
+        background-color: #6f6f72;
+        min-width: 60px;
+    }
+
+.table-contain table input[type=submit]:hover {
+    background-color: #3d3d3f;
+}
+    .table-contain table td:nth-child(4n+2) .validator {
+        margin-left: 45px;
+    }
+
+    .validator {
+        margin-left: 30px;
+        color: red;
+        font-size: 12px;
+    }
+
+.pdfPanel {
+    width: 100vw;
+    height: 800px;
+    background-color: #525659;
+}

@@ -25,6 +25,10 @@ public partial class EnrolmentPage : System.Web.UI.Page
                 PopulateCourseSection(ddlCourseCodeListing.SelectedValue);
             }
         }
+        else
+        {
+            Response.Redirect("StudentLoginPage.aspx");
+        }
     }
 
     private void CheckFunctionOpen()
