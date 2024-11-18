@@ -23,7 +23,7 @@ public partial class StudentViewAttendentPage : System.Web.UI.Page
                 DataTable displayTable = new DataTable();
                 displayTable.Columns.Add("cid", typeof(string));
                 displayTable.Columns.Add("name", typeof(string));
-                displayTable.Columns.Add("attendance", typeof(double));
+                displayTable.Columns.Add("attendance", typeof(string));
                 if (courseData != null)
                 {
                     foreach (DataRow row in courseData.Tables[0].Rows)
@@ -36,9 +36,9 @@ public partial class StudentViewAttendentPage : System.Web.UI.Page
                             "student_take_attendance",
                             $@"WHERE rid IN (select rid FROM lecturer_create_attendance_record WHERE sectionId = '{row["section_id"].ToString()}');"
                             );
-                        double attendance = takenAttendance / allAttendance;
+                        double attendance = takenAttendance / allAttendance * 100;
 
-                        displayTable.Rows.Add(row["cid"].ToString(), row["name"].ToString(), attendance);
+                        displayTable.Rows.Add(row["cid"].ToString(), row["name"].ToString(), attendance + " %");
                     }
                 }
                 gvCourse.DataSource = displayTable;

@@ -1,13 +1,13 @@
 ﻿<%@ Page 
     Title="Home Page"
-    MasterPageFile="~/LecturerSite.master"
+    MasterPageFile="~/Site.master"
     Language="C#" 
     AutoEventWireup="true" 
     CodeFile="StudentViewAttendentPage.aspx.cs" 
     Inherits="StudentViewAttendentPage" %>
 
 <asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/lecturerHomePage.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/StudentViewAttendentPage.css") %>" />
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
