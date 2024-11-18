@@ -223,8 +223,8 @@ public partial class LecturerTakeAttendentPage : System.Web.UI.Page
         Debug.WriteLine(classId);
         DatabaseManager.InsertData(
             "lecturer_create_attendance_record",
-            new List<string> { "rid", "classId", "courseId", "sectionId" },
-            new List<object> { $"{classId}-{date}", classId, courseId, sectionId }
+            new List<string> { "rid", "classId", "courseId", "sectionId", "date" },
+            new List<object> { $"{classId}-{date}", classId, courseId, sectionId, date }
             );
         using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
         {
