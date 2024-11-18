@@ -14,24 +14,39 @@ public partial class StudentViewAttendentPage : System.Web.UI.Page
         {
             if (!IsPostBack)
             {
-                string lecturerId = Session["lid"].ToString();
-                DataSet dataSet = DatabaseManager.GetRecord(
-                    "course",
-                    new List<string> { "cid", "name" },
-                    $@"WHERE cid IN (
-                        SELECT cid FROM class JOIN section ON class.sid = section.sid WHERE lid = '{lecturerId}' 
-                        AND semester IN (SELECT semester FROM current_semester))"
+                string studentId = Session["sid"].ToString();
+                DataSet courseData = DatabaseManager.GetRecord(
+                    "student_taken_course AS stc",
+                    new List<string> { "stc.cid", "name", "section_id" },
+                    $@"JOIN course ON course.cid = stc.cid WHERE status = 'TAKEN' AND stc.sid = 'I23024312' "
                     );
-                if (dataSet != null)
+                DataTable displayTable = new DataTable();
+                displayTable.Columns.Add("cid", typeof(string));
+                displayTable.Columns.Add("name", typeof(string));
+                displayTable.Columns.Add("attendance", typeof(double));
+                if (courseData != null)
                 {
-                    gvCourse.DataSource = dataSet;
-                    gvCourse.DataBind();
-                }
+                    foreach (DataRow row in courseData.Tables[0].Rows)
+                    {
+                        double allAttendance = DatabaseManager.GetRecordCount(
+                            "lecturer_create_attendance_record",
+                            $@"WHERE sectionId = '{row["section_id"].ToString()}'"
+                            );
+                        double takenAttendance = DatabaseManager.GetRecordCount(
+                            "student_take_attendance",
+                            $@"WHERE rid IN (select rid FROM lecturer_create_attendance_record WHERE sectionId = '{row["section_id"].ToString()}');"
+                            );
+                        double attendance = takenAttendance / allAttendance;
 
+                        displayTable.Rows.Add(row["cid"].ToString(), row["name"].ToString(), attendance);
+                    }
+                }
+                gvCourse.DataSource = displayTable;
+                gvCourse.DataBind();
                 DataSet lectureData = DatabaseManager.GetRecord(
-                    "lecture",
+                    "student",
                     new List<string> { "name" },
-                    $@"WHERE lid = '{lecturerId}'"
+                    $@"WHERE sid = '{studentId}'"
                     );
                 if (lectureData != null)
                 {
@@ -59,8 +74,8 @@ public partial class StudentViewAttendentPage : System.Web.UI.Page
     protected void gvCourse_SelectedIndexChanged(object sender, EventArgs e)
     {
         string courseId = gvCourse.SelectedRow.Cells[0].Text;
-        string lectureName = lblName.Text;
+        string studentId = lblName.Text;
         string semester = lblSemester.Text;
-        Response.Redirect($"LecturerTakeAttendentPage.aspx?courseId={courseId}&lectureName={lectureName}&semester={lectureName}");
+        Response.Redirect($"StudentAttendanceDetailsPage.aspx?courseId={courseId}&lectureName={studentId}&semester={semester}");
     }
 }
