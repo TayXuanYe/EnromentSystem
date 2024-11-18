@@ -216,7 +216,7 @@ public partial class LecturerTakeAttendentPage : System.Web.UI.Page
         string courseId = lblCourse.Text;
         string sectionId = ddlSection.SelectedValue;
         string classId = ddlClassTime.SelectedValue;
-        string dateTimeGenerate = System.DateTime.Now.ToString("yyyy-MM-dd~HH:mm:ss");
+        string dateTimeGenerate = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         string date = txtDate.Text;
         // rid/courseId/sectionId/date Generate/Time Generate
         string qrMessage = $"{classId}-{date}~{courseId}~{sectionId}~{dateTimeGenerate}";

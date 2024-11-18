@@ -13,13 +13,13 @@ h1{
 }
 
     .qr-contain .reader {
-        display:block;
-        margin: 0px auto;
+/*        display:block;*/
+/*        margin: 0px auto;*/
         min-width: 500px;
-        max-width: 500px;
+/*        max-width: 500px;*/
         min-height: 500px;
-        height: 500px;
-        background-color: antiquewhite;
+/*        height: 500px;*/
+/*        background-color: antiquewhite;*/
 /*            background-image: url(../Images/md-qr-scanner.png);*/
         background-size: 100%;
         background-repeat: no-repeat;
@@ -92,6 +92,7 @@ h2 {
 }
 
 .pop-up-windows span {
+    display:block;
     color: #861b2d;
     padding: 4px;
 }
@@ -459,3 +460,4 @@ h2 {
         /*        width: 600px;*/
         border-radius: 5px;
     }
+
