@@ -11,7 +11,7 @@
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Take Attendent</h1>
+    <h1>Attendent History</h1>
     <asp:Panel ID="successfulWindow" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
             <br />
