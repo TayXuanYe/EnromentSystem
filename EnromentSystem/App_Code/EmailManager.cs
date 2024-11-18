@@ -8,7 +8,7 @@ public class EmailManager
 {
     private static MailAddress sender = new MailAddress("email", "name");
     private MailAddress receiver = null;
-    private static string senderPassword = "";
+    private static string senderPassword = "iu040804130465";
     private string subject = null;
     private string body = null;
 
@@ -24,8 +24,8 @@ public class EmailManager
 
     public void SetEmailReceiver(string emailAddress, string name)
     {
-        //receiver = new MailAddress("i23024312@student.newinti.edu.my", name);
-        receiver = new MailAddress("i22023829@student.newinti.edu.my", name);
+        receiver = new MailAddress("i23024312@student.newinti.edu.my", name);
+        //receiver = new MailAddress("i22023829@student.newinti.edu.my", name);
 
     }
 

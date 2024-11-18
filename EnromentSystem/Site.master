@@ -76,7 +76,11 @@
 
                 <!--Attendance-->
                 <li> 
-	                <p><a href="#">Attendance</a></p>
+	                <p>Attendance</p>
+                    <ul>
+                        <li><a href="#">Take Attendance</a></li>
+                        <li><a href="#">Attendance</a></li>
+                    </ul>
                 </li>
 
                 <!--Statement-->

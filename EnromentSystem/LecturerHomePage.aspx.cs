@@ -61,6 +61,6 @@ public partial class LecturerHomePage : System.Web.UI.Page
         string courseId = gvCourse.SelectedRow.Cells[0].Text;
         string lectureName = lblName.Text;
         string semester = lblSemester.Text;
-        Response.Redirect($"LecturerTakeAttendentPage.aspx?courseId={courseId}&lectureName={lectureName}&semester={lectureName}");
+        Response.Redirect($"LecturerTakeAttendentPage.aspx?courseId={courseId}&lectureName={lectureName}&semester={semester}");
     }
 }
