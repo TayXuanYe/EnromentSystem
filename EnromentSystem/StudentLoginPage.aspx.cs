@@ -41,4 +41,9 @@ public partial class StudentLoginPage : System.Web.UI.Page
             Response.Redirect("StudentHomePage.aspx");
         }
     }
+
+    protected void btnBack_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("MainLoginPage.aspx");
+    }
 }

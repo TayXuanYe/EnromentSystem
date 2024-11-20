@@ -11,6 +11,11 @@
 <body>
     <form id="form1" runat="server">
         <div class="box">
+                <asp:ImageButton ID="btnBack" runat="server" 
+                    ImageUrl="~/Images/back.png" 
+                    CssClass="back-image"
+                    OnClick="btnBack_Click"
+                    CausesValidation="false"/>
             <div>
                 <asp:Image runat="server" ImageUrl="~/Images/INTI_IU_logo.png"/>
             </div>
