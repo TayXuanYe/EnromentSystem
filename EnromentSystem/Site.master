@@ -44,7 +44,7 @@
             <div id="studentDetails">
                 <asp:Label ID="lblStudentDetails" runat="server" Text=""></asp:Label>
             </div>
-            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" />
+            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CausesValidation="false"/>
         </div><br />
 
         <div class="navigation-bar">
@@ -61,7 +61,7 @@
                 <li> 
 	                <p>Enrolment</p>
                     <ul>
-                        <li><a href="#">Course Enrolment</a></li>
+                        <li><a href="EnrolmentPage.aspx">Course Enrolment</a></li>
                     </ul>
                 </li>
 
@@ -69,8 +69,8 @@
                 <li> 
 	                <p>Add & Drop</p>
                     <ul>
-                        <li><a href="#">Course Add / Drop</a></li>
-                        <li><a href="#">Add / Drop History</a></li>
+                        <li><a href="CourseAddAndDropPage.aspx">Course Add / Drop</a></li>
+                        <li><a href="AddDropHistoryPage.aspx">Add / Drop History</a></li>
                     </ul>
                 </li>
 
@@ -78,8 +78,8 @@
                 <li> 
 	                <p>Attendance</p>
                     <ul>
-                        <li><a href="#">Take Attendance</a></li>
-                        <li><a href="#">Attendance</a></li>
+                        <li><a href="StudentTakeAttendentPage.aspx">Take Attendance</a></li>
+                        <li><a href="StudentViewAttendentPage.aspx">Attendance</a></li>
                     </ul>
                 </li>
 

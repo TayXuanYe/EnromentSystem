@@ -38,7 +38,7 @@ public partial class StudentViewAttendentPage : System.Web.UI.Page
                             );
                         double attendance = takenAttendance / allAttendance * 100;
 
-                        displayTable.Rows.Add(row["cid"].ToString(), row["name"].ToString(), attendance);
+                        displayTable.Rows.Add(row["cid"].ToString(), row["name"].ToString(), attendance + "%");
                     }
                 }
                 gvCourse.DataSource = displayTable;
