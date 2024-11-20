@@ -48,7 +48,8 @@ public partial class StudentAttendanceDetailsPage : System.Web.UI.Page
         DataSet dataSet = DatabaseManager.GetRecord(
             "lecturer_create_attendance_record AS lca",
             new List<string> { "cid", "name", "date", "sta.rid" },
-            $@"WHERE sid IN ('{studentid}',null) AND courseId = '{courseId}' AND 
+            $@"FULL JOIN student_take_attendance AS sta ON lca.rid = sta.rid JOIN course ON lca.courseId = course.cid 
+            WHERE (sid = '{studentid}' OR sid is null) AND courseId = '{courseId}' AND 
             sectionId IN (SELECT section_id FROM student_taken_course WHERE cid = '{courseId}' AND sid = '{studentid}')  ORDER by date"
             );
         DataTable displayTable = new DataTable();
@@ -56,20 +57,23 @@ public partial class StudentAttendanceDetailsPage : System.Web.UI.Page
         displayTable.Columns.Add("name",typeof(string));
         displayTable.Columns.Add("date",typeof(string));
         displayTable.Columns.Add("attendance", typeof(string));
-        foreach(DataRow row in dataSet.Tables[0].Rows)
+        if(dataSet != null)
         {
-            string attend = "";
-            if (row["attendance"].ToString().IsNullOrWhiteSpace())
+            Debug.WriteLine("HI");
+            foreach (DataRow row in dataSet.Tables[0].Rows)
             {
-                attend = "Not Attend";
+                string attend = "";
+                if (row["rid"].ToString().IsNullOrWhiteSpace())
+                {
+                    attend = "Not Attend";
+                }
+                else
+                {
+                    attend = "Attend";
+                }
+                displayTable.Rows.Add(row["cid"].ToString(), row["name"].ToString(), row["date"].ToString(), attend);
             }
-            else
-            {
-                attend = "Attend";
-            }
-            displayTable.Rows.Add(row["cid"].ToString(), row["name"].ToString(), row["date"].ToString(), attend);
         }
-
         gvHistory.DataSource = displayTable;
         gvHistory.DataBind();
     }

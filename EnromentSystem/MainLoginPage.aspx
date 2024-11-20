@@ -34,7 +34,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="AdminSettingPage.aspx">
+                    <a href="AdminLoginPage.aspx">
                         <div class="functionCard">
                             <asp:Image ID="Image4" runat="server" ImageUrl="~/Images/Administrator.png"/>
                             <span>Admin</span>
