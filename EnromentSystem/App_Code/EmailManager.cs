@@ -8,7 +8,7 @@ public class EmailManager
 {
     private static MailAddress sender = new MailAddress("email", "name");
     private MailAddress receiver = null;
-    private static string senderPassword = "iu040804130465";
+    private static string senderPassword = "";
     private string subject = null;
     private string body = null;
 
