@@ -41,4 +41,9 @@ public partial class LecturerLoginPage : System.Web.UI.Page
             Response.Redirect("LecturerHomePage.aspx");
         }
     }
+
+    protected void btnBack_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("MainLoginPage.aspx");
+    }
 }
