@@ -61,7 +61,20 @@ public static class DatabaseManager
 
         if (connection.State == ConnectionState.Closed)
         {
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine("SQL error occurred - open connection: " + sqlEx.Message);
+                Debug.WriteLine("SQL error occurred - open connection: " + sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred - open connection: " + ex.Message);
+                Debug.WriteLine("SQL error occurred - open connection: " + ex.Message);
+            }
         }
 
         //create query
