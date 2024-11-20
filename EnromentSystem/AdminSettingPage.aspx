@@ -70,7 +70,7 @@
                 <th colspan="2"><span>Enable Option</span></th>
             </tr>
             <tr>
-                <td>Enroll Available</td>
+                <td>Enrol Available</td>
                 <td>
                     <div class="toggle-btn">
                         <asp:Button ID="btnEnroll" runat="server" OnClick="btnEnroll_Click" CausesValidation="false"/>
