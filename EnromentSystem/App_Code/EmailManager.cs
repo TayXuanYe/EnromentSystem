@@ -29,7 +29,7 @@ public class EmailManager
 
     public void SendEmail()
     {
-        var smtp = new SmtpClient
+        SmtpClient smtp = new SmtpClient
         {
             Host = "smtp.gmail.com", // SMTP server address
             Port = 587,                // SMTP port
