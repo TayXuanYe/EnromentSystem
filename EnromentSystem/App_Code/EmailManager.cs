@@ -24,9 +24,7 @@ public class EmailManager
 
     public void SetEmailReceiver(string emailAddress, string name)
     {
-        receiver = new MailAddress("i23024312@student.newinti.edu.my", name);
-        //receiver = new MailAddress("i22023829@student.newinti.edu.my", name);
-
+        receiver = new MailAddress(emailAddress, name);
     }
 
     public void SendEmail()
