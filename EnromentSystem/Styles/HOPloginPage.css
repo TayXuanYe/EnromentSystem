@@ -1,0 +1,85 @@
+﻿/* 页面背景渐变 */
+body {
+    background: linear-gradient(to bottom right, #87CEFA, #FFEB3B); /* 天蓝色到明黄色 */
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 中间的白色背景方块 */
+#form1 {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px; /* 圆角 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影 */
+    width: 400px;
+    text-align: center;
+}
+
+/* 每个控件的样式 */
+.form-field {
+    margin: 20px 0;
+}
+
+/* 控件的标签 */
+label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    color: #333;
+}
+
+/* 文本框样式 */
+input[type="text"], input[type="password"], .aspTextBox {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+    /* 输入框聚焦时的样式 */
+    input[type="text"]:focus, input[type="password"]:focus {
+        border-color: #66afe9;
+        outline: none;
+    }
+
+/* 错误信息的样式 */
+span.error {
+    color: red;
+    font-size: 12px;
+}
+
+/* 按钮样式 */
+/* 按钮样式 */
+button, .aspButton, #btnLogin {
+    width: 100%; /* 确保与 TextBox 一致 */
+    height: 42px; /* 保持与朋友样式相同的高度 */
+    background-color: #A00000; /* 按钮初始背景色 */
+    margin: 0px auto 25px; /* 居中对齐并设置下间距 */
+    color: #FFF; /* 按钮文字为白色 */
+    text-align: center; /* 居中对齐文字 */
+    display: block; /* 独占一行 */
+    border: 2px solid rgba(0, 0, 0, 0.15); /* 淡灰色边框 */
+    border-color: #e8f0fe; /* 边框颜色略带蓝色 */
+    border-radius: 7px; /* 圆角 */
+    font-size: 16px; /* 调整文字大小 */
+    cursor: pointer; /* 鼠标悬停变为手势 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* 添加轻微阴影 */
+}
+
+    /* 按钮悬停效果 */
+    button:hover, .aspButton:hover, #btnLogin:hover {
+        background-color: #8d0000; /* 鼠标悬停时的深红色背景 */
+        text-decoration: none; /* 确保文字没有下划线 */
+        border-color: #c5d5f5; /* 鼠标悬停时边框颜色变化 */
+    }
+
+.form-field + .form-field {
+    margin-top: 20px;
+}

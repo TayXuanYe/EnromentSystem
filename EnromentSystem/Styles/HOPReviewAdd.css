@@ -1,0 +1,99 @@
+﻿/* 通用设置 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #87CEEB, #FFEB3B); /* 天蓝色到明黄色渐变 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 容器居中 */
+.container {
+    max-width: 1200px; /* 根据需要调整最大宽度 */
+    max-height: 800px; /* 根据需要调整最大高度 */
+    margin: 0 auto; /* 居中容器 */
+    padding: 20px;
+    background: linear-gradient(to bottom, #87CEEB, #FFD700); /* 渐变背景 */
+    overflow: auto; /* 添加滚动条支持 */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gridview {
+    width: 100%; /* 表格宽度填满容器 */
+    border-collapse: collapse;
+    font-size: 14px; /* 调整文字大小 */
+    margin: 0 auto; /* 表格居中 */
+}
+
+    .gridview th, .gridview td {
+        border: 1px solid #ddd; /* 边框 */
+        padding: 8px; /* 内间距 */
+        text-align: center; /* 文本居中 */
+    }
+
+    .gridview th {
+        background-color: #f4f4f4; /* 表头背景色 */
+        color: #333;
+    }
+
+    .gridview tr:nth-child(even) {
+        background-color: #f9f9f9; /* 奇偶行背景色 */
+    }
+
+    .gridview tr:hover {
+        background-color: #f1f1f1; /* 悬停效果 */
+    }
+
+/* 标题样式 */
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* GridView 表格样式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center; /* 表格内容居中 */
+}
+
+th {
+    background-color: #f2f2f2; /* 表头背景色 */
+    color: #333;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* 鼠标悬停行高亮 */
+}
+
+/* 按钮样式 */
+button, input[type="button"] {
+    background-color: #4CAF50; /* 绿色背景 */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    button:hover, input[type="button"]:hover {
+        background-color: #45a049;
+    }

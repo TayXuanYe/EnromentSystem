@@ -19,6 +19,7 @@ DROP TABLE school
 DROP TABLE course_prerequisite
 DROP TABLE course_major
 DROP TABLE course
+DROP TABLE hop
 
 CREATE TABLE student(
 	sid varchar(255) primary key,
@@ -224,5 +225,12 @@ INSERT INTO bank (bank_name) VALUES
     ('Bank Muamalat Malaysia Berhad'),
     ('Affin Bank Berhad'),
     ('Bank Pertanian Malaysia Berhad');
+
+
+CREATE TABLE hop(
+	hid varchar(255) primary key,
+	fullname varchar(255),
+	password varchar(255)
+);
 
 
