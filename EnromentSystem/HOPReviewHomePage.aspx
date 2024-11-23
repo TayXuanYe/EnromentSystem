@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="layout-container">
+
         <div class="welcome-container">
             <asp:Label ID="welcome" runat="server" Text="Welcome 'Full Name'"></asp:Label>
         </div>
@@ -27,11 +28,11 @@
             </div>
 
             <div class="content-box" id="drop-course-box">
-                <img src="deletecourse.png" alt="Drop Course" class="box-image"/>
                 <asp:Image ID="deletecourse" runat="server" ImageUrl="~/Images/deletecourse.png"/>
                 <h2>Request Drop Course</h2>
                 <a href="HOPReviewDropCourse.aspx" class="action-button">Go to Page</a>
             </div>
+
         </div>
     </div>
 </body>

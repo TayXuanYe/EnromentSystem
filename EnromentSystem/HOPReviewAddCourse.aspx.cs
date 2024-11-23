@@ -9,6 +9,11 @@ public partial class request_add_course : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["hid"] == null)
+        {
+            Response.Redirect("HopLoginPage.aspx");
+        }
+
         if (!IsPostBack)
         {
             LoadPendingRequests();
@@ -42,14 +47,12 @@ public partial class request_add_course : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            // 获取状态列的值
+
             string status = DataBinder.Eval(e.Row.DataItem, "status").ToString();
 
-            // 从 TemplateField 中找到按钮
             Button acceptButton = e.Row.FindControl("btnAccept") as Button;
             Button notAcceptButton = e.Row.FindControl("btnNotAccept") as Button;
 
-            // 检查按钮是否存在并设置可见性
             if (acceptButton != null && notAcceptButton != null)
             {
                 if (status == "PENDING")
@@ -92,16 +95,13 @@ public partial class request_add_course : System.Web.UI.Page
                 }
             }
 
-            // INSERT student_taken_course
-            string insertQuery = @"
-            INSERT INTO student_taken_course (sid, cid, section_id, status) 
-            VALUES (@sid, @cid, @sectionId, @status)";
+            string insertQuery = "INSERT INTO student_taken_course (sid, cid, section_id, status) VALUES (@sid, @cid, @sectionId, @status)";
             using (SqlCommand insertCommand = new SqlCommand(insertQuery, DatabaseManager.connection))
             {
                 insertCommand.Parameters.AddWithValue("@sid", sid);
                 insertCommand.Parameters.AddWithValue("@cid", cid);
                 insertCommand.Parameters.AddWithValue("@sectionId", sectionId);
-                insertCommand.Parameters.AddWithValue("@status", "APPROVED");
+                insertCommand.Parameters.AddWithValue("@status", "TAKEN");
 
                 int rowsInserted = insertCommand.ExecuteNonQuery();
                 if (rowsInserted == 0)
@@ -189,5 +189,10 @@ public partial class request_add_course : System.Web.UI.Page
     private void ShowError(string message)
     {
         Response.Write("<script>alert('" + message + "');</script>");
+    }
+
+    protected void Return_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("HOPReviewHomePage.aspx");
     }
 }
