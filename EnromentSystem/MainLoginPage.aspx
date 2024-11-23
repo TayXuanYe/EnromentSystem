@@ -13,7 +13,7 @@
         <table class="card-contain" style="height: auto">
             <tr>
                 <th colspan="4" style="color:white">
-                    <h1>Select ICOM For LOGIN</h1>
+                    <h1>Select ICON For LOGIN</h1>
                 </th>
             </tr>
             <tr>
@@ -52,7 +52,6 @@
             </tr>
         </table>
     </div>
-
     </form>
 </body>
 </html>
