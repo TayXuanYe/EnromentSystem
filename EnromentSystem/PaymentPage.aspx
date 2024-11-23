@@ -6,10 +6,13 @@
      .auto-style1 {
          color: #FF1111;
      }
+         .auto-style2 {
+             width: 43px;
+         }
  </style>
 </asp:Content>
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
-    
+
  <div> 
     <br />
     <h1>Payment</h1>
@@ -54,75 +57,35 @@
 <br />
        <div>
             <!-- New Course Table -->
- <table class="course-table">
-     <thead>
-         <tr>
-             <th>Particulars</th>
-             <th>Type</th>
-             <th>Document Date/Instalment Due Date</th>
-             <th>Amount (RM)</th>
-             <th>Amount Settled (RM)</th>
-         </tr>
-     </thead>
-     <tbody>
-         <tr>
-             <td></td>
-             <td></td>
-             <td></td>
-             <td></td>
-             <td></td>
-         </tr>
-         <tr>
-             <td></td>
-             <td></td>
-             <td></td>
-             <td></td>
-             <td></td>
-         </tr>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-         <!-- Add more rows as needed -->
-     </tbody>
- </table>
+ <asp:Table ID="courseTable" class="course-table" runat="server">
+    <asp:TableHeaderRow>
+        <asp:TableHeaderCell>Particulars</asp:TableHeaderCell>
+        <asp:TableHeaderCell>Type</asp:TableHeaderCell>
+        <asp:TableHeaderCell>Document Date/Instalment Due Date</asp:TableHeaderCell>
+        <asp:TableHeaderCell>Amount (RM)</asp:TableHeaderCell>
+        <asp:TableHeaderCell>Amount Settled (RM)</asp:TableHeaderCell>
+    </asp:TableHeaderRow>
+    <asp:TableRow>
+    </asp:TableRow>
+</asp:Table>
        </div>
        <div class="small-table">
 
-<table>
+                 <table>
                         <tr>
-                            <td>Minimum Amount Payable</td>
-                            <td>:-</td>
-                            <td ><asp:Label ID="Label7" runat="server" /></td>
+                            <td>Total Amount Payable</td>
+                            <td>:</td>
+                            <td><asp:Label ID="Label7" runat="server" /></td>
                         </tr>
                         <tr>
-                            <td>Amount B/F</td>
+                            <td>Scholarship Deduction</td>
                             <td>:</td>
                             <td><asp:Label ID="Label8" runat="server" /></td>
+                        </tr>
+                        <tr>
+                            <td>Amount Settled</td>
+                            <td>:</td>
+                            <td><asp:Label ID="Label13" runat="server" /></td>
                         </tr>
                         <tr>
                             <td class="blue">Net Amount Payable</td>
@@ -150,8 +113,8 @@
        <br />
        <div class="button-container" >
           <br />
-        <asp:Button ID="Button1" runat="server" Text="PAY BY(CREDIT/DEBIT CARD/FLYWIRE)" CssClass="unique-button" />
-           &nbsp;<asp:Button ID="Button2" runat="server" Text="PAY BY (OTHER)" CssClass="unique-button" />
+        <asp:Button ID="Button1" runat="server" Text="PAY BY(CREDIT/DEBIT CARD/FLYWIRE)" CssClass="unique-button" OnClick="Button1_Click" />
+           &nbsp;<asp:Button ID="Button2" runat="server" Text="PAY BY (OTHER)" CssClass="unique-button" OnClick="Button2_Click" />
            &nbsp;<asp:Button ID="Button3" runat="server" Text="REGISTRATION SUMMARY" CssClass="unique-button" />
            &nbsp;<asp:Button ID="Button4" runat="server" Text="CANCEL" CssClass="unique-button" />
          
@@ -163,5 +126,5 @@
        <br />
        <asp:Label ID="Label12" runat="server" Text="@Copyright 2014 INTI International University &amp; Collages. All Rights Reserved." CssClass="copywrite-label"></asp:Label>
        <br />
-       
-    </asp:Content>
+
+   </asp:Content>

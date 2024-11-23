@@ -76,8 +76,8 @@
             </div>
             <div class="card-content">
                 <ul>
-                    <li><a href="#">Payment</a></li>
-                    <li><a href="#">Online Payment History / Receipt</a></li>
+                    <li><a href="PaymentPage.aspx">Payment</a></li>
+                    <li><a href="OnlinePaymentHistoryandReceiptpage.aspx">Online Payment History / Receipt</a></li>
                     <li><a href="#">Invoice and Adjustment Note</a></li>
                 </ul>
             </div>
