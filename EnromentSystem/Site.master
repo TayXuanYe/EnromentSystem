@@ -40,7 +40,7 @@
      <div class="header">
         <div id="intiLogo"></div>
         <div id="identityCard">
-            <asp:Button ID="btnHomeButton" runat="server" Text="" />
+            <asp:Button ID="btnHomeButton" runat="server" Text="" OnClick="btnHomeButton_Click" CausesValidation="false"/>
             <div id="studentDetails">
                 <asp:Label ID="lblStudentDetails" runat="server" Text=""></asp:Label>
             </div>

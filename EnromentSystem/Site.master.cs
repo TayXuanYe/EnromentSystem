@@ -41,4 +41,9 @@ public partial class SiteMaster : MasterPage
         Session["sid"] = null;
         Response.Redirect("StudentLoginPage.aspx");
     }
+
+    protected void btnHomeButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StudentHomePage.aspx");
+    }
 }
