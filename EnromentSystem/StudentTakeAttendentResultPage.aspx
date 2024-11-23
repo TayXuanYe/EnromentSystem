@@ -15,7 +15,7 @@
     <asp:Panel ID="successfulWindow" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
             <br />
-            <h1>Attendent Take Successful</h1>
+            <h1 style="padding:0px">Attendent Take Successful</h1>
             <br />
             <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/successful.png" CssClass="successful-image"/><br />
             <div class="button-container">
@@ -27,7 +27,7 @@
     <asp:Panel ID="failWindow" runat="server" CssClass="pop-up-windows">
         <div class="windows-contain">
             <br />
-            <h1>
+            <h1 style="padding:0PX">
                 <asp:Label ID="lblErrorMessage" runat="server" CssClass="errorLabel" Text="test"></asp:Label>
             </h1>
             <br />
