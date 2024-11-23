@@ -22,6 +22,8 @@ DROP TABLE course;
 DROP TABLE student;
 DROP TABLE admin;
 DROP TABLE lecture;
+DROP TABLE hop
+
 
 CREATE TABLE student(
 	sid varchar(255) primary key,
@@ -228,6 +230,13 @@ INSERT INTO bank (bank_name) VALUES
     ('Affin Bank Berhad'),
     ('Bank Pertanian Malaysia Berhad');
 
+CREATE TABLE hop(
+	hid varchar(255) primary key,
+	fullname varchar(255),
+	password varchar(255),
+  email varchar(255)
+);
+
 
 CREATE TABLE lecturer_create_attendance_record(
 	rid varchar(255) PRIMARY KEY,
@@ -244,3 +253,4 @@ CREATE TABLE student_take_attendance(
 	FOREIGN KEY (sid) REFERENCES student(sid),
 	FOREIGN KEY (rid) REFERENCES lecturer_create_attendance_record(rid)
 );
+

@@ -162,3 +162,28 @@ INSERT INTO student_taken_course
 UPDATE request_add_course SET status = 'PENDING'
 
 SELECT * FROM course WHERE cid NOT IN (SELECT cid FROM request_add_course )
+
+INSERT INTO hop
+(hid,fullname,password) VALUES
+('H18016442','CaiYi','iuee4769449')
+
+INSERT INTO request_add_course
+(sid,cid,section_id,reason,status) VALUES
+('I23024312','PRG3205','PRG3205-JAN2024-8G1','no','PENDING')
+
+INSERT INTO section
+(sid, name, cid, semester, program, max_enroll, current_enroll) VALUES
+('PRG3204-AUG2024-8G2', '8G2', 'PRG3204', 'AUG2024', 'BCSI - BACHELER OF COMPUTER SCIENCES (HONS)', 30, 0);
+
+INSERT INTO student_taken_course
+(sid,cid,section_id,status) VALUES
+('I23024312','PRG3204','PRG3204-AUG2024-8G1','TAKEN')
+
+INSERT INTO request_change_section
+(sid,cid,current_section_id,target_section_id,reason,status) VALUES
+('I23024312','PRG3204','PRG3204-AUG2024-8G1','PRG3204-AUG2024-8G2','no','PENDING')
+
+INSERT INTO request_drop_course
+(sid,cid,reason,status) VALUES
+('I23024312','PRG3201','no','PENDING')
+
