@@ -1,4 +1,12 @@
-﻿body {
+﻿.box .back-image {
+    width: 24px;
+    height: 24px;
+    float:left;
+/*    position: absolute;*/
+    margin: 5px;
+}
+
+body {
     display: flex;
     justify-content: center;
     align-items: center;

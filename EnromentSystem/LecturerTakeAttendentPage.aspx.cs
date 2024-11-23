@@ -88,7 +88,7 @@ public partial class LecturerTakeAttendentPage : System.Web.UI.Page
     {
         DataSet dataSet = DatabaseManager.GetDistinctRecord(
             "class",
-            new List<string> { "time" },
+            new List<string> { "time", "id" },
             $@"JOIN section ON class.sid = section.sid WHERE lid = '{lecturerId}' AND 
                 semester IN (SELECT semester FROM current_semester) AND 
                 class.sid = '{sectionId}' AND type = '{classType}'"
@@ -200,7 +200,7 @@ public partial class LecturerTakeAttendentPage : System.Web.UI.Page
                 }
 
                 text.Add($"{day} - {time}");
-                value.Add(row["time"].ToString());
+                value.Add(row["id"].ToString());
             }
             UIComponentGenerator.PopulateDropDownList(ddlClassTime, text, value);
         }
@@ -216,9 +216,16 @@ public partial class LecturerTakeAttendentPage : System.Web.UI.Page
         string courseId = lblCourse.Text;
         string sectionId = ddlSection.SelectedValue;
         string classId = ddlClassTime.SelectedValue;
-        string time = System.DateTime.Now.TimeOfDay.ToString();
+        string dateTimeGenerate = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         string date = txtDate.Text;
-        string qrMessage = $"{courseId}/{sectionId}/{classId}/{time}/{date}";
+        // rid/courseId/sectionId/date Generate/Time Generate
+        string qrMessage = $"{classId}-{date}~{courseId}~{sectionId}~{dateTimeGenerate}";
+        Debug.WriteLine(classId);
+        DatabaseManager.InsertData(
+            "lecturer_create_attendance_record",
+            new List<string> { "rid", "classId", "courseId", "sectionId", "date" },
+            new List<object> { $"{classId}-{date}", classId, courseId, sectionId, date }
+            );
         using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
         {
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrMessage, QRCodeGenerator.ECCLevel.Q);

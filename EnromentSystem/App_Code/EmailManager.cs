@@ -24,14 +24,12 @@ public class EmailManager
 
     public void SetEmailReceiver(string emailAddress, string name)
     {
-        //receiver = new MailAddress("i23024312@student.newinti.edu.my", name);
-        receiver = new MailAddress("i22023829@student.newinti.edu.my", name);
-
+        receiver = new MailAddress(emailAddress, name);
     }
 
     public void SendEmail()
     {
-        var smtp = new SmtpClient
+        SmtpClient smtp = new SmtpClient
         {
             Host = "smtp.gmail.com", // SMTP server address
             Port = 587,                // SMTP port

@@ -8,14 +8,7 @@ public partial class StudentResetPasswordPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["sid"] != null)
-        {
 
-        }
-        else
-        {
-            Response.Redirect("StudentLoginPage.aspx");
-        }
     }
     protected void cvdVerificationCodeMatch_ServerValidate(object source, ServerValidateEventArgs args)
     {

@@ -44,7 +44,7 @@
             <div id="studentDetails">
                 <asp:Label ID="lblLecturerDetails" runat="server" Text=""></asp:Label>
             </div>
-            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" />
+            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CausesValidation="false"/>
         </div><br />
     </div>
     <div class="container body-content">
