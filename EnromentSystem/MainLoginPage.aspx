@@ -42,7 +42,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="#">
+                    <a href="HopLoginPage.aspx">
                         <div class="functionCard">
                             <asp:Image ID="Image6" runat="server" ImageUrl="~/Images/book.png"/>
                             <span>HOP</span>
