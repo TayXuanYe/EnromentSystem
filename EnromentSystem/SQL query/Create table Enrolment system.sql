@@ -257,7 +257,7 @@ CREATE TABLE student_take_attendance(
 CREATE TABLE payment(
 	pid int PRIMARY KEY IDENTITY(1, 1) ,
 	sid varchar(255),
-	date date  DATETIME DEFAULT GETDATE(),
+	date date DEFAULT GETDATE(),
 	process varchar(255),
 	particulars varchar(255),
 	documentNo varchar(255),

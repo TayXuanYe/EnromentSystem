@@ -651,6 +651,7 @@ public partial class EnrolmentPage : System.Web.UI.Page
                 new List<object> { currentEnroll+1 },
                 "WHERE sid = \'" + ddlCourseSection.SelectedValue + "\' "
                 );
+            SetFeeSummaryTable();
             //Add payment record
             DatabaseManager.InsertData(
                 "payment",
@@ -667,7 +668,6 @@ public partial class EnrolmentPage : System.Web.UI.Page
             addCoursePopUpWindow.Style["display"] = "none";
             PopulateCourseCodeListing();
             SetCourseEnrolledTable();
-            SetFeeSummaryTable();
         }
     }
 
