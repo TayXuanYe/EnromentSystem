@@ -79,7 +79,6 @@
                 <ul>
                     <li><a href="PaymentPage.aspx">Payment</a></li>
                     <li><a href="OnlinePaymentHistoryandReceiptpage.aspx">Online Payment History / Receipt</a></li>
-                    <li><a href="#">Invoice and Adjustment Note</a></li>
                 </ul>
             </div>
         </div>
