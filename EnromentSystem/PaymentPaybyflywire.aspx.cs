@@ -15,23 +15,20 @@ public partial class PaymentPaybyflywire : System.Web.UI.Page
 
             if (string.IsNullOrEmpty(studentId))
             {
-                // Redirect if student ID is not found in the session
                 Response.Redirect("StudentLoginPage.aspx");
                 return;
             }
 
-            // Check if the NetAmount is present in the session
             if (Session["NetAmount"] != null)
             {
                 decimal netAmount = Convert.ToDecimal(Session["NetAmount"]);
 
-                // Store the NetAmount in a hidden field and display in the TextBox
-                HiddenNetAmount.Value = netAmount.ToString("0.00"); // Store net amount in hidden field
-                TextBoxAmount.Text = netAmount.ToString("0.00");    // Display the net amount in the TextBox
+                HiddenNetAmount.Value = netAmount.ToString("0.00"); 
+                TextBoxAmount.Text = netAmount.ToString("0.00");    
             }
             else
             {
-                TextBoxAmount.Text = "Net Amount not found."; // Handle case when net amount is not in session
+                TextBoxAmount.Text = "Net Amount not found."; 
             }
         }
     }
@@ -40,32 +37,30 @@ public partial class PaymentPaybyflywire : System.Web.UI.Page
     {
         if (!CheckBoxAgreeTerms.Checked)
         {
-            // If not checked, display an error message
             TextBoxAmount.Text = "You must agree to the terms and conditions before proceeding.";
-            return; // Exit the function
+            return; 
         }
 
-        // Get the amount entered by the user
+    
         string userAmountText = TextBoxAmount.Text.Trim();
-        userAmountText = userAmountText.Replace("$", "").Replace(",", ""); // Remove unwanted characters
-
+        userAmountText = userAmountText.Replace("$", "").Replace(",", ""); 
         decimal userAmount;
         bool isDecimal = Decimal.TryParse(userAmountText, out userAmount);
 
-        // Get the value of NetAmount from HiddenNetAmount
+       
         decimal passingAmount = Convert.ToDecimal(HiddenNetAmount.Value);
 
-        // Get the phone number entered by the user
+        
         string phoneNumber = TextBoxPhone.Text.Trim();
 
         if (isDecimal)
         {
             if (userAmount <= passingAmount)
             {
-                // Store the NetAmount in session
+                
                 Session["NetAmount"] = userAmount;
 
-                // Store the Phone Number in session
+                
                 if (!string.IsNullOrEmpty(phoneNumber))
                 {
                     Session["PhoneNumber"] = phoneNumber;
@@ -75,19 +70,22 @@ public partial class PaymentPaybyflywire : System.Web.UI.Page
                     Session["PhoneNumber"] = "Phone number not provided.";
                 }
 
-                // Redirect to the Maybank Portal page
+                
                 Response.Redirect("Maybank Portal.aspx");
             }
             else
             {
-                // Invalid: Display error message
                 TextBoxAmount.Text = "Amount cannot exceed the passing value.";
             }
         }
         else
         {
-            // Invalid decimal format
             TextBoxAmount.Text = "Please enter a valid amount.";
         }
+    }
+
+    protected void Cancelbutton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("PaymentPage.aspx");
     }
 }

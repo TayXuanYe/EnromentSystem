@@ -70,7 +70,7 @@ public partial class Maybank_Portal : System.Web.UI.Page
     private string GenerateOrderReference()
     {
         string orderReference = string.Empty;
-        string query = "SELECT TOP 1 OrderReference FROM MaybankPay ORDER BY OrderReference DESC";
+        string query = "SELECT TOP 1 documentNo FROM payment ORDER BY documentNo DESC";
 
         try
         {
@@ -84,7 +84,7 @@ public partial class Maybank_Portal : System.Web.UI.Page
 
                     if (result != DBNull.Value && result != null)
                     {
-                        lastOrderReference = Convert.ToInt32(result.ToString().Substring(3)); 
+                        lastOrderReference = Convert.ToInt32(result.ToString().Substring(3));
                     }
 
                     if (lastOrderReference == 0) lastOrderReference = 1000;
@@ -138,74 +138,78 @@ public partial class Maybank_Portal : System.Web.UI.Page
     {
         string orderReference = string.Empty;
 
-
         if (orderreference.Text.Length >= 15)
         {
-            orderReference = orderreference.Text.Substring(15);
+            orderReference = orderreference.Text.Substring(15);  
         }
         else
         {
-
             orderReference = orderreference.Text;
 
+          
+            string studentId = Session["sid"] as string; 
+            string paymentDescription = paymentdescription.Text;  
+            decimal totalAmount = Convert.ToDecimal(Session["NetAmount"]);  
 
-            string studentId = Session["sid"] as string;
-            string customerName = studentname.Text;
-            string paymentDescription = paymentdescription.Text; 
-            decimal totalAmount = Convert.ToDecimal(Session["NetAmount"]);
-            string cardNumber = cardnumber.Text;
-            string cardHolderName = nameoncard.Text;
-            int expirationMonth = Convert.ToInt32(ddlExpirationMonth.SelectedValue);
-            int expirationYear = Convert.ToInt32(ddlExpirationYear.SelectedValue);
-            string cvv = cvc.Text;
-            DateTime transactionDate = DateTime.Now.Date;
-            string paymentMethod = "Online"; 
-            string status = "Approved"; 
-
-            // Save transaction details to the database
-            SavePaymentTransaction(orderReference, studentId, customerName, paymentDescription, totalAmount, cardNumber,
-                                   cardHolderName, expirationMonth, expirationYear, cvv, transactionDate, paymentMethod, status);
+    
+            SavePaymentTransaction(orderReference, studentId, paymentDescription, totalAmount);
         }
     }
-        private void SavePaymentTransaction(string orderReference, string studentId, string customerName, string paymentDescription,
-                                             decimal totalAmount, string cardNumber, string cardHolderName, int expirationMonth,
-                                             int expirationYear, string cvv, DateTime transactionDate, string paymentMethod, string status)
+    private void SavePaymentTransaction(string orderReference, string studentId, string paymentDescription, decimal totalAmount)
+    {
+        string insertQuery = @"
+    INSERT INTO payment (sid, date, process, particulars, documentNo, session, amount) 
+    VALUES (@sid, @date, @process, @particulars, @documentNo, @session, @amount)";
+
+        try
         {
-            string insertQuery = @"
-        INSERT INTO MaybankPay (OrderReference, sid, CustomerName, PaymentDescription, TotalAmount, CardNumber, 
-                                CardHolderName, ExpirationMonth, ExpirationYear, CVV, TransactionDate, PaymentMethod, Status) 
-        VALUES (@OrderReference, @sid, @CustomerName, @PaymentDescription, @TotalAmount, @CardNumber, 
-                @CardHolderName, @ExpirationMonth, @ExpirationYear, @CVV, @TransactionDate, @PaymentMethod, @Status)";
-
-            try
+            using (SqlConnection conn = DatabaseManager.GetConnection())
             {
-                using (SqlConnection conn = DatabaseManager.GetConnection())
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@OrderReference", orderReference);
-                        cmd.Parameters.AddWithValue("@sid", studentId);
-                        cmd.Parameters.AddWithValue("@CustomerName", customerName);
-                        cmd.Parameters.AddWithValue("@PaymentDescription", paymentDescription);
-                        cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
-                        cmd.Parameters.AddWithValue("@CardNumber", cardNumber);
-                        cmd.Parameters.AddWithValue("@CardHolderName", cardHolderName);
-                        cmd.Parameters.AddWithValue("@ExpirationMonth", expirationMonth);
-                        cmd.Parameters.AddWithValue("@ExpirationYear", expirationYear);
-                        cmd.Parameters.AddWithValue("@CVV", cvv);
-                        cmd.Parameters.AddWithValue("@TransactionDate", transactionDate);
-                        cmd.Parameters.AddWithValue("@PaymentMethod", paymentMethod);
-                        cmd.Parameters.AddWithValue("@Status", status);
+                    // Directly assign the value "AUG2024" to session
+                    string session = "AUG2024";
 
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
+                    // Add parameters for the query
+                    cmd.Parameters.AddWithValue("@sid", studentId);
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now.Date);  // Only the date part (no time)
+                    cmd.Parameters.AddWithValue("@process", "Online");
+                    cmd.Parameters.AddWithValue("@particulars", paymentDescription);
+                    cmd.Parameters.AddWithValue("@documentNo", orderReference);
+                    cmd.Parameters.AddWithValue("@session", session);  // Insert "AUG2024" as session value
+                    cmd.Parameters.AddWithValue("@amount", totalAmount);
+
+                    // Open connection and execute the command
+                    conn.Open();
+                    
+                    int rows = cmd.ExecuteNonQuery();
+                    if (rows > 0)
+                    {
+                        // Success message with redirect
+                        string successScript = "alert('Transaction Successfull!');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "SaveSuccess", successScript, true);
+                    }
+                    else
+                    {
+                        // Error message with redirect
+                        string errorScript = "alert('Error updating bank details.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "SaveError", errorScript, true);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                studentname.Text = "Error saving transaction: " + ex.Message;
+
+                
             }
         }
+        catch (Exception ex)
+        {
+            studentname.Text = "Error saving transaction: " + ex.Message;
+        }
+    }
+
+
+    protected void Cancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("PaymentPage.aspx");
+    }
 }
 

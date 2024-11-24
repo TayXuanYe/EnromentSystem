@@ -12,19 +12,16 @@
 
         <div class="payment-methods">
             <div class="method active">
-                <img src="<%= ResolveUrl("~/Images/maybank-logo.png") %>" alt="Maybank Logo" />
-                <p>Credit Or Debit Card Via Maybank Gateway</p>
+                &nbsp;<p><strong>Credit Or Debit Card Via Maybank Gateway</strong></p>
             </div>
-            <div class="method">
-                <img src="<%= ResolveUrl("~/Images/flywire-logo.png") %>" alt="Flywire Logo" />
-                <p>For International Students performing Peer-to-Peer transfer</p>
+            <div class="method active">
+                &nbsp;<p><strong>Flywire For International Students performing Peer-to-Peer transfer</strong></p>
             </div>
         </div>
 
         <div class="payment-details">
             <asp:Label ID="Label1" runat="server" Text="Amount"></asp:Label>
             <asp:TextBox ID="TextBoxAmount" runat="server"></asp:TextBox>
-
             <asp:Label ID="Label2" runat="server" Text="Phone No"></asp:Label>
             <asp:TextBox ID="TextBoxPhone" runat="server" placeholder="Enter your contact number"></asp:TextBox>
 
@@ -47,8 +44,8 @@
         </div>
 
         <div class="actions">
-            <asp:Button ID="ButtonPay" runat="server" Text="Pay" OnClick="Button1_Click" CssClass="btn-primary" />
-            <asp:Button ID="ButtonCancel" runat="server" Text="Cancel" CssClass="btn-secondary" />
+            <asp:Button ID="Paybutton" runat="server" Text="Pay" OnClick="Button1_Click" CssClass="btn-primary" />
+            <asp:Button ID="Cancelbutton" runat="server" Text="Cancel" CssClass="btn-secondary" OnClick="Cancelbutton_Click" />
         </div>
     </div>
 </asp:Content>

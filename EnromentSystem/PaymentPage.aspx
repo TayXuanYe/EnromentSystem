@@ -6,8 +6,8 @@
      .auto-style1 {
          color: #FF1111;
      }
-         .auto-style2 {
-             width: 43px;
+         .auto-style3 {
+             height: 26px;
          }
  </style>
 </asp:Content>
@@ -32,9 +32,9 @@
                             <td><asp:Label ID="Label2" runat="server" /></td>
                         </tr>
                         <tr>
-                            <td>IC/Passport No</td>
-                            <td>:</td>
-                            <td><asp:Label ID="Label3" runat="server" /></td>
+                            <td class="auto-style3">IC/Passport No</td>
+                            <td class="auto-style3">:</td>
+                            <td class="auto-style3"><asp:Label ID="Label3" runat="server" /></td>
                         </tr>
                         <tr>
                             <td>Program</td>
@@ -62,7 +62,7 @@
         <asp:TableHeaderCell>Particulars</asp:TableHeaderCell>
         <asp:TableHeaderCell>Type</asp:TableHeaderCell>
         <asp:TableHeaderCell>Document Date/Instalment Due Date</asp:TableHeaderCell>
-        <asp:TableHeaderCell>Amount (RM)</asp:TableHeaderCell>
+        <asp:TableHeaderCell>Amount(RM)</asp:TableHeaderCell>
         <asp:TableHeaderCell>Amount Settled (RM)</asp:TableHeaderCell>
     </asp:TableHeaderRow>
     <asp:TableRow>
@@ -73,19 +73,13 @@
 
                  <table>
                         <tr>
-                            <td>Total Amount Payable</td>
-                            <td>:</td>
-                            <td><asp:Label ID="Label7" runat="server" /></td>
+                            <td>Minimum Amount Payable</td>
+                            <td>:-</td>
                         </tr>
                         <tr>
-                            <td>Scholarship Deduction</td>
+                            <td>Amount B/F</td>
                             <td>:</td>
                             <td><asp:Label ID="Label8" runat="server" /></td>
-                        </tr>
-                        <tr>
-                            <td>Amount Settled</td>
-                            <td>:</td>
-                            <td><asp:Label ID="Label13" runat="server" /></td>
                         </tr>
                         <tr>
                             <td class="blue">Net Amount Payable</td>
