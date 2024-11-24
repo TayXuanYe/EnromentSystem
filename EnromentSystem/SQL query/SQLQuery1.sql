@@ -1,12 +1,12 @@
 USE EnrolmentSystemDatabase
 INSERT INTO student 
-(sid,name,password,program,student_email,ic_or_passport,mode_of_study,school,level,major,scholarship) VALUES 
-('I23024312','Tay Xuan Ye','iu040804130465','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)','i23024312@student.newiniti.edu.my','040804130465','Full-time Learning','GBL110 INFORMATION TECHNOLOGY','Degree','SOFTWARE ENGINEERING',60)
+(sid,name,password,program,student_email,ic_or_passport,mode_of_study,school,level,major,scholarship,admission_date) VALUES 
+('I23024312','Tay Xuan Ye','iu040804130465','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)','i23024312@student.newinti.edu.my','040804130465','Full-time Learning','GBL110 INFORMATION TECHNOLOGY','Degree','SOFTWARE ENGINEERING',60,'2024-01-01')
 
 INSERT INTO lecture
 (lid,name,password) values
-('L0000001','test lecturer 1','test1'),
-('L0000002','test lecturer 2','test2')
+('L00000001','test lecturer 1','test1'),
+('L00000002','test lecturer 2','test2')
 /*school:'GBL000 TEST'*/
 INSERT INTO school values('GBL000 TEST')
 INSERT INTO program VALUES('TTTT - TEST','GBL000 TEST','Foundation')
@@ -63,42 +63,42 @@ INSERT INTO section
 
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8G1-1', 'PRG3201-AUG2024-8G1', 40, 'C1', 'L0000001', 'LECTURE');
+('PRG3201-AUG2024-8G1-1', 'PRG3201-AUG2024-8G1', 40, 'C1', 'L00000001', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8G1-2', 'PRG3201-AUG2024-8G1', 41, 'C1', 'L0000001', 'LECTURE');
+('PRG3201-AUG2024-8G1-2', 'PRG3201-AUG2024-8G1', 41, 'C1', 'L00000001', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8G1-3', 'PRG3201-AUG2024-8G1', 8, 'C1', 'L0000001', 'PRACTICAL');
+('PRG3201-AUG2024-8G1-3', 'PRG3201-AUG2024-8G1', 8, 'C1', 'L00000001', 'PRACTICAL');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8G1-4', 'PRG3201-AUG2024-8G1', 9, 'C1', 'L0000001', 'PRACTICAL');
+('PRG3201-AUG2024-8G1-4', 'PRG3201-AUG2024-8G1', 9, 'C1', 'L00000001', 'PRACTICAL');
 
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8G2-1', 'PRG3201-AUG2024-8G2', 42, 'C1', 'L0000001', 'LECTURE');
+('PRG3201-AUG2024-8G2-1', 'PRG3201-AUG2024-8G2', 42, 'C1', 'L00000001', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8G2-2', 'PRG3201-AUG2024-8G2', 43, 'C1', 'L0000001', 'LECTURE');
+('PRG3201-AUG2024-8G2-2', 'PRG3201-AUG2024-8G2', 43, 'C1', 'L00000001', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8G2-3', 'PRG3201-AUG2024-8G2', 7, 'C1', 'L0000001', 'PRACTICAL');
+('PRG3201-AUG2024-8G2-3', 'PRG3201-AUG2024-8G2', 7, 'C1', 'L00000001', 'PRACTICAL');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8G2-4', 'PRG3201-AUG2024-8G2', 6, 'C1', 'L0000001', 'PRACTICAL');
+('PRG3201-AUG2024-8G2-4', 'PRG3201-AUG2024-8G2', 6, 'C1', 'L00000001', 'PRACTICAL');
 
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8H1-1', 'PRG3201-AUG2024-8H1', 42, 'C1', 'L0000001', 'LECTURE');
+('PRG3201-AUG2024-8H1-1', 'PRG3201-AUG2024-8H1', 42, 'C1', 'L00000001', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8H1-2', 'PRG3201-AUG2024-8H1', 43, 'C1', 'L0000001', 'LECTURE');
+('PRG3201-AUG2024-8H1-2', 'PRG3201-AUG2024-8H1', 43, 'C1', 'L00000001', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8H1-3', 'PRG3201-AUG2024-8H1', 7, 'C1', 'L0000001', 'PRACTICAL');
+('PRG3201-AUG2024-8H1-3', 'PRG3201-AUG2024-8H1', 7, 'C1', 'L00000001', 'PRACTICAL');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3201-AUG2024-8H1-4', 'PRG3201-AUG2024-8H1', 6, 'C1', 'L0000001', 'PRACTICAL');
+('PRG3201-AUG2024-8H1-4', 'PRG3201-AUG2024-8H1', 6, 'C1', 'L00000001', 'PRACTICAL');
 
 
 /*PRG3204*/
@@ -117,16 +117,16 @@ INSERT INTO section
 
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3204-AUG2024-8G1-1', 'PRG3204-AUG2024-8G1', 42, 'C1', 'L0000002', 'LECTURE');
+('PRG3204-AUG2024-8G1-1', 'PRG3204-AUG2024-8G1', 42, 'C1', 'L00000002', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3204-AUG2024-8G1-2', 'PRG3204-AUG2024-8G1', 43, 'C1', 'L0000002', 'LECTURE');
+('PRG3204-AUG2024-8G1-2', 'PRG3204-AUG2024-8G1', 43, 'C1', 'L00000002', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3204-AUG2024-8G1-3', 'PRG3204-AUG2024-8G1', 7, 'C1', 'L0000002', 'PRACTICAL');
+('PRG3204-AUG2024-8G1-3', 'PRG3204-AUG2024-8G1', 7, 'C1', 'L00000002', 'PRACTICAL');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3204-AUG2024-8G1-4', 'PRG3204-AUG2024-8G1', 6, 'C1', 'L0000002', 'PRACTICAL');
+('PRG3204-AUG2024-8G1-4', 'PRG3204-AUG2024-8G1', 6, 'C1', 'L00000002', 'PRACTICAL');
 
 /*PRG3205*/
 INSERT INTO course
@@ -140,16 +140,32 @@ INSERT INTO section
 ('PRG3205-JAN2024-8G1', '8G1', 'PRG3205', 'JAN2024', 'BCSI - BACHELER OF COMPUTER SCIENCES (HONS)', 30, 0);
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3205-AUG2024-8G1-1', 'PRG3205-JAN2024-8G1', 44, 'C1', 'L0000001', 'LECTURE');
+('PRG3205-JAN2024-8G1-1', 'PRG3205-JAN2024-8G1', 44, 'C1', 'L00000001', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3205-AUG2024-8G1-2', 'PRG3205-JAN2024-8G1', 45, 'C1', 'L0000001', 'LECTURE');
+('PRG3205-JAN2024-8G1-2', 'PRG3205-JAN2024-8G1', 45, 'C1', 'L00000001', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3205-AUG2024-8G1-3', 'PRG3205-JAN2024-8G1', 1, 'C1', 'L0000001', 'PRACTICAL');
+('PRG3205-JAN2024-8G1-3', 'PRG3205-JAN2024-8G1', 1, 'C1', 'L00000001', 'PRACTICAL');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3205-AUG2024-8G1-4', 'PRG3205-JAN2024-8G1', 2, 'C1', 'L0000001', 'PRACTICAL');
+('PRG3205-JAN2024-8G1-4', 'PRG3205-JAN2024-8G1', 2, 'C1', 'L00000001', 'PRACTICAL');
+
+INSERT INTO section
+(sid, name, cid, semester, program, max_enroll, current_enroll) VALUES
+('PRG3205-AUG2024-8G1', '8G1', 'PRG3205', 'AUG2024', 'BCSI - BACHELER OF COMPUTER SCIENCES (HONS)', 30, 0);
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-1', 'PRG3205-AUG2024-8G1', 44, 'C1', 'L00000001', 'LECTURE');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-2', 'PRG3205-AUG2024-8G1', 45, 'C1', 'L00000001', 'LECTURE');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-3', 'PRG3205-AUG2024-8G1', 1, 'C1', 'L00000001', 'PRACTICAL');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-4', 'PRG3205-AUG2024-8G1', 2, 'C1', 'L00000001', 'PRACTICAL');
 
 INSERT INTO previous_compulsory_course
 (sid,cid) VALUES 
@@ -159,6 +175,17 @@ INSERT INTO student_taken_course
 (sid,cid,section_id,status) VALUES
 ('I23024312','PRG3201','PRG3201-AUG2024-8G2','FAIL')
 
-UPDATE request_add_course SET status = 'PENDING'
 
 SELECT * FROM course WHERE cid NOT IN (SELECT cid FROM request_add_course )
+
+INSERT INTO hop
+(hid,fullname,password,email) VALUES
+('H18016442','CaiYi','iuee4769449','i23024312@student.newinti.edu.my')
+
+
+
+INSERT INTO section
+(sid, name, cid, semester, program, max_enroll, current_enroll) VALUES
+('PRG3204-AUG2024-8G2', '8G2', 'PRG3204', 'AUG2024', 'BCSI - BACHELER OF COMPUTER SCIENCES (HONS)', 30, 0);
+
+

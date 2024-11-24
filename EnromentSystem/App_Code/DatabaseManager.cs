@@ -13,9 +13,11 @@ using System.Linq;
 
 public static class DatabaseManager
 {
-    //private static string serverName = "DESKTOP-GCII6U9\\SQLEXPRESS";// XY laptop
+    private static string serverName = "DESKTOP-GCII6U9\\SQLEXPRESS";// XY laptop
     //private static string serverName = "DESKTOP-EMOGFRG\\SQLEXPRESS";// XY desktop
-    private static string serverName = "LAPTOP-25QCMRDF\\SQLEXPRESS";// Mizana Laptop
+    //private static string serverName = "LAPTOP-25QCMRDF\\SQLEXPRESS";// Mizana Laptop
+    //private static string serverName = "云烟\\SQLEXPRESS";// Cai Yi Laptop
+
     private static string databaseName = "EnrolmentSystemDatabase";
     public static SqlConnection connection = null;
 
@@ -61,7 +63,20 @@ public static class DatabaseManager
 
         if (connection.State == ConnectionState.Closed)
         {
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine("SQL error occurred - open connection: " + sqlEx.Message);
+                Debug.WriteLine("SQL error occurred - open connection: " + sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred - open connection: " + ex.Message);
+                Debug.WriteLine("SQL error occurred - open connection: " + ex.Message);
+            }
         }
 
         //create query

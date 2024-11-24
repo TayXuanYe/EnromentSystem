@@ -44,4 +44,9 @@ public partial class AdminLoginPage : System.Web.UI.Page
             Response.Redirect("AdminHomePage.aspx");
         }
     }
+
+    protected void btnBack_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("MainLoginPage.aspx");
+    }
 }

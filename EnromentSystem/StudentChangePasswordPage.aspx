@@ -24,7 +24,7 @@
             <!--Current password-->
             <div class="text-box">
                 <p>Existing Password</p>
-                <asp:TextBox ID="txtExistingPassword" runat="server"></asp:TextBox><br />
+                <asp:TextBox ID="txtExistingPassword" runat="server" TextMode="Password"></asp:TextBox><br />
                 <asp:RequiredFieldValidator 
                     ControlToValidate="txtExistingPassword"
                     ID="RequiredFieldValidator4" 
@@ -46,7 +46,7 @@
             <!--New Password-->
             <div class="text-box">
                 <p>New Password</p>
-                <asp:TextBox ID="txtNewPassword" runat="server"></asp:TextBox><br />
+                <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password"></asp:TextBox><br />
                 <asp:RequiredFieldValidator
                     ControlToValidate="txtNewPassword"
                     ID="RequiredFieldValidator5" 
@@ -68,7 +68,7 @@
             <!--Confirm New Password-->
             <div class="text-box">
                 <p>Confirm New Password</p>
-                <asp:TextBox ID="txtConfirmNewPassword" runat="server"></asp:TextBox><br />
+                <asp:TextBox ID="txtConfirmNewPassword" runat="server" TextMode="Password"></asp:TextBox><br />
                 <asp:RequiredFieldValidator 
                     ControlToValidate="txtConfirmNewPassword"
                     ID="RequiredFieldValidator6" 
@@ -89,7 +89,7 @@
             </div>
             <div class="button">
                 <asp:Button ID="Button1" runat="server" Text="Update Password" CssClass="button" OnClientClick="showVerificationPopup()" OnClick="Button1_Click"/>
-                <asp:Button ID="Button2" runat="server" Text="Cancel" CssClass="button" OnClick="Button2_Click"/>
+                <asp:Button ID="Button2" runat="server" Text="Cancel" CssClass="button" OnClick="Button2_Click" CausesValidation="false"/>
                 <br />
                 <br />
                 <asp:Label ID="lblMessage" runat="server" ForeColor="Red"/>

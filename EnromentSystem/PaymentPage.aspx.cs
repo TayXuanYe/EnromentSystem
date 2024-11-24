@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -95,7 +96,11 @@ public partial class PaymentPage : System.Web.UI.Page
         {
 
             Label1.Text = "Error loading student details";
-            Console.WriteLine($"SQL Error: {ex.Message}");
+            Debug.WriteLine($"SQL Error: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error: {ex.Message}");
         }
     }
     private void LoadPaymentHistory(string studentId)
@@ -205,6 +210,10 @@ public partial class PaymentPage : System.Web.UI.Page
         }
 
 
+    protected void btnExit_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StudentHomePage.aspx");
+    }
 }
 
 

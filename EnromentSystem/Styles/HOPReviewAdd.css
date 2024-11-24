@@ -1,0 +1,84 @@
+﻿/* 通用设置 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #87CEEB, #FFEB3B); /* 天蓝色到明黄色渐变 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    max-height: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(to bottom, #87CEEB, #FFD700);
+    overflow: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 表格样式 */
+.gridview {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 0 auto;
+}
+
+    .gridview th, .gridview td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .gridview th {
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    .gridview tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .gridview tr:hover {
+        background-color: #f1f1f1;
+    }
+
+/* 添加按钮的样式 */
+.action-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.return-button {
+    background-color: #008CBA; /* 蓝色背景 */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid #005f73; /* 深蓝色边框 */
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* 按钮阴影 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .return-button:hover {
+        background-color: #005f73; /* 深蓝色背景 */
+        color: #fff;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5); /* 加强阴影 */
+        transform: scale(1.05); /* 放大效果 */
+    }
