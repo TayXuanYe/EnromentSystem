@@ -115,8 +115,7 @@
           <br />
         <asp:Button ID="Button1" runat="server" Text="PAY BY(CREDIT/DEBIT CARD/FLYWIRE)" CssClass="unique-button" OnClick="Button1_Click" />
            &nbsp;<asp:Button ID="Button2" runat="server" Text="PAY BY (OTHER)" CssClass="unique-button" OnClick="Button2_Click" />
-           &nbsp;<asp:Button ID="Button3" runat="server" Text="REGISTRATION SUMMARY" CssClass="unique-button" />
-           &nbsp;<asp:Button ID="Button4" runat="server" Text="CANCEL" CssClass="unique-button" />
+           &nbsp;<asp:Button ID="btnExit" runat="server" Text="CANCEL" CssClass="unique-button" OnClick="btnExit_Click" CausesValidation="false"/>
          
       </div>
        <br />

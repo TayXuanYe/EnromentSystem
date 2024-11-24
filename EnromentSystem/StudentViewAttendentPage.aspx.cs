@@ -36,9 +36,17 @@ public partial class StudentViewAttendentPage : System.Web.UI.Page
                             "student_take_attendance",
                             $@"WHERE rid IN (select rid FROM lecturer_create_attendance_record WHERE sectionId = '{row["section_id"].ToString()}');"
                             );
-                        double attendance = takenAttendance / allAttendance * 100;
+                        
+                        if(allAttendance != 0.0)
+                        {
+                            double attendance = takenAttendance / allAttendance * 100;
+                            displayTable.Rows.Add(row["cid"].ToString(), row["name"].ToString(), attendance + "%");
+                        }
+                        else
+                        {
+                            displayTable.Rows.Add(row["cid"].ToString(), row["name"].ToString(), "No result");
+                        }
 
-                        displayTable.Rows.Add(row["cid"].ToString(), row["name"].ToString(), attendance + "%");
                     }
                 }
                 gvCourse.DataSource = displayTable;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -92,7 +93,11 @@ public partial class PaymentPage : System.Web.UI.Page
         {
           
             Label1.Text = "Error loading student details";
-            Console.WriteLine($"SQL Error: {ex.Message}");
+            Debug.WriteLine($"SQL Error: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error: {ex.Message}");
         }
     }
 
@@ -366,22 +371,21 @@ public partial class PaymentPage : System.Web.UI.Page
         public decimal AmountSettled { get; set; }
     }
 
-
-
-
-
-     protected void Button1_Click(object sender, EventArgs e)
-      {
-       Response.Redirect("PaymentPaybyflywire.aspx");
-      }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("PaymentPaybyflywire.aspx");
+    }
 
        
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("PaybyotherRootPage.aspx");
-        }
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("PaybyotherRootPage.aspx");
+    }
 
-
+    protected void btnExit_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StudentHomePage.aspx");
+    }
 }
 
 
