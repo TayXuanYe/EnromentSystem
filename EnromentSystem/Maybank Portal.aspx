@@ -106,15 +106,20 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
+                        <asp:Button ID="Pay" runat="server" Text="Pay" OnClick="Button1_Click" CausesValidation="true" />
                     </td>
                     <td>
-                        <asp:Button ID="Button2" runat="server" Text="Button" />
+                        <asp:Button ID="Cancel" runat="server" Text="Cancel" OnClick="Cancel_Click" />
                     </td>
                 </tr>
             </table>
         </asp:Panel>
             </div>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="cardnumber" ErrorMessage="You Must Enter your Card Number" ForeColor="Red"></asp:RequiredFieldValidator>
+        <br />
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="nameoncard" ErrorMessage="You must enter your card number" ForeColor="Red"></asp:RequiredFieldValidator>
+        <br />
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="cvc" ErrorMessage="You must enter the cvv code" ForeColor="Red"></asp:RequiredFieldValidator>
     </form>
 </body>
 </html>

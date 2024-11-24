@@ -2,13 +2,28 @@
 
 <asp:Content  ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/OnlinePaymentHistoryandReceipt.css") %>" />
+    <style>
+        .box{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .container{
+            width:80%;
+            border-radius:10px;
+            background-color:white;
+            margin:20px;
+            padding:10px;
+            justify-content:center;
+        }
+    </style>
 </asp:Content>
 <asp:Content  ContentPlaceHolderID="MainContent" runat="server">
-         <div> 
+         <div class="box"> 
        <br />
        <h1>Online Payment History / Receipt </h1>
    </div>
-       
+       <div class="container">
      <br />
   
         <asp:Panel ID="Panel1" runat="server" CssClass="Panel1">
@@ -16,13 +31,9 @@
                 <strong>
                     <asp:Label ID="Label1" runat="server" Text="Transaction Date"></asp:Label>
                 </strong>&nbsp; From
-                <asp:TextBox ID="TextBox1" runat="server" CssClass="text-box"></asp:TextBox>
-                <asp:ImageButton ID="ImageButton1" runat="server" CssClass="image-button" OnClick="ImageButton1_Click" />
-                <asp:Calendar ID="Calendar1" runat="server" Visible="false" OnSelectionChanged="Calendar1_SelectionChanged" />
+                <asp:TextBox ID="TextBox1" runat="server" CssClass="text-box" TextMode="Date"></asp:TextBox>
                 &nbsp;&nbsp;&nbsp;&nbsp; To
-                <asp:TextBox ID="TextBox2" runat="server" CssClass="text-box"></asp:TextBox>
-                <asp:ImageButton ID="ImageButton2" runat="server" CssClass="image-button" OnClick="ImageButton2_Click" />
-                <asp:Calendar ID="Calendar2" runat="server" Visible="false" OnSelectionChanged="Calendar2_SelectionChanged" />
+                <asp:TextBox ID="TextBox2" runat="server" CssClass="text-box" TextMode="Date"></asp:TextBox>
                 &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="Button1" runat="server" Text="View" CssClass="view-button" OnClick="Button1_Click1" />
             </div>
@@ -50,6 +61,7 @@
     <br />
     <br />
     <br />
+    </div>
     <h3>@Copyright 2014 INTI International University &amp; Collages. All Rights Reserved.</h3>
 
     </asp:Content>
