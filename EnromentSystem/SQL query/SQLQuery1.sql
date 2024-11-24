@@ -1,7 +1,7 @@
 USE EnrolmentSystemDatabase
 INSERT INTO student 
 (sid,name,password,program,student_email,ic_or_passport,mode_of_study,school,level,major,scholarship,admission_date) VALUES 
-('I23024312','Tay Xuan Ye','iu040804130465','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)','i23024312@student.newiniti.edu.my','040804130465','Full-time Learning','GBL110 INFORMATION TECHNOLOGY','Degree','SOFTWARE ENGINEERING',60,'2024-01-01')
+('I23024312','Tay Xuan Ye','iu040804130465','BCSI - BACHELER OF COMPUTER SCIENCES (HONS)','i23024312@student.newinti.edu.my','040804130465','Full-time Learning','GBL110 INFORMATION TECHNOLOGY','Degree','SOFTWARE ENGINEERING',60,'2024-01-01')
 
 INSERT INTO lecture
 (lid,name,password) values
@@ -164,8 +164,8 @@ UPDATE request_add_course SET status = 'PENDING'
 SELECT * FROM course WHERE cid NOT IN (SELECT cid FROM request_add_course )
 
 INSERT INTO hop
-(hid,fullname,password) VALUES
-('H18016442','CaiYi','iuee4769449')
+(hid,fullname,password,email) VALUES
+('H18016442','CaiYi','iuee4769449','i23024312@student.newinti.edu.my')
 
 INSERT INTO request_add_course
 (sid,cid,section_id,reason,status) VALUES

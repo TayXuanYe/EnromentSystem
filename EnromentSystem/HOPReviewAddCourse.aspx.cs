@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -109,6 +110,78 @@ public partial class request_add_course : System.Web.UI.Page
                     ShowError("Failed to insert into student_taken_course.");
                 }
             }
+
+            //get current semester
+            string getSemesterQuery = "SELECT semester FROM current_semester";
+            string semester = "";
+            using (SqlCommand command = new SqlCommand(getSemesterQuery, DatabaseManager.connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        semester = reader["semester"].ToString();
+                    }
+                }
+            }
+
+            //get price for this course
+            string getPriceQuery = "SELECT price FROM course WHERE cid = @cid";
+            double price = 0.0;
+            using (SqlCommand command = new SqlCommand(getPriceQuery, DatabaseManager.connection))
+            {
+                command.Parameters.AddWithValue("@cid", cid);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            price = double.Parse(reader["price"].ToString());
+                        }
+                    }
+                    else
+                    {
+                        ShowError("Get Price Fail");
+                    }
+                }
+            }
+            //get scolar ship
+            double scholarShipAmount = 0.0;
+            string getScholarShip = "SELECT scholarship FROM student WHERE sid = @sid";
+            using (SqlCommand command = new SqlCommand(getScholarShip, DatabaseManager.connection))
+            {
+                command.Parameters.AddWithValue("@sid", sid);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            scholarShipAmount = price * double.Parse(reader["scholarship"].ToString()) / 100.0;
+                        }
+                    }
+                    else
+                    {
+                        ShowError("Get Scholarship Fail");
+                    }
+                }
+            }
+
+            //Add payment record
+            DatabaseManager.InsertData(
+                "payment",
+                new List<string> { "sid", "process", "particulars", "documentNo", "session", "amount" },
+                new List<object> { sid, "ADD", "TUIT", "IM24BCS100004", semester, price * -1 }
+                );
+            //Add scohloar ship
+            DatabaseManager.InsertData(
+                "payment",
+                new List<string> { "sid", "process", "particulars", "documentNo", "session", "amount" },
+                new List<object> { sid, "ADD", "SYSSCHO", "IM24BCS100004", semester, scholarShipAmount }
+                );
         }
         catch (Exception ex)
         {
