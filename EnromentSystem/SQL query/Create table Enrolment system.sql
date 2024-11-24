@@ -1,7 +1,7 @@
 USE EnrolmentSystemDatabase
+DROP TABLE payment;
 DROP TABLE student_take_attendance;
 DROP TABLE lecturer_create_attendance_record;
-
 DROP TABLE bank;
 DROP TABLE student_enrol_successful;
 DROP TABLE system_function_available;
@@ -22,7 +22,7 @@ DROP TABLE course;
 DROP TABLE student;
 DROP TABLE admin;
 DROP TABLE lecture;
-DROP TABLE hop
+DROP TABLE hop;
 
 
 CREATE TABLE student(
@@ -254,3 +254,14 @@ CREATE TABLE student_take_attendance(
 	FOREIGN KEY (rid) REFERENCES lecturer_create_attendance_record(rid)
 );
 
+CREATE TABLE payment(
+	pid int PRIMARY KEY IDENTITY(1, 1) ,
+	sid varchar(255),
+	date date  DATETIME DEFAULT GETDATE(),
+	process varchar(255),
+	particulars varchar(255),
+	documentNo varchar(255),
+	session varchar(255),
+	amount float,
+	FOREIGN KEY (sid) REFERENCES student(sid)
+);
