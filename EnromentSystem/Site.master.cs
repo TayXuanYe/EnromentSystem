@@ -32,7 +32,6 @@ public partial class SiteMaster : MasterPage
                 program;
         }else
         {
-            Debug.WriteLine("return");
             Response.Redirect("StudentLoginPage.aspx");
         }
     }
@@ -41,5 +40,10 @@ public partial class SiteMaster : MasterPage
     {
         Session["sid"] = null;
         Response.Redirect("StudentLoginPage.aspx");
+    }
+
+    protected void btnHomeButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StudentHomePage.aspx");
     }
 }

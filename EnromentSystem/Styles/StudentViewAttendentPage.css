@@ -1,0 +1,179 @@
+﻿body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    /*    background: linear-gradient(to bottom right, #df595c,#6b2424);*/
+}
+
+span, h1, li {
+    user-select: none;
+}
+
+* {
+    caret-color: transparent;
+}
+
+.box {
+}
+
+h1 {
+    text-align: left;
+    color: #b2151b;
+    margin-top: 10px;
+    width: 100%;
+    /*    padding:0px 20%;*/
+}
+
+span, h1, li, div {
+    user-select: none;
+}
+
+* {
+    caret-color: transparent;
+}
+
+/*.box > table {
+    margin:10px 0px;*/
+/*    margin-bottom: 10%;*/
+/*}*/
+
+.adminInfoCard {
+    display: inline-block;
+    background-color: #fff;
+    padding: 30px;
+    border: solid;
+    border-color: #FFF;
+    border-radius: 10px;
+    margin: 20px;
+    height: 474px;
+}
+
+    .adminInfoCard img {
+        /*    transform: scale(0.6);*/
+        display: block;
+        margin: 0px auto;
+        width: 200px;
+        height: 200px;
+        margin-bottom: 50px;
+        margin-top: 25px;
+    }
+
+    .adminInfoCard h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .adminInfoCard span {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        padding-bottom: 25px;
+    }
+
+.functionCard {
+    background-color: #FFF;
+    border: solid;
+    border-color: #FFF;
+    border-radius: 5px;
+    height: 100%;
+    width: 216px;
+    cursor: pointer;
+    color: #000;
+}
+
+    .functionCard:hover {
+        border: solid;
+        border-color: #123;
+        border-radius: 5px;
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+    }
+
+.card-contain {
+    height: 494px;
+}
+
+    .card-contain td {
+        padding: 10px;
+    }
+
+.functionCard img {
+    display: block;
+    margin: 10px auto;
+}
+
+.functionCard span {
+    display: block;
+    text-align: center;
+    font-size: 16pt;
+}
+
+a {
+    text-decoration: none;
+}
+
+.lecturer-info-table {
+    width: 100%;
+    margin: 10px 0px;
+    margin-bottom: 20px;
+}
+
+    .lecturer-info-table td {
+        font-size: 16pt;
+        vertical-align: central;
+    }
+
+        .lecturer-info-table td:nth-child(2n+1)::after {
+            content: ":";
+            float: right;
+            font-weight: 600;
+            margin-right: 2px;
+        }
+
+        .lecturer-info-table td:nth-child(2n+1) {
+            width: 20%;
+            padding: 2px;
+            padding-left: 0px;
+        }
+
+table {
+    width: 100%;
+}
+
+    table th {
+        padding: 4px 0px;
+    }
+
+    table td {
+        padding: 4px 0px;
+    }
+
+    table input[type=button] {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border: solid 1px;
+        border-color: white;
+        border-radius: 100%;
+        background-color: #d22a46;
+        margin: 0px auto;
+        background-image: url("../Images/arrow.png");
+        background-size: cover; /* 图片等比例放大或缩小，覆盖整个容器 */
+        background-position: center; /* 图片居中显示 */
+        background-repeat: no-repeat; /* 防止背景图片重复 */
+        background-size: 80%;
+        padding: 2px;
+    }
+
+        table input[type=button]:hover {
+            background-color: #ac2239;
+        }
+
+.grid-view td {
+    padding: 2px 4px;
+}
+.grid-view td:nth-child(4n+3) {
+    text-align:center;
+}

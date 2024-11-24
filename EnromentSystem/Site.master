@@ -40,11 +40,11 @@
      <div class="header">
         <div id="intiLogo"></div>
         <div id="identityCard">
-            <asp:Button ID="btnHomeButton" runat="server" Text="" />
+            <asp:Button ID="btnHomeButton" runat="server" Text="" OnClick="btnHomeButton_Click" CausesValidation="false"/>
             <div id="studentDetails">
                 <asp:Label ID="lblStudentDetails" runat="server" Text=""></asp:Label>
             </div>
-            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" />
+            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CausesValidation="false"/>
         </div><br />
 
         <div class="navigation-bar">
@@ -61,7 +61,7 @@
                 <li> 
 	                <p>Enrolment</p>
                     <ul>
-                        <li><a href="#">Course Enrolment</a></li>
+                        <li><a href="EnrolmentPage.aspx">Course Enrolment</a></li>
                     </ul>
                 </li>
 
@@ -69,22 +69,26 @@
                 <li> 
 	                <p>Add & Drop</p>
                     <ul>
-                        <li><a href="#">Course Add / Drop</a></li>
-                        <li><a href="#">Add / Drop History</a></li>
+                        <li><a href="CourseAddAndDropPage.aspx">Course Add / Drop</a></li>
+                        <li><a href="AddDropHistoryPage.aspx">Add / Drop History</a></li>
                     </ul>
                 </li>
 
                 <!--Attendance-->
                 <li> 
-	                <p><a href="#">Attendance</a></p>
+	                <p>Attendance</p>
+                    <ul>
+                        <li><a href="StudentTakeAttendentPage.aspx">Take Attendance</a></li>
+                        <li><a href="StudentViewAttendentPage.aspx">Attendance</a></li>
+                    </ul>
                 </li>
 
                 <!--Statement-->
                 <li> 
 	                <p>Statement</p>
                     <ul>
-                        <li><a href="#">Student Statement</a></li>
-                        <li><a href="#">Registration <br />Summary</a></li>
+                        <li><a href="StudentStatementPage.aspx">Student Statement</a></li>
+                        <li><a href="StudentClassTimetablePage.aspx">Registration <br />Summary</a></li>
                     </ul>
                 </li>
 

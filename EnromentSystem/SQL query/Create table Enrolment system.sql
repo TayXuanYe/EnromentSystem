@@ -1,24 +1,29 @@
 USE EnrolmentSystemDatabase
-DROP TABLE admin;
-DROP TABLE bank
+DROP TABLE payment;
+DROP TABLE student_take_attendance;
+DROP TABLE lecturer_create_attendance_record;
+DROP TABLE bank;
 DROP TABLE student_enrol_successful;
 DROP TABLE system_function_available;
 DROP TABLE request_drop_course;
 DROP TABLE request_add_course;
 DROP TABLE request_change_section;
-DROP TABLE student_taken_course
-DROP TABLE previous_compulsory_course
-DROP TABLE student
-DROP TABLE current_semester
-DROP TABLE class
-DROP TABLE section
-DROP TABLE lecture
-DROP TABLE major
-DROP TABLE program
-DROP TABLE school
-DROP TABLE course_prerequisite
-DROP TABLE course_major
-DROP TABLE course
+DROP TABLE student_taken_course;
+DROP TABLE previous_compulsory_course;
+DROP TABLE current_semester;
+DROP TABLE class;
+DROP TABLE section;
+DROP TABLE major;
+DROP TABLE program;
+DROP TABLE school;
+DROP TABLE course_prerequisite;
+DROP TABLE course_major;
+DROP TABLE course;
+DROP TABLE student;
+DROP TABLE admin;
+DROP TABLE lecture;
+DROP TABLE hop;
+
 
 CREATE TABLE student(
 	sid varchar(255) primary key,
@@ -225,4 +230,38 @@ INSERT INTO bank (bank_name) VALUES
     ('Affin Bank Berhad'),
     ('Bank Pertanian Malaysia Berhad');
 
+CREATE TABLE hop(
+	hid varchar(255) primary key,
+	fullname varchar(255),
+	password varchar(255),
+	email varchar(255)
+);
 
+
+CREATE TABLE lecturer_create_attendance_record(
+	rid varchar(255) PRIMARY KEY,
+	classId varchar(255),
+	courseId varchar(255),
+	sectionId varchar(255),
+	date varchar(255),
+	FOREIGN KEY (classId) REFERENCES class(id)
+);
+
+CREATE TABLE student_take_attendance(
+	rid varchar(255) PRIMARY KEY,
+	sid varchar(255),
+	FOREIGN KEY (sid) REFERENCES student(sid),
+	FOREIGN KEY (rid) REFERENCES lecturer_create_attendance_record(rid)
+);
+
+CREATE TABLE payment(
+	pid int PRIMARY KEY IDENTITY(1, 1) ,
+	sid varchar(255),
+	date date DEFAULT GETDATE(),
+	process varchar(255),
+	particulars varchar(255),
+	documentNo varchar(255),
+	session varchar(255),
+	amount float,
+	FOREIGN KEY (sid) REFERENCES student(sid)
+);
