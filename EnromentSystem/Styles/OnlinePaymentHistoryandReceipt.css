@@ -36,7 +36,7 @@ h3 {
     cursor: pointer;
 }
 
-.view-button {
+.date-range-container input[type=submit] {
     padding: 10px 15px;
     font-size: 14px;
     background-color: #4CAF50;
@@ -45,7 +45,7 @@ h3 {
     cursor: pointer;
 }
 
-    .view-button:hover {
+    .date-range-container input[type=submit]:hover {
         background-color: #45a049;
     }
 

@@ -52,7 +52,7 @@ public partial class Paybyother : System.Web.UI.Page
             // Set session and process as per the new requirements
             string session = "AUG2024";
             string process = "Payment";
-
+            
             // Save transaction to the database
             SavePaymentTransaction(studentId, transactionDate, process, particulars, documentNo, session, amountPaid);
         }
@@ -83,8 +83,9 @@ public partial class Paybyother : System.Web.UI.Page
 
                 // Show success message after saving to the database
                 Label1.Text = "Payment successfully processed!";
-            }
-            catch (Exception ex)
+                Response.Redirect("PaymentPage.aspx");
+        }
+        catch (Exception ex)
             {
                 // Handle any errors
                 Label1.Text = "Error: " + ex.Message;

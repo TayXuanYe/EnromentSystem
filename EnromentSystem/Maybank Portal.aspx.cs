@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -69,34 +70,8 @@ public partial class Maybank_Portal : System.Web.UI.Page
 
     private string GenerateOrderReference()
     {
-        string orderReference = string.Empty;
-        string query = "SELECT TOP 1 documentNo FROM payment ORDER BY documentNo DESC";
-
-        try
-        {
-            using (SqlConnection conn = DatabaseManager.GetConnection())
-            {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    conn.Open();
-                    object result = cmd.ExecuteScalar();
-                    int lastOrderReference = 0;
-
-                    if (result != DBNull.Value && result != null)
-                    {
-                        lastOrderReference = Convert.ToInt32(result.ToString().Substring(3));
-                    }
-
-                    if (lastOrderReference == 0) lastOrderReference = 1000;
-                    lastOrderReference++;
-                    orderReference = "000" + lastOrderReference.ToString("D4");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            orderReference = "Error generating order reference: " + ex.Message;
-        }
+        Random random = new Random();
+        string orderReference = "M"+random.Next(1000000000);
 
         return orderReference;
     }
@@ -136,14 +111,7 @@ public partial class Maybank_Portal : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string orderReference = string.Empty;
-
-        if (orderreference.Text.Length >= 15)
-        {
-            orderReference = orderreference.Text.Substring(15);  
-        }
-        else
-        {
+            string orderReference = string.Empty;
             orderReference = orderreference.Text;
 
           
@@ -151,16 +119,14 @@ public partial class Maybank_Portal : System.Web.UI.Page
             string paymentDescription = paymentdescription.Text;  
             decimal totalAmount = Convert.ToDecimal(Session["NetAmount"]);  
 
-    
             SavePaymentTransaction(orderReference, studentId, paymentDescription, totalAmount);
-        }
+        
     }
     private void SavePaymentTransaction(string orderReference, string studentId, string paymentDescription, decimal totalAmount)
     {
         string insertQuery = @"
-    INSERT INTO payment (sid, date, process, particulars, documentNo, session, amount) 
-    VALUES (@sid, @date, @process, @particulars, @documentNo, @session, @amount)";
-
+        INSERT INTO payment (sid, process, particulars, documentNo, session, amount) 
+        VALUES (@sid, @process, @particulars, @documentNo, @session, @amount)";
         try
         {
             using (SqlConnection conn = DatabaseManager.GetConnection())
@@ -172,7 +138,6 @@ public partial class Maybank_Portal : System.Web.UI.Page
 
                     // Add parameters for the query
                     cmd.Parameters.AddWithValue("@sid", studentId);
-                    cmd.Parameters.AddWithValue("@date", DateTime.Now.Date);  // Only the date part (no time)
                     cmd.Parameters.AddWithValue("@process", "Online");
                     cmd.Parameters.AddWithValue("@particulars", paymentDescription);
                     cmd.Parameters.AddWithValue("@documentNo", orderReference);
@@ -188,6 +153,7 @@ public partial class Maybank_Portal : System.Web.UI.Page
                         // Success message with redirect
                         string successScript = "alert('Transaction Successfull!');";
                         ClientScript.RegisterStartupScript(this.GetType(), "SaveSuccess", successScript, true);
+                        Response.Redirect("PaymentPage.aspx");
                     }
                     else
                     {

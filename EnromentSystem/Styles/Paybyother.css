@@ -55,7 +55,7 @@ table {
 }
 
 /* Styling for buttons */
-.btn-primary {
+table td .btn-primary {
     background-color: #007bff;
     color: white;
     padding: 10px 20px;

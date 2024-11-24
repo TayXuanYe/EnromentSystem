@@ -12,7 +12,7 @@
             width:80%;
             border-radius:10px;
             background-color:white;
-            margin:20px;
+            margin:10px 10vw;
             padding:10px;
             justify-content:center;
         }

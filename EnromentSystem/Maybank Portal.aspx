@@ -18,7 +18,6 @@
         <div>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Maybank Top Bar.png" CssClass="image"/>
         </div>
-        <asp:Button ID="Button3" runat="server" Text="Button" />
          <div class="container">
             <asp:Panel ID="Panel1" runat="server" CssClass="panel1">
                 <asp:Label ID="Label1" runat="server" Text="INTI INTERNATIONAL UNIVERSITY" CssClass="Label1"></asp:Label>
@@ -109,7 +108,7 @@
                         <asp:Button ID="Pay" runat="server" Text="Pay" OnClick="Button1_Click" CausesValidation="true" />
                     </td>
                     <td>
-                        <asp:Button ID="Cancel" runat="server" Text="Cancel" OnClick="Cancel_Click" />
+                        <asp:Button ID="Cancel" runat="server" Text="Cancel" OnClick="Cancel_Click" CausesValidation="false"/>
                     </td>
                 </tr>
             </table>
