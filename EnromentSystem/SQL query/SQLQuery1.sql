@@ -140,16 +140,32 @@ INSERT INTO section
 ('PRG3205-JAN2024-8G1', '8G1', 'PRG3205', 'JAN2024', 'BCSI - BACHELER OF COMPUTER SCIENCES (HONS)', 30, 0);
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3205-AUG2024-8G1-1', 'PRG3205-JAN2024-8G1', 44, 'C1', 'L00000001', 'LECTURE');
+('PRG3205-JAN2024-8G1-1', 'PRG3205-JAN2024-8G1', 44, 'C1', 'L00000001', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3205-AUG2024-8G1-2', 'PRG3205-JAN2024-8G1', 45, 'C1', 'L00000001', 'LECTURE');
+('PRG3205-JAN2024-8G1-2', 'PRG3205-JAN2024-8G1', 45, 'C1', 'L00000001', 'LECTURE');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3205-AUG2024-8G1-3', 'PRG3205-JAN2024-8G1', 1, 'C1', 'L00000001', 'PRACTICAL');
+('PRG3205-JAN2024-8G1-3', 'PRG3205-JAN2024-8G1', 1, 'C1', 'L00000001', 'PRACTICAL');
 INSERT INTO class
 (id, sid, time, class_room, lid, type) VALUES
-('PRG3205-AUG2024-8G1-4', 'PRG3205-JAN2024-8G1', 2, 'C1', 'L00000001', 'PRACTICAL');
+('PRG3205-JAN2024-8G1-4', 'PRG3205-JAN2024-8G1', 2, 'C1', 'L00000001', 'PRACTICAL');
+
+INSERT INTO section
+(sid, name, cid, semester, program, max_enroll, current_enroll) VALUES
+('PRG3205-AUG2024-8G1', '8G1', 'PRG3205', 'AUG2024', 'BCSI - BACHELER OF COMPUTER SCIENCES (HONS)', 30, 0);
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-1', 'PRG3205-AUG2024-8G1', 44, 'C1', 'L00000001', 'LECTURE');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-2', 'PRG3205-AUG2024-8G1', 45, 'C1', 'L00000001', 'LECTURE');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-3', 'PRG3205-AUG2024-8G1', 1, 'C1', 'L00000001', 'PRACTICAL');
+INSERT INTO class
+(id, sid, time, class_room, lid, type) VALUES
+('PRG3205-AUG2024-8G1-4', 'PRG3205-AUG2024-8G1', 2, 'C1', 'L00000001', 'PRACTICAL');
 
 INSERT INTO previous_compulsory_course
 (sid,cid) VALUES 
@@ -159,7 +175,6 @@ INSERT INTO student_taken_course
 (sid,cid,section_id,status) VALUES
 ('I23024312','PRG3201','PRG3201-AUG2024-8G2','FAIL')
 
-UPDATE request_add_course SET status = 'PENDING'
 
 SELECT * FROM course WHERE cid NOT IN (SELECT cid FROM request_add_course )
 
@@ -167,9 +182,7 @@ INSERT INTO hop
 (hid,fullname,password,email) VALUES
 ('H18016442','CaiYi','iuee4769449','i23024312@student.newinti.edu.my')
 
-INSERT INTO request_add_course
-(sid,cid,section_id,reason,status) VALUES
-('I23024312','PRG3205','PRG3205-JAN2024-8G1','no','PENDING')
+
 
 INSERT INTO section
 (sid, name, cid, semester, program, max_enroll, current_enroll) VALUES
@@ -179,6 +192,10 @@ INSERT INTO student_taken_course
 (sid,cid,section_id,status) VALUES
 ('I23024312','PRG3204','PRG3204-AUG2024-8G1','TAKEN')
 
+//delete
+INSERT INTO request_add_course
+(sid,cid,section_id,reason,status) VALUES
+('I23024312','PRG3205','PRG3205-JAN2024-8G1','no','PENDING')
 INSERT INTO request_change_section
 (sid,cid,current_section_id,target_section_id,reason,status) VALUES
 ('I23024312','PRG3204','PRG3204-AUG2024-8G1','PRG3204-AUG2024-8G2','no','PENDING')
