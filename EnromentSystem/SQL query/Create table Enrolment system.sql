@@ -234,7 +234,7 @@ CREATE TABLE hop(
 	hid varchar(255) primary key,
 	fullname varchar(255),
 	password varchar(255),
-  email varchar(255)
+	email varchar(255)
 );
 
 
