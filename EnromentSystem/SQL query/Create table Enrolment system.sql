@@ -22,8 +22,8 @@ DROP TABLE course;
 DROP TABLE student;
 DROP TABLE admin;
 DROP TABLE lecture;
-DROP TABLE hop
-
+DROP TABLE hop;
+DROP TABLE payment;
 
 CREATE TABLE student(
 	sid varchar(255) primary key,
@@ -254,3 +254,16 @@ CREATE TABLE student_take_attendance(
 	FOREIGN KEY (rid) REFERENCES lecturer_create_attendance_record(rid)
 );
 
+
+
+CREATE TABLE payment(
+	pid int PRIMARY KEY IDENTITY(1, 1) ,
+	sid varchar(255),
+	date date DEFAULT GETDATE(),
+	process varchar(255),
+	particulars varchar(255),
+	documentNo varchar(255),
+	session varchar(255),
+	amount float,
+	FOREIGN KEY (sid) REFERENCES student(sid)
+);
