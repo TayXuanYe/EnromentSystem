@@ -283,7 +283,9 @@ public partial class EnrolmentPage : System.Web.UI.Page
             tblCourseEnrolled.Rows.Add(tbRow);
         }
     }
-
+        
+    private double scholarshipAmount = 0;
+    private double cumulativePrice = 0.0;
     private void SetFeeSummaryTable()
     {
         //Add header
@@ -303,7 +305,6 @@ public partial class EnrolmentPage : System.Web.UI.Page
         }
         
         //Add price data
-        double cumulativePrice = 0.0;
         DataSet dataSet = DatabaseManager.GetRecord(
             "student_taken_course",
             new List<string> { "student_taken_course.cid", "course.name", "price" },
@@ -334,7 +335,6 @@ public partial class EnrolmentPage : System.Web.UI.Page
         }
 
         //add scholar
-        double scholarshipAmount = 0;
         {
             TableRow tbRow = new TableRow();
             dataSet = DatabaseManager.GetRecord(
@@ -651,10 +651,23 @@ public partial class EnrolmentPage : System.Web.UI.Page
                 new List<object> { currentEnroll+1 },
                 "WHERE sid = \'" + ddlCourseSection.SelectedValue + "\' "
                 );
+            SetFeeSummaryTable();
+            //Add payment record
+            DatabaseManager.InsertData(
+                "payment",
+                new List<string> { "sid", "process", "particulars", "documentNo", "session", "amount" },
+                new List<object> { Session["sid"].ToString() , "ENROL", "TUIT", "IM24BCS100004", lblSession.Text, cumulativePrice*-1 }
+                );
+            //Add scohloar ship
+            DatabaseManager.InsertData(
+                "payment",
+                new List<string> { "sid", "process", "particulars", "documentNo", "session", "amount" },
+                new List<object> { Session["sid"].ToString() , "ENROL", "SYSSCHO", "IM24BCS100004", lblSession.Text, scholarshipAmount }
+                );
+
             addCoursePopUpWindow.Style["display"] = "none";
             PopulateCourseCodeListing();
             SetCourseEnrolledTable();
-            SetFeeSummaryTable();
         }
     }
 

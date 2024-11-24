@@ -164,8 +164,8 @@ UPDATE request_add_course SET status = 'PENDING'
 SELECT * FROM course WHERE cid NOT IN (SELECT cid FROM request_add_course )
 
 INSERT INTO hop
-(hid,fullname,password) VALUES
-('H18016442','CaiYi','iuee4769449')
+(hid,fullname,password,email) VALUES
+('H18016442','CaiYi','iuee4769449','i23024312@student.newinti.edu.my')
 
 INSERT INTO request_add_course
 (sid,cid,section_id,reason,status) VALUES

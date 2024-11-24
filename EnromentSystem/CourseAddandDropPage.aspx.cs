@@ -690,7 +690,10 @@ public partial class CourseAddAndDropPage : System.Web.UI.Page
             courseCode.Add(row["cid"].ToString());
         }
         UIComponentGenerator.PopulateDropDownList(ddlCourseCodeListing, course, courseCode);
-        PopulateCourseSection(courseCode[0]);
+        if (courseCode.Count > 0)
+        {
+            PopulateCourseSection(courseCode[0]);
+        }
     }
 
     private void PopulateCourseSection(string courseCode)
