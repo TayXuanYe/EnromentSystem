@@ -25,7 +25,7 @@
                     To <asp:TextBox ID="txtEndDate" runat="server" TextMode="Date"></asp:TextBox>
                 </td>
                 <td>
-                    <asp:Button ID="btnView" runat="server" Text="View" />
+                    <asp:Button ID="btnView" runat="server" Text="View" OnClick="btnView_Click" />
                 </td>
             </tr>
             <tr>
@@ -48,5 +48,7 @@
             </tr>
         </table>
     </div>
-    <asp:Panel ID="pnDisplayPdf" runat="server" CssClass="pdfPanel"></asp:Panel>
+    <asp:Panel ID="pnDisplayPdf" runat="server" CssClass="pdfPanel">
+        <iframe id="pdfFrame" runat="server" class="pdfPanel" style="width:100vw; height=100vh;"></iframe>
+    </asp:Panel>
 </asp:Content>
