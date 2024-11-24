@@ -16,7 +16,7 @@
                 <strong>
                     <asp:Label ID="Label1" runat="server" Text="Transaction Date"></asp:Label>
                 </strong>&nbsp; From
-                <asp:TextBox ID="TextBox1" runat="server" CssClass="text-box"></asp:TextBox>
+                <asp:TextBox ID="TextBox1" runat="server" CssClass="text-box" TextMode="Date"></asp:TextBox>
                 <asp:ImageButton ID="ImageButton1" runat="server" CssClass="image-button" OnClick="ImageButton1_Click" />
                 <asp:Calendar ID="Calendar1" runat="server" Visible="false" OnSelectionChanged="Calendar1_SelectionChanged" />
                 &nbsp;&nbsp;&nbsp;&nbsp; To

@@ -59,7 +59,6 @@ public partial class StudentAttendanceDetailsPage : System.Web.UI.Page
         displayTable.Columns.Add("attendance", typeof(string));
         if(dataSet != null)
         {
-            Debug.WriteLine("HI");
             foreach (DataRow row in dataSet.Tables[0].Rows)
             {
                 string attend = "";
