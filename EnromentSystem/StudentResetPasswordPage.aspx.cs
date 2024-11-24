@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.Net.Mail;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -47,45 +49,54 @@ public partial class StudentResetPasswordPage : System.Web.UI.Page
                 name = row["name"].ToString();
                 student_email = row["student_email"].ToString();
             }
-
             if (name != null)
             {
-                EmailManager emailManager = new EmailManager();
-                emailManager.SetEmailReceiver(name, student_email);
-                emailManager.SetEmailSubject("Verification Code");
-                //send verification
-                string verificationCode = Session["verification"].ToString();
-                string body = $@" 
-                    <!DOCTYPE html>
-                    <html lang='en'>
-                    <head>
-                        <meta charset='UTF-8'>
-                        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                        <title>Verification Code</title>
-                        <style>
-                            body {{font - family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }}
-                            .container {{max - width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }}
-                            h2 {{color: #333333; }}
-                            p {{color: #555555; line-height: 1.6; }}
-                            .code {{font - size: 24px; font-weight: bold; color: #4CAF50; padding: 10px 20px; background-color: #f4f4f4; border: 1px dashed #4CAF50; display: inline-block; margin: 10px 0; }}
-                            .footer {{font - size: 12px; color: #999999; text-align: center; margin-top: 20px; }}
-                        </style>
-                    </head>
-                    <body>
-                        <div class='container'>
-                            <h2>Verification Code</h2>
-                            <p>Dear {name},</p>
-                            <p>Forget your password? <br> The following is your verification code. Please use this verification code to complete the verification to reset password.</p>
-                            <div class='code'>{verificationCode}</div>
-                            <p>If you did not request this verification code, please ignore this email.</p>
-                            <div class='footer'>
-                                <p>This is a computer generated email. Please do not respond to this email.</p>
+                try
+                {
+                    EmailManager emailManager = new EmailManager();
+
+                    emailManager.SetEmailReceiver( new MailAddress(student_email, name) );
+                    emailManager.SetEmailSubject("Verification Code");
+                
+
+                    //send verification
+                    string verificationCode = Session["verification"].ToString();
+                    string body = $@" 
+                        <!DOCTYPE html>
+                        <html lang='en'>
+                        <head>
+                            <meta charset='UTF-8'>
+                            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                            <title>Verification Code</title>
+                            <style>
+                                body {{font - family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }}
+                                .container {{max - width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }}
+                                h2 {{color: #333333; }}
+                                p {{color: #555555; line-height: 1.6; }}
+                                .code {{font - size: 24px; font-weight: bold; color: #4CAF50; padding: 10px 20px; background-color: #f4f4f4; border: 1px dashed #4CAF50; display: inline-block; margin: 10px 0; }}
+                                .footer {{font - size: 12px; color: #999999; text-align: center; margin-top: 20px; }}
+                            </style>
+                        </head>
+                        <body>
+                            <div class='container'>
+                                <h2>Verification Code</h2>
+                                <p>Dear {name},</p>
+                                <p>Forget your password? <br> The following is your verification code. Please use this verification code to complete the verification to reset password.</p>
+                                <div class='code'>{verificationCode}</div>
+                                <p>If you did not request this verification code, please ignore this email.</p>
+                                <div class='footer'>
+                                    <p>This is a computer generated email. Please do not respond to this email.</p>
+                                </div>
                             </div>
-                        </div>
-                    </body>
-                    </html>";
-                emailManager.SetEmailBody(body);
-                emailManager.SendEmail();
+                        </body>
+                        </html>";
+                    emailManager.SetEmailBody(body);
+                    emailManager.SendEmail();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("send email: " + ex.Message);
+                }
             }
             else
             {
