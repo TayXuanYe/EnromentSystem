@@ -79,7 +79,7 @@
                     <tr>
                         <td></td>
                         <td class="auto-style1"><asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn-primary" OnClick="btnSubmit_Click" /></td>
-                        <td class="auto-style1"><asp:Button ID="Button1" runat="server" Text="Cancel" CssClass="btn-secondary" OnClick="Button1_Click" /></td>
+                        <td class="auto-style1"><asp:Button ID="Button1" runat="server" Text="Cancel" CssClass="btn-secondary" OnClick="Button1_Click" CausesValidation="false"/></td>
                     </tr>
                    
                 </table>
