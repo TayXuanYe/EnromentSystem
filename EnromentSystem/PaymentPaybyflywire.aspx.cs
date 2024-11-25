@@ -18,18 +18,6 @@ public partial class PaymentPaybyflywire : System.Web.UI.Page
                 Response.Redirect("StudentLoginPage.aspx");
                 return;
             }
-
-            if (Session["NetAmount"] != null)
-            {
-                decimal netAmount = Convert.ToDecimal(Session["NetAmount"]);
-
-                HiddenNetAmount.Value = netAmount.ToString("0.00"); 
-                TextBoxAmount.Text = netAmount.ToString("0.00");    
-            }
-            else
-            {
-                TextBoxAmount.Text = "Net Amount not found."; 
-            }
         }
     }
 
@@ -48,40 +36,10 @@ public partial class PaymentPaybyflywire : System.Web.UI.Page
         bool isDecimal = Decimal.TryParse(userAmountText, out userAmount);
 
        
-        decimal passingAmount = Convert.ToDecimal(HiddenNetAmount.Value);
-
         
         string phoneNumber = TextBoxPhone.Text.Trim();
-
-        if (isDecimal)
-        {
-            if (userAmount <= passingAmount)
-            {
-                
-                Session["NetAmount"] = userAmount;
-
-                
-                if (!string.IsNullOrEmpty(phoneNumber))
-                {
-                    Session["PhoneNumber"] = phoneNumber;
-                }
-                else
-                {
-                    Session["PhoneNumber"] = "Phone number not provided.";
-                }
-
-                
-                Response.Redirect("Maybank Portal.aspx");
-            }
-            else
-            {
-                TextBoxAmount.Text = "Amount cannot exceed the passing value.";
-            }
-        }
-        else
-        {
-            TextBoxAmount.Text = "Please enter a valid amount.";
-        }
+        Session["NetAmount"] = userAmountText;
+        Response.Redirect("Maybank Portal.aspx");
     }
 
     protected void Cancelbutton_Click(object sender, EventArgs e)

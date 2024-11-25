@@ -21,10 +21,18 @@
 
         <div class="payment-details">
             <asp:Label ID="Label1" runat="server" Text="Amount"></asp:Label>
-            <asp:TextBox ID="TextBoxAmount" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxAmount" runat="server" TextMode="Number" min="0"></asp:TextBox><br />
+            <asp:RequiredFieldValidator runat="server" ErrorMessage="This field is requited" ForeColor="Red" ControlToValidate="TextBoxAmount"></asp:RequiredFieldValidator><br />
             <asp:Label ID="Label2" runat="server" Text="Phone No"></asp:Label>
             <asp:TextBox ID="TextBoxPhone" runat="server" placeholder="Enter your contact number"></asp:TextBox>
-
+            <asp:RequiredFieldValidator runat="server" ErrorMessage="This field is requited" ForeColor="Red" ControlToValidate="TextBoxPhone" Display="Dynamic"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator Display="Dynamic" runat="server" 
+                ControlToValidate="TextBoxPhone"
+                ErrorMessage="Phone number format not correct<br> Format: [country code]-XXX-XXX-XXX"
+                ForeColor="Red"
+                ValidationExpression="\+\d{1,3}[-]\d{1,4}[-]\d{1,4}[-]\d{1,9}">
+            </asp:RegularExpressionValidator>
+            <br />
             <!-- Hidden Field for storing the passed Net Amount -->
             <asp:HiddenField ID="HiddenNetAmount" runat="server" />
 
@@ -45,7 +53,7 @@
 
         <div class="actions">
             <asp:Button ID="Paybutton" runat="server" Text="Pay" OnClick="Button1_Click" CssClass="btn-primary" />
-            <asp:Button ID="Cancelbutton" runat="server" Text="Cancel" CssClass="btn-secondary" OnClick="Cancelbutton_Click" />
+            <asp:Button ID="Cancelbutton" runat="server" Text="Cancel" CssClass="btn-secondary" OnClick="Cancelbutton_Click" CausesValidation="false"/>
         </div>
     </div>
 </asp:Content>
