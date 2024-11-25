@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iText.Html2pdf.Attach.Wrapelement;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -33,7 +34,7 @@ public partial class StudentStatementPage : System.Web.UI.Page
     }
     private string GenerateStudentPaymentHtml(string studentID)
     {
-        string cdate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        string cdate = DateTime.Now.ToString("yyyy-MM-dd");
         string date = "";
         string studentName = "";
         string program = "";
@@ -100,7 +101,8 @@ public partial class StudentStatementPage : System.Web.UI.Page
                 DateTime paymentDate = DateTime.Parse(row["date"].ToString());
                 pid = Convert.ToString(row["pid"]);
                 sid = Convert.ToString(row["sid"]);
-                date = Convert.ToString(row["date"]);
+                DateTime dateTemp = DateTime.Parse(row["date"].ToString());
+                date = dateTemp.ToString("dd-MM-yyyy");
                 process = row["process"].ToString();
                 particulars = row["particulars"].ToString();
                 documentNo = row["documentNo"].ToString();
