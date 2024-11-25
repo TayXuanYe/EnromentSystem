@@ -108,7 +108,7 @@ public partial class PaymentPage : System.Web.UI.Page
         using (SqlConnection conn = DatabaseManager.GetConnection())
         {
            
-            string query = @"SELECT date, amount, documentNo 
+            string query = @"SELECT date, amount, documentNo, process 
                          FROM payment 
                          WHERE sid = @sid
                          ORDER BY date";
@@ -128,7 +128,7 @@ public partial class PaymentPage : System.Web.UI.Page
                 DateTime paymentDate = Convert.ToDateTime(reader["date"]);
                 decimal amountPaid = Convert.ToDecimal(reader["amount"]);
                 string documentNo = reader["documentNo"]?.ToString() ?? "N/A";
-
+                string process = reader["process"].ToString();
               
                 if (totalSettled == 0)
                 {
@@ -147,7 +147,7 @@ public partial class PaymentPage : System.Web.UI.Page
                 row.Cells.Add(new TableCell { Text = documentNo });
 
               
-                row.Cells.Add(new TableCell { Text = "Payment" });
+                row.Cells.Add(new TableCell { Text = process });
 
                 
                 row.Cells.Add(new TableCell { Text = paymentDate.ToString("yyyy-MM-dd") });
@@ -175,10 +175,9 @@ public partial class PaymentPage : System.Web.UI.Page
             conn.Open();
 
            
-            string feeQuery = @"SELECT SUM(c.price) AS TotalFees
-                            FROM student_taken_course stc
-                            JOIN course c ON stc.cid = c.cid
-                            WHERE stc.sid = @studentID";
+            string feeQuery = @"SELECT SUM(amount) AS TotalFees
+                            FROM payment
+                            WHERE sid = @studentID";
 
             SqlCommand feeCmd = new SqlCommand(feeQuery, conn);
             feeCmd.Parameters.AddWithValue("@studentID", studentId);
@@ -189,7 +188,7 @@ public partial class PaymentPage : System.Web.UI.Page
 
             if (totalFeesResult != DBNull.Value)
             {
-                totalFees = Convert.ToDecimal(totalFeesResult);
+                totalFees = Convert.ToDecimal(totalFeesResult)*-1;
             }
 
             Session["NetAmount"] = totalFees;
