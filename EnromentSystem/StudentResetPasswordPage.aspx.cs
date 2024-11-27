@@ -70,10 +70,12 @@ public partial class StudentResetPasswordPage : System.Web.UI.Page
                             <title>Verification Code</title>
                             <style>
                                 body {{font - family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }}
-                                .container {{max - width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }}
+                                .container {{max - width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; 
+                                border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }}
                                 h2 {{color: #333333; }}
                                 p {{color: #555555; line-height: 1.6; }}
-                                .code {{font - size: 24px; font-weight: bold; color: #4CAF50; padding: 10px 20px; background-color: #f4f4f4; border: 1px dashed #4CAF50; display: inline-block; margin: 10px 0; }}
+                                .code {{font - size: 24px; font-weight: bold; color: #4CAF50; padding: 10px 20px; background-color: #f4f4f4; 
+                                border: 1px dashed #4CAF50; display: inline-block; margin: 10px 0; }}
                                 .footer {{font - size: 12px; color: #999999; text-align: center; margin-top: 20px; }}
                             </style>
                         </head>

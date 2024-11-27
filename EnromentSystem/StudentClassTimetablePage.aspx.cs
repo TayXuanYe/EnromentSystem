@@ -9,10 +9,13 @@ public partial class StudentClassTimetablePage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        string htmlContent = GenerateTimetable("I23024312");
-        PdfGenerator pdfGenerator = new PdfGenerator();
-        pdfGenerator.GenerateLandscapePdf(htmlContent, "output.pdf", "StudentTimeTable");
-        DisplayPdf("output.pdf");
+        if (Session["sid"] != null)
+        {
+            string htmlContent = GenerateTimetable(Session["sid"].ToString());
+            PdfGenerator pdfGenerator = new PdfGenerator();
+            pdfGenerator.GenerateLandscapePdf(htmlContent, "output.pdf", "StudentTimeTable");
+            DisplayPdf("output.pdf");
+        }
     }
 
     private string GenerateTimetable(string studentID)

@@ -18,7 +18,7 @@ public partial class StudentViewAttendentPage : System.Web.UI.Page
                 DataSet courseData = DatabaseManager.GetRecord(
                     "student_taken_course AS stc",
                     new List<string> { "stc.cid", "name", "section_id" },
-                    $@"JOIN course ON course.cid = stc.cid WHERE status = 'TAKEN' AND stc.sid = 'I23024312' "
+                    $@"JOIN course ON course.cid = stc.cid WHERE status = 'TAKEN' AND stc.sid = '{studentId}' "
                     );
                 DataTable displayTable = new DataTable();
                 displayTable.Columns.Add("cid", typeof(string));
